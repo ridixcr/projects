@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Autoevaluacion" table="autoevaluacion" catalog="db_sgc">
+        <id name="idautoevaluacion" type="java.lang.Long">
+            <column name="idautoevaluacion" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="modeloCalidad" class="org.edessco.sva.be.ModeloCalidad" fetch="select">
+            <column name="id_modelocalidad" not-null="true" />
+        </many-to-one>
+        <many-to-one name="unidadAcademica" class="org.edessco.sva.be.UnidadAcademica" fetch="select">
+            <column name="id_unidadacademica" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="timestamp">
+            <column name="fecha_inicio" length="19" />
+        </property>
+        <property name="fechaFin" type="timestamp">
+            <column name="fecha_fin" length="19" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="titulo" type="string">
+            <column name="titulo" length="200" />
+        </property>
+        <set name="encuestas" table="encuesta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_autoevaluacion" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Encuesta" />
+        </set>
+        <set name="cuestionarios" table="cuestionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_autoevaluacion" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Cuestionario" />
+        </set>
+    </class>
+</hibernate-mapping>

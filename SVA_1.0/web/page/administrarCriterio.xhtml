@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminCriterio" header="Administrar criterio">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                         value="Nuevo" actionListener="#{criterioBean.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{criterioBean.listaCriterios}" var="criterioItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Criterios
+                            </f:facet>
+                            
+                            <p:column headerText="Nº">
+                                <h:outputText value="#{criterioItem.numero}" />
+                            </p:column> 
+                            <p:column headerText="Factor">
+                                <h:outputText value="#{criterioItem.factor.titulo}" />
+                            </p:column>
+                                                   
+                            <p:column headerText="Criterio">
+                                <h:outputText value="#{criterioItem.titulo}" />
+                            </p:column>
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{criterioItem.descripcion}" />
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <h:outputLink value="/SVA_1.0/admin/page/administrarEstandar.xhtml">
+                                    <h:outputText value="Estándar"/>
+                                </h:outputLink>                         
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{criterioItem}" target="#{criterioBean.criterio}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{criterioItem}" target="#{criterioBean.criterio}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Factor" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_factor" value="Factor:" />
+                                <p:selectOneMenu id="cbx_factor" value="#{criterioBean.criterio.factor.idfactor}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{factorBean.selectOneItemsFactor}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_numero" value="Número:" />                            
+                                <p:inputText id="txt_numero" label="Número" placeholder="NUMERO"
+                                             value="#{criterioBean.criterio.numero}" size="60"/>
+
+                                <h:outputLabel for="txt_titulo" value="Título:" />                            
+                                <p:inputText id="txt_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{criterioBean.criterio.titulo}" size="60"/>
+
+                                <h:outputLabel for="txt_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 value="#{criterioBean.criterio.descripcion}" cols="60"/>
+
+                                <h:outputLabel for="rbtn_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_estado" value="#{criterioBean.criterio.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{criterioBean.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+                                
+                                <h:inputHidden value="#{criterioBean.criterio.idcriterio}" />
+                                <h:inputHidden />
+
+                                <h:outputLabel for="cbx_edit_factor" value="Factor:" />
+                                <p:selectOneMenu id="cbx_edit_factor" value="#{criterioBean.criterio.factor.idfactor}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{factorBean.selectOneItemsFactor}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_edit_numero" value="Número:" />                            
+                                <p:inputText id="txt_edit_numero" label="Número" placeholder="NUMERO"
+                                             value="#{criterioBean.criterio.numero}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_titulo" value="Título:" />                            
+                                <p:inputText id="txt_edit_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{criterioBean.criterio.titulo}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_edit_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 value="#{criterioBean.criterio.descripcion}" cols="60"/>
+
+                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_edit_estado" value="#{criterioBean.criterio.estado}" label="Estado">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     title="Guardar" value="Guardar" actionListener="#{criterioBean.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{criterioBean.criterio.idcriterio}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{criterioBean.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="dlgDelete.hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

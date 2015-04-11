@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutComision.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminAutoevaluacion" header="Administrar autoevaluación">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                         value="Nuevo" actionListener="#{autoevaluacionControler.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{autoevaluacionControler.listaAutoevaluaciones}" var="autoevaluacionItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Procesos de autoevaluación
+                            </f:facet>
+
+                            <p:column style="width:15px;text-align: center" headerText="Nº">
+                                <h:outputText value="#{autoevaluacionItem.idautoevaluacion}" />
+                            </p:column>
+                            <p:column headerText="Título">
+                                <h:outputText value="#{autoevaluacionItem.titulo}" />
+                            </p:column>
+                            <p:column headerText="E.F.P." style="width: 200px">
+                                <h:outputText value="#{autoevaluacionItem.unidadAcademica.idunidadacademica}" />
+                            </p:column>
+                            <p:column headerText="Inicio" style="width: 60px">
+                                <h:outputText value="#{autoevaluacionItem.fechaInicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
+                                </h:outputText>
+                            </p:column>                        
+                            <p:column headerText="Finaliza" style="width: 60px">
+                                <h:outputText value="#{autoevaluacionItem.fechaFin}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Estado" style="width:30px;text-align: center">
+                                <h:outputText value="#{autoevaluacionItem.estado}" />
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{autoevaluacionItem}" target="#{autoevaluacionControler.autoevaluacion}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{autoevaluacionItem}" target="#{autoevaluacionControler.autoevaluacion}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Autoevaluación" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="txt_titulo" value="Título:" />                            
+                                <p:inputText id="txt_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{autoevaluacionControler.autoevaluacion.titulo}" size="60"/>
+
+                                <h:outputLabel for="cbx_efp" value="EFP:" />
+                                <p:selectOneMenu id="cbx_efp" value="#{autoevaluacionControler.autoevaluacion.unidadAcademica.idunidadacademica}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                </p:selectOneMenu>                                                                
+
+                                <h:outputLabel for="cbx_modelo" value="Modelo de calidad:" />
+                                <p:selectOneMenu id="cbx_modelo" value="#{autoevaluacionControler.autoevaluacion.modeloCalidad.idmodelocalidad}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{modeloCalidadBean.selectOneItemsModeloCalidad}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_fecha_inicio" value="Fecha de inicio:" />                            
+                                <p:calendar id="txt_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{autoevaluacionControler.autoevaluacion.fechaInicio}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                                <h:outputLabel for="txt_fecha_fin" value="Fecha de finalizacion:" />                            
+                                <p:calendar id="txt_fecha_fin" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{autoevaluacionControler.autoevaluacion.fechaFin}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>                           
+
+                                <h:outputLabel for="rbtn_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_estado" value="#{autoevaluacionControler.autoevaluacion.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{autoevaluacionControler.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+
+                                <h:inputHidden value="#{autoevaluacionControler.autoevaluacion.idautoevaluacion}" />
+                                <h:inputHidden/>
+
+                                <h:outputLabel for="txt_edit_titulo" value="Título:" />                            
+                                <p:inputText id="txt_edit_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{autoevaluacionControler.autoevaluacion.titulo}" size="60"/>
+
+                                <h:outputLabel for="cbx_edit_efp" value="EFP:" />
+                                <p:selectOneMenu id="cbx_edit_efp" value="#{autoevaluacionControler.autoevaluacion.unidadAcademica.idunidadacademica}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="cbx_edit_modelo" value="Modelo de calidad:" />
+                                <p:selectOneMenu id="cbx_edit_modelo" value="#{autoevaluacionControler.autoevaluacion.modeloCalidad.idmodelocalidad}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{modeloCalidadBean.selectOneItemsModeloCalidad}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_edit_fecha_inicio" value="Fecha de inicio:" />                            
+                                <p:calendar id="txt_edit_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{autoevaluacionControler.autoevaluacion.fechaInicio}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                                <h:outputLabel for="txt_edit_fecha_fin" value="Fecha de finalizacion:" />                            
+                                <p:calendar id="txt_edit_fecha_fin" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{autoevaluacionControler.autoevaluacion.fechaFin}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>                          
+
+                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_edit_estado" value="#{autoevaluacionControler.autoevaluacion.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     title="Guardar" value="Guardar" actionListener="#{autoevaluacionControler.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{autoevaluacionControler.autoevaluacion.idautoevaluacion}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{autoevaluacionControler.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutComision.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminEncuesta" header="Administrar cuestionario">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                         value="Nuevo" actionListener="#{cuestionarioControler.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{cuestionarioControler.listaCuestionarios}" var="cuestionarioItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Cuestionarios
+                            </f:facet>
+
+                            <p:column style="width:15px;text-align: center" headerText="Nº">
+                                <h:outputText value="#{cuestionarioItem.idcuestionario}" />
+                            </p:column>
+                            <p:column headerText="Título">
+                                <h:outputText value="#{cuestionarioItem.tituloCuestionario}" />
+                            </p:column>
+                            <p:column headerText="Inicio" style="width: 60px">
+                                <h:outputText value="#{cuestionarioItem.fechaHoraInicio}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
+                                </h:outputText>
+
+                            </p:column>  
+                            <p:column headerText="Finaliza" style="width: 60px">
+                                <h:outputText value="#{cuestionarioItem.fechaHoraFin}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Estado" style="width:30px;text-align: center">
+                                <h:outputText value="#{cuestionarioItem.estado}" />
+                            </p:column>
+
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnPreguntas" icon="ui-icon-extlink" title="Preguntas" ajax="true" 
+                                                 action="#{preguntaCuestionarioControler.buscarId()}" immediate="true">
+                                    <f:setPropertyActionListener value="#{cuestionarioItem}" target="#{cuestionarioControler.cuestionario}" />
+                                </p:commandButton> 
+                            </p:column>
+
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{cuestionarioItem}" target="#{cuestionarioControler.cuestionario}" />
+                                </p:commandButton>                            
+                            </p:column>
+
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{cuestionarioItem}" target="#{cuestionarioControler.cuestionario}" />          
+                                </p:commandButton> 
+                            </p:column>                            
+
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Cuestionario" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_autoevaluacion" value="Autoevaluacion:" />
+                                <p:selectOneMenu id="cbx_autoevaluacion" value="#{cuestionarioControler.cuestionario.autoevaluacion.idautoevaluacion}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true" />
+                                    <f:selectItems value="#{autoevaluacionControler.selectOneItemsAutoevaluacion}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_titulo" value="Título:" />                            
+                                <p:inputText id="txt_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{cuestionarioControler.cuestionario.tituloCuestionario}" size="60"/>
+
+                                <h:outputLabel for="txt_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 cols="60"/>
+
+                                <h:outputLabel for="txt_agradecimiento" value="Agradecimiento:" />                            
+                                <p:inputTextarea id="txt_agradecimiento" label="Agradecimiento" placeholder="AGRADECIMIENTO"
+                                                 cols="60"/>
+
+                                <h:outputLabel for="txt_fecha_inicio" value="Fecha de inicio:" />                            
+                                <p:calendar id="txt_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{cuestionarioControler.cuestionario.fechaHoraInicio}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <h:outputLabel for="txt_fecha_fin" value="Fecha de finalización:" />                            
+                                <p:calendar id="txt_fecha_fin" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{cuestionarioControler.cuestionario.fechaHoraFin}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                                <h:outputLabel for="rbtn_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_estado" value="#{cuestionarioControler.cuestionario.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{cuestionarioControler.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+
+                                <h:inputHidden value="#{cuestionarioControler.cuestionario.idcuestionario}" />
+                                <h:inputHidden/>
+
+                                <h:outputLabel for="cbx_edit_autoevaluacion" value="Autoevaluacion:" />
+                                <p:selectOneMenu id="cbx_edit_autoevaluacion" value="#{cuestionarioControler.cuestionario.autoevaluacion.idautoevaluacion}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
+                                    <f:selectItems value="#{autoevaluacionControler.selectOneItemsAutoevaluacion}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_edit_titulo" value="Título:" />                            
+                                <p:inputText id="txt_edit_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{cuestionarioControler.cuestionario.tituloCuestionario}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_edit_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 cols="60"/>
+
+                                <h:outputLabel for="txt_edit_agradecimiento" value="Agradecimiento:" />                            
+                                <p:inputTextarea id="txt_edit_agradecimiento" label="Agradecimiento" placeholder="AGRADECIMIENTO"
+                                                 cols="60"/>
+
+                                <h:outputLabel for="txt_edit_fecha_inicio" value="Fecha de inicio:" />                            
+                                <p:calendar id="txt_edit_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{cuestionarioControler.cuestionario.fechaHoraInicio}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <h:outputLabel for="txt_edit_fecha_fin" value="Fecha de finalización:" />                            
+                                <p:calendar id="txt_edit_fecha_fin" class="calendar" showOn="button" effect="fold" navigator="true" 
+                                            value="#{cuestionarioControler.cuestionario.fechaHoraFin}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_edit_estado" value="#{cuestionarioControler.cuestionario.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     title="Guardar" value="Guardar" actionListener="#{cuestionarioControler.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{cuestionarioControler.cuestionario.idcuestionario}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{cuestionarioControler.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+
+                        </p:confirmDialog>
+                    </h:form>
+
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,101 @@
+/*body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}*/
+html,body {
+    background-color: #FFFFFF;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 0px;
+    height: 100%;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+    color: #045491;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+    color: #045491;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.ui-state-default .icon-add{
+    background-image: url(../img/iconos/agregar.png);
+}
+.ui-state-default .icon-editar{
+    background-image: url(../img/iconos/editar.png);
+}
+.ui-state-default .icon-eliminar{
+    background-image: url(../img/iconos/eliminar.png);
+}
+.ui-state-default .icon-guardar{
+    background-image: url(../img/iconos/guardar.png);
+}
+.ui-state-default .icon-aceptar{
+    background-image: url(../img/iconos/aceptar.png);
+}
+.ui-state-default .icon-cancelar{
+    background-image: url(../img/iconos/cancelar.png);
+}
+.ui-state-default .icon-preguntas{
+    background-image: url(../img/iconos/hcard_edit.png);
+}
+.ui-state-default .icon-ingresar{
+    background-image: url(../img/iconos/Check_Icon_16.png);
+}
+.ui-state-default .icon-addUser{
+    background-image: url(../img/iconos/adduser.png);
+}
+.ui-state-default .icon-next{
+    background-image: url(../img/iconos/Next.png);
+}
+.ui-state-default .icon-lock{
+    background-image: url(../img/iconos/my-account.png);
+}
+.ui-state-default .icon-userGroup{
+    background-image: url(../img/iconos/UserGroup.png);
+}
+
+.ui-editable-column-options .ui-icon{
+    background-repeat: repeat;
+}	
+
+.ui-editable-column-options .ui-icon-pencil{
+    background-image: url(../img/iconos/editar.png)
+}
+
+.ui-editable-column-options .ui-icon-check{
+    background-image: url(../img/iconos/aceptar.png)
+}
+
+.ui-editable-column-options .ui-icon-close{
+    margin-left:0.5em;
+    background-image: url(../img/iconos/cancelar.png)
+}
+
+.ui-editable-column-options .ui-icon-remove{
+    float:left;
+    margin-left:0.5em;
+    background-image: url(../img/iconos/remove.png)
+}
+

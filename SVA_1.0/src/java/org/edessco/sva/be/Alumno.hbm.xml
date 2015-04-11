@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Alumno" table="alumno" catalog="db_sgc">
+        <id name="idalumno" type="java.lang.Long">
+            <column name="idalumno" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="org.edessco.sva.be.Persona" fetch="select">
+            <column name="id_persona" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="10" not-null="true" />
+        </property>
+        <property name="serie" type="string">
+            <column name="serie" length="10" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="fecha_ingreso" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

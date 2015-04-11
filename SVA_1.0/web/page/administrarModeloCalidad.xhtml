@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminModeloCalidad" header="Administrar modelo de calidad">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" icon="icon-add" value="Nuevo" title="Nuevo" oncomplete="PF('dlgNew').show();" 
+                                         update=":formNew" actionListener="#{modeloCalidadBean.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{modeloCalidadBean.listaModelo}" var="modeloCalidadItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Modelos de calidad
+                            </f:facet>
+
+                            <p:column style="width:4%;text-align: center" headerText="Nº">
+                                <h:outputText value="#{modeloCalidadItem.idmodelocalidad}" />
+                            </p:column>
+                            <p:column headerText="Modelo de calidad">
+                                <h:outputText value="#{modeloCalidadItem.titulo}" />
+                            </p:column>
+                            <p:column headerText="Resolución">
+                                <h:outputText value="#{modeloCalidadItem.resolucion}" />
+                            </p:column>
+                            <p:column headerText="Publicación">
+                                <h:outputText value="#{modeloCalidadItem.fechaPublicacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
+                                </h:outputText>
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <h:outputLink value="/SVA_1.0/admin/page/administrarDimension.xhtml">
+                                    <h:outputText value="Dimensión"/>
+                                </h:outputLink>                         
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />           
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Modelo de Calidad" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">                            
+                                <h:outputLabel for="txt_titulo" value="Titulo:" style="font-weight:bold"/>                            
+                                <p:inputText id="txt_titulo" required="true" label="Título" 
+                                             value="#{modeloCalidadBean.modeloCalidad.titulo}" placeholder="TÍTULO" size="60"/>
+
+                                <h:outputLabel for="txt_resolucion" value="Resolución:" style="font-weight:bold"/>                            
+                                <p:inputText id="txt_resolucion" required="true" label="Resolución" 
+                                             value="#{modeloCalidadBean.modeloCalidad.resolucion}" placeholder="RESOLUCIÓN" size="60"/>
+
+                                <h:outputLabel for="txt_fecha_publicación" value="Fecha publicación:" style="font-weight:bold"/>                            
+                                <p:calendar id="txt_fecha_publicación" label="Fecha publicación" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{modeloCalidadBean.modeloCalidad.fechaPublicacion}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" icon="icon-guardar" value="Guardar" title="Guardar"  
+                                                     oncomplete="PF('dlgNew').hide();" update=":formDataTable, :msg" 
+                                                     actionListener="#{modeloCalidadBean.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  icon="icon-cancelar" value="Cancelar" title="Cancelar" 
+                                                     oncomplete="PF('dlgNew').hide();"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+
+                                <h:inputHidden value="#{modeloCalidadBean.modeloCalidad.idmodelocalidad}" />
+                                <h:inputHidden />
+
+                                <h:outputLabel for="txt_edit_titulo" value="Titulo:" />                            
+                                <p:inputText id="txt_edit_titulo" required="true" label="Título" 
+                                             value="#{modeloCalidadBean.modeloCalidad.titulo}" placeholder="TÍTULO" size="60"/>
+
+                                <h:outputLabel for="txt_edit_resolucion" value="Resolución:" />                            
+                                <p:inputText id="txt_edit_resolucion" required="true" label="Resolución" 
+                                             value="#{modeloCalidadBean.modeloCalidad.resolucion}" placeholder="RESOLUCIÓN" size="60"/>
+
+                                <h:outputLabel for="txt_edit_fecha_publicación" value="Fecha publicación:" />                            
+                                <p:calendar id="txt_edit_fecha_publicación" label="Fecha publicación" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{modeloCalidadBean.modeloCalidad.fechaPublicacion}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-guardar" title="Guardar" value="Guardar"
+                                                     actionListener="#{modeloCalidadBean.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{modeloCalidadBean.modeloCalidad.idmodelocalidad}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{modeloCalidadBean.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_sgc</property>
+    <property name="hibernate.connection.username">db_sgc_user</property>
+    <property name="hibernate.connection.password">db_sgc_useradmin</property>
+    <property name="hibernate.show_sql">true</property>
+    <mapping resource="org/edessco/sva/be/Usuario.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/UsuarioRol.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Docente.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Egresado.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Administrativo.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Persona.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/RespuestaEncuesta.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Alumno.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Autoevaluacion.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Dimension.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Factor.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Encuesta.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/ModeloCalidad.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/PreguntaCuestionario.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Estandar.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Criterio.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Universidad.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/PreguntaEncuesta.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/GrupoInteres.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Rol.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Cuestionario.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/RespuestaCuestionario.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/ComisionInterna.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/UnidadAcademica.hbm.xml"/>
+    <mapping resource="org/edessco/sva/be/Facultad.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

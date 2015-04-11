@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Persona" table="persona" catalog="db_sgc">
+        <id name="idpersona" type="java.lang.Long">
+            <column name="idpersona" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="unidadAcademica" class="org.edessco.sva.be.UnidadAcademica" fetch="select">
+            <column name="id_unidad_academica" not-null="true" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="nombres" length="60" />
+        </property>
+        <property name="apellidoPaterno" type="string">
+            <column name="apellido_paterno" length="60" />
+        </property>
+        <property name="apellidoMaterno" type="string">
+            <column name="apellido_materno" length="60" />
+        </property>
+        <property name="dni" type="string">
+            <column name="dni" length="8" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="30" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="60" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="2" />
+        </property>
+        <set name="docentes" table="docente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Docente" />
+        </set>
+        <set name="alumnos" table="alumno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Alumno" />
+        </set>
+        <set name="comisionInternas" table="comision_interna" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.ComisionInterna" />
+        </set>
+        <set name="egresados" table="egresado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Egresado" />
+        </set>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Usuario" />
+        </set>
+        <set name="grupoIntereses" table="grupo_interes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.GrupoInteres" />
+        </set>
+        <set name="administrativos" table="administrativo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Administrativo" />
+        </set>
+    </class>
+</hibernate-mapping>

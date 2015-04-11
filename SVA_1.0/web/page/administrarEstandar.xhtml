@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminEstandar" header="Administrar estándar">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                         value="Nuevo" actionListener="#{estandarBean.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{estandarBean.listaEstandares}" var="estandarItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Estándares
+                            </f:facet>
+
+                            <p:column headerText="Nº">
+                                <h:outputText value="#{estandarItem.numeroEstandar}" />
+                            </p:column>
+                            <p:column headerText="Criterio">
+                                <h:outputText value="#{estandarItem.criterio.titulo}" />
+                            </p:column>
+                              
+                            <p:column headerText="Tipo">
+                                <h:outputText value="#{estandarItem.tipoEstandar}" />
+                            </p:column>
+                            <p:column headerText="Estándar">
+                                <h:outputText value="#{estandarItem.titulo}" />
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:4%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />          
+                                </p:commandButton> 
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Estándar" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_criterio" value="Criterio:" />
+                                <p:selectOneMenu id="cbx_criterio" value="#{estandarBean.estandar.criterio.idcriterio}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{criterioBean.selectOneItemsCriterio}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="cbx_tipo" value="Tipo estándar:" />
+                                <p:selectOneMenu id="cbx_tipo" required="true" label="Estandar" style="width:150px"
+                                                 value="#{estandarBean.estandar.tipoEstandar}">
+                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Sistémico" itemValue="Sistémico"/>
+                                    <f:selectItem itemLabel="Satisfacción" itemValue="Satisfacción"/>
+                                    <f:selectItem itemLabel="Nominal" itemValue="Nominal"/>
+                                    <f:selectItem itemLabel="Valorativo" itemValue="Valorativo"/>
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_numero" value="Número:" />                            
+                                <p:inputText id="txt_numero" label="Número" placeholder="NUMERO"
+                                             value="#{estandarBean.estandar.numeroEstandar}" size="60"/>
+
+                                <h:outputLabel for="txt_titulo" value="Título:" />                            
+                                <p:inputText id="txt_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{estandarBean.estandar.titulo}" size="60"/>
+
+                                <h:outputLabel for="txt_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 value="#{estandarBean.estandar.descripcion}" cols="60"/>
+
+                                <h:outputLabel for="rbtn_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_estado" value="#{estandarBean.estandar.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{estandarBean.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+                                
+                                <h:inputHidden value="#{estandarBean.estandar.idestandar}" />
+                                <h:inputHidden />
+
+                                <h:outputLabel for="cbx_edit_criterio" value="Criterio:" />
+                                <p:selectOneMenu id="cbx_edit_criterio" value="#{estandarBean.estandar.criterio.idcriterio}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{criterioBean.selectOneItemsCriterio}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="cbx_edit_tipo" value="Tipo estándar:" />
+                                <p:selectOneMenu id="cbx_edit_tipo" required="true" label="Estandar" style="width:150px"
+                                                 value="#{estandarBean.estandar.tipoEstandar}">
+                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Sistémico" itemValue="Sistémico"/>
+                                    <f:selectItem itemLabel="Satisfacción" itemValue="Satisfacción"/>
+                                    <f:selectItem itemLabel="Nominal" itemValue="Nominal"/>
+                                    <f:selectItem itemLabel="Valorativo" itemValue="Valorativo"/>
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txt_edit_numero" value="Número:" />                            
+                                <p:inputText id="txt_edit_numero" label="Número" placeholder="NUMERO"
+                                             value="#{estandarBean.estandar.numeroEstandar}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_titulo" value="Título:" />                            
+                                <p:inputText id="txt_edit_titulo" label="Título" placeholder="TÍTULO"
+                                             value="#{estandarBean.estandar.titulo}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_descripción" value="Descripción:" />                            
+                                <p:inputTextarea id="txt_edit_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                                 value="#{estandarBean.estandar.descripcion}" cols="60"/>
+
+                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_edit_estado" value="#{estandarBean.estandar.estado}">
+                                    <f:selectItem itemLabel="Activado" itemValue="true" />
+                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
+                                </p:selectOneRadio>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     title="Guardar" value="Guardar" actionListener="#{estandarBean.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{estandarBean.estandar.idestandar}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{estandarBean.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

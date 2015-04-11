@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutComision.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_formatoRM" header="REGISTRO DE INICIATIVA Y MEJORA - FORMATO RM">
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{estandarBean.listaEstandares}" var="estandarItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                
+                            </f:facet>
+
+                            <p:column headerText="Nº" style="width: 15px">
+                                <h:outputText value="#{estandarItem.numeroEstandar}" />
+                            </p:column>
+
+                            <p:column headerText="Tipo" style="width: 120px">
+                                <h:outputText value="#{estandarItem.tipoEstandar}" />
+                            </p:column>
+                            <p:column headerText="Estándar">
+                                <h:outputText value="#{estandarItem.titulo}" />
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formRM" oncomplete="PF('dlgRM').show();" icon="ui-icon-extlink" title="Editar">
+                                    <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEstado" icon="ui-icon-extlink" title="Estado">
+                                </p:commandButton>                            
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formRM">
+                        <p:dialog header="REGISTRO DE INICIATIVA Y MEJORA - FORMATO RM" widgetVar="dlgRM" id="dlgRM" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:outputLabel value="Estándar:" style="font-weight: bold"/>
+                            <h:outputLabel value="Este es el estandar seleccionado" />
+                            <p:separator/>
+                            
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+                                
+                                <h:outputLabel for="txa_alternativasol" value="Alternativa de Solución Consensuada:" style="font-weight: bold" />
+                                <p:inputTextarea id="txa_alternativasol" label="Alternativa de Solución Consensuada" cols="50" />
+                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgRM').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" />
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgRM').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

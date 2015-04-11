@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.ModeloCalidad" table="modelo_calidad" catalog="db_sgc">
+        <id name="idmodelocalidad" type="java.lang.Long">
+            <column name="idmodelocalidad" />
+            <generator class="identity" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="titulo" length="180" />
+        </property>
+        <property name="resolucion" type="string">
+            <column name="resolucion" length="20" />
+        </property>
+        <property name="fechaPublicacion" type="timestamp">
+            <column name="fecha_publicacion" length="19" />
+        </property>
+        <set name="dimensions" table="dimension" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_modelocalidad" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Dimension" />
+        </set>
+        <set name="autoevaluacions" table="autoevaluacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_modelocalidad" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Autoevaluacion" />
+        </set>
+    </class>
+</hibernate-mapping>

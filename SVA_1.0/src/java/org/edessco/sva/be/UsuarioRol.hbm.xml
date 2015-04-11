@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.UsuarioRol" table="usuario_rol" catalog="db_sgc">
+        <id name="idusuariorol" type="java.lang.Long">
+            <column name="idusuariorol" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="usuario" class="org.edessco.sva.be.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
+        <many-to-one name="rol" class="org.edessco.sva.be.Rol" fetch="select">
+            <column name="id_rol" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

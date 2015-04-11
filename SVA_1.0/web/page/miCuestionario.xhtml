@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/docente.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_respEnc" header="Mi cuestionario">
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{preguntaCuestionarioControler.listaPreguntasCuestionario}" var="preguntaItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Preguntas del cuestionario
+                            </f:facet>
+
+                            <p:column style="width:4%;text-align: center" headerText="Nº">
+                                <h:outputText value="#{preguntaItem.idpreguntacuestionario}" />
+                            </p:column>
+
+                            <p:column headerText="Estándar" style="text-align: center">
+                                <h:outputText value="#{preguntaItem.estandar.numeroEstandar}"/>
+                            </p:column> 
+
+                            <p:column  headerText="Pregunta">
+                                <h:outputText value="#{preguntaItem.pregunta}"/>
+                            </p:column>
+
+                            <p:column style="text-align: center">
+                                <h:outputText value="#{respuestaCuestionarioControler.respuestaCuestionario.respuesta}"/>
+                            </p:column> 
+
+                            <p:column style="width:5%; text-align: center">
+                                <p:commandButton id="btnRespta" update=":formRespuesta" oncomplete="PF('dlgResp').show();" immediate="True"
+                                                 icon="icon-preguntas" title="Respuesta" action="#{preguntaCuestionarioControler.obtenerPregunta()}">
+                                    <f:setPropertyActionListener value="#{preguntaItem}" target="#{preguntaCuestionarioControler.preguntaCuestionario}" />          
+                                </p:commandButton> 
+                            </p:column>
+
+                            <p:column headerText="Estado" style="width:4%">
+                                <h:outputText />
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </h:form>
+
+                    <h:form id="formRespuesta">
+                        <p:growl id="msgs" showDetail="true"/>
+                        <p:dialog header="Responder pregunta" widgetVar="dlgResp" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">                            
+                                <h:outputLabel for="txt_numEstandar" value="Estándar:" />                            
+                                <p:outputLabel id="txt_numEstandar" value="#{preguntaCuestionarioControler.preguntaCuestionario.estandar.numeroEstandar}"
+                                               style="font-weight: bold"/>
+
+                                <h:outputLabel for="txt_pregunta" value="Pregunta:" />
+                                <p:inputTextarea id="txt_pregunta" readonly="true" rows="2" cols="80" value="#{preguntaCuestionarioControler.preguntaCuestionario.pregunta}" 
+                                                 style="font-weight: bold"/>
+
+                                <h:outputLabel for="txt_respuesta" value="Respuesta:" />                            
+                                <p:selectOneMenu id="cbx_rpta" required="true" label="Respuesta" style="width:170px" value="#{respuestaCuestionarioControler.respuestaCuestionario.respuesta}">
+                                    <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Sí" itemValue="Sí"/>
+                                    <f:selectItem itemLabel="No" itemValue="No"/>
+                                </p:selectOneMenu>
+                                
+                                <h:outputLabel for="txt_explicacion" value="Explicación:" />
+                                <p:inputTextarea id="txt_explicacion" rows="2" cols="80" value="#{respuestaCuestionarioControler.respuestaCuestionario.explicacionDocente}" 
+                                                 style="font-weight: bold"/>
+                                
+                                <h:outputLabel for="txt_alternativa" value="Alternativa de solución:" />
+                                <p:inputTextarea id="txt_alternativa" rows="2" cols="80" value="#{respuestaCuestionarioControler.respuestaCuestionario.alternativaSolucionDocente}" 
+                                                 style="font-weight: bold"/>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrarResp" icon="icon-guardar" value="Guardar" title="Guardar"  
+                                                     oncomplete="PF('dlgResp').hide();" update=":formDataTable, :msg" 
+                                                     actionListener="#{respuestaCuestionarioControler.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistroresp"  icon="icon-cancelar" value="Cancelar" title="Cancelar" 
+                                                     oncomplete="PF('dlgResp').hide();"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Estandar" table="estandar" catalog="db_sgc">
+        <id name="idestandar" type="java.lang.Long">
+            <column name="idestandar" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="criterio" class="org.edessco.sva.be.Criterio" fetch="select">
+            <column name="id_criterio" not-null="true" />
+        </many-to-one>
+        <property name="idUnidadacademica" type="long">
+            <column name="id_unidadacademica" not-null="true" />
+        </property>
+        <property name="numeroEstandar" type="java.lang.Integer">
+            <column name="numero_estandar" />
+        </property>
+        <property name="titulo" type="string">
+            <column name="titulo" length="65535" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" />
+        </property>
+        <property name="tipoEstandar" type="string">
+            <column name="tipo_estandar" length="20" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="preguntaCuestionarios" table="pregunta_cuestionario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.PreguntaCuestionario" />
+        </set>
+        <set name="preguntaEncuestas" table="pregunta_encuesta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.PreguntaEncuesta" />
+        </set>
+    </class>
+</hibernate-mapping>

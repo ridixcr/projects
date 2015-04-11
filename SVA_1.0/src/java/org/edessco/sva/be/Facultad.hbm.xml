@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Facultad" table="facultad" catalog="db_sgc">
+        <id name="idfacultad" type="java.lang.Long">
+            <column name="idfacultad" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="universidad" class="org.edessco.sva.be.Universidad" fetch="select">
+            <column name="id_universidad" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="120" />
+        </property>
+        <set name="unidadAcademicas" table="unidad_academica" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_facultad" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.UnidadAcademica" />
+        </set>
+    </class>
+</hibernate-mapping>

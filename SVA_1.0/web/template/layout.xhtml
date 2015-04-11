@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLogin.css"/>
+        <h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
+        <title>.:Sistema Virtual de Autoevaluacion:.</title>
+    </h:head>
+
+    <h:body>
+        <div id="Cont_layaout">
+            <div id="top">
+                <ui:insert name="top"></ui:insert>
+            </div>
+            <div id="menu">
+                <h:form> 
+                    <p:menubar>
+                        <p:menuitem value="Inicio" url="/admin/page/inicioAdmin.xhtml" icon="ui-icon-home" />
+
+                        <p:submenu label="Usuarios" icon="ui-icon-user">
+                            <p:menuitem value="Administrar usuario" url="/admin/page/administrarUsuarios.xhtml"  />
+                        </p:submenu>
+
+                        <p:submenu label="Universidad" icon="ui-icon-pencil">
+                            <p:menuitem value="Administrar universidad" url="/admin/page/administrarUniversidad.xhtml"  />
+                            <p:menuitem value="Administrar facultad" url="/admin/page/administrarFacultad.xhtml"  />
+                            <p:menuitem value="Administrar EFP" url="/admin/page/administrarUnidadAcademica.xhtml"  />
+                        </p:submenu>
+
+                        <p:submenu label="Modelo de calidad" icon="ui-icon-pencil">
+                            <p:menuitem value="Modelo de calidad" url="/admin/page/administrarModeloCalidad.xhtml"  />
+                            <p:menuitem value="Dimensión" url="/admin/page/administrarDimension.xhtml"  />
+                            <p:menuitem value="Factor" url="/admin/page/administrarFactor.xhtml"  />
+                            <p:menuitem value="Citerio" url="/admin/page/administrarCriterio.xhtml"  />
+                            <p:menuitem value="Estándar" url="/admin/page/administrarEstandar.xhtml" />
+                        </p:submenu>
+
+                        <f:facet name="options">
+                            <p:outputLabel value="Bienvenido(a) : " style="margin-right: 5px;"></p:outputLabel>
+                            <p:menuButton value="#{loginControler.nombreUsuario}">
+                                <p:menuitem value="Save" icon="ui-icon-disk"/>
+                                <p:menuitem value="Update" icon="ui-icon-arrowrefresh-1-w"/>
+                                <p:menuitem value="Delete" ajax="false" icon="ui-icon-close"/>
+                                <p:separator />
+                                <p:menuitem value="Homepage" icon="ui-icon-extlink" action="#{loginControler.cerrarSesion()}"/>
+                            </p:menuButton>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+            <div id="content_comision" class="left_content">
+                <ui:insert name="content"></ui:insert>
+            </div>
+            <div id="bottom">
+                <ui:insert name="bottom"></ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>

@@ -1,0 +1,64 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package org.edessco.sva.da;
+
+import java.util.List;
+import org.edessco.sva.be.RespuestaCuestionario;
+import org.edessco.sva.util.AbstractDA;
+import org.springframework.stereotype.Repository;
+
+/**
+ *
+ * @author JorgeLuis
+ */
+@Repository("respuestaCuestionarioDA")
+public class RespuestaCuestionarioDA extends AbstractDA<RespuestaCuestionario>{
+    @Override
+    public long registrar(RespuestaCuestionario bean) {
+         return save(bean);
+    }
+
+    @Override
+    public long actualizar(RespuestaCuestionario bean) {
+        return update(bean);
+    }
+
+    @Override
+    public long eliminar(RespuestaCuestionario bean) {
+        return delete(bean);
+    }
+
+    @Override
+    public List<RespuestaCuestionario> listar() {
+        return list(RespuestaCuestionario.class);
+    }
+
+    @Override
+    public List<RespuestaCuestionario> listar(String ref) {
+        return list("from RespuestaEncuesta re left join fetch re.preguntaEncuesta");
+    }
+
+    @Override
+    public List<RespuestaCuestionario> listar(long id) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+    @Override
+    public RespuestaCuestionario buscar(long id) {
+        return search(RespuestaCuestionario.class,id);
+    }
+
+    @Override
+    public long id() {
+        return maxId(RespuestaCuestionario.class);
+    }
+
+    @Override
+    public RespuestaCuestionario buscar(String ref) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}

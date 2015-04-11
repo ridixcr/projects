@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Dimension" table="dimension" catalog="db_sgc">
+        <id name="iddimension" type="java.lang.Long">
+            <column name="iddimension" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="modeloCalidad" class="org.edessco.sva.be.ModeloCalidad" fetch="select">
+            <column name="id_modelocalidad" not-null="true" />
+        </many-to-one>
+        <property name="numero" type="java.lang.Integer">
+            <column name="numero" />
+        </property>
+        <property name="titulo" type="string">
+            <column name="titulo" length="180" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="600" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="factors" table="factor" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_dimension" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.Factor" />
+        </set>
+    </class>
+</hibernate-mapping>

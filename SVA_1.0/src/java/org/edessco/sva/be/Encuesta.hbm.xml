@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.Encuesta" table="encuesta" catalog="db_sgc">
+        <id name="idencuesta" type="java.lang.Long">
+            <column name="idencuesta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="autoevaluacion" class="org.edessco.sva.be.Autoevaluacion" fetch="select">
+            <column name="id_autoevaluacion" not-null="true" />
+        </many-to-one>
+        <property name="tituloEncuesta" type="string">
+            <column name="titulo_encuesta" length="200" />
+        </property>
+        <property name="fechaHoraInicio" type="timestamp">
+            <column name="fecha_hora_inicio" length="19" />
+        </property>
+        <property name="fechaHoraFin" type="timestamp">
+            <column name="fecha_hora_fin" length="19" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <property name="fechaCreacion" type="timestamp">
+            <column name="fecha_creacion" length="19">
+                <comment>Almacena la fecha de creacion de la encuesta</comment>
+            </column>
+        </property>
+        <property name="agradecimiento" type="string">
+            <column name="agradecimiento" length="65535">
+                <comment>Agrademiento por responder las preguntas de la encuesta</comment>
+            </column>
+        </property>
+        <property name="tipoUsuario" type="string">
+            <column name="tipo_usuario" length="25">
+                <comment>A quien esta dirigido la encuesta</comment>
+            </column>
+        </property>
+        <property name="idUsuario" type="java.lang.Long">
+            <column name="id_usuario">
+                <comment>Almacenar internamenete quien crea la encuesta</comment>
+            </column>
+        </property>
+        <set name="preguntaEncuestas" table="pregunta_encuesta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_encuesta" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.PreguntaEncuesta" />
+        </set>
+    </class>
+</hibernate-mapping>
