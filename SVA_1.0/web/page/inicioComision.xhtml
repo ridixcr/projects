@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
     <body>
@@ -10,16 +11,96 @@
         <ui:composition template="./../template/layoutComision.xhtml">
 
             <ui:define name="content">
-                <p:panel id="pnl_adminUsuario" header="Administrar usuario">
-
+                <p:panel id="pnl_adminUsuario" >
+                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">Autoevaluación</p:outputLabel>
+                    <p:separator></p:separator>
+                    <h:form id="form">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:panel id="pnl_uno" header="Nueva Autoevaluación" style="width: 200px; text-align: center">
+                                <p:commandLink action="administrarAutoevaluacion">
+                                    <img src="../resources/img/iconos/newAutoevalua.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                                
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
+                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">Cuestionarios y Encuestas</p:outputLabel>
+                    <p:separator></p:separator>
+                    <h:form id="form2">
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <p:panel id="pnl_uno" header="Cuestionario" style="width: 200px; text-align: center">
+                                <p:commandLink action="administrarCuestionario">
+                                    <img src="../resources/img/iconos/ic_admin_reg.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                                
+                            </p:panel>
+                            <p:panel id="pnl_dos" header="Encuestas" style="width: 200px; text-align: center">
+                                <p:commandLink action="administrarEncuesta">
+                                    <img src="../resources/img/iconos/check.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
+                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">Reportes</p:outputLabel>
+                    <p:separator></p:separator>
+                    <h:form id="form3">
+                        <h:panelGrid columns="5" cellpadding="10">
+                            <p:panel id="pnl_uno" header="Formato RD" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRD">
+                                    <img src="../resources/img/iconos/Distributor-report-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                                
+                            </p:panel>
+                            <p:panel id="pnl_dos" header="Formato RE" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRE">
+                                    <img src="../resources/img/iconos/report-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_tres" header="Formato RP" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRP">
+                                    <img src="../resources/img/iconos/custom-reports-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_cuatro" header="Estadística Encuesta" style="width: 200px; text-align: center">
+                                <p:commandLink action="reporteEncuesta">
+                                    <img src="../resources/img/iconos/reportEstadistica.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_cinco" header="Estadística Cuestionario" style="width: 200px; text-align: center">
+                                <p:commandLink action="reporteCuestionario">
+                                    <img src="../resources/img/iconos/ic_enable_stats.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
+                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">Procesamiento de Datos</p:outputLabel>
+                    <p:separator></p:separator>
+                    <h:form id="form4">
+                        <h:panelGrid columns="5" cellpadding="10">
+                            <p:panel id="pnl_uno" header="Formato MR" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoMR">
+                                    <img src="../resources/img/iconos/Network-Panel.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                                
+                            </p:panel>
+                            <p:panel id="pnl_dos" header="Formato RR" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRR">
+                                    <img src="../resources/img/iconos/Options-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_tres" header="Formato RC" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRC">
+                                    <img src="../resources/img/iconos/tests-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_cuatro" header="Formato RM" style="width: 200px; text-align: center">
+                                <p:commandLink action="formatoRM">
+                                    <img src="../resources/img/iconos/edit-file-icon.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                        </h:panelGrid>
+                    </h:form>
                 </p:panel>
-                <p:panel id="pnl_adminUniversidad" header="Administrar universidad">
-
-                </p:panel>
-                <p:panel id="pnl_adminModeloCalidad" header="Administrar modelo de calidad">
-
-                </p:panel>
-
             </ui:define>
 
         </ui:composition>
