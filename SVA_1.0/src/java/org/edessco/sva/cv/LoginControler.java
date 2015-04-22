@@ -81,7 +81,7 @@ public class LoginControler implements Serializable {
                         url = "/page/inicioComision";
                         break;
                     case "Docente":
-                        url = "/page/inicioUsuario";
+                        url = "/page/inicioDocente";
                         break;
                     case "Egresado":
                         url = "/page/inicioUsuario";
