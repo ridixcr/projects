@@ -26,7 +26,7 @@
                                 Modelos de calidad
                             </f:facet>
 
-                            <p:column style="width:4%;text-align: center" headerText="Nº">
+                            <p:column style="width:30px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{modeloCalidadItem.idmodelocalidad}" />
                             </p:column>
                             <p:column headerText="Modelo de calidad">
@@ -40,17 +40,17 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
                                 </h:outputText>
                             </p:column>
-                            <p:column style="width:6%;text-align: center">
-                                <h:outputLink value="/SVA_1.0/admin/page/administrarDimension.xhtml">
-                                    <h:outputText value="Dimensión"/>
-                                </h:outputLink>                         
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Dimensiones" action="#{modeloCalidadBean.redirigir()}">
+                                    <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />
+                                </p:commandButton>                         
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
                                     <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />
                                 </p:commandButton>                            
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
                                                  icon="icon-eliminar" title="Eliminar">
                                     <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />           

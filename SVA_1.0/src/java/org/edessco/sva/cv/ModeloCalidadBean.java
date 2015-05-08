@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.edessco.sva.cv;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.ModeloCalidad;
 import org.edessco.sva.bl.ModeloBL;
 import org.edessco.sva.util.Tarea;
@@ -34,11 +33,11 @@ public class ModeloCalidadBean {
     @ManagedProperty(value = "#{modeloCalidad}")
     private ModeloCalidad modeloCalidad;
     private List<ModeloCalidad> listaModelo = new LinkedList<>();
-    
+
     private List<SelectItem> selectOneItemsModeloCalidad;
 
     public ModeloCalidadBean() {
-    }     
+    }
 
     public void registrar() {
         setTareaEvento(new Tarea(Tarea.REGISTRO, getModeloBL().registrar(getModeloCalidad())) {
@@ -52,54 +51,60 @@ public class ModeloCalidadBean {
 
     @PostConstruct
     public void listar() {
-        setListaModelo(getModeloBL().listar());       
-    }    
+        setListaModelo(getModeloBL().listar());
+    }
 
     public void actualizar() {
         ModeloCalidad temp = new ModeloCalidad();
         String msg;
         temp = buscarId();
-        
+
         temp.setTitulo(this.getModeloCalidad().getTitulo());
         temp.setResolucion(this.getModeloCalidad().getResolucion());
         temp.setFechaPublicacion(this.getModeloCalidad().getFechaPublicacion());
-        
+
         long res = getModeloBL().actualizar(temp);
-        if(res==0){
-            msg="Se actualizó correctamente el registro.";
+        if (res == 0) {
+            msg = "Se actualizó correctamente el registro.";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }else{
-            msg="Error al actualizar el registro.";
+        } else {
+            msg = "Error al actualizar el registro.";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
         listar();
     }
-    
+
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idModelo", getModeloCalidad().getIdmodelocalidad());
+        return "administrarDimension";
+    }
+
     public void eliminar() {
         ModeloCalidad temp = new ModeloCalidad();
         String msg;
         temp = buscarId();
-        long res = getModeloBL().eliminar(temp);        
-        if(res==0){
-            msg="Se eliminó correctamente el registro.";
+        long res = getModeloBL().eliminar(temp);
+        if (res == 0) {
+            msg = "Se eliminó correctamente el registro.";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
-        }else{
-            msg="Error al eliminar el registro.";
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
+        } else {
+            msg = "Error al eliminar el registro.";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-              
+
         listar();
     }
-    
-    public ModeloCalidad buscarId(){
+
+    public ModeloCalidad buscarId() {
         return getModeloBL().buscar(getModeloCalidad().getIdmodelocalidad());
     }
-    
-    public void limpiar(){
+
+    public void limpiar() {
         this.modeloCalidad.setIdmodelocalidad(null);
         this.modeloCalidad.setTitulo("");
         this.modeloCalidad.setResolucion("");
@@ -143,5 +148,5 @@ public class ModeloCalidadBean {
     public void setSelectOneItemsModeloCalidad(List<SelectItem> selectOneItemsModeloCalidad) {
         this.selectOneItemsModeloCalidad = selectOneItemsModeloCalidad;
     }
-    
+
 }

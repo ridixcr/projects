@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.edessco.sva.cv;
 
 import java.util.LinkedList;
@@ -31,25 +30,24 @@ public class UsuarioControler {
     @ManagedProperty(value = "#{usuario}")
     private Usuario usuario;
     private List<Usuario> listUsuarioPersona = new LinkedList<>();
-    
+
     Usuario temp;
-    
+
     public UsuarioControler() {
     }
-    
+
     @PostConstruct
     public void listar() {
         setListUsuarioPersona(getUsuarioBL().listar(""));
     }
-    
+
     public void actualizar() {
         Usuario temp2 = new Usuario();
         String msg;
         temp2 = buscarId();
-        
+
         temp2.setEstado(this.getUsuario().getEstado());
-        System.out.println("estado..."+temp2.getEstado());
-        
+
         long res = getUsuarioBL().actualizar(temp2);
         if (res == 0) {
             msg = "Se actualizó correctamente el registro.";
@@ -62,23 +60,27 @@ public class UsuarioControler {
         }
         listar();
     }
-    
+
     public Usuario buscarId() {
         return getUsuarioBL().buscar(getUsuario().getIdusuario());
     }
-    
+
     public void onRowEdit(RowEditEvent event) {
         temp = new Usuario();
         String msg = "";
-        temp.setIdusuario(((Usuario)event.getObject()).getIdusuario());
+        temp.setIdusuario(((Usuario) event.getObject()).getIdusuario());
         Usuario temp2 = new Usuario();
         temp2 = getUsuarioBL().buscar(temp.getIdusuario());
-        System.out.println("Estado modificado..."+getUsuario().getEstado());
+        System.out.println("Estado modificado..." + getUsuario().getEstado());
         temp2.setEstado(getUsuario().getEstado());
-        
+
         long res = getUsuarioBL().actualizar(temp2);
-        if (res == 0) {
-            msg = "Se habilitó la cuenta para "+temp2.getNombreUsuario();
+        if (res == 0 && temp2.getEstado() == true) {
+            msg = "Se habilitó la cuenta para " + temp2.getNombreUsuario();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        } else if (res == 0 && temp2.getEstado() == false) {
+            msg = "Se desactivó la cuenta para " + temp2.getNombreUsuario();
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
         } else {
@@ -88,7 +90,7 @@ public class UsuarioControler {
         }
         listar();
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edicion cancelada", null);
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -117,5 +119,5 @@ public class UsuarioControler {
     public void setListUsuarioPersona(List<Usuario> listUsuarioPersona) {
         this.listUsuarioPersona = listUsuarioPersona;
     }
-    
+
 }

@@ -26,7 +26,7 @@
                                 Factores
                             </f:facet>
                             
-                            <p:column headerText="Nº">
+                            <p:column headerText="Nº" style="width:30px;text-align: center">
                                 <h:outputText value="#{factorItem.numero}" />
                             </p:column>
                             <p:column headerText="Dimensión">
@@ -38,17 +38,17 @@
                             <p:column headerText="Descipción">
                                 <h:outputText value="#{factorItem.descripcion}" />
                             </p:column>
-                            <p:column style="width:6%;text-align: center">
-                                <h:outputLink value="/SVA_1.0/admin/page/administrarCriterio.xhtml">
-                                    <h:outputText value="Criterio"/>
-                                </h:outputLink>                         
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Criterios" action="#{factorBean.redirigir()}">
+                                    <f:setPropertyActionListener value="#{factorItem}" target="#{factorBean.factor}" />
+                                </p:commandButton>                       
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
                                     <f:setPropertyActionListener value="#{factorItem}" target="#{factorBean.factor}" />
                                 </p:commandButton>                            
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
                                                  icon="icon-eliminar" title="Eliminar">
                                     <f:setPropertyActionListener value="#{factorItem}" target="#{factorBean.factor}" />          

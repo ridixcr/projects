@@ -3,7 +3,6 @@ package org.edessco.sva.da;
 
 import java.util.List;
 import org.edessco.sva.be.Facultad;
-import org.edessco.sva.be.UnidadAcademica;
 import org.edessco.sva.be.Universidad;
 import org.edessco.sva.util.AbstractDA;
 import org.springframework.stereotype.Repository;
@@ -41,9 +40,9 @@ public class FacultadDA extends AbstractDA<Facultad>{
         return list(Facultad.class, Universidad.class, id);
     }
     
-//    public List<UnidadAcademica> listarEscuelasFacultad(long idFacultad) {
-//        return list("from UnidadAcademica ua inner join fetch ua.facultad f where f.idfacultad="+idFacultad);
-//    }
+    public List<Facultad> listarFacultad(long idUniversidad) {
+        return list("from Facultad f inner join fetch f.universidad u where u.iduniversidad="+idUniversidad);
+    }
 
     @Override
     public Facultad buscar(long id) {

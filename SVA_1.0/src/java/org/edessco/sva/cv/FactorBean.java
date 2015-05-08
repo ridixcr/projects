@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package org.edessco.sva.cv;
 
@@ -15,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Dimension;
 import org.edessco.sva.be.Factor;
 import org.edessco.sva.bl.FactorBL;
@@ -51,7 +47,12 @@ public class FactorBean {
 
     @PostConstruct
     public void listar() {
-        setListaFactores(getFactorBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idDimension") != null){
+            setListaFactores(getFactorBL().listarFactor(Long.parseLong(httpSession.getAttribute("idDimension").toString())));
+        }else{
+            setListaFactores(getFactorBL().listar(""));
+        }          
     }
 
     public void actualizar() {
@@ -144,5 +145,11 @@ public class FactorBean {
 
     public void setSelectOneItemsFactor(List<SelectItem> selectOneItemsFactor) {
         this.selectOneItemsFactor = selectOneItemsFactor;
+    }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idFactor", getFactor().getIdfactor());
+        return "administrarCriterio";
     }
 }

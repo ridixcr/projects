@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Universidad;
 import org.edessco.sva.bl.UniversidadBL;
 import org.edessco.sva.util.Tarea;
@@ -107,6 +108,12 @@ public class UniversidadBean {
             this.selectOneItemsUniversidad.add(selectItem);
         }        
         return selectOneItemsUniversidad;
+    }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idUniversidad", getUniversidad().getIduniversidad());
+        return "administrarFacultad";
     }
     
         

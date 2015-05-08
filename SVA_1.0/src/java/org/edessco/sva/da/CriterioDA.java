@@ -61,4 +61,9 @@ public class CriterioDA extends AbstractDA<Criterio>{
     public Criterio buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<Criterio> listarCriterio(long id) {
+        System.out.println("id factor"+id);
+        return list("from Criterio c inner join fetch c.factor f where f.idfactor=" + id);
+    }
 }

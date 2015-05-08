@@ -28,7 +28,7 @@
                                 Facultades
                             </f:facet>
 
-                            <p:column style="width:4%;text-align: center" headerText="Nº">
+                            <p:column style="width:30px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{facultadItem.idfacultad}" />
                             </p:column>
                             <p:column headerText="Universidad" style="width:40%">
@@ -37,17 +37,17 @@
                             <p:column headerText="Facultad" style="width:40%">
                                 <h:outputText value="#{facultadItem.nombre}" />
                             </p:column>
-                            <p:column style="width:8%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Escuelas" action="#{facultadBean.redirigir()}">
                                     <f:setPropertyActionListener value="#{facultadItem}" target="#{facultadBean.facultad}" />
                                 </p:commandButton>                       
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
                                     <f:setPropertyActionListener value="#{facultadItem}" target="#{facultadBean.facultad}" />
                                 </p:commandButton>                            
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" icon="icon-eliminar" title="Eliminar">
                                     <f:setPropertyActionListener value="#{facultadItem}" target="#{facultadBean.facultad}" />
                                 </p:commandButton>                            

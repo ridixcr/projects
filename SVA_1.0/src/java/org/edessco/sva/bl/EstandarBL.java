@@ -80,4 +80,8 @@ public class EstandarBL extends AbstractBL<Estandar>{
     public Estandar buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<Estandar> listarEstandar(long id) {
+        return dao.listarEstandar(id);
+    }
 }

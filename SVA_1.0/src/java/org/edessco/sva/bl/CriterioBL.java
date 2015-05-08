@@ -79,4 +79,8 @@ public class CriterioBL extends AbstractBL<Criterio>{
     public Criterio buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<Criterio> listarCriterio(long id) {
+        return dao.listarCriterio(id);
+    }
 }

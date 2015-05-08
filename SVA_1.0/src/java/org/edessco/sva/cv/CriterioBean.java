@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Criterio;
 import org.edessco.sva.be.Factor;
 import org.edessco.sva.bl.CriterioBL;
@@ -49,10 +50,21 @@ public class CriterioBean {
             }
         });
     }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idCriterio", getCriterio().getIdcriterio());
+        return "administrarEstandar";
+    }
 
     @PostConstruct
     public void listar() {
-        setListaCriterios(getCriterioBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idFactor") != null){
+            setListaCriterios(getCriterioBL().listarCriterio(Long.parseLong(httpSession.getAttribute("idFactor").toString())));
+        }else{
+            setListaCriterios(getCriterioBL().listar(""));
+        }        
     }
 
     public void actualizar() {

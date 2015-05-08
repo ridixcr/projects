@@ -62,4 +62,8 @@ public class EstandarDA extends AbstractDA<Estandar>{
     public Estandar buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<Estandar> listarEstandar(long id) {
+        return list("from Estandar e inner join fetch e.criterio c where c.idcriterio=" + id);
+    }
 }

@@ -26,25 +26,25 @@
                                 Estándares
                             </f:facet>
 
-                            <p:column headerText="Nº">
+                            <p:column headerText="Nº" style="width:30px;text-align: center">
                                 <h:outputText value="#{estandarItem.numeroEstandar}" />
                             </p:column>
                             <p:column headerText="Criterio">
                                 <h:outputText value="#{estandarItem.criterio.titulo}" />
                             </p:column>
                               
-                            <p:column headerText="Tipo">
+                            <p:column headerText="Tipo" style="width: 100px">
                                 <h:outputText value="#{estandarItem.tipoEstandar}" />
                             </p:column>
                             <p:column headerText="Estándar">
                                 <h:outputText value="#{estandarItem.titulo}" />
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
                                     <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
                                 </p:commandButton>                            
                             </p:column>
-                            <p:column style="width:4%;text-align: center">
+                            <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
                                                  icon="icon-eliminar" title="Eliminar">
                                     <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />          

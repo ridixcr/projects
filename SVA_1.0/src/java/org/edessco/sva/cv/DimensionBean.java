@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Dimension;
 import org.edessco.sva.be.ModeloCalidad;
 import org.edessco.sva.bl.DimensionBL;
@@ -48,10 +49,21 @@ public class DimensionBean {
             }
         });
     }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idDimension", getDimension().getIddimension());
+        return "administrarFactor";
+    }
 
     @PostConstruct
     public void listar() {
-        setListaDimensiones(getDimensionBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idModelo") != null){
+            setListaDimensiones(getDimensionBL().listarDimension(Long.parseLong(httpSession.getAttribute("idModelo").toString())));
+        }else{
+            setListaDimensiones(getDimensionBL().listar(""));
+        }        
     }
 
     public void actualizar() {

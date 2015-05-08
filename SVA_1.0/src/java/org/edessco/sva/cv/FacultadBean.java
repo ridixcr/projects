@@ -47,7 +47,13 @@ public class FacultadBean {
 
     @PostConstruct
     public void listarFacultades() {
-        setListaFacultades(getFacultadBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idUniversidad") != null){
+            setListaFacultades(getFacultadBL().listarFacultad(Long.parseLong(httpSession.getAttribute("idUniversidad").toString())));
+            //httpSession.invalidate();
+        }else{
+            setListaFacultades(getFacultadBL().listar(""));
+        }
     }
     
     public void actualizarFacultad() {

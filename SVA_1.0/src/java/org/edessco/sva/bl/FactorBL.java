@@ -79,4 +79,8 @@ public class FactorBL extends AbstractBL<Factor>{
     public Factor buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+     public List<Factor> listarFactor(long id) {
+        return dao.listarFactor(id);
+    }
 }

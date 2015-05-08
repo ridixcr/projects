@@ -1,4 +1,3 @@
-
 package org.edessco.sva.da;
 
 import java.util.List;
@@ -7,11 +6,11 @@ import org.edessco.sva.util.AbstractDA;
 import org.springframework.stereotype.Repository;
 
 @Repository("dimensionDA")
-public class DimensionDA extends AbstractDA<Dimension>{
+public class DimensionDA extends AbstractDA<Dimension> {
 
     @Override
     public long registrar(Dimension bean) {
-         return save(bean);
+        return save(bean);
     }
 
     @Override
@@ -22,6 +21,10 @@ public class DimensionDA extends AbstractDA<Dimension>{
     @Override
     public long eliminar(Dimension bean) {
         return delete(bean);
+    }
+
+    public List<Dimension> listarDimension(long id) {
+        return list("from Dimension d inner join fetch d.modeloCalidad mc where mc.idmodelocalidad=" + id);
     }
 
     @Override
@@ -36,12 +39,12 @@ public class DimensionDA extends AbstractDA<Dimension>{
 
     @Override
     public List<Dimension> listar(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Dimension buscar(long id) {
-        return search(Dimension.class,id);
+        return search(Dimension.class, id);
     }
 
     @Override

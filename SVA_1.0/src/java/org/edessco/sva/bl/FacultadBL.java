@@ -57,8 +57,8 @@ public class FacultadBL extends AbstractBL<Facultad> {
         return list(ref);
     }
 
-    public List<UnidadAcademica> listarFacultad(long idfacultad) {
-        return daoUA.listarFacultad(idfacultad);
+    public List<Facultad> listarFacultad(long idUniversidad) {
+        return dao.listarFacultad(idUniversidad);
     }
 
     @Override

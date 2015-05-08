@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Criterio;
 import org.edessco.sva.be.Estandar;
 import org.edessco.sva.bl.EstandarBL;
@@ -53,7 +54,12 @@ public class EstandarBean {
 
     @PostConstruct
     public void listar() {
-        setListaEstandares(getEstandarBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idCriterio") != null){
+            setListaEstandares(getEstandarBL().listarEstandar(Long.parseLong(httpSession.getAttribute("idCriterio").toString())));
+        }else{
+            setListaEstandares(getEstandarBL().listar(""));
+        }         
     }
 
     public void actualizar() {

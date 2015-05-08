@@ -51,6 +51,10 @@ public class DimensionBL extends AbstractBL<Dimension>{
         return list(ref);
     }
 
+    public List<Dimension> listarDimension(long id) {
+        return dao.listarDimension(id);
+    }
+    
     @Override
     public List<Dimension> listar(long id) {
         return list(id);
@@ -69,5 +73,9 @@ public class DimensionBL extends AbstractBL<Dimension>{
     @Override
     public Dimension buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public List<Dimension> listarFacultad(long id) {
+        return dao.listarDimension(id);
     }
 }
