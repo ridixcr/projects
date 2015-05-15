@@ -100,7 +100,7 @@ public class LoginControler implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, message);
             url = "/page/login";
         }
-        return url;
+        return url+"?faces-redirect=true";
     }
 
     public String cerrarSesion() {

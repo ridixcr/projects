@@ -18,6 +18,7 @@ public class UnidadAcademica  implements java.io.Serializable {
      private String nombre;
      private Set<Autoevaluacion> autoevaluacions = new HashSet<Autoevaluacion>(0);
      private Set<Persona> personas = new HashSet<Persona>(0);
+     private Set<ComiteInterno> comiteInternos = new HashSet<ComiteInterno>(0);
 
     public UnidadAcademica() {
         this.idunidadacademica = Long.MIN_VALUE;
@@ -69,6 +70,14 @@ public class UnidadAcademica  implements java.io.Serializable {
     
     public void setPersonas(Set<Persona> personas) {
         this.personas = personas;
+    }
+
+    public Set<ComiteInterno> getComiteInternos() {
+        return comiteInternos;
+    }
+
+    public void setComiteInternos(Set<ComiteInterno> comiteInternos) {
+        this.comiteInternos = comiteInternos;
     }
 
 

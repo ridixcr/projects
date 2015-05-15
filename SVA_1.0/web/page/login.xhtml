@@ -28,14 +28,42 @@
                                                     value="#{loginControler.contrasenia}"/>
                                         <f:facet name="footer">
                                             <p:separator />
-                                            <p:commandButton value="Registrese" icon="icon-add" ajax="false" action="registrarUsuario" immediate="true"/>
-                                            <p:commandButton value="Iniciar Sesion" update=":growl" icon="icon-ingresar" style="float: right;"
+                                            <p:commandButton value="Regístrese aquí" icon="icon-add" ajax="true"
+                                                             immediate="true" update=":formDialog" oncomplete="PF('dlgDialog').show();"/>
+                                            <p:commandButton value="Iniciar Sesion" update=":growl" icon="icon-ingresar" style="float: right;" ajax="true"
                                                              action="#{loginControler.login()}"/>
                                         </f:facet>
                                     </h:panelGrid>
                                 </p:panel>
-                            </h:form> 
-                            
+                            </h:form>
+
+                            <h:form id="formDialog">
+                                <p:dialog header="Tipo de Usuario" widgetVar="dlgDialog" id="dlgDialog" modal="true"
+                                          showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                                    <h:panelGrid id="gridNew" columns="2" cellpadding="3">                                        
+
+                                        <h:outputLabel for="cbx_efp" value="Tipo de Usuario:" />
+                                        <p:selectOneMenu id="cbx_efp" value="#{urlControler.tipoUser}" style="width: 388px">
+                                            <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Alumno" itemValue="Alumno"/>
+                                            <f:selectItem itemLabel="Egresado" itemValue="Egresado"/>
+                                            <f:selectItem itemLabel="Administrativo" itemValue="Administrativo"/>
+                                            <f:selectItem itemLabel="Docente" itemValue="Docente"/>
+                                            <f:selectItem itemLabel="Grupo de interés" itemValue="Grupo de interés"/>
+                                        </p:selectOneMenu>  
+                                        
+                                        <f:facet name="footer">
+                                            <p:separator/>
+                                            <p:commandButton id="btnContinuar" 
+                                                             oncomplete="PF('dlgDialog').hide();" icon="icon-guardar" 
+                                                             value="Continuar >>" title="Continuar" action="#{urlControler.registrarUser()}"/>
+                                            <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgDialog').hide();"
+                                                             icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                        </f:facet>
+                                    </h:panelGrid>
+                                </p:dialog>
+                            </h:form>
+
                         </div>
                         <span class="copy">Copyright &copy; 2014  jlsulcag</span>	
                     </div>

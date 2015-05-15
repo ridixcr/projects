@@ -24,7 +24,7 @@ public class Persona  implements java.io.Serializable {
      private String sexo;
      private Set<Docente> docentes = new HashSet<Docente>(0);
      private Set<Alumno> alumnos = new HashSet<Alumno>(0);
-     private Set<ComisionInterna> comisionInternas = new HashSet<ComisionInterna>(0);
+     private Set<MiembroComiteInterno> comisionInternas = new HashSet<MiembroComiteInterno>(0);
      private Set<Egresado> egresados = new HashSet<Egresado>(0);
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
      private Set<GrupoInteres> grupoIntereses = new HashSet<GrupoInteres>(0);
@@ -39,7 +39,7 @@ public class Persona  implements java.io.Serializable {
     public Persona(UnidadAcademica unidadAcademica) {
         this.unidadAcademica = unidadAcademica;
     }
-    public Persona(UnidadAcademica unidadAcademica, String nombres, String apellidoPaterno, String apellidoMaterno, String dni, String telefono, String correo, String sexo, Set<Docente> docentes, Set<Alumno> alumnos, Set<ComisionInterna> comisionInternas, Set<Egresado> egresados, Set<Usuario> usuarios, Set<GrupoInteres> grupoIntereses, Set<Administrativo> administrativos) {
+    public Persona(UnidadAcademica unidadAcademica, String nombres, String apellidoPaterno, String apellidoMaterno, String dni, String telefono, String correo, String sexo, Set<Docente> docentes, Set<Alumno> alumnos, Set<MiembroComiteInterno> comisionInternas, Set<Egresado> egresados, Set<Usuario> usuarios, Set<GrupoInteres> grupoIntereses, Set<Administrativo> administrativos) {
        this.unidadAcademica = unidadAcademica;
        this.nombres = nombres;
        this.apellidoPaterno = apellidoPaterno;
@@ -134,11 +134,11 @@ public class Persona  implements java.io.Serializable {
     public void setAlumnos(Set<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
-    public Set<ComisionInterna> getComisionInternas() {
+    public Set<MiembroComiteInterno> getComisionInternas() {
         return this.comisionInternas;
     }
     
-    public void setComisionInternas(Set<ComisionInterna> comisionInternas) {
+    public void setComisionInternas(Set<MiembroComiteInterno> comisionInternas) {
         this.comisionInternas = comisionInternas;
     }
     public Set<Egresado> getEgresados() {

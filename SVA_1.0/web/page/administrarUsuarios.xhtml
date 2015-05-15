@@ -11,67 +11,86 @@
         <ui:composition template="./../template/layout.xhtml">
 
             <ui:define name="content">
-                <p:growl id="msg" showDetail="true" />
-                <p:panel id="pnl_adminUsaarios" header="Administrar usuarios">
-                    <h:form id="formDataTable">
-                        <p:dataTable id="lista" value="#{usuarioControler.listUsuarioPersona}" var="usuarioItem"
-                                     paginator="true" rows="10" paginatorPosition="bottom"
-                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     rowsPerPageTemplate="10,15,20" editable="true">
-                            <f:facet name="header">
-                                Usuarios
-                            </f:facet>
+                <p:layout style="min-width:400px;min-height:550px;">
+                    <p:layoutUnit position="west" resizable="true" size="200" minSize="40" maxSize="200">
+                        <h:form>
+                            <p:growl id="msgs" showDetail="true" />
 
-                            <p:ajax event="rowEdit" listener="#{usuarioControler.onRowEdit}"  update=":msg"/>
-                            <p:ajax event="rowEditCancel" listener="#{usuarioControler.onRowCancel}"  update=":msg"/>
+                            <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px">
+                                <h:panelGrid columns="2" cellpadding="10">
+                                    <p:graphicImage name="demo/images/godfather/godfather1.jpg" />
+                                    <h:outputText
+                                        value="The story begins as Don Vito Corleone..." />
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </p:layoutUnit>
 
-                            <p:column style="width:15px;text-align: center" headerText="Nº">
-                                <h:outputText value="#{usuarioItem.idusuario}" />
-                            </p:column>
-                            <p:column headerText="Apellidos y Nombres">
-                                <h:outputText value="#{usuarioItem.persona.apellidoPaterno} #{usuarioItem.persona.apellidoMaterno}, #{usuarioItem.persona.nombres}" />
-                            </p:column>
-                            
-                            <p:column headerText="Rol" style="width: 150px">
-                                <h:outputText value="#{usuarioItem.persona.nombres}" />
-                            </p:column>
-
-                            <p:column headerText="DNI" style="width:50px;text-align: center">
-                                <h:outputText value="#{usuarioItem.persona.dni}" />
-                            </p:column>
-
-                            <p:column headerText="Usuario" style="width:70px;">
-                                <h:outputText value="#{usuarioItem.nombreUsuario}" />
-                            </p:column>
-
-
-                            <p:column headerText="Correo Electrónico" style="width:200px;">
-                                <h:outputText value="#{usuarioItem.persona.correo}" />
-                            </p:column>
-
-                            <p:column headerText="Estado" style="width: 150px; text-align: center">
-                                <p:cellEditor>
-                                    <f:facet name="output"><h:outputText value="#{usuarioItem.estado}" /></f:facet>
-                                    <f:facet name="input">
-                                        <p:selectOneMenu id="cbx_estado" label="Estado" style="width: 150px"
-                                                         value="#{usuarioControler.usuario.estado}">
-                                            <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true" />
-                                            <f:selectItem itemLabel="Activado" itemValue="true"/>
-                                            <f:selectItem itemLabel="Desactivado" itemValue="false"/>
-                                        </p:selectOneMenu>
+                    <p:layoutUnit position="center">
+                        <p:growl id="msg" showDetail="true" />
+                        <p:panel id="pnl_adminUsaarios" header="Administrar usuarios">
+                            <h:form id="formDataTable">
+                                <p:dataTable id="lista" value="#{usuarioControler.listUsuarioPersona}" var="usuarioItem"
+                                             paginator="true" rows="10" paginatorPosition="bottom"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="10,15,20" editable="true">
+                                    <f:facet name="header">
+                                        Usuarios
                                     </f:facet>
-                                </p:cellEditor>
 
-                            </p:column>
+                                    <p:ajax event="rowEdit" listener="#{usuarioControler.onRowEdit}"  update=":msg"/>
+                                    <p:ajax event="rowEditCancel" listener="#{usuarioControler.onRowCancel}"  update=":msg"/>
 
-                            <p:column style="width:50px;text-align: center" styleClass="ui-editable-column-options">
-                                <p:rowEditor />
-                            </p:column>
+                                    <p:column style="width:15px;text-align: center" headerText="Nº">
+                                        <h:outputText value="#{usuarioItem.idusuario}" />
+                                    </p:column>
+                                    <p:column headerText="Apellidos y Nombres">
+                                        <h:outputText value="#{usuarioItem.persona.apellidoPaterno} #{usuarioItem.persona.apellidoMaterno}, #{usuarioItem.persona.nombres}" />
+                                    </p:column>
 
-                        </p:dataTable>
-                    </h:form>
+                                    <p:column headerText="Rol" style="width: 150px">
+                                        <h:outputText value="#{usuarioItem.persona.nombres}" />
+                                    </p:column>
 
-                </p:panel>
+                                    <p:column headerText="DNI" style="width:50px;text-align: center">
+                                        <h:outputText value="#{usuarioItem.persona.dni}" />
+                                    </p:column>
+
+                                    <p:column headerText="Usuario" style="width:70px;">
+                                        <h:outputText value="#{usuarioItem.nombreUsuario}" />
+                                    </p:column>
+
+
+                                    <p:column headerText="Correo Electrónico" style="width:200px;">
+                                        <h:outputText value="#{usuarioItem.persona.correo}" />
+                                    </p:column>
+
+                                    <p:column headerText="Estado" style="width: 150px; text-align: center">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{usuarioItem.estado}" /></f:facet>
+                                            <f:facet name="input">
+                                                <p:selectOneMenu id="cbx_estado" label="Estado" style="width: 150px"
+                                                                 value="#{usuarioControler.usuario.estado}">
+                                                    <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true" />
+                                                    <f:selectItem itemLabel="Activado" itemValue="true"/>
+                                                    <f:selectItem itemLabel="Desactivado" itemValue="false"/>
+                                                </p:selectOneMenu>
+                                            </f:facet>
+                                        </p:cellEditor>
+
+                                    </p:column>
+
+                                    <p:column style="width:50px;text-align: center" styleClass="ui-editable-column-options">
+                                        <p:rowEditor />
+                                    </p:column>
+
+                                </p:dataTable>
+                            </h:form>
+
+                        </p:panel>
+                    </p:layoutUnit>
+                </p:layout>
+
             </ui:define>
 
         </ui:composition>

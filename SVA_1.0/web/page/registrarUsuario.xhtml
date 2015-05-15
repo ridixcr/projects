@@ -96,7 +96,7 @@
 
                                         <f:facet name="footer">
                                             <p:separator style="margin-left: 50px"/>
-                                            <p:commandButton value="Volver al inicio" icon="icon-lock" ajax="false" action="login" immediate="true" style="margin-left: 50px"/>
+                                            <p:commandButton value="Volver al inicio" icon="icon-lock" ajax="false" action="login?faces-redirect=true" immediate="true" style="margin-left: 50px"/>
                                             <p:commandButton value="Guardar" update=":growl" icon="icon-guardar" style="margin-right:5px; float: right"
                                                              action="#{personaControler.registrar()}"/>
                                         </f:facet>
