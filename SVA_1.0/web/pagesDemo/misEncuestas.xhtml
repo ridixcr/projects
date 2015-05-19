@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutUsuarios.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_respEnc" header="Mis encuestas">
+
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{preguntaEncuestaBean.listaPreguntasEncuestas}" var="preguntaItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Preguntas de la encuesta
+                            </f:facet>
+
+                            <p:column style="width:4%" headerText="Nº">
+                                <h:outputText value="#{preguntaItem.idpreguntaencuesta}" />
+                            </p:column>
+
+                            <p:column headerText="Estándar">
+                                <h:outputText value="#{preguntaItem.estandar.titulo}"/>
+                            </p:column> 
+
+                            <p:column  headerText="Pregunta">
+                                <h:outputText value="#{preguntaItem.pregunta}"/>
+                            </p:column> 
+
+                            <p:column style="width:5%; text-align: center">
+                                <p:commandButton id="btnPreguntas" update=":formPreguntas" oncomplete="PF('dlgPreguntas').show();" immediate="True"
+                                                 icon="icon-preguntas" title="Preguntas">
+                                    <f:setPropertyActionListener value="#{preguntaItem}" target="#{preguntaEncuestaBean.preguntaEncuesta}" />          
+                                </p:commandButton> 
+                            </p:column>
+
+                            <p:column headerText="Estado" style="width:4%">
+                                <h:outputText />
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formPreguntas">
+                        <p:growl id="msgs" showDetail="true"/>
+                        <p:dialog header="Resolver encuesta" widgetVar="dlgPreguntas" id="dlgPreguntas" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" >
+                            <p:dataTable id="lista" style="width: 1000px" value="#{preguntaEncuestaBean.listaPreguntasEncuestas}" var="preguntasEncuestaItem"
+                                         paginator="true" rows="10" paginatorPosition="bottom" editable="true"
+                                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="10,15,20">
+                                <f:facet name="header">
+                                    Preguntas
+                                </f:facet>
+
+                                <p:ajax event="rowEdit" listener="#{respuestaEncuestaBean.onRowEdit}"  update=":formPreguntas:msgs"/>
+                                <p:ajax event="rowEditCancel" listener="#{respuestaEncuestaBean.onRowCancel}"  update=":formPreguntas:msgs"/>
+
+                                <p:column style="width:4%" headerText="Nº">
+                                    <h:outputText value="#{preguntasEncuestaItem.idpreguntaencuesta}"/>
+                                </p:column>                           
+
+
+                                <p:column style="width:70%" headerText="Pregunta">
+                                    <h:outputText value="#{preguntasEncuestaItem.pregunta}"/>
+                                </p:column>                            
+
+                                <p:column style="width:16%">
+                                    <p:cellEditor>
+                                        <f:facet name="output"><h:outputText value="#{respuestaEncuestaBean.respuestaEncuesta.respuesta}"/></f:facet>
+                                        <f:facet name="input">
+                                            <p:selectOneMenu id="cbx_rpta" required="true" label="Respuesta" style="width:170px"
+                                                             value="#{respuestaEncuestaBean.respuestaEncuesta.respuesta}">
+                                                <f:selectItem itemLabel="-- Seleccione --" noSelectionOption="true" />
+                                                <f:selectItem itemLabel="Totalmente de acuerdo" itemValue="TA"/>
+                                                <f:selectItem itemLabel="De acuerdo" itemValue="DA"/>
+                                                <f:selectItem itemLabel="Poco de acuerdo" itemValue="PA"/>
+                                                <f:selectItem itemLabel="En desacuerdo" itemValue="DE"/>
+                                                <f:selectItem itemLabel="No connozco el tema" itemValue="NC"/>
+                                            </p:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+
+                                </p:column>
+
+                                <p:column headerText="Estado" style="width:4%">
+                                    <h:outputText />
+                                </p:column>
+
+                                <p:column style="width:6%">
+                                    <p:rowEditor />
+                                </p:column>
+
+                            </p:dataTable>
+
+                            <f:facet name="footer">
+                                <p:separator/>
+                                <p:commandButton id="btnRegistrar" icon="icon-guardar" value="Guardar" title="Guardar"  
+                                                 oncomplete="PF('dlgPreguntas').hide()" actionListener="#{respuestaEncuestaBean.registrar()}" />
+                                <p:commandButton id="btnCancelarRegistro"  icon="icon-cancelar" value="Cancelar" title="Cancelar" oncomplete="PF('dlgPreguntas').hide()" />
+                            </f:facet>
+
+                        </p:dialog>
+                    </h:form>
+
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
