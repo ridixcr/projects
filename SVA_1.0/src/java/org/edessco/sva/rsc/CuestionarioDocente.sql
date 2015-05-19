@@ -19,4 +19,3 @@ on pc.id_estandar=es.idestandar
 inner join respuesta_cuestionario rc
 on rc.id_preguntacuestionario=pc.idpreguntacuestionario
 order by p.idpersona asc
-
