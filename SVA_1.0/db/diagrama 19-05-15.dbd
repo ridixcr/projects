@@ -514,7 +514,212 @@
           </Relation>
         </TDiagramForeignKeyProperties>
       </TDBADiagramObject>
+      <TDBADiagramObject id="50" propertiesclass="TDiagramMetaTableProperties" objectname="comite_interno">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1410" top="840" width="200" height="125"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="51" propertiesclass="TDiagramForeignKeyProperties" objectname="comite_interno.comite_interno_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="816" top="816" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1510" y="902"/>
+                <Point x="780" y="100"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="52" propertiesclass="TDiagramMetaTableProperties" objectname="grupo_interes">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1520" top="1030" width="200" height="111"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="53" propertiesclass="TDiagramForeignKeyProperties" objectname="grupo_interes.grupo_interes_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="848" top="848" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1620" y="1085"/>
+                <Point x="1090" y="270"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="54" propertiesclass="TDiagramMetaTableProperties" objectname="iniciativa_mejora">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1460" top="1280" width="200" height="139"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="55" propertiesclass="TDiagramForeignKeyProperties" objectname="iniciativa_mejora.iniciativa_mejora_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="880" top="880" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1560" y="1349"/>
+                <Point x="470" y="1070"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="56" propertiesclass="TDiagramForeignKeyProperties" objectname="iniciativa_mejora.iniciativa_mejora_ibfk_2">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="896" top="896" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1560" y="1349"/>
+                <Point x="790" y="290"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="57" propertiesclass="TDiagramMetaTableProperties" objectname="matriz_recoleccion_datos">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1890" top="1060" width="200" height="279"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="58" propertiesclass="TDiagramForeignKeyProperties" objectname="matriz_recoleccion_datos.matriz_recoleccion_datos_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="928" top="928" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1990" y="1199"/>
+                <Point x="470" y="1070"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="59" propertiesclass="TDiagramForeignKeyProperties" objectname="matriz_recoleccion_datos.matriz_recoleccion_datos_ibfk_2">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="944" top="944" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1990" y="1199"/>
+                <Point x="790" y="290"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="60" propertiesclass="TDiagramMetaTableProperties" objectname="miembro_comite_interno">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="2060" top="860" width="200" height="153"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="61" propertiesclass="TDiagramForeignKeyProperties" objectname="miembro_comite_interno.miembro_comite_interno_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="976" top="976" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="2160" y="936"/>
+                <Point x="1090" y="270"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="62" propertiesclass="TDiagramForeignKeyProperties" objectname="miembro_comite_interno.miembro_comite_interno_ibfk_2">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="992" top="992" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="2160" y="936"/>
+                <Point x="1510" y="900"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="63" propertiesclass="TDiagramMetaTableProperties" objectname="registro_grado_cumplimiento">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1880" top="530" width="200" height="153"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="64" propertiesclass="TDiagramForeignKeyProperties" objectname="registro_grado_cumplimiento.registro_grado_cumplimiento_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="1024" top="1024" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1980" y="606"/>
+                <Point x="470" y="1070"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="65" propertiesclass="TDiagramForeignKeyProperties" objectname="registro_grado_cumplimiento.registro_grado_cumplimiento_ibfk_2">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="1040" top="1040" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1980" y="606"/>
+                <Point x="790" y="290"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="66" propertiesclass="TDiagramMetaTableProperties" objectname="registro_resultado">
+        <TDiagramMetaTableProperties>
+          <Glyph>
+            <Geometry left="1880" top="330" width="200" height="167"/>
+          </Glyph>
+        </TDiagramMetaTableProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="67" propertiesclass="TDiagramForeignKeyProperties" objectname="registro_resultado.registro_resultado_ibfk_1">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="1072" top="1072" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1980" y="413"/>
+                <Point x="470" y="1070"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
+      <TDBADiagramObject id="68" propertiesclass="TDiagramForeignKeyProperties" objectname="registro_resultado.registro_resultado_ibfk_2">
+        <TDiagramForeignKeyProperties>
+          <Relation>
+            <Geometry left="1088" top="1088" width="200" height="100"/>
+            <Glyph>
+              <Geometry>
+                <Point x="1980" y="413"/>
+                <Point x="790" y="290"/>
+              </Geometry>
+            </Glyph>
+          </Relation>
+        </TDiagramForeignKeyProperties>
+      </TDBADiagramObject>
     </Elements>
-    <Surface zoom="64" scrollx="0" scrolly="0"/>
+    <Surface zoom="125" scrollx="1180" scrolly="383"/>
   </TDBADiagramController>
 </XMLDiagram>
