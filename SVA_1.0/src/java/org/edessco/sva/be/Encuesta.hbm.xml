@@ -46,6 +46,9 @@
                 <comment>Almacenar internamenete quien crea la encuesta</comment>
             </column>
         </property>
+        <property name="tipoEncuestado" type="string">
+            <column name="tipo_encuestado" length="20" />
+        </property>
         <set name="preguntaEncuestas" table="pregunta_encuesta" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_encuesta" not-null="true" />

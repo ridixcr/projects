@@ -25,6 +25,7 @@ public class Encuesta  implements java.io.Serializable {
      private String agradecimiento;
      private String tipoUsuario;
      private Long idUsuario;
+     private String tipoEncuestado;
      private Set<PreguntaEncuesta> preguntaEncuestas = new HashSet<PreguntaEncuesta>(0);
 
     public Encuesta() {
@@ -133,6 +134,14 @@ public class Encuesta  implements java.io.Serializable {
     
     public void setPreguntaEncuestas(Set<PreguntaEncuesta> preguntaEncuestas) {
         this.preguntaEncuestas = preguntaEncuestas;
+    }
+
+    public String getTipoEncuestado() {
+        return tipoEncuestado;
+    }
+
+    public void setTipoEncuestado(String tipoEncuestado) {
+        this.tipoEncuestado = tipoEncuestado;
     }
 
 

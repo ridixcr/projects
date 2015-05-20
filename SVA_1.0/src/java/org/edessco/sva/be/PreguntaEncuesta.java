@@ -18,11 +18,6 @@ public class PreguntaEncuesta  implements java.io.Serializable {
      private Encuesta encuesta;
      private String pregunta;
      private String ayuda;
-     private Boolean preguntaAlumno;
-     private Boolean preguntaDocente;
-     private Boolean preguntaAdministrativo;
-     private Boolean preguntaEgresado;
-     private Boolean preguntaGrupoInteres;
      
      private Set<RespuestaEncuesta> respuestaEncuestas = new HashSet<RespuestaEncuesta>(0);
 
@@ -37,16 +32,11 @@ public class PreguntaEncuesta  implements java.io.Serializable {
         this.estandar = estandar;
         this.encuesta = encuesta;
     }
-    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta, String pregunta, String ayuda, Boolean preguntaAlumno, Boolean preguntaDocente, Boolean preguntaAdministrativo, Boolean preguntaEgresado, Boolean preguntaGrupoInteres, Set<RespuestaEncuesta> respuestaEncuestas) {
+    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta, String pregunta, String ayuda, Set<RespuestaEncuesta> respuestaEncuestas) {
        this.estandar = estandar;
        this.encuesta = encuesta;
        this.pregunta = pregunta;
        this.ayuda = ayuda;
-       this.preguntaAlumno = preguntaAlumno;
-       this.preguntaDocente = preguntaDocente;
-       this.preguntaAdministrativo = preguntaAdministrativo;
-       this.preguntaEgresado = preguntaEgresado;
-       this.preguntaGrupoInteres = preguntaGrupoInteres;
        this.respuestaEncuestas = respuestaEncuestas;
     }
    
@@ -84,41 +74,6 @@ public class PreguntaEncuesta  implements java.io.Serializable {
     
     public void setAyuda(String ayuda) {
         this.ayuda = ayuda;
-    }
-    public Boolean getPreguntaAlumno() {
-        return this.preguntaAlumno;
-    }
-    
-    public void setPreguntaAlumno(Boolean preguntaAlumno) {
-        this.preguntaAlumno = preguntaAlumno;
-    }
-    public Boolean getPreguntaDocente() {
-        return this.preguntaDocente;
-    }
-    
-    public void setPreguntaDocente(Boolean preguntaDocente) {
-        this.preguntaDocente = preguntaDocente;
-    }
-    public Boolean getPreguntaAdministrativo() {
-        return this.preguntaAdministrativo;
-    }
-    
-    public void setPreguntaAdministrativo(Boolean preguntaAdministrativo) {
-        this.preguntaAdministrativo = preguntaAdministrativo;
-    }
-    public Boolean getPreguntaEgresado() {
-        return this.preguntaEgresado;
-    }
-    
-    public void setPreguntaEgresado(Boolean preguntaEgresado) {
-        this.preguntaEgresado = preguntaEgresado;
-    }
-    public Boolean getPreguntaGrupoInteres() {
-        return this.preguntaGrupoInteres;
-    }
-    
-    public void setPreguntaGrupoInteres(Boolean preguntaGrupoInteres) {
-        this.preguntaGrupoInteres = preguntaGrupoInteres;
     }
     public Set<RespuestaEncuesta> getRespuestaEncuestas() {
         return this.respuestaEncuestas;
