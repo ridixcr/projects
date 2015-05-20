@@ -62,7 +62,6 @@ public class PreguntaCuestionarioControler {
         temp.setCuestionario(this.getPreguntaCuestionario().getCuestionario());
         temp.setEstandar(this.getPreguntaCuestionario().getEstandar());
         temp.setPregunta(this.getPreguntaCuestionario().getPregunta());
-        temp.setEstado(this.getPreguntaCuestionario().getEstado());
         
         long res = getPreguntaCuestionarioBL().actualizar(temp);
         if (res == 0) {
@@ -104,7 +103,6 @@ public class PreguntaCuestionarioControler {
         this.getPreguntaCuestionario().setCuestionario(new Cuestionario());
         this.getPreguntaCuestionario().setEstandar(new Estandar());
         this.getPreguntaCuestionario().setPregunta("");
-        this.getPreguntaCuestionario().setEstado(false);
     }
     
     public void obtenerPregunta(){

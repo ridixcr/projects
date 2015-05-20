@@ -603,7 +603,6 @@ CREATE TABLE `pregunta_cuestionario` (
   `id_estandar` bigint(20) NOT NULL,
   `pregunta` text,
   `ayuda` text,
-  `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idpreguntacuestionario`),
   KEY `foreign_key01` (`id_cuestionario`),
   KEY `foreign_key02` (`id_estandar`),
@@ -618,7 +617,7 @@ CREATE TABLE `pregunta_cuestionario` (
 
 LOCK TABLES `pregunta_cuestionario` WRITE;
 /*!40000 ALTER TABLE `pregunta_cuestionario` DISABLE KEYS */;
-INSERT INTO `pregunta_cuestionario` VALUES (1,1,4,'asd',NULL,1),(2,1,5,'hjhk',NULL,1);
+INSERT INTO `pregunta_cuestionario` VALUES (1,1,4,'asd',NULL),(2,1,5,'hjhk',NULL);
 /*!40000 ALTER TABLE `pregunta_cuestionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,7 +639,6 @@ CREATE TABLE `pregunta_encuesta` (
   `pregunta_administrativo` tinyint(1) DEFAULT NULL,
   `pregunta_egresado` tinyint(1) DEFAULT NULL,
   `pregunta_grupo_interes` tinyint(1) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idpreguntaencuesta`),
   KEY `foreign_key01` (`id_encuesta`),
   KEY `foreign_key02` (`id_estandar`),
@@ -655,7 +653,7 @@ CREATE TABLE `pregunta_encuesta` (
 
 LOCK TABLES `pregunta_encuesta` WRITE;
 /*!40000 ALTER TABLE `pregunta_encuesta` DISABLE KEYS */;
-INSERT INTO `pregunta_encuesta` VALUES (1,1,4,'¿como ...?',NULL,NULL,NULL,NULL,NULL,NULL,1),(2,1,5,'¿Cual es la forma adecuada ...?',NULL,NULL,NULL,NULL,NULL,NULL,1);
+INSERT INTO `pregunta_encuesta` VALUES (1,1,4,'¿como ...?',NULL,NULL,NULL,NULL,NULL,NULL),(2,1,5,'¿Cual es la forma adecuada ...?',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pregunta_encuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -732,13 +730,16 @@ DROP TABLE IF EXISTS `respuesta_cuestionario`;
 CREATE TABLE `respuesta_cuestionario` (
   `idrespuestacuestionario` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_preguntacuestionario` bigint(20) NOT NULL,
-  `id_usuario` bigint(20) DEFAULT NULL,
+  `id_docente` bigint(20) NOT NULL,
   `respuesta` varchar(3) DEFAULT NULL,
   `explicacion_docente` text,
   `alternativa_solucion_docente` text,
   `fecha_hora` datetime DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idrespuestacuestionario`),
   KEY `foreign_key01` (`id_preguntacuestionario`),
+  KEY `foreign_key02` (`id_docente`),
+  CONSTRAINT `respuesta_cuestionario_ibfk_2` FOREIGN KEY (`id_docente`) REFERENCES `docente` (`iddocente`),
   CONSTRAINT `respuesta_cuestionario_ibfk_1` FOREIGN KEY (`id_preguntacuestionario`) REFERENCES `pregunta_cuestionario` (`idpreguntacuestionario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -749,7 +750,6 @@ CREATE TABLE `respuesta_cuestionario` (
 
 LOCK TABLES `respuesta_cuestionario` WRITE;
 /*!40000 ALTER TABLE `respuesta_cuestionario` DISABLE KEYS */;
-INSERT INTO `respuesta_cuestionario` VALUES (1,1,NULL,'No','sdv','sdfv',NULL);
 /*!40000 ALTER TABLE `respuesta_cuestionario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -766,8 +766,11 @@ CREATE TABLE `respuesta_encuesta` (
   `id_usuario` bigint(20) DEFAULT NULL,
   `respuesta` varchar(3) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idrespuestaencuesta`),
   KEY `foreign_key01` (`id_preguntaencuesta`),
+  KEY `foreign_key02` (`id_usuario`),
+  CONSTRAINT `respuesta_encuesta_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`),
   CONSTRAINT `respuesta_encuesta_ibfk_1` FOREIGN KEY (`id_preguntaencuesta`) REFERENCES `pregunta_encuesta` (`idpreguntaencuesta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -778,7 +781,7 @@ CREATE TABLE `respuesta_encuesta` (
 
 LOCK TABLES `respuesta_encuesta` WRITE;
 /*!40000 ALTER TABLE `respuesta_encuesta` DISABLE KEYS */;
-INSERT INTO `respuesta_encuesta` VALUES (1,1,NULL,'DA',NULL),(2,1,NULL,'DA',NULL);
+INSERT INTO `respuesta_encuesta` VALUES (1,1,NULL,'DA',NULL,NULL),(2,1,NULL,'DA',NULL,NULL);
 /*!40000 ALTER TABLE `respuesta_encuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -931,4 +934,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-19 22:20:50
+-- Dump completed on 2015-05-19 22:53:45

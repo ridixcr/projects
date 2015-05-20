@@ -17,6 +17,7 @@ public class RespuestaEncuesta  implements java.io.Serializable {
      private Long idUsuario;
      private String respuesta;
      private Date fechaHora;
+     private Boolean estado;
 
     public RespuestaEncuesta() {
         this.idrespuestaencuesta = null;
@@ -68,6 +69,14 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
 

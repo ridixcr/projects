@@ -65,7 +65,6 @@ public class PreguntaEncuestaBean {
         temp.setEncuesta(this.getPreguntaEncuesta().getEncuesta());
         temp.setEstandar(this.getPreguntaEncuesta().getEstandar());
         temp.setPregunta(this.getPreguntaEncuesta().getPregunta());
-        temp.setEstado(this.getPreguntaEncuesta().getEstado());
         
         long res = getPreguntaEncuestaBL().actualizar(temp);
         if (res == 0) {
@@ -107,7 +106,6 @@ public class PreguntaEncuestaBean {
         this.preguntaEncuesta.setEncuesta(new Encuesta());
         this.preguntaEncuesta.setEstandar(new Estandar());
         this.preguntaEncuesta.setPregunta("");
-        this.preguntaEncuesta.setEstado(false);
     }
     
     public void obtenerPregunta(){

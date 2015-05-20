@@ -18,7 +18,7 @@ public class PreguntaCuestionario  implements java.io.Serializable {
      private Estandar estandar;
      private String pregunta;
      private String ayuda;
-     private Boolean estado;
+     
      private Set<RespuestaCuestionario> respuestaCuestionarios = new HashSet<RespuestaCuestionario>(0);
 
     public PreguntaCuestionario() {
@@ -32,12 +32,11 @@ public class PreguntaCuestionario  implements java.io.Serializable {
         this.cuestionario = cuestionario;
         this.estandar = estandar;
     }
-    public PreguntaCuestionario(Cuestionario cuestionario, Estandar estandar, String pregunta, String ayuda, Boolean estado, Set<RespuestaCuestionario> respuestaCuestionarios) {
+    public PreguntaCuestionario(Cuestionario cuestionario, Estandar estandar, String pregunta, String ayuda, Set<RespuestaCuestionario> respuestaCuestionarios) {
        this.cuestionario = cuestionario;
        this.estandar = estandar;
        this.pregunta = pregunta;
        this.ayuda = ayuda;
-       this.estado = estado;
        this.respuestaCuestionarios = respuestaCuestionarios;
     }
    
@@ -75,13 +74,6 @@ public class PreguntaCuestionario  implements java.io.Serializable {
     
     public void setAyuda(String ayuda) {
         this.ayuda = ayuda;
-    }
-    public Boolean getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
     }
     public Set<RespuestaCuestionario> getRespuestaCuestionarios() {
         return this.respuestaCuestionarios;

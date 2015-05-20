@@ -23,7 +23,7 @@ public class PreguntaEncuesta  implements java.io.Serializable {
      private Boolean preguntaAdministrativo;
      private Boolean preguntaEgresado;
      private Boolean preguntaGrupoInteres;
-     private Boolean estado;
+     
      private Set<RespuestaEncuesta> respuestaEncuestas = new HashSet<RespuestaEncuesta>(0);
 
     public PreguntaEncuesta() {
@@ -37,7 +37,7 @@ public class PreguntaEncuesta  implements java.io.Serializable {
         this.estandar = estandar;
         this.encuesta = encuesta;
     }
-    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta, String pregunta, String ayuda, Boolean preguntaAlumno, Boolean preguntaDocente, Boolean preguntaAdministrativo, Boolean preguntaEgresado, Boolean preguntaGrupoInteres, Boolean estado, Set<RespuestaEncuesta> respuestaEncuestas) {
+    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta, String pregunta, String ayuda, Boolean preguntaAlumno, Boolean preguntaDocente, Boolean preguntaAdministrativo, Boolean preguntaEgresado, Boolean preguntaGrupoInteres, Set<RespuestaEncuesta> respuestaEncuestas) {
        this.estandar = estandar;
        this.encuesta = encuesta;
        this.pregunta = pregunta;
@@ -47,7 +47,6 @@ public class PreguntaEncuesta  implements java.io.Serializable {
        this.preguntaAdministrativo = preguntaAdministrativo;
        this.preguntaEgresado = preguntaEgresado;
        this.preguntaGrupoInteres = preguntaGrupoInteres;
-       this.estado = estado;
        this.respuestaEncuestas = respuestaEncuestas;
     }
    
@@ -120,13 +119,6 @@ public class PreguntaEncuesta  implements java.io.Serializable {
     
     public void setPreguntaGrupoInteres(Boolean preguntaGrupoInteres) {
         this.preguntaGrupoInteres = preguntaGrupoInteres;
-    }
-    public Boolean getEstado() {
-        return this.estado;
-    }
-    
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
     }
     public Set<RespuestaEncuesta> getRespuestaEncuestas() {
         return this.respuestaEncuestas;

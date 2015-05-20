@@ -35,9 +35,6 @@
         <property name="preguntaGrupoInteres" type="java.lang.Boolean">
             <column name="pregunta_grupo_interes" />
         </property>
-        <property name="estado" type="java.lang.Boolean">
-            <column name="estado" />
-        </property>
         <set name="respuestaEncuestas" table="respuesta_encuesta" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_preguntaencuesta" not-null="true" />
