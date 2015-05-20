@@ -11,9 +11,9 @@
         <many-to-one name="preguntaEncuesta" class="org.edessco.sva.be.PreguntaEncuesta" fetch="select">
             <column name="id_preguntaencuesta" not-null="true" />
         </many-to-one>
-        <property name="idUsuario" type="java.lang.Long">
-            <column name="id_usuario" />
-        </property>
+        <many-to-one name="usuario" class="org.edessco.sva.be.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>
         <property name="respuesta" type="string">
             <column name="respuesta" length="3" />
         </property>

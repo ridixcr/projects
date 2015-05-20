@@ -64,7 +64,7 @@ public class RespuestaEncuestaBean {
         temp = buscarId();
         
         temp.setPreguntaEncuesta(this.getRespuestaEncuesta().getPreguntaEncuesta());
-        temp.setIdUsuario(this.getRespuestaEncuesta().getIdUsuario());
+        //temp.setIdUsuario(this.getRespuestaEncuesta().getIdUsuario());
         temp.setRespuesta(this.getRespuestaEncuesta().getRespuesta());
         temp.setFechaHora(this.getRespuestaEncuesta().getFechaHora());
         
@@ -106,7 +106,7 @@ public class RespuestaEncuestaBean {
     public void limpiar() {
         this.respuestaEncuesta.setIdrespuestaencuesta(null);
         this.respuestaEncuesta.setPreguntaEncuesta(new PreguntaEncuesta());
-        this.respuestaEncuesta.setIdUsuario(null);
+        //this.respuestaEncuesta.setIdUsuario(null);
         this.respuestaEncuesta.setRespuesta("");
         this.respuestaEncuesta.setFechaHora(null);
     }

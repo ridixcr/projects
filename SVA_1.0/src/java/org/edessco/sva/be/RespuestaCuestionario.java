@@ -14,7 +14,7 @@ public class RespuestaCuestionario  implements java.io.Serializable {
 
      private Long idrespuestacuestionario;
      private PreguntaCuestionario preguntaCuestionario;
-     private Long idUsuario;
+     private Docente docente;
      private String respuesta;
      private String explicacionDocente;
      private String alternativaSolucionDocente;
@@ -30,9 +30,9 @@ public class RespuestaCuestionario  implements java.io.Serializable {
     public RespuestaCuestionario(PreguntaCuestionario preguntaCuestionario) {
         this.preguntaCuestionario = preguntaCuestionario;
     }
-    public RespuestaCuestionario(PreguntaCuestionario preguntaCuestionario, Long idUsuario, String respuesta, String explicacionDocente, String alternativaSolucionDocente, Date fechaHora) {
+    public RespuestaCuestionario(PreguntaCuestionario preguntaCuestionario, Docente docente, String respuesta, String explicacionDocente, String alternativaSolucionDocente, Date fechaHora) {
        this.preguntaCuestionario = preguntaCuestionario;
-       this.idUsuario = idUsuario;
+       this.docente = docente;
        this.respuesta = respuesta;
        this.explicacionDocente = explicacionDocente;
        this.alternativaSolucionDocente = alternativaSolucionDocente;
@@ -52,13 +52,6 @@ public class RespuestaCuestionario  implements java.io.Serializable {
     
     public void setPreguntaCuestionario(PreguntaCuestionario preguntaCuestionario) {
         this.preguntaCuestionario = preguntaCuestionario;
-    }
-    public Long getIdUsuario() {
-        return this.idUsuario;
-    }
-    
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
     }
     public String getRespuesta() {
         return this.respuesta;
@@ -95,6 +88,14 @@ public class RespuestaCuestionario  implements java.io.Serializable {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
     }
 
 

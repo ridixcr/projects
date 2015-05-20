@@ -14,7 +14,7 @@ public class RespuestaEncuesta  implements java.io.Serializable {
 
      private Long idrespuestaencuesta;
      private PreguntaEncuesta preguntaEncuesta;
-     private Long idUsuario;
+     private Usuario usuario;
      private String respuesta;
      private Date fechaHora;
      private Boolean estado;
@@ -28,9 +28,9 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta) {
         this.preguntaEncuesta = preguntaEncuesta;
     }
-    public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta, Long idUsuario, String respuesta, Date fechaHora) {
+    public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta, Usuario usuario, String respuesta, Date fechaHora) {
        this.preguntaEncuesta = preguntaEncuesta;
-       this.idUsuario = idUsuario;
+       this.usuario = usuario;
        this.respuesta = respuesta;
        this.fechaHora = fechaHora;
     }
@@ -48,13 +48,6 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     
     public void setPreguntaEncuesta(PreguntaEncuesta preguntaEncuesta) {
         this.preguntaEncuesta = preguntaEncuesta;
-    }
-    public Long getIdUsuario() {
-        return this.idUsuario;
-    }
-    
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
     }
     public String getRespuesta() {
         return this.respuesta;
@@ -77,6 +70,14 @@ public class RespuestaEncuesta  implements java.io.Serializable {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 
