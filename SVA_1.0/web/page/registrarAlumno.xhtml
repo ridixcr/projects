@@ -1,16 +1,189 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <body>
-        <div>Bienvenido al registro de un nuevo alumno</div>
+
+        <ui:composition template="./../template/layoutLogin.xhtml">
+
+            <ui:define name="content">
+                
+                <div class="regUsuario">
+                    <p:growl id="growl" life="3000" showDetail="true"/>
+                    <h:form id="formUsuario">
+                        <p:growl id="growl" sticky="true" showDetail="true"/>
+                        <p:panel id="pnl_newUser" header="Registro de nuevo usuario">
+                            <p:wizard>
+                                <p:tab id="personal" title="Personal">
+                                    <p:panel>
+                                        <p:messages />
+                                        <h:panelGrid id="grid_datos_personales" columns="2" cellpadding="1" columnClasses="label, value">
+                                            <h:outputLabel for="txf_nombres" value="Nombres: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>                            
+                                            <p:inputText id="txf_nombres" required="true" size="30" label="Nombres"
+                                                         value="#{personaControler.persona.nombres}"/>
+
+                                            <h:outputLabel for="txf_ape_paterno" value="Apellido Paterno: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:inputText id="txf_ape_paterno" required="true" size="30" 
+                                                         label="Apellido paterno" value="#{personaControler.persona.apellidoPaterno}"/>
+
+                                            <h:outputLabel for="txf_ape_materno" value="Apellido Materno: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:inputText id="txf_ape_materno" required="true" size="30" 
+                                                         label="Apellido materno" value="#{personaControler.persona.apellidoMaterno}"/>
+
+                                            <h:outputLabel for="txf_dni" value="Nº Dni: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:inputText id="txf_dni" required="true" size="15" maxlength="8" 
+                                                         label="Numero de Dni" value="#{personaControler.persona.dni}"/>
+
+                                            <h:outputLabel for="cbx_genero" value="Sexo: " style="font-weight:bold; margin-left: 50px"/>
+                                            <p:selectOneMenu id="cbx_genero" label="Sexo" style="width:118px"
+                                                             value="#{personaControler.persona.sexo}">
+                                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                                <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                                <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                            </p:selectOneMenu>
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </p:tab>
+                                <p:tab id="contacto" title="Contacto">
+                                    <p:panel>
+                                        <p:messages />
+                                        <h:panelGrid id="grid_datos_conatcto" columns="2" cellpadding="1" columnClasses="label, value">
+
+                                            <h:outputLabel for="txf_telefono" value="Teléfono/Celular: " style="font-weight:bold; margin-left: 50px">                                    
+                                            </h:outputLabel>
+                                            <p:inputText id="txf_telefono" size="15" label="Telefono" 
+                                                         value="#{personaControler.persona.telefono}"/>
+
+                                            <h:outputLabel for="txf_correo" value="Correo Electrónico: " style="font-weight:bold; margin-left: 50px">                                    
+                                            </h:outputLabel>
+                                            <p:inputText id="txf_correo" size="30" label="Correo electrónico" 
+                                                         value="#{personaControler.persona.correo}"/>
+
+                                            <h:outputLabel for="cbx_efp" value="EFP: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:selectOneMenu id="cbx_efp" style="width:205px" value="#{personaControler.persona.unidadAcademica.idunidadacademica}" 
+                                                             label="Escuela de formación profesional" required="true">
+                                                <f:selectItem itemLabel="--Seleccione--" />
+                                                <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                            </p:selectOneMenu> 
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </p:tab>
+                                <p:tab id="usuario" title="Usuario">
+                                    <p:panel>
+                                        <p:messages />
+                                        <h:panelGrid id="grid_datos_usuario" columns="2" cellpadding="1" columnClasses="label, value">
+                                            <h:outputLabel for="cbx_rol" value="Tipo de Usuario: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:selectOneMenu id="cbx_rol" style="width:205px" value="#{personaControler.usuarioRol.rol.idrol}" 
+                                                             label="Tipo de usuario" required="true">
+                                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{rolControler.selectOneItemsRol}" />
+                                            </p:selectOneMenu>
+
+                                            <h:outputLabel for="txf_usuario" value="Nombre de Usuario: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>                            
+                                            <p:inputText id="txf_usuario" required="true" size="30" label="Nombre de usuario"
+                                                         value="#{personaControler.usuario.nombreUsuario}"/>
+
+                                            <h:outputLabel for="txf_contrasenia" value="Contraseña: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:password id="txf_contrasenia" required="true" size="30" label="Contraseña"
+                                                        value="#{personaControler.usuario.contrasenia}"/>
+
+                                            <h:outputLabel for="txf_conf_contrasenia" value="Confirmar Contraseña: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:password id="txf_conf_contrasenia" required="true" size="30" label="Confirmar contraseña"
+                                                        value="#{personaControler.confContrasenia}"/>
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </p:tab>
+                                
+                                <p:tab id="adicionales" title="Adicional">
+                                    <p:panel>
+                                        <p:messages />
+                                        <h:panelGrid id="grid_datos_adicionales" columns="2" cellpadding="1" columnClasses="label, value">
+                                            <h:outputLabel for="cbx_rol" value="Tipo de Usuario: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:selectOneMenu id="cbx_rol" style="width:205px" value="#{personaControler.usuarioRol.rol.idrol}" 
+                                                             label="Tipo de usuario" required="true">
+                                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                                <f:selectItems value="#{rolControler.selectOneItemsRol}" />
+                                            </p:selectOneMenu>
+
+                                            <h:outputLabel for="txf_usuario" value="Nombre de Usuario: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>                            
+                                            <p:inputText id="txf_usuario" required="true" size="30" label="Nombre de usuario"
+                                                         value="#{personaControler.usuario.nombreUsuario}"/>
+
+                                            <h:outputLabel for="txf_contrasenia" value="Contraseña: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:password id="txf_contrasenia" required="true" size="30" label="Contraseña"
+                                                        value="#{personaControler.usuario.contrasenia}"/>
+
+                                            <h:outputLabel for="txf_conf_contrasenia" value="Confirmar Contraseña: " style="font-weight:bold; margin-left: 50px">
+                                                <span style="color: red;font-weight: bold">*</span>
+                                            </h:outputLabel>
+                                            <p:password id="txf_conf_contrasenia" required="true" size="30" label="Confirmar contraseña"
+                                                        value="#{personaControler.confContrasenia}"/>
+                                        </h:panelGrid>
+                                    </p:panel>
+                                </p:tab>
+                                
+                            </p:wizard>
+
+                            <f:facet name="footer">
+                                <p:separator style="margin-left: 5px"/>
+                                <p:commandButton value="Volver al inicio" icon="icon-lock" ajax="false" action="login?faces-redirect=true" immediate="true" style="margin-left: 5px"/>
+                                <p:commandButton value="Guardar" update=":growl" icon="icon-guardar" style="margin-right:5px; float: right"
+                                                 action="#{personaControler.registrar()}"/>
+                            </f:facet>
+
+                        </p:panel>
+                        <span><p style="color: red; font-weight: bold">* Datos obligatorios</p></span> 
+                    </h:form>
+                    <script type="text/javascript">
+                        /**
+                         * Faces Validator
+                         */
+                        PrimeFaces.validator['custom.emailValidator'] = {
+                            pattern: /\S+@\S+/,
+                            validate: function (element, value) {
+                                //use element.data() to access validation metadata, in this case there is none.
+                                if (!this.pattern.test(value)) {
+                                    throw {
+                                        summary: 'Error de validación',
+                                        detail: value + ' No es un correo válido.'
+                                    }
+                                }
+                            }
+                        };
+                    </script>
+                </div>
+                -->
+            </ui:define>
+
+        </ui:composition>
+
     </body>
 </html>
