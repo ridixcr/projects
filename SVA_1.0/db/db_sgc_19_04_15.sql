@@ -298,6 +298,7 @@ CREATE TABLE `encuesta` (
   `agradecimiento` text COMMENT 'Agrademiento por responder las preguntas de la encuesta',
   `tipo_usuario` varchar(25) DEFAULT NULL COMMENT 'A quien esta dirigido la encuesta',
   `id_usuario` bigint(20) DEFAULT NULL COMMENT 'Almacenar internamenete quien crea la encuesta',
+  `tipo_encuestado` varchar(20) DEFAULT NULL COMMENT 'Alumno, docente ....etc',
   PRIMARY KEY (`idencuesta`),
   KEY `foreign_key01` (`id_autoevaluacion`),
   CONSTRAINT `encuesta_ibfk_1` FOREIGN KEY (`id_autoevaluacion`) REFERENCES `autoevaluacion` (`idautoevaluacion`)
@@ -310,7 +311,7 @@ CREATE TABLE `encuesta` (
 
 LOCK TABLES `encuesta` WRITE;
 /*!40000 ALTER TABLE `encuesta` DISABLE KEYS */;
-INSERT INTO `encuesta` VALUES (1,1,'aaaa','2015-03-02 19:00:00','2015-03-18 19:00:00',1,'aaa',NULL,NULL,NULL,NULL);
+INSERT INTO `encuesta` VALUES (1,1,'aaaa','2015-03-02 19:00:00','2015-03-18 19:00:00',1,'aaa',NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `encuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -634,11 +635,6 @@ CREATE TABLE `pregunta_encuesta` (
   `id_estandar` bigint(20) NOT NULL,
   `pregunta` text,
   `ayuda` text,
-  `pregunta_alumno` tinyint(1) DEFAULT NULL,
-  `pregunta_docente` tinyint(1) DEFAULT NULL,
-  `pregunta_administrativo` tinyint(1) DEFAULT NULL,
-  `pregunta_egresado` tinyint(1) DEFAULT NULL,
-  `pregunta_grupo_interes` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`idpreguntaencuesta`),
   KEY `foreign_key01` (`id_encuesta`),
   KEY `foreign_key02` (`id_estandar`),
@@ -653,7 +649,7 @@ CREATE TABLE `pregunta_encuesta` (
 
 LOCK TABLES `pregunta_encuesta` WRITE;
 /*!40000 ALTER TABLE `pregunta_encuesta` DISABLE KEYS */;
-INSERT INTO `pregunta_encuesta` VALUES (1,1,4,'¿como ...?',NULL,NULL,NULL,NULL,NULL,NULL),(2,1,5,'¿Cual es la forma adecuada ...?',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `pregunta_encuesta` VALUES (1,1,4,'¿como ...?',NULL),(2,1,5,'¿Cual es la forma adecuada ...?',NULL);
 /*!40000 ALTER TABLE `pregunta_encuesta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -934,4 +930,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-05-19 22:53:45
+-- Dump completed on 2015-05-19 23:21:02
