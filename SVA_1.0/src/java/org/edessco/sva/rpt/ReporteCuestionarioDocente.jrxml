@@ -3,33 +3,30 @@
 	<property name="ireport.zoom" value="2.3579476910000023"/>
 	<property name="ireport.x" value="36"/>
 	<property name="ireport.y" value="96"/>
-	<queryString language="SQL">
-		<![CDATA[select
-p.apellido_paterno,p.nombres,pc.pregunta,rc.respuesta as cumplimiento,
-rc.explicacion_docente, rc.alternativa_solucion_docente
-from persona p
-inner join docente d
-on d.id_persona = p.idpersona
-inner join usuario u
-on u.id_persona = p.idpersona
-inner join unidad_academica ua
-on p.id_unidad_academica = ua.idunidadacademica
-inner join autoevaluacion a
-on a.id_unidadacademica = ua.idunidadacademica 
-inner join cuestionario c
-on c.id_autoevaluacion=a.idautoevaluacion
-inner join pregunta_cuestionario pc
-on pc.id_cuestionario=c.idcuestionario
-inner join estandar es
-on pc.id_estandar=es.idestandar
-inner join respuesta_cuestionario rc
-on rc.id_preguntacuestionario=pc.idpreguntacuestionario
-order by p.idpersona asc]]>
+	<queryString>
+		<![CDATA[SELECT
+d.iddocente, UPPER(p.apellido_paterno) AS ap_paterno, UPPER(p.apellido_materno) AS ap_materno,
+CONCAT(UPPER(LEFT(p.nombres,1)),SUBSTRING(p.nombres,2))as nombre,
+pc.pregunta, rc.respuesta as cumplimiento, rc.explicacion_docente, rc.alternativa_solucion_docente
+FROM estandar e
+INNER JOIN pregunta_cuestionario pc 
+ON e.idestandar = pc.id_estandar
+INNER JOIN respuesta_cuestionario rc
+ON pc.idpreguntacuestionario = rc.id_preguntacuestionario
+INNER JOIN docente d
+ON d.iddocente = rc.id_docente
+INNER JOIN persona p
+ON p.idpersona = d.id_persona
+WHERE d.iddocente=1
+
+]]>
 	</queryString>
-	<field name="apellido_paterno" class="java.lang.String">
+	<field name="iddocente" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="nombres" class="java.lang.String">
+	<field name="ap_paterno" class="java.lang.String"/>
+	<field name="ap_materno" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="pregunta" class="java.lang.String">
@@ -73,7 +70,7 @@ order by p.idpersona asc]]>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{apellido_paterno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{ap_paterno}+" "+$F{ap_materno}+", "+$F{nombre}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -191,7 +188,7 @@ order by p.idpersona asc]]>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{apellido_paterno}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{iddocente}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement uuid="e6033368-2932-47f3-b606-524ac3159efe" positionType="FixRelativeToBottom" x="0" y="68" width="555" height="1"/>
