@@ -179,7 +179,7 @@
       <TDBADiagramObject id="19" propertiesclass="TDiagramMetaTableProperties" objectname="pregunta_cuestionario">
         <TDiagramMetaTableProperties>
           <Glyph>
-            <Geometry left="1190" top="1178" width="200" height="153"/>
+            <Geometry left="1190" top="1180" width="200" height="153"/>
           </Glyph>
         </TDiagramMetaTableProperties>
       </TDBADiagramObject>
@@ -189,7 +189,7 @@
             <Geometry left="320" top="320" width="200" height="100"/>
             <Glyph>
               <Geometry>
-                <Point x="1290" y="1250"/>
+                <Point x="1290" y="1252"/>
                 <Point x="1290" y="1040"/>
               </Geometry>
             </Glyph>
@@ -202,7 +202,7 @@
             <Geometry left="336" top="336" width="200" height="100"/>
             <Glyph>
               <Geometry>
-                <Point x="1310" y="1290"/>
+                <Point x="1310" y="1292"/>
                 <Point x="400" y="1290"/>
               </Geometry>
             </Glyph>
@@ -212,7 +212,7 @@
       <TDBADiagramObject id="22" propertiesclass="TDiagramMetaTableProperties" objectname="pregunta_encuesta">
         <TDiagramMetaTableProperties>
           <Glyph>
-            <Geometry left="80" top="698" width="200" height="142"/>
+            <Geometry left="80" top="700" width="200" height="142"/>
           </Glyph>
         </TDiagramMetaTableProperties>
       </TDBADiagramObject>
@@ -222,7 +222,7 @@
             <Geometry left="368" top="368" width="200" height="100"/>
             <Glyph>
               <Geometry>
-                <Point x="180" y="768"/>
+                <Point x="180" y="770"/>
                 <Point x="180" y="490"/>
                 <Point x="470" y="490"/>
               </Geometry>
@@ -236,7 +236,7 @@
             <Geometry left="384" top="384" width="200" height="100"/>
             <Glyph>
               <Geometry>
-                <Point x="200" y="768"/>
+                <Point x="200" y="770"/>
                 <Point x="200" y="1290"/>
                 <Point x="410" y="1288"/>
               </Geometry>
@@ -258,7 +258,7 @@
             <Glyph>
               <Geometry>
                 <Point x="1570" y="1250"/>
-                <Point x="1300" y="1250"/>
+                <Point x="1300" y="1252"/>
               </Geometry>
             </Glyph>
           </Relation>
@@ -279,7 +279,7 @@
               <Geometry>
                 <Point x="400" y="1500"/>
                 <Point x="170" y="1500"/>
-                <Point x="170" y="760"/>
+                <Point x="170" y="762"/>
               </Geometry>
             </Glyph>
           </Relation>
@@ -418,7 +418,7 @@
             <Geometry left="688" top="688" width="200" height="100"/>
             <Glyph>
               <Geometry>
-                <Point x="2010" y="672"/>
+                <Point x="2010" y="670"/>
                 <Point x="1830" y="670"/>
                 <Point x="1830" y="530"/>
                 <Point x="1570" y="530"/>
@@ -533,8 +533,9 @@
               <Geometry>
                 <Point x="2010" y="960"/>
                 <Point x="1750" y="960"/>
-                <Point x="1750" y="590"/>
-                <Point x="1570" y="589"/>
+                <Point x="1750" y="610"/>
+                <Point x="1590" y="610"/>
+                <Point x="1590" y="589"/>
               </Geometry>
             </Glyph>
           </Relation>
@@ -729,6 +730,6 @@
         </TDiagramForeignKeyProperties>
       </TDBADiagramObject>
     </Elements>
-    <Surface zoom="26,2144" scrollx="0" scrolly="0"/>
+    <Surface zoom="64" scrollx="0" scrolly="280"/>
   </TDBADiagramController>
 </XMLDiagram>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_encuestas_estandar" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="84f9d3ec-a791-4351-84fe-1702a2683c5d">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+es.numero_estandar,
+es.titulo as estandar,
+en.descripcion as encuenta,
+pe.tipo_encuesta,
+count(re.idrespuestaencuesta) as cantidad,
+((sum(CASE
+     WHEN re.estado=1 THEN 1
+     ELSE 0
+END)/count(re.idrespuestaencuesta))*100) as porcentaje_completados,
+sum(CASE
+     WHEN re.estado=1 THEN 1
+     ELSE 0
+END) as completos,
+((sum(CASE
+     WHEN re.estado=0 THEN 1
+     ELSE 0
+END)/count(re.idrespuestaencuesta))*100) as porcentaje_pendientes,
+sum(CASE
+     WHEN re.estado=0 THEN 1
+     ELSE 0
+END) as pendientes
+FROM estandar es
+inner join  pregunta_encuesta pe
+on pe.id_estandar=es.idestandar
+inner join encuesta en
+on pe.id_encuesta=en.idencuesta
+inner join   respuesta_encuesta re
+on re.id_preguntaencuesta=pe.idpreguntaencuesta
+group by es.titulo,en.descripcion,pe.tipo_encuesta]]>
+	</queryString>
+	<field name="numero_estandar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estandar" class="java.lang.String"/>
+	<field name="encuenta" class="java.lang.String"/>
+	<field name="tipo_encuesta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Long"/>
+	<field name="porcentaje_completados" class="java.math.BigDecimal"/>
+	<field name="completos" class="java.math.BigDecimal"/>
+	<field name="porcentaje_pendientes" class="java.math.BigDecimal"/>
+	<field name="pendientes" class="java.math.BigDecimal"/>
+	<group name="estandar">
+		<groupExpression><![CDATA[$F{estandar}]]></groupExpression>
+		<groupHeader>
+			<band height="56">
+				<line>
+					<reportElement uuid="cb9c0175-08f6-47ce-bf30-9d6cb8dce5f1" x="0" y="42" width="555" height="1" forecolor="#666666"/>
+				</line>
+				<textField>
+					<reportElement uuid="3090f26d-4726-4bae-87ff-50e41edbf106" mode="Transparent" x="0" y="2" width="555" height="27" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement>
+						<font size="9" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{numero_estandar}+" - "+$F{estandar}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="26d5d091-546c-4b1a-be81-d45c62f98a04" x="0" y="29" width="555" height="13"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new StringBuilder($F{encuenta}.toUpperCase())]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="96904c70-ad7f-48ec-8c9d-9d1779933cab" mode="Opaque" x="0" y="43" width="158" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIPO DE ENCUESTADO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e696340-2e8b-4856-806b-71fbe0efb59b" mode="Opaque" x="158" y="43" width="79" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[CANTIDAD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="893e0b69-0ba7-4534-b235-428d9bd6a88f" mode="Opaque" x="237" y="43" width="79" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[COMPLETADO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="abb0f88e-6bb5-4f2f-bf48-2b6761e7cdcc" mode="Opaque" x="316" y="43" width="79" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[%]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="084622bb-e23f-4ecb-ae50-1b3a37c8c316" mode="Opaque" x="395" y="43" width="79" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[PENDIENTE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="aea51039-8751-4d3f-b800-74e4c7a59095" mode="Opaque" x="474" y="43" width="81" height="13" forecolor="#000000" backcolor="#E6E6E6"/>
+					<textElement textAlignment="Right" verticalAlignment="Top">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[% ]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="78a5bde0-9142-4f03-9a54-a84baf8ca6dd" x="555" y="42" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement uuid="0dd2bd07-3aef-4248-8dc3-ee48c9af3c45" x="-1" y="42" width="1" height="14"/>
+				</line>
+				<line>
+					<reportElement uuid="bfa15b35-a060-4e31-948f-2d3d25125a6a" x="0" y="55" width="555" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="14">
+				<line>
+					<reportElement uuid="dbec0197-22ea-47dc-97e3-da9abe020881" x="0" y="0" width="555" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="60">
+			<frame>
+				<reportElement uuid="e3d58f09-1772-47f7-886b-b13fac1e5a0e" mode="Opaque" x="-20" y="-20" width="595" height="79" forecolor="#000000" backcolor="#E6E6E6"/>
+				<staticText>
+					<reportElement uuid="0da3b710-76cc-4333-bd94-c4c2e7112338" x="20" y="20" width="340" height="23" forecolor="#000000"/>
+					<textElement>
+						<font size="15" isBold="true"/>
+					</textElement>
+					<text><![CDATA[REPORTE DE ENCUESTAS POR ESTÁNDAR A:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0ecb1a4d-f1bd-4f93-b1a6-32104c497762" x="20" y="43" width="428" height="20" forecolor="#000000"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Alumnos, Docentes, Administrativos, Egresados y Grupos de interés]]></text>
+				</staticText>
+				<line>
+					<reportElement uuid="c6f3960d-52fb-453d-a28a-87c5f8701221" x="0" y="78" width="595" height="1"/>
+				</line>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="14">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b1bd86c9-c949-4292-be37-2df1979bb75e" x="2" y="0" width="156" height="13"/>
+				<textElement textAlignment="Left">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_encuesta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###00;-###00">
+				<reportElement uuid="401f9c1f-4335-420e-a7be-01bd3a70010e" x="158" y="0" width="79" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###00">
+				<reportElement uuid="cfdf3ab8-dea1-4b74-9751-53800aabe8a2" x="237" y="0" width="79" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{completos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00 &apos;%&apos;">
+				<reportElement uuid="46a343f9-549c-48f0-b7fe-53edb1d9c5f5" x="316" y="0" width="79" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porcentaje_completados}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###00">
+				<reportElement uuid="063c4d4b-31be-4f5e-82c7-e85030bb426b" x="395" y="0" width="79" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pendientes}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00 &apos;%&apos;">
+				<reportElement uuid="d180e645-4ed0-4739-aff9-d5e928c5fa7e" x="474" y="0" width="78" height="13"/>
+				<textElement textAlignment="Right">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porcentaje_pendientes}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="a4fb9b41-6a8f-4cdc-8661-35b6d2d464f1" x="555" y="0" width="1" height="14"/>
+			</line>
+			<line>
+				<reportElement uuid="168081c8-8178-4cf9-b4bc-2007974a839d" x="-1" y="0" width="1" height="14"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="14">
+			<textField>
+				<reportElement uuid="e9fb083a-58c8-48de-adf3-0eb20eba92a9" mode="Opaque" x="0" y="1" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="cb63a146-5b72-4565-9102-756774009e80" mode="Opaque" x="515" y="1" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="ce06a8c1-fd7b-40ad-ad0d-beb44bcb190a" x="0" y="1" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="fa80d0a8-bb85-4e15-a3cb-f300e2c0d71b" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
