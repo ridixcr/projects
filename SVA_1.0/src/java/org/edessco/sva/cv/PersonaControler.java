@@ -15,10 +15,12 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
+import org.edessco.sva.be.Alumno;
 import org.edessco.sva.be.Persona;
 import org.edessco.sva.be.Rol;
 import org.edessco.sva.be.Usuario;
 import org.edessco.sva.be.UsuarioRol;
+import org.edessco.sva.bl.AlumnoBL;
 import org.edessco.sva.bl.PersonaBL;
 import org.edessco.sva.bl.RolBL;
 import org.edessco.sva.bl.UsuarioBL;
@@ -38,16 +40,21 @@ public class PersonaControler {
     private Persona persona;
     private List<Persona> listaPersonas = new LinkedList<>();
 
+    @ManagedProperty(value = "#{alumnoBL}")
+    private AlumnoBL alumnoBL;
+    @ManagedProperty(value = "#{alumno}")
+    private Alumno alumno;
+    
     @ManagedProperty(value = "#{usuarioBL}")
     private UsuarioBL usuarioBL;
     @ManagedProperty(value = "#{usuario}")
     private Usuario usuario;
-    
+
     @ManagedProperty(value = "#{usuarioRolBL}")
     private UsuarioRolBL usuarioRolBL;
     @ManagedProperty(value = "#{usuarioRol}")
-    private UsuarioRol usuarioRol;  
-    
+    private UsuarioRol usuarioRol;
+
     @ManagedProperty(value = "#{rolBL}")
     private RolBL rolBL;
     @ManagedProperty(value = "#{rol}")
@@ -70,6 +77,9 @@ public class PersonaControler {
             long res = getPersonaBL().registrar(getPersona());
             //almacenamos el idPersona en una sesion para reutilizarlo
             httpServletRequest.setAttribute("sessionIdPersona", getPersona().getIdpersona());
+            //Registramos los datos del alumno
+            getAlumno().setPersona(getPersona());
+            long resAlumno = getAlumnoBL().registrar(getAlumno());
             //se procede a registrar el usuario
             getUsuario().setPersona(getPersona());
             long resUsuario = getUsuarioBL().registrar(getUsuario());
@@ -88,12 +98,12 @@ public class PersonaControler {
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }
             limpiar();
-            return "registroCorrectoUser";
+            return "registroCorrectoUser?faces-redirect=true";
         }
         return "";
     }
 
-    public boolean validaContrasenia() {        
+    public boolean validaContrasenia() {
         if (!this.getUsuario().getContrasenia().equals(this.confContrasenia)) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Las contraseñas no coinciden"));
             return false;
@@ -196,7 +206,7 @@ public class PersonaControler {
 
     public void setConfContrasenia(String confContrasenia) {
         this.confContrasenia = confContrasenia;
-    } 
+    }
 
     public UsuarioRolBL getUsuarioRolBL() {
         return usuarioRolBL;
@@ -228,5 +238,21 @@ public class PersonaControler {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public AlumnoBL getAlumnoBL() {
+        return alumnoBL;
+    }
+
+    public void setAlumnoBL(AlumnoBL alumnoBL) {
+        this.alumnoBL = alumnoBL;
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 }
