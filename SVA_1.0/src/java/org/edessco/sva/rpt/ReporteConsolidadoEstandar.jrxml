@@ -3,43 +3,45 @@
 	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
-		<![CDATA[select
-p.apellido_paterno,p.nombres,pc.pregunta,rc.respuesta as cumplimiento,
-rc.explicacion_docente, rc.alternativa_solucion_docente
-from persona p
-inner join docente d
-on d.id_persona = p.idpersona
-inner join usuario u
-on u.id_persona = p.idpersona
-inner join unidad_academica ua
-on p.id_unidad_academica = ua.idunidadacademica
-inner join autoevaluacion a
-on a.id_unidadacademica = ua.idunidadacademica 
-inner join cuestionario c
-on c.id_autoevaluacion=a.idautoevaluacion
-inner join pregunta_cuestionario pc
-on pc.id_cuestionario=c.idcuestionario
-inner join estandar es
+	<queryString>
+		<![CDATA[SELECT
+es.numero_estandar,
+es.titulo,
+CASE  WHEN rgc.cumplimiento=1 THEN 'SI'  ELSE 'NO' END as cumplimiento,
+(SUM(CASE WHEN rc.respuesta='SI' THEN 1 ELSE 0 END)/COUNT(dc.iddocente))*100 as porcentaje_si,
+(SUM(CASE WHEN rc.respuesta='NO' THEN 1 ELSE 0 END)/COUNT(dc.iddocente))*100 as porcentaje_no,
+CASE  WHEN  ((SUM(CASE WHEN rc.respuesta='SI' THEN 1 ELSE 0 END)/COUNT(dc.iddocente))*100)>= 50 THEN 'SI' ELSE 'NO' END as cumplimiento_segun_porcentaje,
+rgc.explicacion_consolidada,
+im.alternativa_solucion_consensuada
+FROM estandar es
+inner join  pregunta_cuestionario pc
 on pc.id_estandar=es.idestandar
-inner join respuesta_cuestionario rc
+inner join  respuesta_cuestionario rc
 on rc.id_preguntacuestionario=pc.idpreguntacuestionario
-order by p.idpersona asc]]>
+inner join  docente dc
+on rc.id_docente=dc.iddocente
+inner join registro_grado_cumplimiento rgc
+on rgc.id_estandar=es.idestandar
+inner join  iniciativa_mejora im
+on im.id_estandar=es.idestandar
+group by es.idestandar]]>
 	</queryString>
-	<field name="apellido_paterno" class="java.lang.String">
+	<field name="numero_estandar" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="nombres" class="java.lang.String">
+	<field name="titulo" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="pregunta" class="java.lang.String">
+	<field name="cumplimiento" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="cumplimiento" class="java.lang.String"/>
-	<field name="explicacion_docente" class="java.lang.String">
+	<field name="porcentaje_si" class="java.math.BigDecimal"/>
+	<field name="porcentaje_no" class="java.math.BigDecimal"/>
+	<field name="cumplimiento_segun_porcentaje" class="java.lang.String"/>
+	<field name="explicacion_consolidada" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="alternativa_solucion_docente" class="java.lang.String">
+	<field name="alternativa_solucion_consensuada" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
