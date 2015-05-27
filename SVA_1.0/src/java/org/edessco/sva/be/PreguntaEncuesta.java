@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,11 +14,11 @@ public class PreguntaEncuesta  implements java.io.Serializable {
 
 
      private Long idpreguntaencuesta;
-     private Estandar estandar;
      private Encuesta encuesta;
+     private Estandar estandar;
      private String pregunta;
      private String ayuda;
-     
+     private String tipoEncuesta;
      private Set<RespuestaEncuesta> respuestaEncuestas = new HashSet<RespuestaEncuesta>(0);
 
     public PreguntaEncuesta() {
@@ -28,15 +28,16 @@ public class PreguntaEncuesta  implements java.io.Serializable {
     }
 
 	
-    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta) {
-        this.estandar = estandar;
+    public PreguntaEncuesta(Encuesta encuesta, Estandar estandar) {
         this.encuesta = encuesta;
+        this.estandar = estandar;
     }
-    public PreguntaEncuesta(Estandar estandar, Encuesta encuesta, String pregunta, String ayuda, Set<RespuestaEncuesta> respuestaEncuestas) {
-       this.estandar = estandar;
+    public PreguntaEncuesta(Encuesta encuesta, Estandar estandar, String pregunta, String ayuda, String tipoEncuesta, Set<RespuestaEncuesta> respuestaEncuestas) {
        this.encuesta = encuesta;
+       this.estandar = estandar;
        this.pregunta = pregunta;
        this.ayuda = ayuda;
+       this.tipoEncuesta = tipoEncuesta;
        this.respuestaEncuestas = respuestaEncuestas;
     }
    
@@ -47,19 +48,19 @@ public class PreguntaEncuesta  implements java.io.Serializable {
     public void setIdpreguntaencuesta(Long idpreguntaencuesta) {
         this.idpreguntaencuesta = idpreguntaencuesta;
     }
-    public Estandar getEstandar() {
-        return this.estandar;
-    }
-    
-    public void setEstandar(Estandar estandar) {
-        this.estandar = estandar;
-    }
     public Encuesta getEncuesta() {
         return this.encuesta;
     }
     
     public void setEncuesta(Encuesta encuesta) {
         this.encuesta = encuesta;
+    }
+    public Estandar getEstandar() {
+        return this.estandar;
+    }
+    
+    public void setEstandar(Estandar estandar) {
+        this.estandar = estandar;
     }
     public String getPregunta() {
         return this.pregunta;
@@ -74,6 +75,13 @@ public class PreguntaEncuesta  implements java.io.Serializable {
     
     public void setAyuda(String ayuda) {
         this.ayuda = ayuda;
+    }
+    public String getTipoEncuesta() {
+        return this.tipoEncuesta;
+    }
+    
+    public void setTipoEncuesta(String tipoEncuesta) {
+        this.tipoEncuesta = tipoEncuesta;
     }
     public Set<RespuestaEncuesta> getRespuestaEncuestas() {
         return this.respuestaEncuestas;

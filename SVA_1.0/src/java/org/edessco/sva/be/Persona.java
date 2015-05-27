@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -24,10 +24,10 @@ public class Persona  implements java.io.Serializable {
      private String sexo;
      private Set<Docente> docentes = new HashSet<Docente>(0);
      private Set<Alumno> alumnos = new HashSet<Alumno>(0);
-     private Set<MiembroComiteInterno> comisionInternas = new HashSet<MiembroComiteInterno>(0);
      private Set<Egresado> egresados = new HashSet<Egresado>(0);
      private Set<Usuario> usuarios = new HashSet<Usuario>(0);
      private Set<GrupoInteres> grupoIntereses = new HashSet<GrupoInteres>(0);
+     private Set<MiembroComiteInterno> miembroComiteInternos = new HashSet<MiembroComiteInterno>(0);
      private Set<Administrativo> administrativos = new HashSet<Administrativo>(0);
 
     public Persona() {
@@ -39,7 +39,7 @@ public class Persona  implements java.io.Serializable {
     public Persona(UnidadAcademica unidadAcademica) {
         this.unidadAcademica = unidadAcademica;
     }
-    public Persona(UnidadAcademica unidadAcademica, String nombres, String apellidoPaterno, String apellidoMaterno, String dni, String telefono, String correo, String sexo, Set<Docente> docentes, Set<Alumno> alumnos, Set<MiembroComiteInterno> comisionInternas, Set<Egresado> egresados, Set<Usuario> usuarios, Set<GrupoInteres> grupoIntereses, Set<Administrativo> administrativos) {
+    public Persona(UnidadAcademica unidadAcademica, String nombres, String apellidoPaterno, String apellidoMaterno, String dni, String telefono, String correo, String sexo, Set<Docente> docentes, Set<Alumno> alumnos, Set<Egresado> egresados, Set<Usuario> usuarios, Set<GrupoInteres> grupoIntereses, Set<MiembroComiteInterno> miembroComiteInternos, Set<Administrativo> administrativos) {
        this.unidadAcademica = unidadAcademica;
        this.nombres = nombres;
        this.apellidoPaterno = apellidoPaterno;
@@ -50,10 +50,10 @@ public class Persona  implements java.io.Serializable {
        this.sexo = sexo;
        this.docentes = docentes;
        this.alumnos = alumnos;
-       this.comisionInternas = comisionInternas;
        this.egresados = egresados;
        this.usuarios = usuarios;
        this.grupoIntereses = grupoIntereses;
+       this.miembroComiteInternos = miembroComiteInternos;
        this.administrativos = administrativos;
     }
    
@@ -134,13 +134,6 @@ public class Persona  implements java.io.Serializable {
     public void setAlumnos(Set<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
-    public Set<MiembroComiteInterno> getComisionInternas() {
-        return this.comisionInternas;
-    }
-    
-    public void setComisionInternas(Set<MiembroComiteInterno> comisionInternas) {
-        this.comisionInternas = comisionInternas;
-    }
     public Set<Egresado> getEgresados() {
         return this.egresados;
     }
@@ -161,6 +154,13 @@ public class Persona  implements java.io.Serializable {
     
     public void setGrupoIntereses(Set<GrupoInteres> grupoIntereses) {
         this.grupoIntereses = grupoIntereses;
+    }
+    public Set<MiembroComiteInterno> getMiembroComiteInternos() {
+        return this.miembroComiteInternos;
+    }
+    
+    public void setMiembroComiteInternos(Set<MiembroComiteInterno> miembroComiteInternos) {
+        this.miembroComiteInternos = miembroComiteInternos;
     }
     public Set<Administrativo> getAdministrativos() {
         return this.administrativos;

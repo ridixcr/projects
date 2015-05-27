@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.RegistroGradoCumplimiento" table="registro_grado_cumplimiento" catalog="db_sgc" optimistic-lock="version">
+        <id name="idgradocumplimiento" type="java.lang.Long">
+            <column name="idgradocumplimiento" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="autoevaluacion" class="org.edessco.sva.be.Autoevaluacion" fetch="select">
+            <column name="id_autoevalucion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estandar" class="org.edessco.sva.be.Estandar" fetch="select">
+            <column name="id_estandar" not-null="true" />
+        </many-to-one>
+        <property name="cumplimiento" type="java.lang.Boolean">
+            <column name="cumplimiento" />
+        </property>
+        <property name="explicacionConsolidada" type="string">
+            <column name="explicacion_consolidada" length="65535" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="org.edessco.sva.be.Estandar" table="estandar" catalog="db_sgc">
+    <class name="org.edessco.sva.be.Estandar" table="estandar" catalog="db_sgc" optimistic-lock="version">
         <id name="idestandar" type="java.lang.Long">
             <column name="idestandar" />
             <generator class="identity" />
@@ -35,11 +35,35 @@
             </key>
             <one-to-many class="org.edessco.sva.be.PreguntaCuestionario" />
         </set>
+        <set name="iniciativaMejoras" table="iniciativa_mejora" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.IniciativaMejora" />
+        </set>
         <set name="preguntaEncuestas" table="pregunta_encuesta" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_estandar" not-null="true" />
             </key>
             <one-to-many class="org.edessco.sva.be.PreguntaEncuesta" />
+        </set>
+        <set name="registroGradoCumplimientos" table="registro_grado_cumplimiento" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.RegistroGradoCumplimiento" />
+        </set>
+        <set name="matrizRecoleccionDatoses" table="matriz_recoleccion_datos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.MatrizRecoleccionDatos" />
+        </set>
+        <set name="registroResultados" table="registro_resultado" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_estandar" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.RegistroResultado" />
         </set>
     </class>
 </hibernate-mapping>

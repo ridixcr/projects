@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 import org.springframework.stereotype.Component;
 
@@ -14,8 +14,8 @@ public class UsuarioRol  implements java.io.Serializable {
 
 
      private Long idusuariorol;
-     private Usuario usuario;
      private Rol rol;
+     private Usuario usuario;
 
     public UsuarioRol() {
         this.idusuariorol = null;
@@ -23,9 +23,9 @@ public class UsuarioRol  implements java.io.Serializable {
         this.rol = new Rol();
     }
 
-    public UsuarioRol(Usuario usuario, Rol rol) {
-       this.usuario = usuario;
+    public UsuarioRol(Rol rol, Usuario usuario) {
        this.rol = rol;
+       this.usuario = usuario;
     }
    
     public Long getIdusuariorol() {
@@ -35,19 +35,19 @@ public class UsuarioRol  implements java.io.Serializable {
     public void setIdusuariorol(Long idusuariorol) {
         this.idusuariorol = idusuariorol;
     }
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
     public Rol getRol() {
         return this.rol;
     }
     
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 

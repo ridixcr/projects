@@ -1,24 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="org.edessco.sva.be.PreguntaEncuesta" table="pregunta_encuesta" catalog="db_sgc">
+    <class name="org.edessco.sva.be.PreguntaEncuesta" table="pregunta_encuesta" catalog="db_sgc" optimistic-lock="version">
         <id name="idpreguntaencuesta" type="java.lang.Long">
             <column name="idpreguntaencuesta" />
             <generator class="identity" />
         </id>
-        <many-to-one name="estandar" class="org.edessco.sva.be.Estandar" fetch="select">
-            <column name="id_estandar" not-null="true" />
-        </many-to-one>
         <many-to-one name="encuesta" class="org.edessco.sva.be.Encuesta" fetch="select">
             <column name="id_encuesta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estandar" class="org.edessco.sva.be.Estandar" fetch="select">
+            <column name="id_estandar" not-null="true" />
         </many-to-one>
         <property name="pregunta" type="string">
             <column name="pregunta" length="65535" />
         </property>
         <property name="ayuda" type="string">
             <column name="ayuda" length="65535" />
+        </property>
+        <property name="tipoEncuesta" type="string">
+            <column name="tipo_encuesta" length="20" />
         </property>
         <set name="respuestaEncuestas" table="respuesta_encuesta" inverse="true" lazy="true" fetch="select">
             <key>

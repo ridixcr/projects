@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -22,8 +22,6 @@ public class Criterio  implements java.io.Serializable {
      private Set<Estandar> estandars = new HashSet<Estandar>(0);
 
     public Criterio() {
-        this.idcriterio = Long.MIN_VALUE;
-        this.factor = new Factor();
     }
 
 	

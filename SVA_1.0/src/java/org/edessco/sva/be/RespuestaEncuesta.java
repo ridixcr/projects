@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -28,11 +28,12 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta) {
         this.preguntaEncuesta = preguntaEncuesta;
     }
-    public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta, Usuario usuario, String respuesta, Date fechaHora) {
+    public RespuestaEncuesta(PreguntaEncuesta preguntaEncuesta, Usuario usuario, String respuesta, Date fechaHora, Boolean estado) {
        this.preguntaEncuesta = preguntaEncuesta;
        this.usuario = usuario;
        this.respuesta = respuesta;
        this.fechaHora = fechaHora;
+       this.estado = estado;
     }
    
     public Long getIdrespuestaencuesta() {
@@ -49,6 +50,13 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     public void setPreguntaEncuesta(PreguntaEncuesta preguntaEncuesta) {
         this.preguntaEncuesta = preguntaEncuesta;
     }
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public String getRespuesta() {
         return this.respuesta;
     }
@@ -63,21 +71,12 @@ public class RespuestaEncuesta  implements java.io.Serializable {
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
-
     public Boolean getEstado() {
-        return estado;
+        return this.estado;
     }
-
+    
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 

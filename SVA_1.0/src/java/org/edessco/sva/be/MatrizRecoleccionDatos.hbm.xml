@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.MatrizRecoleccionDatos" table="matriz_recoleccion_datos" catalog="db_sgc" optimistic-lock="version">
+        <id name="idmatriz" type="java.lang.Long">
+            <column name="idmatriz" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="autoevaluacion" class="org.edessco.sva.be.Autoevaluacion" fetch="select">
+            <column name="id_autoevaluacion" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estandar" class="org.edessco.sva.be.Estandar" fetch="select">
+            <column name="id_estandar" not-null="true" />
+        </many-to-one>
+        <property name="fechaRegistro" type="date">
+            <column name="fecha_registro" length="10" />
+        </property>
+        <property name="resultadoComiteInterno" type="java.lang.Integer">
+            <column name="resultado_comite_interno" />
+        </property>
+        <property name="resultadoEncuestaDocente" type="java.lang.Integer">
+            <column name="resultado_encuesta_docente" />
+        </property>
+        <property name="resultadoEncuestaAdministrativo" type="java.lang.Integer">
+            <column name="resultado_encuesta_administrativo" />
+        </property>
+        <property name="resultadoEncuestaEgresado" type="java.lang.Integer">
+            <column name="resultado_encuesta_egresado" />
+        </property>
+        <property name="resultadoEncuestaEstudiante" type="java.lang.Integer">
+            <column name="resultado_encuesta_estudiante" />
+        </property>
+        <property name="resultadoEncuestaGrupoint" type="java.lang.Integer">
+            <column name="resultado_encuesta_grupoint" />
+        </property>
+        <property name="resultadoCuestionario" type="java.lang.Integer">
+            <column name="resultado_cuestionario" />
+        </property>
+        <property name="resultadoInformeSgc" type="java.lang.Integer">
+            <column name="resultado_informe_sgc" />
+        </property>
+        <property name="resultadoFinal" type="boolean">
+            <column name="resultado_final" not-null="true">
+                <comment>pasa a ser analizado o no</comment>
+            </column>
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="65535" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

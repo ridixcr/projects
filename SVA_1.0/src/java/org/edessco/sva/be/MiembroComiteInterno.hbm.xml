@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.MiembroComiteInterno" table="miembro_comite_interno" catalog="db_sgc" optimistic-lock="version">
+        <id name="idcomision" type="java.lang.Long">
+            <column name="idcomision" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="comiteInterno" class="org.edessco.sva.be.ComiteInterno" fetch="select">
+            <column name="id_comite_interno" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="org.edessco.sva.be.Persona" fetch="select">
+            <column name="id_persona" not-null="true" />
+        </many-to-one>
+        <property name="cargo" type="string">
+            <column name="cargo" length="80" />
+        </property>
+        <property name="fechaDesde" type="date">
+            <column name="fecha_desde" length="10" />
+        </property>
+        <property name="fechaHasta" type="date">
+            <column name="fecha_hasta" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

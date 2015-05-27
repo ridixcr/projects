@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.edessco.sva.be.ComiteInterno" table="comite_interno" catalog="db_sgc" optimistic-lock="version">
+        <id name="idcomiteinterno" type="java.lang.Long">
+            <column name="idcomiteinterno" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="unidadAcademica" class="org.edessco.sva.be.UnidadAcademica" fetch="select">
+            <column name="id_unidad_academica" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="10" />
+        </property>
+        <property name="docRef" type="string">
+            <column name="doc_ref" length="100" />
+        </property>
+        <set name="miembroComiteInternos" table="miembro_comite_interno" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_comite_interno" not-null="true" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.MiembroComiteInterno" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -25,7 +25,6 @@ public class Encuesta  implements java.io.Serializable {
      private String agradecimiento;
      private String tipoUsuario;
      private Long idUsuario;
-     private String tipoEncuestado;
      private Set<PreguntaEncuesta> preguntaEncuestas = new HashSet<PreguntaEncuesta>(0);
 
     public Encuesta() {
@@ -134,14 +133,6 @@ public class Encuesta  implements java.io.Serializable {
     
     public void setPreguntaEncuestas(Set<PreguntaEncuesta> preguntaEncuestas) {
         this.preguntaEncuestas = preguntaEncuestas;
-    }
-
-    public String getTipoEncuestado() {
-        return tipoEncuestado;
-    }
-
-    public void setTipoEncuestado(String tipoEncuestado) {
-        this.tipoEncuestado = tipoEncuestado;
     }
 
 

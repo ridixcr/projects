@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="org.edessco.sva.be.RespuestaEncuesta" table="respuesta_encuesta" catalog="db_sgc">
+    <class name="org.edessco.sva.be.RespuestaEncuesta" table="respuesta_encuesta" catalog="db_sgc" optimistic-lock="version">
         <id name="idrespuestaencuesta" type="java.lang.Long">
             <column name="idrespuestaencuesta" />
             <generator class="identity" />
@@ -12,7 +12,7 @@
             <column name="id_preguntaencuesta" not-null="true" />
         </many-to-one>
         <many-to-one name="usuario" class="org.edessco.sva.be.Usuario" fetch="select">
-            <column name="id_usuario" not-null="true" />
+            <column name="id_usuario" />
         </many-to-one>
         <property name="respuesta" type="string">
             <column name="respuesta" length="3" />
@@ -20,7 +20,6 @@
         <property name="fechaHora" type="timestamp">
             <column name="fecha_hora" length="19" />
         </property>
-        
         <property name="estado" type="java.lang.Boolean">
             <column name="estado" />
         </property>

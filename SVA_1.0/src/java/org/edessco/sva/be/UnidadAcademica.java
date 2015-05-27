@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -29,11 +29,12 @@ public class UnidadAcademica  implements java.io.Serializable {
     public UnidadAcademica(Facultad facultad) {
         this.facultad = facultad;
     }
-    public UnidadAcademica(Facultad facultad, String nombre, Set<Autoevaluacion> autoevaluacions, Set<Persona> personas) {
+    public UnidadAcademica(Facultad facultad, String nombre, Set<Autoevaluacion> autoevaluacions, Set<Persona> personas, Set<ComiteInterno> comiteInternos) {
        this.facultad = facultad;
        this.nombre = nombre;
        this.autoevaluacions = autoevaluacions;
        this.personas = personas;
+       this.comiteInternos = comiteInternos;
     }
    
     public Long getIdunidadacademica() {
@@ -71,11 +72,10 @@ public class UnidadAcademica  implements java.io.Serializable {
     public void setPersonas(Set<Persona> personas) {
         this.personas = personas;
     }
-
     public Set<ComiteInterno> getComiteInternos() {
-        return comiteInternos;
+        return this.comiteInternos;
     }
-
+    
     public void setComiteInternos(Set<ComiteInterno> comiteInternos) {
         this.comiteInternos = comiteInternos;
     }

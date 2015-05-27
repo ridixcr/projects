@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,8 +13,8 @@ public class RespuestaCuestionario  implements java.io.Serializable {
 
 
      private Long idrespuestacuestionario;
-     private PreguntaCuestionario preguntaCuestionario;
      private Docente docente;
+     private PreguntaCuestionario preguntaCuestionario;
      private String respuesta;
      private String explicacionDocente;
      private String alternativaSolucionDocente;
@@ -27,16 +27,18 @@ public class RespuestaCuestionario  implements java.io.Serializable {
     }
 
 	
-    public RespuestaCuestionario(PreguntaCuestionario preguntaCuestionario) {
+    public RespuestaCuestionario(Docente docente, PreguntaCuestionario preguntaCuestionario) {
+        this.docente = docente;
         this.preguntaCuestionario = preguntaCuestionario;
     }
-    public RespuestaCuestionario(PreguntaCuestionario preguntaCuestionario, Docente docente, String respuesta, String explicacionDocente, String alternativaSolucionDocente, Date fechaHora) {
-       this.preguntaCuestionario = preguntaCuestionario;
+    public RespuestaCuestionario(Docente docente, PreguntaCuestionario preguntaCuestionario, String respuesta, String explicacionDocente, String alternativaSolucionDocente, Date fechaHora, Boolean estado) {
        this.docente = docente;
+       this.preguntaCuestionario = preguntaCuestionario;
        this.respuesta = respuesta;
        this.explicacionDocente = explicacionDocente;
        this.alternativaSolucionDocente = alternativaSolucionDocente;
        this.fechaHora = fechaHora;
+       this.estado = estado;
     }
    
     public Long getIdrespuestacuestionario() {
@@ -45,6 +47,13 @@ public class RespuestaCuestionario  implements java.io.Serializable {
     
     public void setIdrespuestacuestionario(Long idrespuestacuestionario) {
         this.idrespuestacuestionario = idrespuestacuestionario;
+    }
+    public Docente getDocente() {
+        return this.docente;
+    }
+    
+    public void setDocente(Docente docente) {
+        this.docente = docente;
     }
     public PreguntaCuestionario getPreguntaCuestionario() {
         return this.preguntaCuestionario;
@@ -81,21 +90,12 @@ public class RespuestaCuestionario  implements java.io.Serializable {
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
-
     public Boolean getEstado() {
-        return estado;
+        return this.estado;
     }
-
+    
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public Docente getDocente() {
-        return docente;
-    }
-
-    public void setDocente(Docente docente) {
-        this.docente = docente;
     }
 
 

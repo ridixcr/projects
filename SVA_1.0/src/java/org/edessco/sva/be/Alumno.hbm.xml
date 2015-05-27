@@ -1,23 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class catalog="db_sgc" name="org.edessco.sva.be.Alumno" table="alumno">
-    <id name="idalumno" type="java.lang.Long">
-      <column name="idalumno"/>
-      <generator class="identity"/>
-    </id>
-    <many-to-one class="org.edessco.sva.be.Persona" fetch="select" name="persona">
-      <column name="id_persona" not-null="true"/>
-    </many-to-one>
-    <property name="codigo" type="string">
-      <column length="10" name="codigo" not-null="true"/>
-    </property>
-    <property name="serie" type="string">
-      <column length="10" name="serie"/>
-    </property>
-    <property name="anioIngreso" type="string">
-      <column length="8" name="anio_ingreso"/>
-    </property>
-  </class>
+    <class name="org.edessco.sva.be.Alumno" table="alumno" catalog="db_sgc" optimistic-lock="version">
+        <id name="idalumno" type="java.lang.Long">
+            <column name="idalumno" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="org.edessco.sva.be.Persona" fetch="select">
+            <column name="id_persona" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="10" not-null="true" />
+        </property>
+        <property name="serie" type="string">
+            <column name="serie" length="10" />
+        </property>
+        <property name="anioIngreso" type="string">
+            <column name="anio_ingreso" length="8" />
+        </property>
+    </class>
 </hibernate-mapping>

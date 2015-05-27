@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0 -->
+<!-- Generated 27-may-2015 1:26:59 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="org.edessco.sva.be.Usuario" table="usuario" catalog="db_sgc">
+    <class name="org.edessco.sva.be.Usuario" table="usuario" catalog="db_sgc" optimistic-lock="version">
         <id name="idusuario" type="java.lang.Long">
             <column name="idusuario" />
             <generator class="identity" />
@@ -24,13 +24,19 @@
             <column name="fecha_alta" length="19" />
         </property>
         <property name="estado" type="java.lang.Boolean">
-            <column name="estado" default="false"/>
+            <column name="estado" />
         </property>
         <set name="usuarioRols" table="usuario_rol" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_usuario" not-null="true" />
             </key>
             <one-to-many class="org.edessco.sva.be.UsuarioRol" />
+        </set>
+        <set name="respuestaEncuestas" table="respuesta_encuesta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" />
+            </key>
+            <one-to-many class="org.edessco.sva.be.RespuestaEncuesta" />
         </set>
     </class>
 </hibernate-mapping>

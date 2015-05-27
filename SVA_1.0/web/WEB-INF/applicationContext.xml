@@ -49,31 +49,36 @@
         </property>        
         <property name="mappingResources">
             <list>               
-                <value>/org/edessco/sva/be/Autoevaluacion.hbm.xml</value>              
-                <value>/org/edessco/sva/be/Criterio.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Cuestionario.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Dimension.hbm.xml</value>               
-                <value>/org/edessco/sva/be/Encuesta.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Estandar.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Factor.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Facultad.hbm.xml</value>                
-                <value>/org/edessco/sva/be/ModeloCalidad.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Persona.hbm.xml</value>                
-                <value>/org/edessco/sva/be/PreguntaCuestionario.hbm.xml</value>                
-                <value>/org/edessco/sva/be/PreguntaEncuesta.hbm.xml</value>                
-                <value>/org/edessco/sva/be/RespuestaCuestionario.hbm.xml</value>                
-                <value>/org/edessco/sva/be/RespuestaEncuesta.hbm.xml</value>                
+                <value>/org/edessco/sva/be/RespuestaEncuesta.hbm.xml</value>              
+                <value>/org/edessco/sva/be/ComiteInterno.hbm.xml</value>                
+                <value>/org/edessco/sva/be/Egresado.hbm.xml</value>                
+                <value>/org/edessco/sva/be/UnidadAcademica.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Dimension.hbm.xml</value>                
+                <value>/org/edessco/sva/be/GrupoInteres.hbm.xml</value>                
                 <value>/org/edessco/sva/be/Rol.hbm.xml</value>                
-                <value>/org/edessco/sva/be/UnidadAcademica.hbm.xml</value>                
-                <value>/org/edessco/sva/be/Universidad.hbm.xml</value>                
+                <value>/org/edessco/sva/be/RespuestaCuestionario.hbm.xml</value>                
                 <value>/org/edessco/sva/be/Usuario.hbm.xml</value>                
-                <value>/org/edessco/sva/be/UsuarioRol.hbm.xml</value>               
-                <value>/org/edessco/sva/be/Administrativo.hbm.xml</value>               
-                <value>/org/edessco/sva/be/Alumno.hbm.xml</value>               
-                <value>/org/edessco/sva/be/ComisionInterna.hbm.xml</value>               
+                <value>/org/edessco/sva/be/MiembroComiteInterno.hbm.xml</value>                
+                <value>/org/edessco/sva/be/UsuarioRol.hbm.xml</value>                
+                <value>/org/edessco/sva/be/Persona.hbm.xml</value>                
+                <value>/org/edessco/sva/be/Alumno.hbm.xml</value>                
+                <value>/org/edessco/sva/be/MatrizRecoleccionDatos.hbm.xml</value>                
+                <value>/org/edessco/sva/be/PreguntaCuestionario.hbm.xml</value>                
+                <value>/org/edessco/sva/be/ModeloCalidad.hbm.xml</value>                
+                <value>/org/edessco/sva/be/Administrativo.hbm.xml</value>                
+                <value>/org/edessco/sva/be/Universidad.hbm.xml</value>                
+                <value>/org/edessco/sva/be/RegistroGradoCumplimiento.hbm.xml</value>               
+                <value>/org/edessco/sva/be/IniciativaMejora.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Estandar.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Encuesta.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Factor.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Autoevaluacion.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Criterio.hbm.xml</value>               
+                <value>/org/edessco/sva/be/PreguntaEncuesta.hbm.xml</value>               
+                <value>/org/edessco/sva/be/RegistroResultado.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Facultad.hbm.xml</value>               
                 <value>/org/edessco/sva/be/Docente.hbm.xml</value>               
-                <value>/org/edessco/sva/be/Egresado.hbm.xml</value>               
-                <value>/org/edessco/sva/be/GrupoInteres.hbm.xml</value>               
+                <value>/org/edessco/sva/be/Cuestionario.hbm.xml</value>               
             </list>
         </property>        
     </bean>

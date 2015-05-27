@@ -1,5 +1,5 @@
 package org.edessco.sva.be;
-// Generated 17-ene-2015 17:53:31 by Hibernate Tools 3.6.0
+// Generated 27-may-2015 1:26:58 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -22,6 +22,7 @@ public class Usuario  implements java.io.Serializable {
      private Date fechaAlta;
      private Boolean estado;
      private Set<UsuarioRol> usuarioRols = new HashSet<UsuarioRol>(0);
+     private Set<RespuestaEncuesta> respuestaEncuestas = new HashSet<RespuestaEncuesta>(0);
 
     public Usuario() {
         this.idusuario = null;
@@ -32,7 +33,7 @@ public class Usuario  implements java.io.Serializable {
     public Usuario(Persona persona) {
         this.persona = persona;
     }
-    public Usuario(Persona persona, String nombreUsuario, String contrasenia, Date fechaRegistro, Date fechaAlta, Boolean estado, Set<UsuarioRol> usuarioRols) {
+    public Usuario(Persona persona, String nombreUsuario, String contrasenia, Date fechaRegistro, Date fechaAlta, Boolean estado, Set<UsuarioRol> usuarioRols, Set<RespuestaEncuesta> respuestaEncuestas) {
        this.persona = persona;
        this.nombreUsuario = nombreUsuario;
        this.contrasenia = contrasenia;
@@ -40,6 +41,7 @@ public class Usuario  implements java.io.Serializable {
        this.fechaAlta = fechaAlta;
        this.estado = estado;
        this.usuarioRols = usuarioRols;
+       this.respuestaEncuestas = respuestaEncuestas;
     }
    
     public Long getIdusuario() {
@@ -97,6 +99,13 @@ public class Usuario  implements java.io.Serializable {
     
     public void setUsuarioRols(Set<UsuarioRol> usuarioRols) {
         this.usuarioRols = usuarioRols;
+    }
+    public Set<RespuestaEncuesta> getRespuestaEncuestas() {
+        return this.respuestaEncuestas;
+    }
+    
+    public void setRespuestaEncuestas(Set<RespuestaEncuesta> respuestaEncuestas) {
+        this.respuestaEncuestas = respuestaEncuestas;
     }
 
 
