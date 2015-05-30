@@ -15,12 +15,21 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.edessco.sva.be.Administrativo;
 import org.edessco.sva.be.Alumno;
+import org.edessco.sva.be.Docente;
+import org.edessco.sva.be.Egresado;
+import org.edessco.sva.be.GrupoInteres;
 import org.edessco.sva.be.Persona;
 import org.edessco.sva.be.Rol;
 import org.edessco.sva.be.Usuario;
 import org.edessco.sva.be.UsuarioRol;
+import org.edessco.sva.bl.AdministrativoBL;
 import org.edessco.sva.bl.AlumnoBL;
+import org.edessco.sva.bl.DocenteBL;
+import org.edessco.sva.bl.EgresadoBL;
+import org.edessco.sva.bl.GrupoInteresBL;
 import org.edessco.sva.bl.PersonaBL;
 import org.edessco.sva.bl.RolBL;
 import org.edessco.sva.bl.UsuarioBL;
@@ -45,6 +54,26 @@ public class PersonaControler {
     @ManagedProperty(value = "#{alumno}")
     private Alumno alumno;
     
+    @ManagedProperty(value = "#{docenteBL}")
+    private DocenteBL docenteBL;
+    @ManagedProperty(value = "#{docente}")
+    private Docente docente;
+    
+    @ManagedProperty(value = "#{egresadoBL}")
+    private EgresadoBL egresadoBL;
+    @ManagedProperty(value = "#{egresado}")
+    private Egresado egresado;
+    
+    @ManagedProperty(value = "#{administrativoBL}")
+    private AdministrativoBL administrativoBL;
+    @ManagedProperty(value = "#{administrativo}")
+    private Administrativo administrativo;
+    
+    @ManagedProperty(value = "#{grupoInteresBL}")
+    private GrupoInteresBL grupoInteresBL;
+    @ManagedProperty(value = "#{grupoInteres}")
+    private GrupoInteres grupoInteres;
+
     @ManagedProperty(value = "#{usuarioBL}")
     private UsuarioBL usuarioBL;
     @ManagedProperty(value = "#{usuario}")
@@ -61,10 +90,13 @@ public class PersonaControler {
     private Rol rol;
 
     private String confContrasenia;
+    private String tipoUsuario;
 
     private HttpServletRequest httpServletRequest;
     private FacesContext facesContext;
     private FacesMessage facesMessage;
+    
+    private AlumnoControler alumnoControler = null;
 
     public PersonaControler() {
         facesContext = FacesContext.getCurrentInstance();
@@ -75,11 +107,27 @@ public class PersonaControler {
         if (validaContrasenia()) {
             //se registra a la persona
             long res = getPersonaBL().registrar(getPersona());
-            //almacenamos el idPersona en una sesion para reutilizarlo
             httpServletRequest.setAttribute("sessionIdPersona", getPersona().getIdpersona());
-            //Registramos los datos del alumno
-            getAlumno().setPersona(getPersona());
-            long resAlumno = getAlumnoBL().registrar(getAlumno());
+            //determinar tipo de usuario
+            HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            setTipoUsuario(httpSession.getAttribute("tipoUsuario").toString());
+            System.out.println("tipo de usuario " + getTipoUsuario());
+            if (getTipoUsuario().trim().equals("Alumno")) {
+                getAlumno().setPersona(getPersona());
+                getAlumnoBL().registrar(getAlumno());
+            } else if (getTipoUsuario().trim().equals("Docente")) {
+                getDocente().setPersona(getPersona());
+                getDocenteBL().registrar(getDocente());
+            } else if (getTipoUsuario().trim().equals("Administrativo")) {
+                getAdministrativo().setPersona(getPersona());
+                getAdministrativoBL().registrar(getAdministrativo());
+            } else if (getTipoUsuario().trim().equals("Grupo de interés")) {
+                getGrupoInteres().setPersona(getPersona());
+                getGrupoInteresBL().registrar(getGrupoInteres());
+            } else if (getTipoUsuario().trim().equals("Egresado")) {
+                getEgresado().setPersona(getPersona());
+                getEgresadoBL().registrar(getEgresado());
+            }
             //se procede a registrar el usuario
             getUsuario().setPersona(getPersona());
             long resUsuario = getUsuarioBL().registrar(getUsuario());
@@ -111,6 +159,30 @@ public class PersonaControler {
             return true;
         }
 
+    }
+
+    public String registrarUser() {
+        String url = "";
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("tipoUsuario", this.getTipoUsuario());
+        switch (getTipoUsuario().trim()) {
+            case "Alumno":
+                url = "registrarAlumno";
+                break;
+            case "Egresado":
+                url = "registrarEgresado";
+                break;
+            case "Administrativo":
+                url = "registrarAdministrativo";
+                break;
+            case "Docente":
+                url = "registrarDocente";
+                break;
+            case "Grupo de interés":
+                url = "registrarGrupoInteres";
+                break;
+        }
+        return url + "?faces-redirect=true";
     }
 
     public void limpiar() {
@@ -254,5 +326,77 @@ public class PersonaControler {
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public DocenteBL getDocenteBL() {
+        return docenteBL;
+    }
+
+    public void setDocenteBL(DocenteBL docenteBL) {
+        this.docenteBL = docenteBL;
+    }
+
+    public Docente getDocente() {
+        return docente;
+    }
+
+    public void setDocente(Docente docente) {
+        this.docente = docente;
+    }
+
+    public EgresadoBL getEgresadoBL() {
+        return egresadoBL;
+    }
+
+    public void setEgresadoBL(EgresadoBL egresadoBL) {
+        this.egresadoBL = egresadoBL;
+    }
+
+    public Egresado getEgresado() {
+        return egresado;
+    }
+
+    public void setEgresado(Egresado egresado) {
+        this.egresado = egresado;
+    }
+
+    public AdministrativoBL getAdministrativoBL() {
+        return administrativoBL;
+    }
+
+    public void setAdministrativoBL(AdministrativoBL administrativoBL) {
+        this.administrativoBL = administrativoBL;
+    }
+
+    public Administrativo getAdministrativo() {
+        return administrativo;
+    }
+
+    public void setAdministrativo(Administrativo administrativo) {
+        this.administrativo = administrativo;
+    }
+
+    public GrupoInteresBL getGrupoInteresBL() {
+        return grupoInteresBL;
+    }
+
+    public void setGrupoInteresBL(GrupoInteresBL grupoInteresBL) {
+        this.grupoInteresBL = grupoInteresBL;
+    }
+
+    public GrupoInteres getGrupoInteres() {
+        return grupoInteres;
+    }
+
+    public void setGrupoInteres(GrupoInteres grupoInteres) {
+        this.grupoInteres = grupoInteres;
     }
 }

@@ -28,6 +28,12 @@ public class AlumnoControler {
     
     public AlumnoControler() {
     }
+
+    public AlumnoControler(Alumno alumno) {
+        this.alumno = alumno;
+    }
+    
+    
     
     public void registrar() {
         setTareaEvento(new Tarea(Tarea.REGISTRO, getAlumnoBL().registrar(getAlumno())) {

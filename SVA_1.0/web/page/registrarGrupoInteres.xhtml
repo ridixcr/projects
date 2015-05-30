@@ -87,24 +87,15 @@
                                     <p:panel>
                                         <p:messages />
                                         <h:panelGrid id="grid_datos_conatcto" columns="2" cellpadding="1" columnClasses="label, value">
-                                            <h:outputLabel for="txf_codigo" value="Código: " style="font-weight:bold; margin-left: 50px">
+                                            <h:outputLabel for="txf_institucion" value="Institución: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>
-                                            <p:inputText id="txf_codigo" required="true" size="30" label="Código universitario"
-                                                         value="#{alumnoControler.alumno.codigo}"/>
-                                            <h:outputLabel for="cbx_serie" value="Serie: " style="font-weight:bold; margin-left: 50px"/>
+                                            <p:inputText id="txf_institucion" required="true" size="30" label="Institución"
+                                                         value="#{personaControler.grupoInteres.institucion}"/>
+                                            <h:outputLabel for="txf_cargo" value="Cargo: " style="font-weight:bold; margin-left: 50px"/>
+                                            <p:inputText id="txf_cargo" required="true" size="30" label="Cargo"
+                                                         value="#{personaControler.grupoInteres.cargo}"/>                                           
                                             
-                                            <p:selectOneMenu id="cbx_serie" label="Serie" style="width:118px"
-                                                             value="#{alumnoControler.alumno.serie}">
-                                                <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                                <f:selectItem itemLabel="100" itemValue="100"/>
-                                                <f:selectItem itemLabel="200" itemValue="200"/>
-                                                <f:selectItem itemLabel="300" itemValue="300"/>
-                                                <f:selectItem itemLabel="400" itemValue="400"/>
-                                                <f:selectItem itemLabel="500" itemValue="500"/>
-                                            </p:selectOneMenu>
-                                            <h:outputLabel for="txf_anio_ingreso" value="Año de ingreso: " style="font-weight:bold; margin-left: 50px"/>
-                                            <p:spinner id="txf_anio_ingreso" value="#{alumnoControler.alumno.anioIngreso}" />
                                             <h:outputLabel for="txf_usuario" value="Nombre de Usuario: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>                            

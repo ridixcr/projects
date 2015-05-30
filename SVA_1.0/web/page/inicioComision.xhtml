@@ -16,8 +16,14 @@
                     <p:separator></p:separator>
                     <h:form id="form">
                         <h:panelGrid columns="3" cellpadding="10">
-                            <p:panel id="pnl_uno" header="Nueva Autoevaluación" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarAutoevaluacion">
+                            <p:panel id="pnl_uno" header="Comite Interno" style="width: 200px; text-align: center">
+                                <p:commandLink action="adminComiteInterno">
+                                    <img src="../resources/img/iconos/newAutoevalua.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                                
+                            </p:panel>
+                            <p:panel id="pnl_dos" header="Nueva Autoevaluación" style="width: 200px; text-align: center">
+                                <p:commandLink action="administrarAutoevaluacion?faces-redirect=true">
                                     <img src="../resources/img/iconos/newAutoevalua.png" width="64px" height="64px"/>
                                 </p:commandLink>
                                 
