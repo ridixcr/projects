@@ -11,7 +11,7 @@
         <ui:composition template="./../template/layoutLogin.xhtml">
 
             <ui:define name="content">
-                
+
                 <div class="regUsuario">
                     <p:growl id="growl" life="3000" showDetail="true"/>
                     <h:form id="formUsuario">
@@ -22,7 +22,7 @@
                                     <p:panel>
                                         <p:messages />
                                         <h:panelGrid id="grid_datos_personales" columns="2" cellpadding="1" columnClasses="label, value">
-                                            
+
                                             <h:outputLabel for="cbx_efp" value="EFP: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>
@@ -70,8 +70,7 @@
                                                 <f:selectItem itemLabel="Masculino" itemValue="M"/>
                                                 <f:selectItem itemLabel="Femenino" itemValue="F"/>
                                             </p:selectOneMenu>
-                                             <h:outputLabel for="txf_telefono" value="Teléfono/Celular: " style="font-weight:bold; margin-left: 50px">                                    
-                                            </h:outputLabel>
+                                            <h:outputLabel for="txf_telefono" value="Teléfono/Celular: " style="font-weight:bold; margin-left: 50px"/>
                                             <p:inputText id="txf_telefono" size="15" label="Telefono" 
                                                          value="#{personaControler.persona.telefono}"/>
 
@@ -79,7 +78,7 @@
                                             </h:outputLabel>
                                             <p:inputText id="txf_correo" size="30" label="Correo electrónico" 
                                                          value="#{personaControler.persona.correo}"/>
-                                            
+
                                         </h:panelGrid>
                                     </p:panel>
                                 </p:tab>
@@ -87,30 +86,32 @@
                                     <p:panel>
                                         <p:messages />
                                         <h:panelGrid id="grid_datos_conatcto" columns="2" cellpadding="1" columnClasses="label, value">
-                                            <h:outputLabel for="txf_codigo" value="Código: " style="font-weight:bold; margin-left: 50px">
+                                            <h:outputLabel for="txf_cargo" value="Cargo: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>
-                                            <p:inputText id="txf_codigo" required="true" size="30" label="Código universitario"
-                                                         value="#{alumnoControler.alumno.codigo}"/>
-                                            <h:outputLabel for="cbx_serie" value="Serie: " style="font-weight:bold; margin-left: 50px"/>
                                             
-                                            <p:selectOneMenu id="cbx_serie" label="Serie" style="width:118px"
-                                                             value="#{alumnoControler.alumno.serie}">
+                                            <p:inputText id="txf_cargo" required="true" size="30" label="Cargo"
+                                                         value="#{administrativoControler.administrativo.cargo}"/>
+                                            
+                                            <h:outputLabel for="txf_dependencia" value="Dependencia: " style="font-weight:bold; margin-left: 50px"/>
+                                            <p:inputText id="txf_dependencia" required="true" size="30" label="Dependencia"
+                                                         value="#{administrativoControler.administrativo.dependencia}"/>
+                                            <h:outputLabel for="cbx_condicion_laboral" value="Condición laboral: " style="font-weight:bold; margin-left: 50px"/>
+                                            <p:selectOneMenu id="cbx_condicion_laboral" label="Condición laboral" style="width:205px"
+                                                             value="#{administrativoControler.administrativo.condicionLaboral}">
                                                 <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                                <f:selectItem itemLabel="100" itemValue="100"/>
-                                                <f:selectItem itemLabel="200" itemValue="200"/>
-                                                <f:selectItem itemLabel="300" itemValue="300"/>
-                                                <f:selectItem itemLabel="400" itemValue="400"/>
-                                                <f:selectItem itemLabel="500" itemValue="500"/>
+                                                <f:selectItem itemLabel="Nombrado" itemValue="Nombrado"/>
+                                                <f:selectItem itemLabel="Contratado" itemValue="Contratado"/>
+                                                <f:selectItem itemLabel="Suplencia" itemValue="Suplencia"/>
                                             </p:selectOneMenu>
-                                            <h:outputLabel for="txf_anio_ingreso" value="Año de ingreso: " style="font-weight:bold; margin-left: 50px"/>
-                                            <p:spinner id="txf_anio_ingreso" value="#{alumnoControler.alumno.anioIngreso}" />
+                                            <h:outputLabel for="txf_nivel_estudio" value="Nivel de estudio: " style="font-weight:bold; margin-left: 50px"/>                           
+                                            <p:inputText id="txf_nivel_estudio" required="true" size="30" label="Cargo"
+                                                         value="#{administrativoControler.administrativo.nivelEstudios}"/>
                                             <h:outputLabel for="txf_usuario" value="Nombre de Usuario: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>                            
                                             <p:inputText id="txf_usuario" required="true" size="30" label="Nombre de usuario"
                                                          value="#{personaControler.usuario.nombreUsuario}"/>
-
                                             <h:outputLabel for="txf_contrasenia" value="Contraseña: " style="font-weight:bold; margin-left: 50px">
                                                 <span style="color: red;font-weight: bold">*</span>
                                             </h:outputLabel>
@@ -122,13 +123,11 @@
                                             </h:outputLabel>
                                             <p:password id="txf_conf_contrasenia" required="true" size="30" label="Confirmar contraseña"
                                                         value="#{personaControler.confContrasenia}"/>
-                                           
-
-                                             
+                                            
                                         </h:panelGrid>
                                     </p:panel>
                                 </p:tab>
-                                
+
                             </p:wizard>
 
                             <f:facet name="footer">
@@ -158,7 +157,7 @@
                         };
                     </script>
                 </div>
-                
+
             </ui:define>
 
         </ui:composition>

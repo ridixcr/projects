@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../template/layoutComision.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <p:growl id="msg" showDetail="true" />
+        <p:panel id="pnl_adminComiteInterno" header="Comite Interno">
+            <h:form id="formBtnNew">
+                <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                 value="Nuevo" actionListener="#{encuestaControler.limpiar()}"/>                  
+            </h:form>
+            <h:form id="formDataTable">
+                <p:dataTable id="lista" value="#{encuestaControler.listaEncuestas}" var="encuestaItem"
+                             paginator="true" rows="10" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,15,20">
+                    <f:facet name="header">Comite Interno</f:facet>
+                </p:dataTable>
+            </h:form>
+            <h:form id="formNew">
+                <p:dialog header="Registrar documento" widgetVar="dlgNew" id="dlgNew" modal="true"
+                          showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                    <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                        <h:outputLabel for="cbx_efp" value="EFP: " style="font-weight:bold;">
+                        </h:outputLabel>
+                        <p:selectOneMenu id="cbx_efp" style="width:480px" value="#{personaControler.persona.unidadAcademica.idunidadacademica}" 
+                                         label="Escuela de formación profesional" required="true">
+                            <f:selectItem itemLabel="--Seleccione--" />
+                            <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="txf_nombre" value="Nombre: " style="font-weight:bold;">
+                        </h:outputLabel>                            
+                        <p:inputText id="txf_nombre" required="true" size="120" label="Nombre"
+                                     value="#{personaControler.persona.nombres}" style="width: 480px"/>
+
+                        <h:outputLabel for="txt_fecha_inicio" value="Fecha de creación:" style="font-weight:bold;">
+                        </h:outputLabel>                            
+                        <p:calendar id="txt_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true"
+                                    value="#{encuestaControler.encuesta.fechaHoraInicio}" pattern="dd/MM/yyyy">
+                            <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                        </p:calendar>
+
+                        <h:outputLabel for="txf_doc" value="Documento: " style="font-weight:bold;">
+                        </h:outputLabel>                            
+                        <p:inputText id="txf_doc" required="true" size="120" label="Documento"
+                                     value="#{personaControler.persona.nombres}" style="width: 480px"/>
+
+
+                        <f:facet name="footer">
+                            <p:separator/>
+                            <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                             oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                             value="Guardar" title="Guardar" actionListener="#{encuestaControler.registrar()}"/>
+                            <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                             icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
