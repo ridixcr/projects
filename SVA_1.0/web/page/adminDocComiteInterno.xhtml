@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" />
+                <p:panel id="pnl_adminComiteInterno" header="Comite Interno">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                                         value="Nuevo" actionListener="#{comiteInternoControler.limpiar()}"/>                  
+                    </h:form>
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{comiteInternoControler.listaComites}" var="comiteItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">Comite Interno</f:facet>
+                            <p:column style="width:15px;text-align: center" headerText="Nº">
+                                <h:outputText value="#{comiteItem.idcomiteinterno}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{comiteItem.nombre}" />
+                            </p:column>
+                            <p:column headerText="E.F.P." style="width: 300px">
+                                <h:outputText value="#{comiteItem.unidadAcademica.nombre}" />
+                            </p:column>
+                            <p:column headerText="Fecha de Creación" style="width: 120px">
+                                <h:outputText value="#{comiteItem.fechaCreacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
+                                </h:outputText>
+                            </p:column> 
+                            
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Miembros" action="#{criterioBean.redirigir()}">
+                                    <f:setPropertyActionListener value="#{comiteItem}" target="#{comiteInternoControler.comiteInterno}" />
+                                </p:commandButton>                         
+                            </p:column>
+                            
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{comiteItem}" target="#{comiteInternoControler.comiteInterno}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{comiteItem}" target="#{comiteInternoControler.comiteInterno}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar documento" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_efp" value="EFP: " style="font-weight:bold;">
+                                </h:outputLabel>
+                                <p:selectOneMenu id="cbx_efp" style="width:480px" value="#{comiteInternoControler.comiteInterno.unidadAcademica.idunidadacademica}" 
+                                                 label="Escuela de formación profesional" required="true">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txf_nombre" value="Nombre: " style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_nombre" required="true" size="120" label="Nombre"
+                                             value="#{comiteInternoControler.comiteInterno.nombre}" style="width: 480px"/>
+
+                                <h:outputLabel for="txt_fecha_inicio" value="Fecha de creación:" style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:calendar id="txt_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{comiteInternoControler.comiteInterno.fechaCreacion}" pattern="dd/MM/yyyy" >
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <h:outputLabel for="txf_doc" value="Documento: " style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_doc" required="true" size="120" label="Documento"
+                                             value="#{comiteInternoControler.comiteInterno.docRef}" style="width: 480px"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{comiteInternoControler.registrar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+                                <h:inputHidden value="#{comiteInternoControler.comiteInterno.idcomiteinterno}" />
+                                <h:inputHidden/>
+                                
+                                <h:outputLabel for="cbx_edit_efp" value="EFP: " style="font-weight:bold;">
+                                </h:outputLabel>
+                                <p:selectOneMenu id="cbx_edit_efp" style="width:480px" value="#{comiteInternoControler.comiteInterno.unidadAcademica.idunidadacademica}" 
+                                                 label="Escuela de formación profesional" required="true">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txf_edit_nombre" value="Nombre: " style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_edit_nombre" required="true" size="120" label="Nombre"
+                                             value="#{comiteInternoControler.comiteInterno.nombre}" style="width: 480px"/>
+
+                                <h:outputLabel for="txt_edit_fecha_inicio" value="Fecha de creación:" style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:calendar id="txt_edit_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{comiteInternoControler.comiteInterno.fechaCreacion}" pattern="dd/MM/yyyy">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <h:outputLabel for="txf_edit_doc" value="Documento: " style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_edit_doc" required="true" size="120" label="Documento"
+                                             value="#{comiteInternoControler.comiteInterno.docRef}" style="width: 480px"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     title="Guardar" value="Guardar" actionListener="#{comiteInternoControler.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
+                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{comiteInternoControler.comiteInterno.idcomiteinterno}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{comiteInternoControler.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

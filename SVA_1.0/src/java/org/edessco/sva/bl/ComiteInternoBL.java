@@ -48,7 +48,7 @@ public class ComiteInternoBL extends AbstractBL<ComiteInterno>{
 
     @Override
     public List<ComiteInterno> listar(String ref) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list(ref);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ComiteInternoBL extends AbstractBL<ComiteInterno>{
 
     @Override
     public ComiteInterno buscar(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return search(id);
     }
 
     @Override
