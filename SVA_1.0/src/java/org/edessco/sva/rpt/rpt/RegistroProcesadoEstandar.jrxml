@@ -13,7 +13,8 @@ ON e.idestandar = pe.id_encuesta
 INNER JOIN iniciativa_mejora im
 ON e.idestandar = im.id_estandar
 INNER JOIN registro_grado_cumplimiento rgc
-ON e.idestandar = rgc.id_estandar]]>
+ON e.idestandar = rgc.id_estandar
+WHERE e.idestandar=4]]>
 	</queryString>
 	<field name="idpreguntaencuesta" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -34,29 +35,16 @@ ON e.idestandar = rgc.id_estandar]]>
 		<band/>
 	</background>
 	<title>
-		<band height="56">
+		<band height="10">
 			<frame>
-				<reportElement uuid="8b44be4a-96bf-4a33-b336-26ffaa9b08c7" mode="Opaque" x="-20" y="-23" width="595" height="73" backcolor="#CCCCCC"/>
+				<reportElement uuid="cd81ac84-4be6-4434-829b-836ff0e3a563" mode="Opaque" x="-20" y="-20" width="595" height="30" backcolor="#006699"/>
 				<staticText>
-					<reportElement uuid="33fa52b2-b5f8-4139-b591-cce9d167e76b" x="21" y="40" width="555" height="18" forecolor="#000000"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="14" isBold="false"/>
+					<reportElement uuid="b57f1cab-c56b-48d5-9a6a-4a9ab2884202" x="20" y="5" width="555" height="18" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[REGISTRO PROCESADO POR ESTÁNDAR]]></text>
 				</staticText>
-				<staticText>
-					<reportElement uuid="4bf7f61a-e012-41bd-9b29-1c98b1ac6b3a" x="21" y="20" width="555" height="20" forecolor="#000000"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="15" isBold="true"/>
-					</textElement>
-					<text><![CDATA[UNIVERSIDAD NACIONAL SAN CRISTOBAL DE HUAMANGA]]></text>
-				</staticText>
-				<line>
-					<reportElement uuid="b22ce855-d679-46f7-b722-803034b92307" x="0" y="72" width="595" height="1"/>
-					<graphicElement>
-						<pen lineWidth="1.0"/>
-					</graphicElement>
-				</line>
 			</frame>
 		</band>
 	</title>
@@ -181,14 +169,14 @@ ON e.idestandar = rgc.id_estandar]]>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{explicacion_consolidada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{explicacion_docente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="46b12df3-9315-4624-a66b-64a2d5635ef4" x="422" y="0" width="133" height="68" forecolor="#006699"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{alternativa_solucion_consensuada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{alternativa_solucion_docente}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement uuid="81d4f00b-3837-4f99-948c-5a0e5db256c7" x="555" y="0" width="1" height="69" forecolor="#666666"/>
@@ -233,27 +221,21 @@ ON e.idestandar = rgc.id_estandar]]>
 	</columnFooter>
 	<pageFooter>
 		<band height="17">
-			<frame>
-				<reportElement uuid="dabcd048-0c65-4018-9486-52ef05d43816" mode="Opaque" x="-20" y="0" width="595" height="17" backcolor="#CCCCCC"/>
-			</frame>
 			<textField>
-				<reportElement uuid="e204dea7-0d7a-4fe6-9da0-2b6f1dbb44d5" mode="Transparent" x="0" y="2" width="515" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="a468822f-c41c-4864-a11d-cf58d07bad8c" mode="Opaque" x="0" y="4" width="515" height="13" forecolor="#006699" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="4eca268c-52d7-4970-a144-4ff414018bb3" mode="Transparent" x="515" y="2" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="4771f86b-5d9d-4cde-8b6d-20bdf64d0395" mode="Opaque" x="515" y="4" width="40" height="13" forecolor="#006699" backcolor="#E6E6E6"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="0c982705-80f2-4c11-a041-82a379d33dca" x="0" y="2" width="100" height="13"/>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="c3f91bd9-d345-495e-83ab-2cc9c3dea893" x="0" y="4" width="100" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement uuid="fb79f34d-2c5e-415f-ac6f-7c4957672656" x="-20" y="0" width="595" height="1"/>
-			</line>
 		</band>
 	</pageFooter>
 	<summary>

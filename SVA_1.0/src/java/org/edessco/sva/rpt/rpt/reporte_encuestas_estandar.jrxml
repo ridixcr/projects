@@ -210,27 +210,24 @@ group by es.titulo,en.descripcion,pe.tipo_encuesta]]>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="17">
-			<frame>
-				<reportElement uuid="081786a2-af34-47c1-84a4-b223928fb89c" mode="Opaque" x="-20" y="0" width="595" height="17" backcolor="#CCCCCC"/>
-			</frame>
+		<band height="14">
 			<textField>
-				<reportElement uuid="2c8830b9-ebdf-4ecb-aec3-7b28185236af" mode="Transparent" x="0" y="2" width="515" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="e9fb083a-58c8-48de-adf3-0eb20eba92a9" mode="Opaque" x="0" y="1" width="515" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement uuid="e47ef9dd-edb1-4d63-b94a-28640c12ab49" mode="Transparent" x="515" y="2" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement uuid="cb63a146-5b72-4565-9102-756774009e80" mode="Opaque" x="515" y="1" width="40" height="13" backcolor="#E6E6E6"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="f6892413-cdb2-4a9b-8665-953b8dcdcc5d" x="0" y="2" width="100" height="13"/>
+				<reportElement uuid="ce06a8c1-fd7b-40ad-ad0d-beb44bcb190a" x="0" y="1" width="100" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="c11233da-8b47-4c6b-a053-0c5534d3b193" x="-20" y="0" width="595" height="1"/>
+				<reportElement uuid="fa80d0a8-bb85-4e15-a3cb-f300e2c0d71b" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"/>
 			</line>
 		</band>
 	</pageFooter>
