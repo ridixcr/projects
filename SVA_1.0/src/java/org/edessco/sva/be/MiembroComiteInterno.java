@@ -20,6 +20,9 @@ public class MiembroComiteInterno  implements java.io.Serializable {
      private Date fechaHasta;
 
     public MiembroComiteInterno() {
+        this.idcomision = Long.parseLong("0");
+        this.persona = new Persona();
+        this.comiteInterno = new ComiteInterno();
     }
 
 	

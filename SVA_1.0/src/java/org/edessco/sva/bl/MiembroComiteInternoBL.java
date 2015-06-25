@@ -47,7 +47,7 @@ public class MiembroComiteInternoBL extends AbstractBL<MiembroComiteInterno>{
 
     @Override
     public List<MiembroComiteInterno> listar(String ref) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return list(ref);
     }
 
     @Override

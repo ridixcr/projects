@@ -131,6 +131,12 @@ public class ComiteInternoControler {
     }
 
     public List<SelectItem> getSelectOneItemsComites() {
+        this.selectOneItemsComites = new LinkedList<SelectItem>();
+        for (ComiteInterno comite : listaComites) {
+            this.setComiteInterno(comite);
+            SelectItem selectItem = new SelectItem(comite.getIdcomiteinterno(), comite.getNombre());
+            this.selectOneItemsComites.add(selectItem);
+        }  
         return selectOneItemsComites;
     }
 

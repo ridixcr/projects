@@ -40,6 +40,11 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
                                 </h:outputText>
                             </p:column>
+                            <p:column headerText="Estado">
+                                <h:outputText value="#{modeloCalidadItem.estado}">
+                                    <h:outputText value="#{modeloCalidadItem.estado}" />
+                                </h:outputText>
+                            </p:column>
                             <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Dimensiones" action="#{modeloCalidadBean.redirigir()}">
                                     <f:setPropertyActionListener value="#{modeloCalidadItem}" target="#{modeloCalidadBean.modeloCalidad}" />
@@ -78,6 +83,13 @@
                                     <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
                                 </p:calendar>
                                 
+                                <h:outputLabel for="rbtn_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_estado" value="#{modeloCalidadBean.modeloCalidad.estado}" label="Estado">
+                                    <f:selectItem itemLabel="En Edición" itemValue="En Edición" />
+                                    <f:selectItem itemLabel="Vigente" itemValue="Vigente" />
+                                    <f:selectItem itemLabel="Caducado" itemValue="Caducado" />
+                                </p:selectOneRadio>
+                                
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="icon-guardar" value="Guardar" title="Guardar"  
@@ -112,6 +124,13 @@
                                             value="#{modeloCalidadBean.modeloCalidad.fechaPublicacion}" pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
                                     <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
                                 </p:calendar>
+                                
+                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
+                                <p:selectOneRadio id="rbtn_edit_estado" value="#{modeloCalidadBean.modeloCalidad.estado}" label="Estado">
+                                    <f:selectItem itemLabel="En Edición" itemValue="En Edición" />
+                                    <f:selectItem itemLabel="Vigente" itemValue="Vigente" />
+                                    <f:selectItem itemLabel="Caducado" itemValue="Caducado" />
+                                </p:selectOneRadio>
                                 
                                 <f:facet name="footer">
                                     <p:separator/>
