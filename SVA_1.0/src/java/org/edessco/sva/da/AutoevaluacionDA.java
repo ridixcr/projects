@@ -40,7 +40,7 @@ public class AutoevaluacionDA extends AbstractDA<Autoevaluacion>{
 
     @Override
     public List<Autoevaluacion> listar(String ref) {
-        return list("from Criterio d left join fetch d.factor");
+        return list("from Autoevaluacion a left join fetch a.unidadAcademica ua");
     }
 
     @Override

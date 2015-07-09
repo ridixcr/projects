@@ -14,6 +14,9 @@
         <property name="resolucion" type="string">
             <column name="resolucion" length="20" />
         </property>
+        <property name="estado" type="string">
+            <column name="estado" length="20" />
+        </property>
         <property name="fechaPublicacion" type="timestamp">
             <column name="fecha_publicacion" length="19" />
         </property>

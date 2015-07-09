@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class MiembroComiteInterno  implements java.io.Serializable {
 
 
-     private Long idcomision;
+     private Long idmiembrocomiteinterno;
      private ComiteInterno comiteInterno;
      private Persona persona;
      private String cargo;
@@ -20,6 +20,9 @@ public class MiembroComiteInterno  implements java.io.Serializable {
      private Date fechaHasta;
 
     public MiembroComiteInterno() {
+        this.idmiembrocomiteinterno = Long.parseLong("0");
+        this.persona = new Persona();
+        this.comiteInterno = new ComiteInterno();
     }
 
 	
@@ -35,12 +38,12 @@ public class MiembroComiteInterno  implements java.io.Serializable {
        this.fechaHasta = fechaHasta;
     }
    
-    public Long getIdcomision() {
-        return this.idcomision;
+    public Long getIdmiembrocomiteinterno() {
+        return this.idmiembrocomiteinterno;
     }
     
-    public void setIdcomision(Long idcomision) {
-        this.idcomision = idcomision;
+    public void setIdmiembrocomiteinterno(Long idmiembrocomiteinterno) {
+        this.idmiembrocomiteinterno = idmiembrocomiteinterno;
     }
     public ComiteInterno getComiteInterno() {
         return this.comiteInterno;

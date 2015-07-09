@@ -17,6 +17,7 @@ public class ModeloCalidad  implements java.io.Serializable {
      private Long idmodelocalidad;
      private String titulo;
      private String resolucion;
+     private String estado;
      private Date fechaPublicacion;
      private Set<Dimension> dimensions = new HashSet<Dimension>(0);
      private Set<Autoevaluacion> autoevaluacions = new HashSet<Autoevaluacion>(0);
@@ -74,6 +75,14 @@ public class ModeloCalidad  implements java.io.Serializable {
     
     public void setAutoevaluacions(Set<Autoevaluacion> autoevaluacions) {
         this.autoevaluacions = autoevaluacions;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
 

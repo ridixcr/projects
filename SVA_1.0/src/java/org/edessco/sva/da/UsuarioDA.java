@@ -30,7 +30,7 @@ public class UsuarioDA extends AbstractDA<Usuario> {
 
     @Override
     public List<Usuario> listar(String ref) {
-        return list("from Usuario u left join fetch u.persona");
+        return list("from Usuario u left join fetch u.persona p left join fetch p.unidadAcademica ua");
     }
 
     @Override
@@ -51,6 +51,10 @@ public class UsuarioDA extends AbstractDA<Usuario> {
     @Override
     public Usuario buscar(String ref) {
         return search("from Usuario as u where u.nombreUsuario='"+ref+"'");
+    }
+
+    public List<Usuario> listarAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -6,6 +6,7 @@
 package org.edessco.sva.cv;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -34,12 +35,14 @@ import org.edessco.sva.bl.PersonaBL;
 import org.edessco.sva.bl.RolBL;
 import org.edessco.sva.bl.UsuarioBL;
 import org.edessco.sva.bl.UsuarioRolBL;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 /**
  *
  * @author JorgeLuis
  */
-@ManagedBean
+@ManagedBean(name = "personaControler", eager = true)
 @ViewScoped
 public class PersonaControler {
 
@@ -48,27 +51,29 @@ public class PersonaControler {
     @ManagedProperty(value = "#{persona}")
     private Persona persona;
     private List<Persona> listaPersonas = new LinkedList<>();
+    private List<Persona> filteredPerson;
+    private Persona selectedPersona;
 
     @ManagedProperty(value = "#{alumnoBL}")
     private AlumnoBL alumnoBL;
     @ManagedProperty(value = "#{alumno}")
     private Alumno alumno;
-    
+
     @ManagedProperty(value = "#{docenteBL}")
     private DocenteBL docenteBL;
     @ManagedProperty(value = "#{docente}")
     private Docente docente;
-    
+
     @ManagedProperty(value = "#{egresadoBL}")
     private EgresadoBL egresadoBL;
     @ManagedProperty(value = "#{egresado}")
     private Egresado egresado;
-    
+
     @ManagedProperty(value = "#{administrativoBL}")
     private AdministrativoBL administrativoBL;
     @ManagedProperty(value = "#{administrativo}")
     private Administrativo administrativo;
-    
+
     @ManagedProperty(value = "#{grupoInteresBL}")
     private GrupoInteresBL grupoInteresBL;
     @ManagedProperty(value = "#{grupoInteres}")
@@ -95,7 +100,7 @@ public class PersonaControler {
     private HttpServletRequest httpServletRequest;
     private FacesContext facesContext;
     private FacesMessage facesMessage;
-    
+
     private AlumnoControler alumnoControler = null;
 
     public PersonaControler() {
@@ -111,7 +116,6 @@ public class PersonaControler {
             //determinar tipo de usuario
             HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             setTipoUsuario(httpSession.getAttribute("tipoUsuario").toString());
-            System.out.println("tipo de usuario " + getTipoUsuario());
             if (getTipoUsuario().trim().equals("Alumno")) {
                 getAlumno().setPersona(getPersona());
                 getAlumnoBL().registrar(getAlumno());
@@ -206,6 +210,18 @@ public class PersonaControler {
     @PostConstruct
     public void listar() {
         setListaPersonas(getPersonaBL().listar());
+    }
+
+    public List<Persona> complete(String query) {
+        listaPersonas = personaBL.list();
+        filteredPerson = new ArrayList<Persona>();
+        for (int i = 0; i < listaPersonas.size(); i++) {
+            Persona per = listaPersonas.get(i);
+            if (per.getNombres().toLowerCase().startsWith(query)) {
+                filteredPerson.add(per);
+            }
+        }
+        return filteredPerson;
     }
 
     public PersonaBL getPersonaBL() {
@@ -398,5 +414,23 @@ public class PersonaControler {
 
     public void setGrupoInteres(GrupoInteres grupoInteres) {
         this.grupoInteres = grupoInteres;
+    }
+
+    public Persona getSelectedPersona() {
+        return selectedPersona;
+    }
+
+    public void setSelectedPersona(Persona selectedPersona) {
+        this.selectedPersona = selectedPersona;
+    }
+
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Persona Seleccionada", ((Persona) event.getObject()).getIdpersona().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("Persona no seleccionada", ((Persona) event.getObject()).getIdpersona().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }

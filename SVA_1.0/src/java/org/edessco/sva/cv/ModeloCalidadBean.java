@@ -62,6 +62,7 @@ public class ModeloCalidadBean {
         temp.setTitulo(this.getModeloCalidad().getTitulo());
         temp.setResolucion(this.getModeloCalidad().getResolucion());
         temp.setFechaPublicacion(this.getModeloCalidad().getFechaPublicacion());
+        temp.setEstado(this.getModeloCalidad().getEstado());
 
         long res = getModeloBL().actualizar(temp);
         if (res == 0) {

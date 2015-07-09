@@ -51,10 +51,16 @@ public class PreguntaEncuestaBean {
             }
         });
     }
-
+    
     @PostConstruct
     public void listar() {
-        setListaPreguntasEncuestas(getPreguntaEncuestaBL().listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idEncuesta") != null){
+            setListaPreguntasEncuestas(getPreguntaEncuestaBL().listarPreguntas(Long.parseLong(httpSession.getAttribute("idEncuesta").toString())));
+            //httpSession.invalidate();
+        }else{
+            setListaPreguntasEncuestas(getPreguntaEncuestaBL().listar(""));
+        }
     }
     
     public void actualizar() {

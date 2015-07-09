@@ -44,14 +44,20 @@ public class PreguntaCuestionarioControler {
             @Override
             public void proceso() {
                 preguntaCuestionario = new PreguntaCuestionario();
-                listar();
+                listarPreguntas();
             }
         });
     }
-
+    
     @PostConstruct
-    public void listar() {
-        setListaPreguntasCuestionario(getPreguntaCuestionarioBL().listar(""));
+    public void listarPreguntas() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idCuestionario") != null){
+            setListaPreguntasCuestionario(getPreguntaCuestionarioBL().listarPreguntas(Long.parseLong(httpSession.getAttribute("idCuestionario").toString())));
+            //httpSession.invalidate();
+        }else{
+            setListaPreguntasCuestionario(getPreguntaCuestionarioBL().listar(""));
+        }
     }
     
     public void actualizar() {
@@ -73,7 +79,7 @@ public class PreguntaCuestionarioControler {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
-        listar();
+        listarPreguntas();
     }
     
     public void eliminar() {
@@ -91,7 +97,7 @@ public class PreguntaCuestionarioControler {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
 
-        listar();
+        listarPreguntas();
     }
     
     public PreguntaCuestionario buscarId() {

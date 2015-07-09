@@ -21,20 +21,19 @@
             <div id="menu">
                 <h:form> 
                     <p:menubar>
-                        <p:menuitem value="Inicio" url="/admin/page/inicioUsuario.xhtml" icon="ui-icon-close" />
-                        <p:submenu label="Encuesta" icon="ui-icon-pencil">
+                        <p:menuitem value="Inicio" url="/admin/page/inicioUsuario.xhtml" icon="ui-icon-home" />
+                        <p:submenu label="Encuesta">
                             <p:menuitem value="Mis encuestas" url="/admin/page/misEncuestas.xhtml"  />
                         </p:submenu>
 
                         <f:facet name="options">
                             <p:outputLabel value="Bienvenido(a) : " style="margin-right: 5px;"></p:outputLabel>
-                            <p:menuButton value="#{loginControler.nombreUsuario}">
-                                <p:menuitem value="Save" icon="ui-icon-disk"/>
-                                <p:menuitem value="Update" icon="ui-icon-arrowrefresh-1-w"/>
-                                <p:menuitem value="Delete" ajax="false" icon="ui-icon-close"/>
-                                <p:separator />
-                                <p:menuitem value="Homepage" icon="ui-icon-extlink" action="#{loginControler.cerrarSesion()}"/>
+                            <p:menuButton value="#{loginControler.nombreUsuario}" iconPos="fa fa-user">
+                                <p:menuitem value="Cambiar contraseña" icon="ui-icon-arrowrefresh-1-w"/>
+                                <p:menuitem value="Información" icon="fa fa-user"/>
                             </p:menuButton>
+                            <p:commandButton id="btnCancelarRegistro"  action="#{loginControler.cerrarSesion()}"
+                                                     icon="fa fa-power-off" value="Cerrar Sesión" title="Cerrar Sesión"/>
                         </f:facet>
                     </p:menubar>
                 </h:form>

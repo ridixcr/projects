@@ -61,4 +61,8 @@ public class PreguntaCuestionarioDA extends AbstractDA<PreguntaCuestionario>{
     public PreguntaCuestionario buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<PreguntaCuestionario> listarPreguntas(long idCuestionario) {
+        return list("from PreguntaCuestionario pc inner join fetch pc.cuestionario c where c.idcuestionario="+idCuestionario);
+    }
 }

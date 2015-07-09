@@ -119,3 +119,17 @@ a:link:hover, a:visited:hover  {
  border: 0;
 }
 
+.outputLabel{
+    font-weight: bold;   
+}
+.inputText380px{
+    width: 380px;
+}
+
+.ui-panel{
+    border: none;
+    padding: 0.2em;
+}
+
+
+

@@ -53,7 +53,7 @@ public class AutoevaluacionControler {
 
     @PostConstruct
     public void listar() {
-        setListaAutoevaluaciones(getAutoevaluacionBL().listar());
+        setListaAutoevaluaciones(getAutoevaluacionBL().listar(""));
     }
 
     public void actualizar() {

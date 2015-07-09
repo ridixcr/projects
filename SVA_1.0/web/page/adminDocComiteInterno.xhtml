@@ -39,7 +39,7 @@
                             </p:column> 
                             
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Miembros" action="#{criterioBean.redirigir()}">
+                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Miembros" action="adminMiembroComiteInterno?faces-redirect=true">
                                     <f:setPropertyActionListener value="#{comiteItem}" target="#{comiteInternoControler.comiteInterno}" />
                                 </p:commandButton>                         
                             </p:column>
