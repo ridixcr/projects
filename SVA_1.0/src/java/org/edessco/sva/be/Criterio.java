@@ -22,6 +22,8 @@ public class Criterio  implements java.io.Serializable {
      private Set<Estandar> estandars = new HashSet<Estandar>(0);
 
     public Criterio() {
+        this.idcriterio = Long.MIN_VALUE;
+        this.factor = new Factor();
     }
 
 	

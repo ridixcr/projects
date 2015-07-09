@@ -79,7 +79,7 @@
                                 <h:outputLabel for="cbx_autoevaluacion" value="Autoevaluacion:" />
                                 <p:selectOneMenu id="cbx_autoevaluacion" value="#{encuestaControler.encuesta.autoevaluacion.idautoevaluacion}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true" />
-                                    <f:selectItems value="#{autoevaluacionBean.selectOneItemsAutoevaluacion}" />
+                                    <f:selectItems value="#{autoevaluacionControler.selectOneItemsAutoevaluacion}" />
                                 </p:selectOneMenu>
 
                                 <h:outputLabel for="cbx_tipoUser" value="Dirigido a:" />
@@ -146,7 +146,7 @@
                                 <h:outputLabel for="cbx_edit_autoevaluacion" value="Autoevaluacion:" />
                                 <p:selectOneMenu id="cbx_edit_autoevaluacion" value="#{encuestaControler.encuesta.autoevaluacion.idautoevaluacion}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
-                                    <f:selectItems value="#{autoevaluacionBean.selectOneItemsAutoevaluacion}" />
+                                    <f:selectItems value="#{autoevaluacionControler.selectOneItemsAutoevaluacion}" />
                                 </p:selectOneMenu>
 
                                 <h:outputLabel for="cbx_edit_tipoUser" value="Dirigido a:" />
