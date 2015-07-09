@@ -22,27 +22,41 @@
                                      paginator="true" rows="10" paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="10,15,20">
-                            <f:facet name="header">Miembros del Comite Interno</f:facet>
+                            <f:facet name="header">.</f:facet>
 
                             <p:column style="width:15px;text-align: center" headerText="Nº">
-                                <h:outputText value="#{miembroItem.idcomision}" />
+                                <h:outputText value="#{miembroItem.idmiembrocomiteinterno}" />
                             </p:column>
                             <p:column headerText="Miembro del comité">
-                                <h:outputText value="#{miembroItem.idcomision}" />
+                                <h:outputText value="#{miembroItem.persona.apellidoPaterno} #{miembroItem.persona.apellidoMaterno} #{miembroItem.persona.nombres}" />
                             </p:column>
                             <p:column headerText="Cargo" style="width: 300px">
                                 <h:outputText value="#{miembroItem.cargo}" />
                             </p:column>
-                            <p:column headerText="Desde" style="width: 120px">
+                            <p:column headerText="Desde" style="width: 70px">
                                 <h:outputText value="#{miembroItem.fechaDesde}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Hasta" style="width: 120px">
+                            <p:column headerText="Hasta" style="width: 70px">
                                 <h:outputText value="#{miembroItem.fechaHasta}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
                                 </h:outputText>
                             </p:column>
+                            
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                    <f:setPropertyActionListener value="#{miembroItem}" target="#{miembroComiteInternoControler.miembroComiteInterno}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:30px;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="icon-eliminar" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{miembroItem}" target="#{miembroComiteInternoControler.miembroComiteInterno}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                            
                         </p:dataTable>
                     </h:form>
 
@@ -50,10 +64,11 @@
                         <p:dialog header="Registrar Miembros del Comité Interno" widgetVar="dlgNew" id="dlgNew" modal="true"
                                   showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+                                                                                                
                                 <h:outputLabel for="cbx_efp" value="EFP: " style="font-weight:bold;">
                                     <span style="color: red;font-weight: bold">*</span>
                                 </h:outputLabel>
-                                <p:selectOneMenu id="cbx_efp" style="width:350px" value="#{personaControler.persona.unidadAcademica.idunidadacademica}" 
+                                <p:selectOneMenu id="cbx_efp" style="width:350px" value="#{miembroComiteInternoControler.persona.unidadAcademica.idunidadacademica}" 
                                                  label="Escuela de formación profesional" required="true">
                                     <f:selectItem itemLabel="--Seleccione--" />
                                     <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
@@ -62,29 +77,29 @@
                                     <span style="color: red;font-weight: bold">*</span>
                                 </h:outputLabel>                            
                                 <p:inputText id="txf_nombres" required="true" size="54" label="Nombres"
-                                             value="#{personaControler.persona.nombres}"/>
+                                             value="#{miembroComiteInternoControler.persona.nombres}"/>
 
                                 <h:outputLabel for="txf_ape_paterno" value="Apellido Paterno: " style="font-weight:bold;">
                                     <span style="color: red;font-weight: bold">*</span>
                                 </h:outputLabel>
                                 <p:inputText id="txf_ape_paterno" required="true" size="54" 
-                                             label="Apellido paterno" value="#{personaControler.persona.apellidoPaterno}"/>
+                                             label="Apellido paterno" value="#{miembroComiteInternoControler.persona.apellidoPaterno}"/>
 
                                 <h:outputLabel for="txf_ape_materno" value="Apellido Materno: " style="font-weight:bold;">
                                     <span style="color: red;font-weight: bold">*</span>
                                 </h:outputLabel>
                                 <p:inputText id="txf_ape_materno" required="true" size="54" 
-                                             label="Apellido materno" value="#{personaControler.persona.apellidoMaterno}"/>
+                                             label="Apellido materno" value="#{miembroComiteInternoControler.persona.apellidoMaterno}"/>
 
                                 <h:outputLabel for="txf_dni" value="Nº Dni: " style="font-weight:bold;">
                                     <span style="color: red;font-weight: bold">*</span>
                                 </h:outputLabel>
                                 <p:inputText id="txf_dni" required="true" size="15" maxlength="8" 
-                                             label="Numero de Dni" value="#{personaControler.persona.dni}"/>
+                                             label="Numero de Dni" value="#{miembroComiteInternoControler.persona.dni}"/>
 
                                 <h:outputLabel for="cbx_genero" value="Sexo: " style="font-weight:bold;"/>
                                 <p:selectOneMenu id="cbx_genero" label="Sexo" style="width:118px"
-                                                 value="#{personaControler.persona.sexo}">
+                                                 value="#{miembroComiteInternoControler.persona.sexo}">
                                     <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
                                     <f:selectItem itemLabel="Masculino" itemValue="M"/>
                                     <f:selectItem itemLabel="Femenino" itemValue="F"/>
@@ -92,12 +107,12 @@
                                 <h:outputLabel for="txf_telefono" value="Teléfono/Celular: " style="font-weight:bold;">                                    
                                 </h:outputLabel>
                                 <p:inputText id="txf_telefono" size="15" label="Telefono" 
-                                             value="#{personaControler.persona.telefono}"/>
+                                             value="#{miembroComiteInternoControler.persona.telefono}"/>
 
                                 <h:outputLabel for="txf_correo" value="Correo Electrónico: " style="font-weight:bold;">                                    
                                 </h:outputLabel>
                                 <p:inputText id="txf_correo" size="54" label="Correo electrónico" 
-                                             value="#{personaControler.persona.correo}"/>
+                                             value="#{miembroComiteInternoControler.persona.correo}"/>
 
                                 <h:outputLabel for="cbx_doc" value="Doc Referencia: " style="font-weight:bold;">
                                 </h:outputLabel>
@@ -144,6 +159,118 @@
 
                             </h:panelGrid>
                         </p:dialog>
+                    </h:form>
+                    
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar Datos" widgetVar="dlgEdit" id="dlgEdit" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2" cellpadding="3">
+                                                                
+                                <h:inputHidden value="#{miembroComiteInternoControler.miembroComiteInterno.idmiembrocomiteinterno}" />
+                                <h:inputHidden />
+                                
+                                <h:outputLabel for="cbx_edit_efp" value="EFP: " style="font-weight:bold;">
+                                    <span style="color: red;font-weight: bold">*</span>
+                                </h:outputLabel>
+                                <p:selectOneMenu id="cbx_edit_efp" style="width:350px" value="#{miembroComiteInternoControler.miembroComiteInterno.persona.unidadAcademica.idunidadacademica}" 
+                                                 label="Escuela de formación profesional" required="true">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txf_edit_nombres" value="Nombres: " style="font-weight:bold;">
+                                    <span style="color: red;font-weight: bold">*</span>
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_edit_nombres" required="true" size="54" label="Nombres"
+                                             value="#{miembroComiteInternoControler.miembroComiteInterno.persona.nombres}"/>
+
+                                <h:outputLabel for="txf_edit_ape_paterno" value="Apellido Paterno: " style="font-weight:bold;">
+                                    <span style="color: red;font-weight: bold">*</span>
+                                </h:outputLabel>
+                                <p:inputText id="txf_edit_ape_paterno" required="true" size="54" 
+                                             label="Apellido paterno" value="#{miembroComiteInternoControler.miembroComiteInterno.persona.apellidoPaterno}"/>
+
+                                <h:outputLabel for="txf_edit_ape_materno" value="Apellido Materno: " style="font-weight:bold;">
+                                    <span style="color: red;font-weight: bold">*</span>
+                                </h:outputLabel>
+                                <p:inputText id="txf_edit_ape_materno" required="true" size="54" 
+                                             label="Apellido materno" value="#{miembroComiteInternoControler.miembroComiteInterno.persona.apellidoMaterno}"/>
+
+                                <h:outputLabel for="txf_edit_dni" value="Nº Dni: " style="font-weight:bold;">
+                                    <span style="color: red;font-weight: bold">*</span>
+                                </h:outputLabel>
+                                <p:inputText id="txf_edit_dni" required="true" size="15" maxlength="8" 
+                                             label="Numero de Dni" value="#{miembroComiteInternoControler.miembroComiteInterno.persona.dni}"/>
+
+                                <h:outputLabel for="cbx_edit_genero" value="Sexo: " style="font-weight:bold;"/>
+                                <p:selectOneMenu id="cbx_edit_genero" label="Sexo" style="width:118px"
+                                                 value="#{miembroComiteInternoControler.miembroComiteInterno.persona.sexo}">
+                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                                    <f:selectItem itemLabel="Femenino" itemValue="F"/>
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txf_edit_telefono" value="Teléfono/Celular: " style="font-weight:bold;">                                    
+                                </h:outputLabel>
+                                <p:inputText id="txf_edit_telefono" size="15" label="Telefono" 
+                                             value="#{miembroComiteInternoControler.miembroComiteInterno.persona.telefono}"/>
+
+                                <h:outputLabel for="txf_edit_correo" value="Correo Electrónico: " style="font-weight:bold;">                                    
+                                </h:outputLabel>
+                                <p:inputText id="txf_edit_correo" size="54" label="Correo electrónico" 
+                                             value="#{miembroComiteInternoControler.miembroComiteInterno.persona.correo}"/>
+
+                                <h:outputLabel for="cbx_edit_doc" value="Doc Referencia: " style="font-weight:bold;">
+                                </h:outputLabel>
+                                <p:selectOneMenu id="cbx_edit_doc" style="width:350px" value="#{miembroComiteInternoControler.miembroComiteInterno.comiteInterno.idcomiteinterno}" 
+                                                 label="Documento de referencia" required="true">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{comiteInternoControler.selectOneItemsComites}" />
+                                </p:selectOneMenu>
+
+                                <h:outputLabel for="txf_edit_cargo" value="Cargo: " style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:inputText id="txf_cargo" required="true" size="54" label="Cargo"
+                                             value="#{miembroComiteInternoControler.miembroComiteInterno.cargo}"/>
+                                
+                                <h:outputLabel for="txt_edit_fecha_desde" value="Desde:" style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:calendar id="txt_edit_fecha_desde" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{miembroComiteInternoControler.miembroComiteInterno.fechaDesde}" pattern="dd/MM/yyyy">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <h:outputLabel for="txt_edit_fecha_hasta" value="Hasta:" style="font-weight:bold;">
+                                </h:outputLabel>                            
+                                <p:calendar id="txt_edit_fecha_hasta" class="calendar" showOn="button" effect="fold" navigator="true"
+                                            value="#{miembroComiteInternoControler.miembroComiteInterno.fechaHasta}" pattern="dd/MM/yyyy">
+                                    <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy"/>
+                                </p:calendar>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{miembroComiteInternoControler.actualizar()}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgEdit').hide();"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{miembroComiteInternoControler.miembroComiteInterno.idmiembrocomiteinterno}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
+                                             actionListener="#{miembroComiteInternoControler.eliminar()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="icon-cancelar" oncomplete="dlgDelete.hide()" />
+
+                        </p:confirmDialog>
                     </h:form>
 
                     <h:form id="formBusqueda" >

@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Autoevaluacion;
 import org.edessco.sva.be.Cuestionario;
 import org.edessco.sva.bl.CuestionarioBL;
@@ -52,6 +53,12 @@ public class CuestionarioControler {
     @PostConstruct
     public void listar() {
         setListaCuestionarios(getCuestionarioBL().listar());
+    }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idCuestionario", getCuestionario().getIdcuestionario());
+        return "administrarPreguntasCuestionarios?faces-redirect=true";
     }
     
     public void actualizar() {

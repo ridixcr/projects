@@ -26,7 +26,7 @@
                             <f:facet name="header">
                                 Encuestas
                             </f:facet>
-                            
+
                             <p:column style="width:15px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{encuestaItem.idencuesta}" />
                             </p:column>
@@ -47,10 +47,12 @@
                             <p:column headerText="Estado" style="width:30px;text-align: center">
                                 <h:outputText value="#{encuestaItem.estado}" />
                             </p:column>
-                            
+
                             <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnPreguntas" icon="ui-icon-extlink" title="Preguntas" ajax="true" 
-                                                 action="administrarPreguntasEncuestas" immediate="true"/>
+                                                 action="#{encuestaControler.redirigir()}" immediate="true">
+                                    <f:setPropertyActionListener value="#{encuestaItem}" target="#{encuestaControler.encuesta}" />
+                                </p:commandButton>
                             </p:column>
 
                             <p:column style="width:30px;text-align: center">
@@ -79,7 +81,7 @@
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true" />
                                     <f:selectItems value="#{autoevaluacionBean.selectOneItemsAutoevaluacion}" />
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputLabel for="cbx_tipoUser" value="Dirigido a:" />
                                 <p:selectOneMenu id="cbx_tipoUser" style="width: 150px">
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true" />
@@ -97,10 +99,10 @@
                                 <h:outputLabel for="txt_descripción" value="Descripción:" />                            
                                 <p:inputTextarea id="txt_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
                                                  value="#{encuestaControler.encuesta.descripcion}" cols="60"/>
-                                
+
                                 <h:outputLabel for="txt_agradecimiento" value="Agradecimiento:" />                            
                                 <p:inputTextarea id="txt_agradecimiento" label="Agradecimiento" placeholder="AGRADECIMIENTO"
-                                                  cols="60"/>
+                                                 cols="60"/>
 
                                 <h:outputLabel for="txt_fecha_inicio" value="Fecha de inicio:" />                            
                                 <p:calendar id="txt_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true"
@@ -146,7 +148,7 @@
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
                                     <f:selectItems value="#{autoevaluacionBean.selectOneItemsAutoevaluacion}" />
                                 </p:selectOneMenu>
-                                
+
                                 <h:outputLabel for="cbx_edit_tipoUser" value="Dirigido a:" />
                                 <p:selectOneMenu id="cbx_edit_tipoUser" style="width: 150px">
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true" />
@@ -164,10 +166,10 @@
                                 <h:outputLabel for="txt_edit_descripción" value="Descripción:" />                            
                                 <p:inputTextarea id="txt_edit_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
                                                  value="#{encuestaControler.encuesta.descripcion}" cols="60"/>
-                                
+
                                 <h:outputLabel for="txt_edit_agradecimiento" value="Agradecimiento:" />                            
                                 <p:inputTextarea id="txt_edit_agradecimiento" label="Agradecimiento" placeholder="AGRADECIMIENTO"
-                                                  cols="60"/>
+                                                 cols="60"/>
 
                                 <h:outputLabel for="txt_edit_fecha_inicio" value="Fecha de inicio:" />                            
                                 <p:calendar id="txt_edit_fecha_inicio" class="calendar" showOn="button" effect="fold" navigator="true" 
@@ -200,7 +202,7 @@
 
                         </p:dialog>
                     </h:form>
-                    
+
                     <h:form id="formDelete">
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 

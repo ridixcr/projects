@@ -15,6 +15,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Autoevaluacion;
 import org.edessco.sva.be.Encuesta;
 import org.edessco.sva.bl.EncuestaBL;
@@ -146,6 +147,12 @@ public class EncuestaControler {
 
     public void setSelectOneItemsEncuesta(List<SelectItem> selectOneItemsEncuesta) {
         this.selectOneItemsEncuesta = selectOneItemsEncuesta;
+    }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idEncuesta", getEncuesta().getIdencuesta());
+        return "administrarPreguntasEncuestas?faces-redirect=true";
     }
     
 }

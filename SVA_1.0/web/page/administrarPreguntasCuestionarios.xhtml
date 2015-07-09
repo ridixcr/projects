@@ -41,7 +41,7 @@
                                     <f:setPropertyActionListener value="#{preguntasCuestionarioItem}" target="#{preguntaCuestionarioControler.preguntaCuestionario}" />
                                 </p:commandButton>                            
                             </p:column>
-                            
+
                             <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
                                                  icon="icon-eliminar" title="Eliminar">
@@ -72,13 +72,8 @@
                                 <h:outputLabel for="txt_pregunta" value="Pregunta:" />                            
                                 <p:inputText id="txt_pregunta" label="Pregunta" placeholder="PREGUNTA"
                                              value="#{preguntaCuestionarioControler.preguntaCuestionario.pregunta}" size="60"/>
-                                
-                                <h:outputLabel for="rbtn_estado" value="Estado:" />
-                                <p:selectOneRadio id="rbtn_estado" value="#{preguntaCuestionarioControler.preguntaCuestionario.estado}">
-                                    <f:selectItem itemLabel="Activado" itemValue="true" />
-                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
-                                </p:selectOneRadio>
-                                
+
+
 
                                 <f:facet name="footer">
                                     <p:separator/>
@@ -100,7 +95,7 @@
 
                                 <h:inputHidden value="#{preguntaCuestionarioControler.preguntaCuestionario.idpreguntacuestionario}" />
                                 <h:inputHidden/>
-                                
+
                                 <h:outputLabel for="cbx_edit_cuestionario" value="Cuestionario:" />
                                 <p:selectOneMenu id="cbx_edit_cuestionario" value="#{preguntaCuestionarioControler.preguntaCuestionario.cuestionario.idcuestionario}" style="width:388px">
                                     <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
@@ -116,12 +111,6 @@
                                 <h:outputLabel for="txt_edit_pregunta" value="Pregunta:" />                            
                                 <p:inputText id="txt_edit_pregunta" label="Pregunta" placeholder="PREGUNTA"
                                              value="#{preguntaCuestionarioControler.preguntaCuestionario.pregunta}" size="60"/>
-                                
-                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
-                                <p:selectOneRadio id="rbtn_edit_estado" value="#{preguntaCuestionarioControler.preguntaCuestionario.estado}">
-                                    <f:selectItem itemLabel="Activado" itemValue="true" />
-                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
-                                </p:selectOneRadio>
 
                                 <f:facet name="footer">
                                     <p:separator/>
@@ -136,7 +125,7 @@
 
                         </p:dialog>
                     </h:form>
-                    
+
                     <h:form id="formDelete">
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 

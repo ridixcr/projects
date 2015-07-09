@@ -30,7 +30,7 @@ public class MiembroComiteInternoDA extends  AbstractDA<MiembroComiteInterno>{
 
     @Override
     public List<MiembroComiteInterno> listar(String ref) {
-        return list("from MiembroComiteInterno ci left join fetch ci.comiteInterno");
+        return list("from MiembroComiteInterno mci left join fetch mci.comiteInterno ci left join fetch mci.persona p");
     }
 
     @Override

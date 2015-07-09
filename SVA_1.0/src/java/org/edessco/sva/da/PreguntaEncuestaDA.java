@@ -62,4 +62,8 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
     public PreguntaEncuesta buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<PreguntaEncuesta> listarPreguntas(long idEncuesta) {
+        return list("from PreguntaEncuesta pe inner join fetch pe.encuesta e where e.idencuesta="+idEncuesta);
+    }
 }

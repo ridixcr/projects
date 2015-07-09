@@ -126,5 +126,10 @@ a:link:hover, a:visited:hover  {
     width: 380px;
 }
 
+.ui-panel{
+    border: none;
+    padding: 0.2em;
+}
+
 
 

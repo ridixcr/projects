@@ -73,12 +73,7 @@
                                 <p:inputText id="txt_pregunta" label="Pregunta" placeholder="PREGUNTA"
                                              value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" size="60"/>
                                 
-                                <h:outputLabel for="rbtn_estado" value="Estado:" />
-                                <p:selectOneRadio id="rbtn_estado" value="#{preguntaEncuestaBean.preguntaEncuesta.estado}">
-                                    <f:selectItem itemLabel="Activado" itemValue="true" />
-                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
-                                </p:selectOneRadio>
-                                
+                                                               
 
                                 <f:facet name="footer">
                                     <p:separator/>
@@ -117,12 +112,6 @@
                                 <p:inputText id="txt_edit_pregunta" label="Pregunta" placeholder="PREGUNTA"
                                              value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" size="60"/>
                                 
-                                <h:outputLabel for="rbtn_edit_estado" value="Estado:" />
-                                <p:selectOneRadio id="rbtn_edit_estado" value="#{preguntaEncuestaBean.preguntaEncuesta.estado}">
-                                    <f:selectItem itemLabel="Activado" itemValue="true" />
-                                    <f:selectItem itemLabel="Desactivado" itemValue="false" />
-                                </p:selectOneRadio>
-
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 

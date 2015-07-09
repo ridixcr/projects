@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.edessco.sva.be.ComiteInterno;
 import org.edessco.sva.be.MiembroComiteInterno;
 import org.edessco.sva.be.Persona;
+import org.edessco.sva.be.UnidadAcademica;
 import org.edessco.sva.bl.MiembroComiteInternoBL;
 import org.edessco.sva.bl.PersonaBL;
+import org.edessco.sva.bl.UnidadAcademicaBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
 
@@ -21,6 +23,8 @@ import static org.edessco.sva.util.Utilitario.setTareaEvento;
 @ViewScoped
 public class MiembroComiteInternoControler {
 
+    @ManagedProperty(value = "#{unidadAcademica}")
+    private UnidadAcademica unidadAcademica;
     @ManagedProperty(value = "#{personaBL}")
     private PersonaBL personaBL;
     @ManagedProperty(value = "#{persona}")
@@ -76,12 +80,18 @@ public class MiembroComiteInternoControler {
         MiembroComiteInterno temp = new MiembroComiteInterno();
         String msg;
         temp = buscarId();
-
+        //Actualizar los datos de la persona
+        System.out.println("persona ... "+getMiembroComiteInterno().getPersona());
+        System.out.println("getdoc comite ... "+getMiembroComiteInterno().getComiteInterno());
+        
+        System.out.println("get  miembro recuperado .. "+getMiembroComiteInterno().getCargo());
+        temp.setIdmiembrocomiteinterno(getMiembroComiteInterno().getIdmiembrocomiteinterno());
+        temp.setComiteInterno(getMiembroComiteInterno().getComiteInterno());
+        temp.setPersona(getMiembroComiteInterno().getPersona());
         temp.setCargo(getMiembroComiteInterno().getCargo());
         temp.setFechaDesde(getMiembroComiteInterno().getFechaDesde());
         temp.setFechaHasta(getMiembroComiteInterno().getFechaHasta());
-        temp.setPersona(null);
-        temp.setComiteInterno(null);
+        
 
         long res = getMiembroComiteInternoBL().actualizar(temp);
         if (res == 0) {
@@ -115,16 +125,27 @@ public class MiembroComiteInternoControler {
     }
 
     public MiembroComiteInterno buscarId() {
-        return miembroComiteInternoBL.buscar(getMiembroComiteInterno().getIdcomision());
+        return miembroComiteInternoBL.buscar(getMiembroComiteInterno().getIdmiembrocomiteinterno());
     }
 
     public void limpiar() {
-        this.miembroComiteInterno.setIdcomision(null);
+        this.miembroComiteInterno.setIdmiembrocomiteinterno(null);
         this.miembroComiteInterno.setCargo("");
         this.miembroComiteInterno.setFechaDesde(null);
-        this.miembroComiteInterno.setFechaHasta(null);
-        this.miembroComiteInterno.setPersona(new Persona());
-        this.miembroComiteInterno.setComiteInterno(new ComiteInterno());
+        this.miembroComiteInterno.setFechaHasta(null);        
+        //this.miembroComiteInterno.setPersona(null);
+        //this.miembroComiteInterno.setComiteInterno(new ComiteInterno());
+        persona.setIdpersona(null);
+        persona.setNombres("");
+        persona.setApellidoPaterno("");
+        persona.setApellidoMaterno("");
+        persona.setDni("");
+        persona.setDni("");
+        persona.setSexo("");
+        persona.setTelefono("");
+        persona.setCorreo("");
+        persona.setUnidadAcademica(new UnidadAcademica());
+        
     }
 
     public MiembroComiteInternoBL getMiembroComiteInternoBL() {
@@ -165,6 +186,14 @@ public class MiembroComiteInternoControler {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public UnidadAcademica getUnidadAcademica() {
+        return unidadAcademica;
+    }
+
+    public void setUnidadAcademica(UnidadAcademica unidadAcademica) {
+        this.unidadAcademica = unidadAcademica;
     }
 
 }

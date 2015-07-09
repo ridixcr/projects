@@ -49,6 +49,10 @@ public class UsuarioBL extends AbstractBL<Usuario>{
     public List<Usuario> listar(String ref) {
         return list(ref);
     }
+    
+    public List<Usuario> listarAll() {
+        return dao.listarAll();
+    }
 
     @Override
     public List<Usuario> listar(long id) {

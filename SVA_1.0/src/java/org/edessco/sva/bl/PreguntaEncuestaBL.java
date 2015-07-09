@@ -80,4 +80,8 @@ public class PreguntaEncuestaBL extends AbstractBL<PreguntaEncuesta>{
     public PreguntaEncuesta buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<PreguntaEncuesta> listarPreguntas(long idEncuesta) {
+        return dao.listarPreguntas(idEncuesta);
+    }
 }

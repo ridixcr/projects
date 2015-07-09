@@ -79,4 +79,8 @@ public class PreguntaCuestionarioBL extends AbstractBL<PreguntaCuestionario>{
     public PreguntaCuestionario buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public List<PreguntaCuestionario> listarPreguntas(long idCuestionario) {
+        return dao.listarPreguntas(idCuestionario);
+    }
 }

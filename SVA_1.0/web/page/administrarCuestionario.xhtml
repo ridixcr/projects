@@ -50,7 +50,7 @@
 
                             <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnPreguntas" icon="ui-icon-extlink" title="Preguntas" ajax="true" 
-                                                 action="#{preguntaCuestionarioControler.buscarId()}" immediate="true">
+                                                 action="#{cuestionarioControler.redirigir()}" immediate="true">
                                     <f:setPropertyActionListener value="#{cuestionarioItem}" target="#{cuestionarioControler.cuestionario}" />
                                 </p:commandButton> 
                             </p:column>
