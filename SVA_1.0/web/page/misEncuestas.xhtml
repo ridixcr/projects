@@ -23,21 +23,17 @@
                                 Preguntas de la encuesta
                             </f:facet>
 
-                            <p:column style="width:4%;text-align: center" headerText="Nº">
+                            <p:column style="width:15px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{preguntaItem.idpreguntaencuesta}" />
                             </p:column>
 
-                            <p:column headerText="Estándar" style="text-align: center">
+                            <p:column headerText="Estándar" style="text-align: center; width: 50px">
                                 <h:outputText value="#{preguntaItem.estandar.numeroEstandar}"/>
                             </p:column> 
 
                             <p:column  headerText="Pregunta">
                                 <h:outputText value="#{preguntaItem.pregunta}"/>
                             </p:column>
-                            
-                            <p:column style="text-align: center">
-                                <h:outputText value="#{respuestaEncuestaBean.respuestaEncuesta.respuesta}"/>
-                            </p:column> 
 
                             <p:column style="width:5%; text-align: center">
                                 <p:commandButton id="btnRespta" update=":formRespuesta" oncomplete="PF('dlgResp').show();" immediate="True"
@@ -46,7 +42,7 @@
                                 </p:commandButton> 
                             </p:column>
 
-                            <p:column headerText="Estado" style="width:4%">
+                            <p:column headerText="Estado" style="width:35px">
                                 <h:outputText />
                             </p:column>
 
