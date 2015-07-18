@@ -17,19 +17,22 @@
         <script src="../resources/js/script.js" type="text/css"></script>        
         <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png"/>
     </h:head>
-    <h:body>               
+    <h:body>   
+        <f:metadata>                       
+            <f:viewAction action="#{registroProcesadoEstandarVC.initPDF}" />
+        </f:metadata>
         <p:panel style="position:fixed !important; position:absolute; top:0; right:0;bottom:0;left:0;">
             <f:facet name="header">
-                REPORTE DEL TOTAL DE ENCUESTAS POR ESTANDAR - PDF
+                REGISTRO PROCESADO POR ESTANDAR - PDF
                 <span class="ui-icon ui-icon-print" style="float: right; margin-right: .3em;"></span>                
             </f:facet>
-            <c:if test="#{(rTotalEncuestasEstandar.existe =='true')}">
+            <c:if test="#{(registroProcesadoEstandarVC.existe =='true')}">
                 <div style="width: 100%;">
-                    <iframe src = "../web/viewer.html#{rTotalEncuestasEstandar.pathFile()}" 
+                    <iframe src = "../web/viewer.html#{registroProcesadoEstandarVC.pathFile()}" 
                             style="width: 100%;height: 86vh;border: solid 2px #000;"></iframe>
                 </div>
             </c:if>
-            <c:if test="#{(rTotalEncuestasEstandar.existe =='false')}">     
+            <c:if test="#{(registroProcesadoEstandarVC.existe =='false')}">     
                 <div style="width: 100%;">
                     <div style="margin: 0 auto 0 auto;width: 510px;text-align: center;">
                         <h3>¡REPORTE NO DISPONIBLE!</h3>

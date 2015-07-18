@@ -35,7 +35,12 @@ public class DocenteDA extends AbstractDA<Docente> {
 
     @Override
     public List<Docente> listar() {
-        return list(Docente.class);
+        return list("FROM Docente d"
+                    + " inner join fetch d.persona p");
+    }
+    public List<Docente> listarRespuestasCuestionario() {
+        return list("FROM Docente d"
+                    + " inner join fetch d.persona p");
     }
 
     @Override

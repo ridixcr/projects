@@ -46,6 +46,20 @@ public class RespuestaCuestionarioDA extends AbstractDA<RespuestaCuestionario>{
     public List<RespuestaCuestionario> listar(long id) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+    
+    public List<RespuestaCuestionario> reporteCuestionarioDocente() {
+        return list("FROM RespuestaCuestionario rc "
+                    + " inner join fetch rc.preguntaCuestionario pc"
+                    + " inner join fetch rc.docente d"
+                    + " inner join fetch d.persona p");
+    }
+    public List<RespuestaCuestionario> reporteCuestionarioDocente(long id_docente) {
+        return list("FROM RespuestaCuestionario rc "
+                    + " inner join fetch rc.preguntaCuestionario pc"
+                    + " inner join fetch rc.docente d"
+                    + " inner join fetch d.persona p"
+                    + " where d.iddocente="+id_docente+"");
+    }
 
     @Override
     public RespuestaCuestionario buscar(long id) {

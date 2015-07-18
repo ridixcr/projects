@@ -6,24 +6,20 @@
 package org.edessco.sva.bl;
 
 import java.util.List;
-import org.edessco.sva.be.RespuestaCuestionario;
-import org.edessco.sva.da.RespuestaCuestionarioDA;
+import org.edessco.sva.be.RegistroGradoCumplimiento;
+import org.edessco.sva.da.RegistroGradoCumplimientoDA;
 import org.edessco.sva.util.AbstractBL;
 import org.edessco.sva.util.AbstractDA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author JorgeLuis
- */
-@Service("respuestaCuestionarioBL")
-public class RespuestaCuestionarioBL extends AbstractBL<RespuestaCuestionario> {
+@Service("registroGradoCumplimientoBL")
+public class RegistroGradoCumplimientoBL extends AbstractBL<RegistroGradoCumplimiento> {
 
     @Autowired
-    @Qualifier("respuestaCuestionarioDA")
-    private RespuestaCuestionarioDA dao;
+    @Qualifier("registroGradoCumplimientoDA")
+    private RegistroGradoCumplimientoDA dao;
 
     @Override
     public AbstractDA getDAO() {
@@ -32,48 +28,51 @@ public class RespuestaCuestionarioBL extends AbstractBL<RespuestaCuestionario> {
 
     @Override
     public void setDA(AbstractDA dao) {
-        this.dao = (RespuestaCuestionarioDA) dao;
+        this.dao = (RegistroGradoCumplimientoDA) dao;
     }
 
     @Override
-    public long registrar(RespuestaCuestionario bean) {
+    public long registrar(RegistroGradoCumplimiento bean) {
         return save(bean);
     }
 
     @Override
-    public long actualizar(RespuestaCuestionario bean) {
+    public long actualizar(RegistroGradoCumplimiento bean) {
         return update(bean);
     }
 
     @Override
-    public long eliminar(RespuestaCuestionario bean) {
+    public long eliminar(RegistroGradoCumplimiento bean) {
         return delete(bean);
     }
 
     @Override
-    public List<RespuestaCuestionario> listar() {
+    public List<RegistroGradoCumplimiento> listar() {
         return list();
     }
-
-    public List<RespuestaCuestionario> reporteCuestionarioDocente() {
-        return dao.reporteCuestionarioDocente();
+    @Override
+    public List listarSQL(){
+        return dao.listarSQL();
     }
-    public List<RespuestaCuestionario> reporteCuestionarioDocente(long id_docente) {
-        return dao.reporteCuestionarioDocente(id_docente);
+    public List reporteProcesadoEstandar(){
+        return dao.reporteProcesadoEstandar();
+    }
+    public List reporteProcesadoConsolidadoEstandar(){
+        return dao.reporteProcesadoConsolidadoEstandar();
     }
 
     @Override
-    public List<RespuestaCuestionario> listar(String ref) {
+    public List<RegistroGradoCumplimiento> listar(String ref) {
         return list(ref);
     }
 
     @Override
-    public List<RespuestaCuestionario> listar(long id) {
+    public List<RegistroGradoCumplimiento> listar(long id) {
         return list(id);
     }
 
     @Override
-    public RespuestaCuestionario buscar(long id) {
+    public RegistroGradoCumplimiento buscar(long id) {
         return search(id);
     }
 
@@ -83,7 +82,7 @@ public class RespuestaCuestionarioBL extends AbstractBL<RespuestaCuestionario> {
     }
 
     @Override
-    public RespuestaCuestionario buscar(String ref) {
+    public RegistroGradoCumplimiento buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

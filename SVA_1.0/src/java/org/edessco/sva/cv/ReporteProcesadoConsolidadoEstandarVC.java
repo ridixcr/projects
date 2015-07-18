@@ -14,7 +14,7 @@ import org.edessco.sva.util.ReportViewerBean;
 
 @ManagedBean
 @ViewScoped
-public class RegistroProcesadoEstandarVC extends ReportViewerBean implements Serializable {
+public class ReporteProcesadoConsolidadoEstandarVC extends ReportViewerBean implements Serializable {
     @ManagedProperty(value = "#{registroGradoCumplimiento}")
     private RegistroGradoCumplimiento registroGradoCumplimiento;
     @ManagedProperty(value = "#{registroGradoCumplimientoBL}")
@@ -27,24 +27,24 @@ public class RegistroProcesadoEstandarVC extends ReportViewerBean implements Ser
     
     public void initHTML() {
         registroProcesadoConsolidado
-                .addAll(getRegistroGradoCumplimientoBL().reporteProcesadoEstandar());
+                .addAll(getRegistroGradoCumplimientoBL().reporteProcesadoConsolidadoEstandar());
         lista.clear();
         for (Object item : registroProcesadoConsolidado) {
             Object[] o = (Object[])item;  
             lista.add(new ItemReporteProcesadoConsolidadoEstandar(
                             o[0].toString(),
                             o[1].toString(),
-                            o[2].toString(),
-                            "0",
+                            o[5].toString(),
                             o[3].toString(),
-                            o[4].toString()));            
+                            o[6].toString(),
+                            o[7].toString()));            
         }
     }
     
     public void initPDF() {
         file_path = "/resources/t/";
         rsc_report_path = "/org/edessco/sva/rpt/";
-        generarReporte("rpt", "RegistroProcesadoEstandar");
+        generarReporte("rpt", "ReporteConsolidadoEstandar");
     }
 
     //<editor-fold defaultstate="collapsed" desc="GET'S & SET'S">
@@ -71,5 +71,5 @@ public class RegistroProcesadoEstandarVC extends ReportViewerBean implements Ser
     public void setLista(List<ItemReporteProcesadoConsolidadoEstandar> lista) {
         this.lista = lista;
     }
-    //</editor-fold>    
+    //</editor-fold>
 }

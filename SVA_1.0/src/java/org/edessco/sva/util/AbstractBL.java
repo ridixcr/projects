@@ -26,6 +26,10 @@ public abstract class AbstractBL<T> implements DAO<T>{
         return getDAO().listar(ref);
     }
     @Deprecated
+    public List listSQL(String sql){
+        return getDAO().listSQL(sql);
+    }
+    @Deprecated
     public List<T> list(long id) {
         return getDAO().listar(id);
     }
@@ -41,4 +45,14 @@ public abstract class AbstractBL<T> implements DAO<T>{
     public long maxId() {
         return getDAO().id();
     }
+
+    @Override
+    public List listarSQL(String ref){
+        return listSQL(ref);
+    }
+    @Override
+    public List listarSQL(){
+        return null;
+    }
+    
 }

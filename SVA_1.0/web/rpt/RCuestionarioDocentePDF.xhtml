@@ -17,7 +17,10 @@
         <script src="../resources/js/script.js" type="text/css"></script>        
         <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png"/>
     </h:head>
-    <h:body>               
+    <h:body style="background: black;">      
+        <f:metadata>                       
+            <f:viewAction action="#{rCuestionarioDocenteVC.initPDF}" />
+        </f:metadata>
         <p:panel style="position:fixed !important; position:absolute; top:0; right:0;bottom:0;left:0;">
             <f:facet name="header">
                 REPORTE CUESTIONARIO DOCENTE - PDF

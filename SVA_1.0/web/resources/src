@@ -1,0 +1,141 @@
+<!--
+                <p:dataTable var="r" value="#{rCuestionarioDocenteHTMLVC.listaRespuestaCuestionario}">
+                    <p:column headerText="N°">
+                        <h:outputText value="#{r.docente.iddocente}" />
+                    </p:column>
+                    <p:column headerText="ESTANDAR PREGUNTA">
+                        <h:outputText value="#{r.preguntaCuestionario.pregunta}" escape="false"/>
+                    </p:column>
+                    <p:column headerText="CUMPLE SI/NO">
+                        <h:outputText value="#{r.respuesta}"  escape="false"/>
+                    </p:column>
+                    <p:column headerText="EXPLICACION">
+                        <h:outputText value="#{r.explicacionDocente}"  escape="false"/>
+                    </p:column>
+                    <p:column headerText="ALTERNATIVA SOLUCION">
+                        <h:outputText value="#{r.alternativaSolucionDocente}"  escape="false"/>
+                    </p:column>                    
+                </p:dataTable>
+                <p:dataTable var="d" value="#{rCuestionarioDocenteHTMLVC.listaDocentes}" rows="4" 
+                             paginator="true" paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                    <f:facet name="header">
+                        <div style="text-align: left;">FORMATO DE REGISTRO POR DOCENTE</div>
+                    </f:facet>
+                    <p:column headerText="Docente">                            
+                        <div style="text-transform: uppercase;font-weight: bold;">
+                            #{d.persona.apellidoPaterno} #{d.persona.apellidoMaterno}, #{d.persona.nombres}
+                        </div>
+                        <div>
+
+                        </div>                                         
+                    </p:column>
+                </p:dataTable>  
+                -->
+
+
+<!--<c:forEach items="${rCuestionarioDocenteHTMLVC.listaDocentes}" var="d">
+                    ${d.iddocente}<br/>
+                </c:forEach>-->
+
+<!--
+                <c:forEach items="${rCuestionarioDocenteHTMLVC.listaDocentes}" var="d">
+                ${d.iddocente}<br/>
+            </c:forEach>
+                -->
+                <!--
+                <h:form>
+                    <p:dataTable var="rc" value="#{rCuestionarioDocenteHTMLVC.listaRespuestaCuestionario}">
+                        <f:facet name="header">
+                             CUESTIONARIO DOCENTE
+                        </f:facet>
+
+                        <p:columnGroup type="header">
+                            <p:row>
+                                <p:column rowspan="2" headerText="DOCENTE" />
+                                <p:column colspan="5" headerText="RESPUESTA" />
+                            </p:row>
+                            <p:row>
+                                <p:column headerText="N°" />
+                                <p:column headerText="ESTANDAR PREGUNTA" />
+                                <p:column headerText="CUMPLE SI/NO" />
+                                <p:column headerText="EXPLICACION" />
+                                <p:column headerText="ALTERNATIVA SOLUCION" />
+                            </p:row>
+                        </p:columnGroup>
+
+                        <p:subTable value="#{rCuestionarioDocenteHTMLVC.listaRespuestaCuestionario}">
+                            <f:facet name="header">
+                                <h:outputText value="#{rc.docente.persona.apellidoPaterno} #{rc.docente.persona.apellidoMaterno}, #{rc.docente.persona.nombres}" style="text-transform: uppercase;"/>
+                            </f:facet>
+                            <p:column headerText="">
+                            </p:column>
+                            <p:column headerText="N°">
+                                <h:outputText value="#{rc.docente.iddocente}" />
+                            </p:column>
+                            <p:column headerText="ESTANDAR PREGUNTA">
+                                <h:outputText value="#{rc.preguntaCuestionario.pregunta}" escape="false"/>
+                            </p:column>
+                            <p:column headerText="CUMPLE SI/NO">
+                                <h:outputText value="#{rc.respuesta}"  escape="false"/>
+                            </p:column>
+                            <p:column headerText="EXPLICACION">
+                                <h:outputText value="#{rc.explicacionDocente}"  escape="false"/>
+                            </p:column>
+                            <p:column headerText="ALTERNATIVA SOLUCION">
+                                <h:outputText value="#{rc.alternativaSolucionDocente}"  escape="false"/>
+                            </p:column>     
+                        </p:subTable>
+                    </p:dataTable>
+                </h:form>
+                -->
+                <!--
+                <p:dataTable var="r" value="#{rCuestionarioDocenteHTMLVC.listaRespuestaCuestionario}">
+                    <p:column headerText="N°">
+                        <h:outputText value="#{r.docente.iddocente}" />
+                    </p:column>
+                    <p:column headerText="ESTANDAR PREGUNTA">
+                        <h:outputText value="#{r.preguntaCuestionario.pregunta}" escape="false"/>
+                    </p:column>
+                    <p:column headerText="CUMPLE SI/NO">
+                        <h:outputText value="#{r.respuesta}"  escape="false"/>
+                    </p:column>
+                    <p:column headerText="EXPLICACION">
+                        <h:outputText value="#{r.explicacionDocente}"  escape="false"/>
+                    </p:column>
+                    <p:column headerText="ALTERNATIVA SOLUCION">
+                        <h:outputText value="#{r.alternativaSolucionDocente}"  escape="false"/>
+                    </p:column>                    
+                </p:dataTable>
+                -->
+
+<p:dataTable var="item" value="#{reporteProcesadoConsolidadoEstandarVC.lista}" 
+                     rowIndexVar="rowIndex" rows="4" paginator="true" paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+            <f:facet name="header">
+                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                    INFO
+                </div>                                
+            </f:facet>
+            <p:column headerText="N°" style="width: 40px;text-align: center;">
+                <h:outputText value="#{rowIndex+1}" />
+            </p:column>
+            <p:column headerText="ESTANDAR PREGUNTA" style="text-align: left;">
+                <h:outputText value="#{item.estandar}" escape="false"/>
+            </p:column>
+            <p:column headerText="CUMPLE SI/NO" style="text-align: center;width: 80px;">
+                <h:outputText value="#{item.cumplimiento_si_no}"  escape="false"/>
+                <h:outputText value="#{item.cumplimiento_porcentaje}"  escape="false"/>
+            </p:column>
+            <p:column headerText="EXPLICACION">
+                <h:outputText value="#{item.explicacion}"  escape="false"/>
+            </p:column>
+            <p:column headerText="ALTERNATIVA SOLUCION">
+                <h:outputText value="#{item.alternativa_solucion}"  escape="false"/>
+            </p:column>
+            <f:facet name="footer">
+                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                    REF
+                </div>
+            </f:facet>
+        </p:dataTable>

@@ -8,6 +8,8 @@ public interface DAO<Tipo>{
     public long actualizar(Tipo bean);
     public long eliminar(Tipo bean);  
     public List<Tipo> listar();
+    public List listarSQL(String ref);
+    public List listarSQL();
     public List<Tipo> listar(String ref);
     public List<Tipo> listar(long id);
     public Tipo buscar(long id);  

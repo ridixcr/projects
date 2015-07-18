@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCuestionarioDocente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ebf896d6-a7ac-4c2d-ab28-28bf4f58253e">
-	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.zoom" value="1.6105100000000014"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
@@ -184,13 +184,6 @@ group by es.idestandar]]>
 				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement uuid="db9ea2af-5048-4c16-a443-68e7c4d093d4" x="177" y="0" width="38" height="68" forecolor="#000000"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{cumplimiento}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
 				<reportElement uuid="8b46ac34-80af-46df-900a-877ad687e2b5" x="216" y="0" width="205" height="68" forecolor="#000000"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
 					<font size="8"/>
@@ -240,6 +233,20 @@ group by es.idestandar]]>
 					<pen lineColor="#000000"/>
 				</graphicElement>
 			</line>
+			<textField isStretchWithOverflow="true" pattern="###0&apos;%&apos;">
+				<reportElement uuid="db9ea2af-5048-4c16-a443-68e7c4d093d4" x="177" y="15" width="38" height="18" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{porcentaje_si}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="41f27b9b-f6d7-4c9a-a7fb-ce3e2e08a357" x="177" y="33" width="38" height="17" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cumplimiento_segun_porcentaje}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

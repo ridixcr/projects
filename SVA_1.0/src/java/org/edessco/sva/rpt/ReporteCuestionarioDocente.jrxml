@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
 d.iddocente, UPPER(p.apellido_paterno) AS ap_paterno, UPPER(p.apellido_materno) AS ap_materno,
 CONCAT(UPPER(LEFT(p.nombres,1)),SUBSTRING(p.nombres,2))as nombre,
@@ -16,7 +16,8 @@ ON pc.idpreguntacuestionario = rc.id_preguntacuestionario
 INNER JOIN docente d
 ON d.iddocente = rc.id_docente
 INNER JOIN persona p
-ON p.idpersona = d.id_persona]]>
+ON p.idpersona = d.id_persona
+order by UPPER(p.apellido_paterno), UPPER(p.apellido_materno) asc]]>
 	</queryString>
 	<field name="iddocente" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>

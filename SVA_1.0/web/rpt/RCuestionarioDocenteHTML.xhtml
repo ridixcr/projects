@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>.:SVA:.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <link href="../resources/css/style.css" type="text/css" rel="stylesheet"/>
+        <script src="../resources/js/script.js" type="text/css"></script>        
+        <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png"/>
+    </h:head>
+    <h:body style="background: black;margin: 0;">   
+        <f:metadata>                       
+            <f:viewAction action="#{rCuestionarioDocenteVC.initHTML}" />
+        </f:metadata>
+        <p:panel>
+            <f:facet name="header">
+                REPORTE CUESTIONARIO DOCENTE - HTML
+                <span class="ui-icon ui-icon-print" style="float: right; margin-right: .3em;"></span>                
+            </f:facet>
+            <div style="width: 100%;">                
+                <p:dataTable var="d" value="#{rCuestionarioDocenteVC.listaDocentes}" rows="3" 
+                             paginator="true" paginatorPosition="bottom" rowIndexVar="rowIndex1"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                    <f:facet name="header">
+                        <div style="text-align: left;">FORMATO DE REGISTRO POR DOCENTE</div>
+                    </f:facet>
+                    <p:column style="text-align: left;">                       
+                        <p:dataTable var="r" value="#{rCuestionarioDocenteVC.listarResultadosDocente(d.iddocente)}" 
+                                     rowIndexVar="rowIndex2" rows="4" paginator="true" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            <f:facet name="header">
+                                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                                    #{d.persona.apellidoPaterno} #{d.persona.apellidoMaterno}, #{d.persona.nombres} : #{d.persona.dni}
+                                </div>                                
+                            </f:facet>
+                            <p:column headerText="N°" style="width: 40px;text-align: center;">
+                                <h:outputText value="#{rowIndex2+1}" />
+                            </p:column>
+                            <p:column headerText="ESTANDAR PREGUNTA" style="text-align: left;">
+                                <h:outputText value="#{r.preguntaCuestionario.pregunta}" escape="false"/>
+                            </p:column>
+                            <p:column headerText="CUMPLE SI/NO" style="text-align: center;width: 80px;">
+                                <h:outputText value="#{r.respuesta}"  escape="false"/>
+                            </p:column>
+                            <p:column headerText="EXPLICACION">
+                                <h:outputText value="#{r.explicacionDocente}"  escape="false"/>
+                            </p:column>
+                            <p:column headerText="ALTERNATIVA SOLUCION">
+                                <h:outputText value="#{r.alternativaSolucionDocente}"  escape="false"/>
+                            </p:column>
+                            <f:facet name="footer">
+                                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                                    DOCENTE N° #{rowIndex1+1} : #{d.gradoAcademico}
+                                </div>
+                            </f:facet>
+                        </p:dataTable>                                         
+                    </p:column>
+                </p:dataTable>  
+
+            </div>            
+            <f:facet name="footer">
+                .:SISTEMA VIRTUAL DE AUTOEVALUACION:.
+            </f:facet>
+        </p:panel>
+    </h:body>
+</html>

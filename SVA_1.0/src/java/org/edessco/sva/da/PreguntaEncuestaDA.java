@@ -37,6 +37,10 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
     public List<PreguntaEncuesta> listar() {
         return list(PreguntaEncuesta.class);
     }
+    public List<PreguntaEncuesta> listarEstandaresEncuesta() {
+        return list("from PreguntaEncuesta pe"
+                + " inner join fetch pe.estandar e");
+    }
 
     @Override
     public List<PreguntaEncuesta> listar(String ref) {
