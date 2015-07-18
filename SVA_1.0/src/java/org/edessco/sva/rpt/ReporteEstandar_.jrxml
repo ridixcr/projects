@@ -156,13 +156,6 @@ ON p.idpersona = d.id_persona]]>
 			<line>
 				<reportElement uuid="e6033368-2932-47f3-b606-524ac3159efe" positionType="FixRelativeToBottom" x="0" y="68" width="555" height="1"/>
 			</line>
-			<staticText>
-				<reportElement uuid="dfed75ed-3267-489c-a5ad-9cd7ea2c3f15" mode="Opaque" x="1" y="-1" width="45" height="69" forecolor="#006699" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
 			<textField isStretchWithOverflow="true">
 				<reportElement uuid="ef6bf48d-c56f-4850-bf32-4a32e5b678de" x="52" y="0" width="100" height="68" forecolor="#000000"/>
 				<textElement textAlignment="Justified" verticalAlignment="Middle">
@@ -212,6 +205,13 @@ ON p.idpersona = d.id_persona]]>
 			<line>
 				<reportElement uuid="6ad43d1e-1696-4e2e-9d34-430efdd6e9ad" x="46" y="-1" width="1" height="69" forecolor="#666666"/>
 			</line>
+			<staticText>
+				<reportElement uuid="dfed75ed-3267-489c-a5ad-9cd7ea2c3f15" mode="Opaque" x="1" y="-3" width="45" height="71" forecolor="#006699" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
