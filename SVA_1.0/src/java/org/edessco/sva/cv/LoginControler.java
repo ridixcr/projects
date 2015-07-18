@@ -19,6 +19,7 @@ import org.edessco.sva.bl.RolBL;
 import org.edessco.sva.bl.UsuarioBL;
 import org.edessco.sva.bl.UsuarioRolBL;
 import org.edessco.sva.da.UsuarioDA;
+import org.edessco.sva.util.Encrypt;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -62,7 +63,7 @@ public class LoginControler implements Serializable {
         //Obtenemos el rol del usuario que ingresa, para establecer las paginas de acceso
         rol = getRolBL().buscar("" + getUsuarioRol().getRol().getIdrol());
         if (temp != null && temp.getEstado() == true) {
-            if (temp.getContrasenia().equals(this.getContrasenia())) {
+            if (temp.getContrasenia().equals(Encrypt.sha512(this.getContrasenia()))) {
                 HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                 httpSession.setAttribute("nombreUsuario", this.nombreUsuario);
                 //FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", "Bienvenido " + temp.getNombreUsuario());

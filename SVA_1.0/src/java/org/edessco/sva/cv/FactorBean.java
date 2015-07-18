@@ -1,4 +1,3 @@
-
 package org.edessco.sva.cv;
 
 import java.util.LinkedList;
@@ -24,14 +23,15 @@ import static org.edessco.sva.util.Utilitario.setTareaEvento;
 @ManagedBean
 @ViewScoped
 public class FactorBean {
-@ManagedProperty(value = "#{factorBL}")
+
+    @ManagedProperty(value = "#{factorBL}")
     private FactorBL factorBL;
     @ManagedProperty(value = "#{factor}")
     private Factor factor;
     private List<Factor> listaFactores = new LinkedList<>();
 
     private List<SelectItem> selectOneItemsFactor;
-    
+
     public FactorBean() {
     }
 
@@ -48,11 +48,11 @@ public class FactorBean {
     @PostConstruct
     public void listar() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(httpSession.getAttribute("idDimension") != null){
+        if (httpSession.getAttribute("idDimension") != null) {
             setListaFactores(getFactorBL().listarFactor(Long.parseLong(httpSession.getAttribute("idDimension").toString())));
-        }else{
+        } else {
             setListaFactores(getFactorBL().listar(""));
-        }          
+        }
     }
 
     public void actualizar() {
@@ -146,7 +146,7 @@ public class FactorBean {
     public void setSelectOneItemsFactor(List<SelectItem> selectOneItemsFactor) {
         this.selectOneItemsFactor = selectOneItemsFactor;
     }
-    
+
     public String redirigir() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         httpSession.setAttribute("idFactor", getFactor().getIdfactor());
