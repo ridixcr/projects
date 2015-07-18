@@ -64,6 +64,10 @@ public class PreguntaEncuestaBL extends AbstractBL<PreguntaEncuesta>{
     public List<PreguntaEncuesta> listarEstandaresEncuesta(){
         return dao.listarEstandaresEncuesta();
     }
+    
+    public List reporteTotalEncuestasEstandar(long id_estandar){
+        return dao.reporteTotalEncuestasEstandar(id_estandar);
+    }
 
     @Override
     public List<PreguntaEncuesta> listar(long id) {

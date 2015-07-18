@@ -41,6 +41,42 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
         return list("from PreguntaEncuesta pe"
                 + " inner join fetch pe.estandar e");
     }
+    
+    public List reporteTotalEncuestasEstandar(long id_estandar) {
+        //<editor-fold defaultstate="collapsed" desc="CUERPO">  
+        return listSQL("select\n" +
+                    " es.numero_estandar,\n" +
+                    " es.titulo as estandar,\n" +
+                    " en.descripcion as encuenta,\n" +
+                    " pe.tipo_encuesta,\n" +
+                    " count(re.idrespuestaencuesta) as cantidad,\n" +
+                    " ((sum(CASE\n" +
+                    "     WHEN re.estado=1 THEN 1\n" +
+                    "     ELSE 0\n" +
+                    " END)/count(re.idrespuestaencuesta))*100) as porcentaje_completados,\n" +
+                    " sum(CASE\n" +
+                    "     WHEN re.estado=1 THEN 1\n" +
+                    "     ELSE 0\n" +
+                    " END) as completos,\n" +
+                    " ((sum(CASE\n" +
+                    "     WHEN re.estado=0 THEN 1\n" +
+                    "     ELSE 0\n" +
+                    " END)/count(re.idrespuestaencuesta))*100) as porcentaje_pendientes,\n" +
+                    " sum(CASE\n" +
+                    "     WHEN re.estado=0 THEN 1\n" +
+                    "     ELSE 0\n" +
+                    " END) as pendientes\n" +
+                    " FROM estandar es\n" +
+                    " inner join  pregunta_encuesta pe\n" +
+                    " on pe.id_estandar=es.idestandar\n" +
+                    " inner join encuesta en\n" +
+                    " on pe.id_encuesta=en.idencuesta\n" +
+                    " inner join   respuesta_encuesta re\n" +
+                    " on re.id_preguntaencuesta=pe.idpreguntaencuesta\n" +
+                    " where es.idestandar="+ id_estandar +"\n"+
+                    " group by es.titulo,en.descripcion,pe.tipo_encuesta");
+        //</editor-fold>
+    }
 
     @Override
     public List<PreguntaEncuesta> listar(String ref) {

@@ -35,7 +35,7 @@ public class EstandarDA extends AbstractDA<Estandar>{
 
     @Override
     public List<Estandar> listar() {
-        return list(Estandar.class);
+        return list("from Estandar");
     }
 
     @Override
