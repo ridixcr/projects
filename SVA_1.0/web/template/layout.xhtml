@@ -10,6 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLogin.css"/>
+        <h:outputStylesheet name="./css/pie.css"/>
         <h:outputStylesheet library="awesome" name="css/font-awesome.css"/>
         <title>.:Sistema Virtual de Autoevaluacion:.</title>
     </h:head>
@@ -17,23 +18,25 @@
     <h:body>
         <div id="Cont_layaout">
             <div id="top">
-                <ui:insert name="top"></ui:insert>
+                <ui:insert name="top">
+                    SISTEMA VIRTUAL DE AUTOEVALUACIÓN - UNSCH
+                </ui:insert>
             </div>
             <div id="menu">
                 <h:form> 
                     <p:menubar>
                         <p:menuitem value="Inicio" url="/admin/page/inicioAdmin.xhtml" icon="ui-icon-home" />
-                        
+
                         <p:submenu label="Universidad" >
                             <p:menuitem value="Administrar universidad" url="/admin/page/administrarUniversidad.xhtml"  />
                             <p:menuitem value="Administrar facultad" url="/admin/page/administrarFacultad.xhtml"  />
                             <p:menuitem value="Administrar EFP" url="/admin/page/administrarUnidadAcademica.xhtml"  />
                         </p:submenu>
-                         
-                       <p:submenu label="Comite Interno" >
+
+                        <p:submenu label="Comite Interno" >
                             <p:menuitem value="Administrar Comite Interno" url="/admin/page/adminDocComiteInterno.xhtml"  />
                         </p:submenu>
-                        
+
                         <p:submenu label="Usuarios" >
                             <p:menuitem value="Administrar usuario" url="/admin/page/administrarUsuarios.xhtml"  />
                         </p:submenu>                        
@@ -50,10 +53,10 @@
                             <p:outputLabel value="Bienvenido(a) : " style="margin-right: 5px;"></p:outputLabel>
                             <p:menuButton value="#{loginControler.nombreUsuario}" iconPos="fa fa-user">
                                 <p:menuitem value="Cambiar contraseña" icon="ui-icon-arrowrefresh-1-w"/>
-                                <p:menuitem value="Información" icon="fa fa-user"/>
+                                <p:menuitem value="Información" icon="fa fa-user" onclick="PF('dlgMisDatos').show();"/>
                             </p:menuButton>
                             <p:commandButton id="btnCancelarRegistro"  action="#{loginControler.cerrarSesion()}"
-                                                     icon="fa fa-power-off" value="Cerrar Sesión" title="Cerrar Sesión"/>
+                                             icon="fa fa-power-off" value="Cerrar Sesión" title="Cerrar Sesión"/>
                         </f:facet>
                     </p:menubar>
                 </h:form>
@@ -62,7 +65,15 @@
                 <ui:insert name="content"></ui:insert>
             </div>
             <div id="bottom">
-                <ui:insert name="bottom"></ui:insert>
+                <ui:insert name="bottom">
+                    <div class="pieIzq">Copyright © 2015 - Jorge Luis Sulca González</div>
+                    <div class="pieCenter">
+                        Urb. Mariscal C&aacute;ceres Mz L Lt 22<br/> 
+                        Telf. 999188003 <br/>
+                        jlsulcag@gmail.com
+                    </div>
+                    <div class="pieDer">Desarrollado por : jlsulcag</div>
+                </ui:insert>
             </div>
         </div>
     </h:body>

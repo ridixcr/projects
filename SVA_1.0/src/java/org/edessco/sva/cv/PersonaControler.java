@@ -7,6 +7,7 @@ package org.edessco.sva.cv;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -35,6 +36,7 @@ import org.edessco.sva.bl.PersonaBL;
 import org.edessco.sva.bl.RolBL;
 import org.edessco.sva.bl.UsuarioBL;
 import org.edessco.sva.bl.UsuarioRolBL;
+import org.edessco.sva.util.Encrypt;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
@@ -134,6 +136,9 @@ public class PersonaControler {
             }
             //se procede a registrar el usuario
             getUsuario().setPersona(getPersona());
+            getUsuario().setFechaRegistro(new Date());
+            getUsuario().setEstado(Boolean.FALSE);
+            getUsuario().setContrasenia(Encrypt.sha512(getUsuario().getContrasenia()));
             long resUsuario = getUsuarioBL().registrar(getUsuario());
             //almacenamos el id del ultimo usuario registrado
             httpServletRequest.setAttribute("sessionIdUsuario", getUsuario().getIdusuario());

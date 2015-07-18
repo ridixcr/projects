@@ -1,0 +1,52 @@
+
+root { 
+    display: block;
+}
+
+.pieIzq {
+    float: left;
+    height: 40px;
+    width: 395px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.pieCenter {
+    float: left;
+    height: 40px;
+    width: 395px;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-right-style: groove;
+    border-left-style: solid;
+    border-right-color: #FFF;
+    border-left-color: #FFF;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+.pieDer {
+    float: left;
+    height: 40px;
+    width: 395px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: 70%;
+    line-height: 40px;
+    font-weight: bold;
+    color: #FFF;
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 13px;
+}
+
+

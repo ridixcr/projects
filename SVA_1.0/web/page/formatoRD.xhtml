@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
@@ -11,7 +13,20 @@
             <ui:define name="content">
                 <p:growl id="msg" showDetail="true" />
                 <p:panel id="pnl_formatoRD" header="REGISTRO POR DOCENTE - FORMATO RD">
-                    
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" value="#{estandarBean.listaEstandares}" var="estandarItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
+                                     {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="{Exporters}">
+                                <h:commandLink>
+                                    <p:graphicImage  width="24"/>
+                                    <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+                                </h:commandLink>
+                            </f:facet>
+                        </p:dataTable>
+                    </h:form>
                 </p:panel>
             </ui:define>
 
