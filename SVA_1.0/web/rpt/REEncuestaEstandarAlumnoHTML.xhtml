@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>.:SVA:.</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />   
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <link href="../resources/css/style.css" type="text/css" rel="stylesheet"/>
+        <script src="../resources/js/script.js" type="text/css"></script>        
+        <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png"/>
+    </h:head>
+    <h:body style="background: black;margin: 0;">   
+        <f:metadata>                       
+            <f:viewAction action="#{rEEncuestaEstandarAlumnoVC.initHTML}" />
+        </f:metadata>
+        <p:panel>
+            <f:facet name="header">
+                RESULTADOS DE LA ENCUESTA A ESTUDIANTES - HTML
+                <span class="ui-icon ui-icon-print" style="float: right; margin-right: .3em;"></span>                
+            </f:facet>
+            <div style="width: 100%;">                
+                <p:dataTable var="es" value="#{rEEncuestaEstandarAlumnoVC.listaEstandar}" rows="3" 
+                             paginator="true" paginatorPosition="bottom" rowIndexVar="rowIndex1"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                    <f:facet name="header">
+                        <div style="text-transform: uppercase;text-align: left;">
+                            REGISTRO POR ESTANDAR
+                        </div>
+                    </f:facet>
+                    <p:column style="text-align: left;">                       
+                        <p:dataTable var="r" value="#{rEEncuestaEstandarAlumnoVC.listarItemsReporteEstadisticoAlumnoTabla(es.idestandar)}" 
+                                     rowIndexVar="rowIndex2" >
+                            <f:facet name="header">
+                                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                                    ESTANDAR N° #{es.numeroEstandar} - #{es.titulo} - #{es.idestandar}                                   
+                                </div>                                
+                            </f:facet>
+                            <p:column style="width: 40px;text-align: center;">
+                                <p:panelGrid>
+                                    <f:facet name="header">
+                                        <p:row>
+                                            <p:column colspan="4">TABLA N° #{rowIndex1+1}</p:column>
+                                        </p:row>
+                                        <p:row>
+                                            <p:column colspan="2">TIPO RESPUESTA</p:column>
+                                            <p:column colspan="1">FRECUENCIA</p:column>
+                                            <p:column colspan="1">PORCENTAJE</p:column>
+                                        </p:row>
+                                    </f:facet>
+
+                                    <p:row>
+                                        <p:column rowspan="4">SI CONOCE</p:column>
+                                        <p:column>TOTALMENTE DE ACUERDO (TA)</p:column>
+
+                                        <p:column>#{r.totalmente_acuerdo}</p:column>
+                                        <p:column>#{r.p_totalmente_acuerdo} %</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>DE ACUERDO (DA)</p:column>
+
+                                        <p:column>#{r.de_acuerdo}</p:column>
+                                        <p:column>#{r.p_de_acuerdo} %</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>POCO DE ACUERDO (PA)</p:column>
+
+                                        <p:column>#{r.poco_de_acuerdo}</p:column>
+                                        <p:column>#{r.p_poco_de_acuerdo} %</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column>EN DESACUERDO (DE)</p:column>
+
+                                        <p:column>#{r.en_desacuerdo}</p:column>
+                                        <p:column>#{r.p_en_desacuerdo} %</p:column>
+                                    </p:row>
+                                    <p:row>
+                                        <p:column colspan="2">NO CONOZCO EL TEMA (NC)</p:column>
+
+                                        <p:column>#{r.no_conosco_tema}</p:column>
+                                        <p:column>#{r.p_no_conosco_tema} %</p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column colspan="4" styleClass="ui-widget-header">
+                                            <p:spacer height="0"/>
+                                        </p:column>
+                                    </p:row>
+
+                                    <p:row>
+                                        <p:column colspan="2" style="font-weight: bold;text-align: left;">TOTAL</p:column>
+                                        <p:column rowspan="1" style="font-weight: bold;">000</p:column>
+                                        <p:column rowspan="1" style="font-weight: bold;">100 %</p:column>
+                                    </p:row>
+
+                                    <f:facet name="footer">
+                                        <p:row>
+                                            <p:column  colspan="4" style="text-align: center;">
+                                                FUENTE : ENCUESTA APLICADA A LOS  ESTUDIANTES
+                                            </p:column>
+                                        </p:row>
+                                    </f:facet>
+                                </p:panelGrid>
+                                <div style="width: 100%;">  
+                                    <div style="font-weight: bold;">
+                                        GRAFICO #{rowIndex1+1}
+                                    </div>
+                                    <p:graphicImage value="#{r.host_path}"/>
+                                    <div style="font-weight: bold;">
+                                        FUENTE TABLA #{rowIndex1+1}
+                                    </div>
+                                    <!--
+                                    <p:chart type="pie" model="#{r.pieChartModel}" style=" margin: 0 auto 0 auto; width:400px;height:300px" />                                
+                                    -->
+                                </div>                                
+                            </p:column>         
+                            <f:facet name="footer">
+                                <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
+                                    ESTANDAR N° #{rowIndex1+1} 
+                                </div>
+                            </f:facet>
+                        </p:dataTable>    
+                    </p:column>
+                </p:dataTable>  
+
+            </div>            
+            <f:facet name="footer">
+                .:SISTEMA VIRTUAL DE AUTOEVALUACION:.
+            </f:facet>
+        </p:panel>
+    </h:body>
+</html>

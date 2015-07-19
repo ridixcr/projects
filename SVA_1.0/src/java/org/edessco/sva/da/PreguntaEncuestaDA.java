@@ -125,7 +125,7 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
                     " on u.idusuario = re.id_usuario\n" +
                     " inner join persona p\n" +
                     " on u.id_persona=p.idpersona\n" +
-                    " where es.idestandar = "+id_estandar+"\n" +
+                    " where pe.tipo_encuesta='ALUMNO' and es.idestandar = "+id_estandar+"\n" +
                     " \n" +
                     " union all\n" +
                     " \n" +
@@ -144,7 +144,7 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
                     " on u.idusuario = re.id_usuario\n" +
                     " inner join persona p\n" +
                     " on u.id_persona=p.idpersona\n" +
-                    " where es.idestandar = "+id_estandar+"\n" +
+                    " where pe.tipo_encuesta='ALUMNO' and es.idestandar = "+id_estandar+"\n" +
                     " \n" +
                     " union all\n" +
                     " \n" +
@@ -163,7 +163,7 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
                     " on u.idusuario = re.id_usuario\n" +
                     " inner join persona p\n" +
                     " on u.id_persona=p.idpersona\n" +
-                    " where es.idestandar = "+id_estandar+"\n" +
+                    " where pe.tipo_encuesta='ALUMNO' and es.idestandar = "+id_estandar+"\n" +
                     " \n" +
                     " union all\n" +
                     " \n" +
@@ -182,7 +182,7 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
                     " on u.idusuario = re.id_usuario\n" +
                     " inner join persona p\n" +
                     " on u.id_persona=p.idpersona\n" +
-                    " where es.idestandar = "+id_estandar+"\n" +
+                    " where pe.tipo_encuesta='ALUMNO' and es.idestandar = "+id_estandar+"\n" +
                     " \n" +
                     " union all\n" +
                     " \n" +
@@ -201,7 +201,7 @@ public class PreguntaEncuestaDA extends AbstractDA<PreguntaEncuesta>{
                     " on u.idusuario = re.id_usuario\n" +
                     " inner join persona p\n" +
                     " on u.id_persona=p.idpersona\n" +
-                    " where es.idestandar = "+id_estandar);
+                    " where pe.tipo_encuesta='ALUMNO' and es.idestandar = "+id_estandar);
         //</editor-fold>
     }
 

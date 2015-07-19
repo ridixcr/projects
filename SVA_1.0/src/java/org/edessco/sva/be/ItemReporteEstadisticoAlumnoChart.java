@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class ItemReporteEstadisticoAlumnoChart implements Serializable {
 

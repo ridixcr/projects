@@ -25,7 +25,7 @@ inner join usuario u
 on u.idusuario = re.id_usuario
 inner join persona p
 on u.id_persona=p.idpersona
-where es.idestandar = $P{p_id_estandar}
+where pe.tipo_encuesta='ALUMNO' and es.idestandar = $P{p_id_estandar}
 
 union all
 
@@ -44,7 +44,7 @@ inner join usuario u
 on u.idusuario = re.id_usuario
 inner join persona p
 on u.id_persona=p.idpersona
-where es.idestandar = $P{p_id_estandar}
+where pe.tipo_encuesta='ALUMNO' and es.idestandar = $P{p_id_estandar}
 
 union all
 
@@ -63,7 +63,7 @@ inner join usuario u
 on u.idusuario = re.id_usuario
 inner join persona p
 on u.id_persona=p.idpersona
-where es.idestandar = $P{p_id_estandar}
+where pe.tipo_encuesta='ALUMNO' and es.idestandar = $P{p_id_estandar}
 
 union all
 
@@ -82,7 +82,7 @@ inner join usuario u
 on u.idusuario = re.id_usuario
 inner join persona p
 on u.id_persona=p.idpersona
-where es.idestandar = $P{p_id_estandar}
+where pe.tipo_encuesta='ALUMNO' and es.idestandar = $P{p_id_estandar}
 
 union all
 
@@ -101,7 +101,7 @@ inner join usuario u
 on u.idusuario = re.id_usuario
 inner join persona p
 on u.id_persona=p.idpersona
-where es.idestandar = $P{p_id_estandar}]]>
+where pe.tipo_encuesta='ALUMNO' and es.idestandar = $P{p_id_estandar}]]>
 	</queryString>
 	<field name="respuesta" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
