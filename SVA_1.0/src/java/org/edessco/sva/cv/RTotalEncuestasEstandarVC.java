@@ -39,7 +39,6 @@ public class RTotalEncuestasEstandarVC extends ReportViewerBean implements Seria
         listaTotalEncuestasEstandar.clear();
         for (Object item : listaResultadosEncuesta) {
             Object[] o = (Object[])item;  
-            System.out.println(o[2].toString());
             listaTotalEncuestasEstandar.add(new ItemReporteTotalEncuestasEstandar(
                             o[0].toString(),
                             o[1].toString(),
