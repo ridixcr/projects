@@ -31,7 +31,9 @@ public class RTotalEncuestasEstandarVC extends ReportViewerBean implements Seria
     public void initHTML() {
         listaEstandar.addAll(estandarBL.listar());
     }
+    
     public List<ItemReporteTotalEncuestasEstandar> listarTotalEncuestasEstandar(long id_estandar){
+        //<editor-fold defaultstate="collapsed" desc="CUERPO">
         listaResultadosEncuesta.clear();        
         listaResultadosEncuesta.addAll(getPreguntaEncuestaBL().reporteTotalEncuestasEstandar(id_estandar));
         listaTotalEncuestasEstandar.clear();
@@ -51,8 +53,8 @@ public class RTotalEncuestasEstandarVC extends ReportViewerBean implements Seria
             ));            
         }
         return listaTotalEncuestasEstandar;
-    }
-    
+        //</editor-fold>
+    }    
     
     public void initPDF() {
         file_path = "/resources/t/";

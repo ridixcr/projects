@@ -69,14 +69,14 @@ order by e.idestandar]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Explicación del docente]]></text>
+					<text><![CDATA[EXPLICACION DEL DOCENTE]]></text>
 				</staticText>
 				<staticText>
 					<reportElement uuid="46e14f13-0b08-41fb-9c67-26d222faad92" mode="Opaque" x="422" y="44" width="133" height="23" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Alternativa de solución del docente]]></text>
+					<text><![CDATA[ALTERNATIVA DE SOLUCION DEL DOCENTE]]></text>
 				</staticText>
 				<line>
 					<reportElement uuid="14c476c7-93dd-44cd-858a-22a0ad83ac1a" x="1" y="43" width="554" height="1" forecolor="#666666"/>
