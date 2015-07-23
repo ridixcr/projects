@@ -15,7 +15,7 @@
                 <div class="contenedor">
                     <div class="panel">
                         <div class="box">
-                            <p:growl id="growl" showDetail="true" life="3000" />
+                            <p:growl id="growl" showDetail="true" life="3000" showSummary="true"/>
                             <h:form id="formLogin">
                                 <p:panel id="basic" header="Ingrese Usuario y Contraseña" >
                                     <h:panelGrid columns="2" cellpadding="5">
@@ -30,7 +30,7 @@
                                             <p:separator />
                                             <p:commandButton value="Regístrese aquí" icon="icon-add" ajax="true"
                                                              immediate="true" update=":formDialog" oncomplete="PF('dlgDialog').show();"/>
-                                            <p:commandButton value="Iniciar Sesion" update=":growl" icon="icon-ingresar" style="float: right;" ajax="true"
+                                            <p:commandButton value="Iniciar Sesion" update=":growl" icon="icon-ingresar" style="float: right;"
                                                              action="#{loginControler.login()}"/>
                                         </f:facet>
                                     </h:panelGrid>

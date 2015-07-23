@@ -109,7 +109,7 @@ public class LoginControler implements Serializable {
         this.contrasenia = null;
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         httpSession.invalidate();
-        return "/page/login";
+        return "/page/login?faces-redirect=true";
     }
 
     public String irRegistrarse() {

@@ -29,18 +29,18 @@
                             <p:column style="width:30px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{modeloCalidadItem.idmodelocalidad}" />
                             </p:column>
-                            <p:column headerText="Modelo de calidad">
+                            <p:column headerText="Modelo de calidad" style="width: 50%">
                                 <h:outputText value="#{modeloCalidadItem.titulo}" />
                             </p:column>
                             <p:column headerText="Resolución">
                                 <h:outputText value="#{modeloCalidadItem.resolucion}" />
                             </p:column>
-                            <p:column headerText="Publicación">
+                            <p:column headerText="Publicación" style="width: 60px">
                                 <h:outputText value="#{modeloCalidadItem.fechaPublicacion}">
                                     <f:convertDateTime pattern="dd/MM/yyyy" timeZone="GTM-5"/> 
                                 </h:outputText>
                             </p:column>
-                            <p:column headerText="Estado">
+                            <p:column headerText="Estado" style="width: 40px">
                                 <h:outputText value="#{modeloCalidadItem.estado}">
                                     <h:outputText value="#{modeloCalidadItem.estado}" />
                                 </h:outputText>

@@ -28,24 +28,24 @@
                             <p:column style="width:15px;text-align: center" headerText="Nº">
                                 <h:outputText value="#{usuarioItem.idusuario}" />
                             </p:column>
-                            <p:column headerText="Apellidos y Nombres">
+                            <p:column headerText="Apellidos y Nombres" style=" width: 250px">
                                 <h:outputText value="#{usuarioItem.persona.apellidoPaterno} #{usuarioItem.persona.apellidoMaterno} #{usuarioItem.persona.nombres}" />
                             </p:column>
                             
-                            <p:column headerText="EFP" style="width: 250px">
+                            <p:column headerText="EFP" style="width: 220px">
                                 <h:outputText value="#{usuarioItem.persona.unidadAcademica.nombre}" />
                             </p:column>
 
-                            <p:column headerText="DNI" style="width:50px;text-align: center">
+                            <p:column headerText="DNI" style="width:60px;text-align: center">
                                 <h:outputText value="#{usuarioItem.persona.dni}" />
                             </p:column>
 
-                            <p:column headerText="Usuario" style="width:70px;">
+                            <p:column headerText="Usuario" style="width:100px;">
                                 <h:outputText value="#{usuarioItem.nombreUsuario}" />
                             </p:column>
 
 
-                            <p:column headerText="Correo Electrónico" style="width:200px;">
+                            <p:column headerText="Correo Electrónico" style="width:150px;">
                                 <h:outputText value="#{usuarioItem.persona.correo}" />
                             </p:column>
 
