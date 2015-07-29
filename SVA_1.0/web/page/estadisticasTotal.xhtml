@@ -11,52 +11,63 @@
         <ui:composition template="./../template/layoutComision.xhtml">
             <ui:define name="content">
                 <f:metadata>                       
-                    <f:viewAction action="#{rCuestionarioDocenteVC.initHTML}" />
+                    <f:viewAction action="#{rTotalEncuestasEstandarVC.initHTML}" />
                 </f:metadata>
                 <p:panel>
                     <f:facet name="header">
-                        REPORTE CUESTIONARIO DOCENTE - 
-                        <p:link class="link_custom" outcome="formatoRD.xhtml" value="HTML"/> - 
-                        <p:link class="link_custom" outcome="formatoRD_PDF.xhtml" value="PDF"/>
+                        REPORTE DEL TOTAL DE ENCUESTAS POR ESTANDAR - 
+                        <p:link class="link_custom" outcome="estadisticasTotal.xhtml" value="HTML"/> - 
+                        <p:link class="link_custom" outcome="estadisticasTotal_PDF.xhtml" value="PDF"/>
                         <span class="ui-icon ui-icon-print" style="float: right; margin-right: .3em;"></span>                
                     </f:facet>
                     <div style="width: 100%;">                
-                        <p:dataTable var="d" value="#{rCuestionarioDocenteVC.listaDocentes}" rows="3" 
+                        <p:dataTable var="es" value="#{rTotalEncuestasEstandarVC.listaEstandar}" rows="3" 
                                      paginator="true" paginatorPosition="bottom" rowIndexVar="rowIndex1"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
                             <f:facet name="header">
-                                <div style="text-align: left;">FORMATO DE REGISTRO POR DOCENTE</div>
+                                <div style="text-transform: uppercase;text-align: left;">
+                                    Alumnos, Docentes, Administrativos, Egresados y Grupos de interés
+                                </div>
                             </f:facet>
                             <p:column style="text-align: left;">                       
-                                <p:dataTable var="r" value="#{rCuestionarioDocenteVC.listarResultadosDocente(d.iddocente)}" 
+                                <p:dataTable var="r" value="#{rTotalEncuestasEstandarVC.listarTotalEncuestasEstandar(es.idestandar)}" 
                                              rowIndexVar="rowIndex2" rows="4" paginator="true" paginatorPosition="bottom"
                                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
                                     <f:facet name="header">
                                         <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
-                                            #{d.persona.apellidoPaterno} #{d.persona.apellidoMaterno}, #{d.persona.nombres} : #{d.persona.dni}
+                                            #{es.numeroEstandar} - #{es.titulo}                                    
                                         </div>                                
                                     </f:facet>
                                     <p:column headerText="N°" style="width: 40px;text-align: center;">
                                         <h:outputText value="#{rowIndex2+1}" />
                                     </p:column>
-                                    <p:column headerText="ESTANDAR PREGUNTA" style="text-align: left;">
-                                        <h:outputText value="#{r.preguntaCuestionario.pregunta}" escape="false"/>
+                                    <p:column headerText="ENCUESTA" style="text-transform: uppercase;text-align: left;">
+                                        <h:outputText value="#{r.encuesta}" escape="false"/>
                                     </p:column>
-                                    <p:column headerText="CUMPLE SI/NO" style="text-align: center;width: 80px;">
-                                        <h:outputText value="#{r.respuesta}"  escape="false"/>
+                                    <p:column headerText="TIPO ENCUESTADO" style="text-align: left;">
+                                        <h:outputText value="#{r.tipo_encuesta}" escape="false"/>
                                     </p:column>
-                                    <p:column headerText="EXPLICACION">
-                                        <h:outputText value="#{r.explicacionDocente}"  escape="false"/>
+                                    <p:column headerText="CANTIDAD" style="text-align: center;">
+                                        <h:outputText value="#{r.cantidad}" escape="false"/>
                                     </p:column>
-                                    <p:column headerText="ALTERNATIVA SOLUCION">
-                                        <h:outputText value="#{r.alternativaSolucionDocente}"  escape="false"/>
+                                    <p:column headerText="COMPLETADO" style="text-align: center;">
+                                        <h:outputText value="#{r.completos}" escape="false"/>
+                                    </p:column>
+                                    <p:column headerText="%" style="text-align: center;">
+                                        <h:outputText value="#{r.porcentajes_completados} %" escape="false"/>
+                                    </p:column>
+                                    <p:column headerText="PENDIENTES" style="text-align: center;">
+                                        <h:outputText value="#{r.pendientes}" escape="false"/>
+                                    </p:column>
+                                    <p:column headerText="%" style="text-align: center;">
+                                        <h:outputText value="#{r.porcentaje_pendientes} %" escape="false"/>
                                     </p:column>
                                     <f:facet name="footer">
                                         <div style="text-transform: uppercase;font-weight: bold;text-align: left;">
-                                            DOCENTE N° #{rowIndex1+1} : #{d.gradoAcademico}
+                                            ESTANDAR N° #{rowIndex1+1} 
                                         </div>
                                     </f:facet>
-                                </p:dataTable>                                         
+                                </p:dataTable>    
                             </p:column>
                         </p:dataTable>  
 

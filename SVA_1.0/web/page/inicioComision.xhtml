@@ -52,27 +52,32 @@
                     <h:form id="form3">
                         <h:panelGrid columns="5" cellpadding="10">
                             <p:panel id="pnl_uno" header="Formato RD" style="width: 200px; text-align: center">
-                                <p:commandLink action="formatoRD">
+                                <p:commandLink action="formatoRD.xhtml?faces-redirect=true">
                                     <img src="../resources/img/iconos/Distributor-report-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
                                 
                             </p:panel>
                             <p:panel id="pnl_dos" header="Formato RE" style="width: 200px; text-align: center">
-                                <p:commandLink action="formatoRE">
+                                <p:commandLink action="formatoRE.xhtml?faces-redirect=true">
                                     <img src="../resources/img/iconos/report-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
                             </p:panel>
                             <p:panel id="pnl_tres" header="Formato RP" style="width: 200px; text-align: center">
-                                <p:commandLink action="formatoRP">
+                                <p:commandLink action="formatoRP.xhtml?faces-redirect=true">
                                     <img src="../resources/img/iconos/custom-reports-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
                             </p:panel>
                             <p:panel id="pnl_cuatro" header="Estadística Encuesta" style="width: 200px; text-align: center">
-                                <p:commandLink action="reporteEncuesta">
+                                <p:commandLink action="estadisticasEncuesta.xhtml?faces-redirect=true">
                                     <img src="../resources/img/iconos/reportEstadistica.png" width="64px" height="64px"/>
                                 </p:commandLink>
                             </p:panel>
-                            <p:panel id="pnl_cinco" header="Estadística Cuestionario" style="width: 200px; text-align: center">
+                            <p:panel id="pnl_cinco" header="Estadística Generales Encuesta" style="width: 200px; text-align: center">
+                                <p:commandLink action="estadisticasTotal.xhtml?faces-redirect=true">
+                                    <img src="../resources/img/iconos/reportEstadistica.png" width="64px" height="64px"/>
+                                </p:commandLink>
+                            </p:panel>
+                            <p:panel id="pnl_seis" header="Estadística Cuestionario" style="width: 200px; text-align: center">
                                 <p:commandLink action="reporteCuestionario">
                                     <img src="../resources/img/iconos/ic_enable_stats.png" width="64px" height="64px"/>
                                 </p:commandLink>

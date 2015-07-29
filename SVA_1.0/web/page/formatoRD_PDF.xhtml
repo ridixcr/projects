@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutComision.xhtml">
+            <ui:define name="content">
+                <f:metadata>                       
+                    <f:viewAction action="#{rCuestionarioDocenteVC.initPDF}" />
+                </f:metadata>
+                <p:panel>
+                    <f:facet name="header">
+                        REPORTE CUESTIONARIO DOCENTE - 
+                        <p:link class="link_custom" outcome="formatoRD.xhtml" value="HTML"/> - 
+                        <p:link class="link_custom" outcome="formatoRD_PDF.xhtml" value="PDF"/>
+                        <span class="ui-icon ui-icon-print" style="float: right; margin-right: .3em;"></span>                
+                    </f:facet>
+                    <c:if test="#{(rCuestionarioDocenteVC.existe =='true')}">
+                        <div style="width: 100%;">
+                            <iframe src = "../web/viewer.html#{rCuestionarioDocenteVC.pathFile()}" 
+                                    style="width: 100%;height: 86vh;border: solid 2px #000;"></iframe>
+                        </div>
+                    </c:if>
+                    <c:if test="#{(rCuestionarioDocenteVC.existe =='false')}">     
+                        <div style="width: 100%;">
+                            <div style="margin: 0 auto 0 auto;width: 510px;text-align: center;">
+                                <h3>¡REPORTE NO DISPONIBLE!</h3>
+                                <p:graphicImage name="img/Presentation-icon.png" />
+                            </div>
+                        </div>                
+                    </c:if>   
+                    <f:facet name="footer">
+                        .:SISTEMA VIRTUAL DE AUTOEVALUACION:.
+                    </f:facet>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
