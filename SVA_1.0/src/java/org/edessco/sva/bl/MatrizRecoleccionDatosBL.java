@@ -1,30 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.edessco.sva.bl;
 
 import java.util.List;
-import org.edessco.sva.be.Estandar;
-import org.edessco.sva.da.EstandarDA;
+import org.edessco.sva.be.*;
+import org.edessco.sva.da.*;
 import org.edessco.sva.util.AbstractBL;
 import org.edessco.sva.util.AbstractDA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author JorgeLuis
- */
-@Service("estandarBL")
-public class EstandarBL extends AbstractBL<Estandar>{
-    
+@Service("matrizRecoleccionDatosBL")
+public class MatrizRecoleccionDatosBL  extends AbstractBL<MatrizRecoleccionDatos>{
+
     @Autowired
-    @Qualifier("estandarDA")
-    private EstandarDA dao;
+    @Qualifier("matrizRecoleccionDatosDA")
+    private MatrizRecoleccionDatosDA dao;
     
     @Override
     public AbstractDA getDAO() {
@@ -33,41 +23,41 @@ public class EstandarBL extends AbstractBL<Estandar>{
 
     @Override
     public void setDA(AbstractDA dao) {
-        this.dao=(EstandarDA) dao;
+        this.dao=(MatrizRecoleccionDatosDA) dao;
     }
 
     @Override
-    public long registrar(Estandar bean) {
+    public long registrar(MatrizRecoleccionDatos bean) {
         return save(bean);
     }
 
     @Override
-    public long actualizar(Estandar bean) {
+    public long actualizar(MatrizRecoleccionDatos bean) {
         return update(bean);
     }
 
     @Override
-    public long eliminar(Estandar bean) {
+    public long eliminar(MatrizRecoleccionDatos bean) {
         return delete(bean);
     }
 
     @Override
-    public List<Estandar> listar() {
+    public List<MatrizRecoleccionDatos> listar() {
         return list();
     }
 
     @Override
-    public List<Estandar> listar(String ref) {
+    public List<MatrizRecoleccionDatos> listar(String ref) {
         return list(ref);
     }
 
     @Override
-    public List<Estandar> listar(long id) {
+    public List<MatrizRecoleccionDatos> listar(long id) {
         return list(id);
     }
 
     @Override
-    public Estandar buscar(long id) {
+    public MatrizRecoleccionDatos buscar(long id) {
         return search(id);
     }
 
@@ -77,15 +67,16 @@ public class EstandarBL extends AbstractBL<Estandar>{
     }
 
     @Override
-    public Estandar buscar(String ref) {
+    public MatrizRecoleccionDatos buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public List<Estandar> listarEstandar(long id) {
+    public List<MatrizRecoleccionDatos> listarEstandar(long id) {
         return dao.listarEstandar(id);
     }
     
     public List respuestaCuestionarioDocente(long id_estandar){
         return dao.respuestaCuestionarioDocente(id_estandar);
     }
+    
 }

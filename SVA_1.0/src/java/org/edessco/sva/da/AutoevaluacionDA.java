@@ -49,13 +49,16 @@ public class AutoevaluacionDA extends AbstractDA<Autoevaluacion>{
     }
 
     @Override
-    public Autoevaluacion buscar(long id) {
-        return search(Autoevaluacion.class,id);
+    public Autoevaluacion buscar(long id_autoevaluacion) {
+        return search("from Autoevaluacion au"
+                    + " where au.idautoevaluacion="+id_autoevaluacion+"");
     }
 
     @Override
     public long id() {
-        return maxId(Autoevaluacion.class);
+        Object o = searchSQL("SELECT max(idautoevaluacion) \n"
+                           + " FROM autoevaluacion");
+        return o != null ? Long.parseLong(o.toString()) : 0;
     }
 
     @Override

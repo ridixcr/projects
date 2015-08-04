@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.edessco.sva.cv;
 
 import java.util.LinkedList;
@@ -16,9 +15,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+import org.edessco.sva.be.Autoevaluacion;
 import org.edessco.sva.be.Criterio;
 import org.edessco.sva.be.Estandar;
+import org.edessco.sva.be.MatrizRecoleccionDatos;
+import org.edessco.sva.bl.AutoevaluacionBL;
 import org.edessco.sva.bl.EstandarBL;
+import org.edessco.sva.bl.MatrizRecoleccionDatosBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
 
@@ -37,10 +40,42 @@ public class EstandarBean {
     private List<Estandar> listaEstandares = new LinkedList<>();
     private List<SelectItem> selectOneItemsEstandar;
 
-    public EstandarBean() {
+    @ManagedProperty(value = "#{matrizRecoleccionDatosBL}")
+    private MatrizRecoleccionDatosBL matrizRecoleccionDatosBL;
+    @ManagedProperty(value = "#{matrizRecoleccionDatos}")
+    private MatrizRecoleccionDatos matrizRecoleccionDatos;
+    
+    @ManagedProperty(value = "#{autoevaluacionBL}")
+    private AutoevaluacionBL autoevaluacionBL;
+    @ManagedProperty(value = "#{autoevaluacion}")
+    private Autoevaluacion autoevaluacion;
+
+    private List listaResultadosEncuestaDocente = new LinkedList<>();
+
+    @PostConstruct
+    public void init() {
+        setAutoevaluacion(getAutoevaluacionBL().buscar(getAutoevaluacionBL().maxId()));
+        listar();
     }
 
-
+    public void recuperarResultados(long id_estandar) {
+        setMatrizRecoleccionDatos(getMatrizRecoleccionDatosBL().buscar(id_estandar));
+        if (getMatrizRecoleccionDatos() == null) {                        
+            setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+            getMatrizRecoleccionDatos().setEstandar(getEstandarBL().buscar(id_estandar));
+            getMatrizRecoleccionDatos().setAutoevaluacion(getAutoevaluacion());
+            listaResultadosEncuestaDocente.clear();
+            listaResultadosEncuestaDocente.addAll(getEstandarBL().respuestaCuestionarioDocente(id_estandar));
+            for (Object item : listaResultadosEncuestaDocente) {
+                Object[] o = (Object[]) item;
+                if (Double.parseDouble(o[0].toString()) >= 50) {
+                    getMatrizRecoleccionDatos().setResultadoCuestionario(true);
+                } else {
+                    getMatrizRecoleccionDatos().setResultadoCuestionario(false);
+                }
+            }
+        }
+    }
 
     public void registrar() {
         setTareaEvento(new Tarea(Tarea.REGISTRO, getEstandarBL().registrar(getEstandar())) {
@@ -51,22 +86,21 @@ public class EstandarBean {
             }
         });
     }
-
-    @PostConstruct
+    
     public void listar() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(httpSession.getAttribute("idCriterio") != null){
+        if (httpSession.getAttribute("idCriterio") != null) {
             setListaEstandares(getEstandarBL().listarEstandar(Long.parseLong(httpSession.getAttribute("idCriterio").toString())));
-        }else{
+        } else {
             setListaEstandares(getEstandarBL().listar(""));
-        }         
+        }
     }
 
     public void actualizar() {
         Estandar temp = new Estandar();
         String msg;
         temp = buscarId();
-        
+
         temp.setNumeroEstandar(getEstandar().getNumeroEstandar());
         temp.setTitulo(getEstandar().getTitulo());
         temp.setDescripcion(getEstandar().getDescripcion());
@@ -155,5 +189,37 @@ public class EstandarBean {
     public void setSelectOneItemsEstandar(List<SelectItem> selectOneItemsEstandar) {
         this.selectOneItemsEstandar = selectOneItemsEstandar;
     }
-    
+
+    public MatrizRecoleccionDatosBL getMatrizRecoleccionDatosBL() {
+        return matrizRecoleccionDatosBL;
+    }
+
+    public void setMatrizRecoleccionDatosBL(MatrizRecoleccionDatosBL matrizRecoleccionDatosBL) {
+        this.matrizRecoleccionDatosBL = matrizRecoleccionDatosBL;
+    }
+
+    public MatrizRecoleccionDatos getMatrizRecoleccionDatos() {
+        return matrizRecoleccionDatos;
+    }
+
+    public void setMatrizRecoleccionDatos(MatrizRecoleccionDatos matrizRecoleccionDatos) {
+        this.matrizRecoleccionDatos = matrizRecoleccionDatos;
+    }
+
+    public AutoevaluacionBL getAutoevaluacionBL() {
+        return autoevaluacionBL;
+    }
+
+    public void setAutoevaluacionBL(AutoevaluacionBL autoevaluacionBL) {
+        this.autoevaluacionBL = autoevaluacionBL;
+    }
+
+    public Autoevaluacion getAutoevaluacion() {
+        return autoevaluacion;
+    }
+
+    public void setAutoevaluacion(Autoevaluacion autoevaluacion) {
+        this.autoevaluacion = autoevaluacion;
+    }
+
 }

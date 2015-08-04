@@ -16,14 +16,14 @@ public class MatrizRecoleccionDatos  implements java.io.Serializable {
      private Autoevaluacion autoevaluacion;
      private Estandar estandar;
      private Date fechaRegistro;
-     private Integer resultadoComiteInterno;
-     private Integer resultadoEncuestaDocente;
-     private Integer resultadoEncuestaAdministrativo;
-     private Integer resultadoEncuestaEgresado;
-     private Integer resultadoEncuestaEstudiante;
-     private Integer resultadoEncuestaGrupoint;
-     private Integer resultadoCuestionario;
-     private Integer resultadoInformeSgc;
+     private boolean resultadoComiteInterno;
+     private boolean resultadoEncuestaDocente;
+     private boolean resultadoEncuestaAdministrativo;
+     private boolean resultadoEncuestaEgresado;
+     private boolean resultadoEncuestaEstudiante;
+     private boolean resultadoEncuestaGrupoint;
+     private boolean resultadoCuestionario;
+     private boolean resultadoInformeSgc;
      private boolean resultadoFinal;
      private String observacion;
      private Boolean estado;
@@ -37,7 +37,7 @@ public class MatrizRecoleccionDatos  implements java.io.Serializable {
         this.estandar = estandar;
         this.resultadoFinal = resultadoFinal;
     }
-    public MatrizRecoleccionDatos(Autoevaluacion autoevaluacion, Estandar estandar, Date fechaRegistro, Integer resultadoComiteInterno, Integer resultadoEncuestaDocente, Integer resultadoEncuestaAdministrativo, Integer resultadoEncuestaEgresado, Integer resultadoEncuestaEstudiante, Integer resultadoEncuestaGrupoint, Integer resultadoCuestionario, Integer resultadoInformeSgc, boolean resultadoFinal, String observacion, Boolean estado) {
+    public MatrizRecoleccionDatos(Autoevaluacion autoevaluacion, Estandar estandar, Date fechaRegistro, boolean resultadoComiteInterno, boolean resultadoEncuestaDocente, boolean resultadoEncuestaAdministrativo, boolean resultadoEncuestaEgresado, boolean resultadoEncuestaEstudiante, boolean resultadoEncuestaGrupoint, boolean resultadoCuestionario, boolean resultadoInformeSgc, boolean resultadoFinal, String observacion, Boolean estado) {
        this.autoevaluacion = autoevaluacion;
        this.estandar = estandar;
        this.fechaRegistro = fechaRegistro;
@@ -82,60 +82,60 @@ public class MatrizRecoleccionDatos  implements java.io.Serializable {
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    public Integer getResultadoComiteInterno() {
+    public boolean getResultadoComiteInterno() {
         return this.resultadoComiteInterno;
     }
     
-    public void setResultadoComiteInterno(Integer resultadoComiteInterno) {
+    public void setResultadoComiteInterno(boolean resultadoComiteInterno) {
         this.resultadoComiteInterno = resultadoComiteInterno;
     }
-    public Integer getResultadoEncuestaDocente() {
+    public boolean getResultadoEncuestaDocente() {
         return this.resultadoEncuestaDocente;
     }
     
-    public void setResultadoEncuestaDocente(Integer resultadoEncuestaDocente) {
+    public void setResultadoEncuestaDocente(boolean resultadoEncuestaDocente) {
         this.resultadoEncuestaDocente = resultadoEncuestaDocente;
     }
-    public Integer getResultadoEncuestaAdministrativo() {
+    public boolean getResultadoEncuestaAdministrativo() {
         return this.resultadoEncuestaAdministrativo;
     }
     
-    public void setResultadoEncuestaAdministrativo(Integer resultadoEncuestaAdministrativo) {
+    public void setResultadoEncuestaAdministrativo(boolean resultadoEncuestaAdministrativo) {
         this.resultadoEncuestaAdministrativo = resultadoEncuestaAdministrativo;
     }
-    public Integer getResultadoEncuestaEgresado() {
+    public boolean getResultadoEncuestaEgresado() {
         return this.resultadoEncuestaEgresado;
     }
     
-    public void setResultadoEncuestaEgresado(Integer resultadoEncuestaEgresado) {
+    public void setResultadoEncuestaEgresado(boolean resultadoEncuestaEgresado) {
         this.resultadoEncuestaEgresado = resultadoEncuestaEgresado;
     }
-    public Integer getResultadoEncuestaEstudiante() {
+    public boolean getResultadoEncuestaEstudiante() {
         return this.resultadoEncuestaEstudiante;
     }
     
-    public void setResultadoEncuestaEstudiante(Integer resultadoEncuestaEstudiante) {
+    public void setResultadoEncuestaEstudiante(boolean resultadoEncuestaEstudiante) {
         this.resultadoEncuestaEstudiante = resultadoEncuestaEstudiante;
     }
-    public Integer getResultadoEncuestaGrupoint() {
+    public boolean getResultadoEncuestaGrupoint() {
         return this.resultadoEncuestaGrupoint;
     }
     
-    public void setResultadoEncuestaGrupoint(Integer resultadoEncuestaGrupoint) {
+    public void setResultadoEncuestaGrupoint(boolean resultadoEncuestaGrupoint) {
         this.resultadoEncuestaGrupoint = resultadoEncuestaGrupoint;
     }
-    public Integer getResultadoCuestionario() {
+    public boolean getResultadoCuestionario() {
         return this.resultadoCuestionario;
     }
     
-    public void setResultadoCuestionario(Integer resultadoCuestionario) {
+    public void setResultadoCuestionario(boolean resultadoCuestionario) {
         this.resultadoCuestionario = resultadoCuestionario;
     }
-    public Integer getResultadoInformeSgc() {
+    public boolean getResultadoInformeSgc() {
         return this.resultadoInformeSgc;
     }
     
-    public void setResultadoInformeSgc(Integer resultadoInformeSgc) {
+    public void setResultadoInformeSgc(boolean resultadoInformeSgc) {
         this.resultadoInformeSgc = resultadoInformeSgc;
     }
     public boolean isResultadoFinal() {

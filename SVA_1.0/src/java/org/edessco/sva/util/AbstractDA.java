@@ -122,6 +122,21 @@ public abstract class AbstractDA<T> implements DAO<T>{
             return null;
         }
     }
+    public Object searchSQL(String query) {
+        Session s = getSession();
+        Transaction t = s.beginTransaction();
+        try {  
+            Query q = s.createSQLQuery(query);
+            Object obj = q.uniqueResult();
+            t.commit();        
+            s.close();    
+            return obj;
+        } catch (HibernateException e) {
+            t.rollback();
+            e.printStackTrace();            
+            return null;
+        }
+    }
     @Deprecated
     public List<T> list(Class cd,Class cm,long id) {
         Session s = getSession();

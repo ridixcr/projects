@@ -67,8 +67,8 @@ public class AutoevaluacionBL extends AbstractBL<Autoevaluacion>{
     }
 
     @Override
-    public Autoevaluacion buscar(long id) {
-        return search(id);
+    public Autoevaluacion buscar(long id_autoevaluacion) {
+        return search(id_autoevaluacion);
     }
 
     @Override

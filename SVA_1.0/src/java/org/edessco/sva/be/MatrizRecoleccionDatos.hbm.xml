@@ -17,28 +17,28 @@
         <property name="fechaRegistro" type="date">
             <column name="fecha_registro" length="10" />
         </property>
-        <property name="resultadoComiteInterno" type="java.lang.Integer">
+        <property name="resultadoComiteInterno" type="boolean">
             <column name="resultado_comite_interno" />
         </property>
-        <property name="resultadoEncuestaDocente" type="java.lang.Integer">
+        <property name="resultadoEncuestaDocente" type="boolean">
             <column name="resultado_encuesta_docente" />
         </property>
-        <property name="resultadoEncuestaAdministrativo" type="java.lang.Integer">
+        <property name="resultadoEncuestaAdministrativo" type="boolean">
             <column name="resultado_encuesta_administrativo" />
         </property>
-        <property name="resultadoEncuestaEgresado" type="java.lang.Integer">
+        <property name="resultadoEncuestaEgresado" type="boolean">
             <column name="resultado_encuesta_egresado" />
         </property>
-        <property name="resultadoEncuestaEstudiante" type="java.lang.Integer">
+        <property name="resultadoEncuestaEstudiante" type="boolean">
             <column name="resultado_encuesta_estudiante" />
         </property>
-        <property name="resultadoEncuestaGrupoint" type="java.lang.Integer">
+        <property name="resultadoEncuestaGrupoint" type="boolean">
             <column name="resultado_encuesta_grupoint" />
         </property>
-        <property name="resultadoCuestionario" type="java.lang.Integer">
+        <property name="resultadoCuestionario" type="boolean">
             <column name="resultado_cuestionario" />
         </property>
-        <property name="resultadoInformeSgc" type="java.lang.Integer">
+        <property name="resultadoInformeSgc" type="boolean">
             <column name="resultado_informe_sgc" />
         </property>
         <property name="resultadoFinal" type="boolean">

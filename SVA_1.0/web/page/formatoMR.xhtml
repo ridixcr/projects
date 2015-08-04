@@ -19,7 +19,7 @@
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="10,15,20">
                             <f:facet name="header">
-                                
+
                             </f:facet>
 
                             <p:column headerText="Nº" style="width: 15px">
@@ -33,101 +33,63 @@
                                 <h:outputText value="#{estandarItem.titulo}" />
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEdit" update=":formMR" oncomplete="PF('dlgMR').show();" icon="ui-icon-extlink" title="Editar">
+                                <p:commandButton id="btnEdit" update=":formMR" oncomplete="PF('dlgMR').show();" icon="ui-icon-pencil" title="Editar" actionListener="#{estandarBean.recuperarResultados(estandarItem.idestandar)}">
                                     <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
-                                </p:commandButton>                            
+                                </p:commandButton>  
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEstado" icon="ui-icon-extlink" title="Estado">
-                                </p:commandButton>                            
+                                <p:commandButton id="btnEstado" icon="ui-icon-closethick" title="Estado">
+                                    <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}"/> 
+                                </p:commandButton>  
                             </p:column>
                         </p:dataTable>
                     </h:form>
 
                     <h:form id="formMR">
                         <p:dialog header="MATRIZ DE RECOLECCIÓN DE DATOS - FORMATO MR" widgetVar="dlgMR" id="dlgMR" modal="true"
-                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
-                            <h:outputLabel value="Estándar:" style="font-weight: bold"/>
-                            <h:outputLabel value="Este es el estandar seleccionado" />
+                                  resizable="false" closable="true">
+                            <h:outputLabel value="ESTANDAR : N° #{estandarBean.estandar.numeroEstandar}" style="font-weight: bold"/>
+                            <p:scrollPanel style="width: 370px;border: none;">
+                                <h:outputText value="#{estandarBean.estandar.titulo}" escape="false" style="width: 100%; border: none;font-weight: bold;text-transform: uppercase;color: #8D3333;"/> 
+                            </p:scrollPanel> 
+                            <p:separator/>
+                            <p:scrollPanel style="width: 370px;border: none;">
+                                <h:outputText value="#{estandarBean.autoevaluacion.titulo}" escape="false" style="width: 100%; border: none;font-weight: bold;text-transform: uppercase;color: #8D3333;"/> 
+                            </p:scrollPanel> 
                             <p:separator/>
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
-                                
+
                                 <h:outputLabel for="cbx_comite_interno" value="Comité interno:" style="font-weight: bold; text-align: right"/>
-                                <p:selectOneMenu id="cbx_comite_interno" label="Comité interno" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_comite_interno" value="#{estandarBean.matrizRecoleccionDatos.resultadoComiteInterno}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_encuestaD" value="Encuesta Docente:" style="font-weight: bold"/>
-                                <p:selectOneMenu id="cbx_encuestaD" label="Encuesta Docente" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_encuestaD" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaDocente}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_encuestaE" value="Encuesta Estudiante:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_encuestaE" label="Encuesta Estudiante" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_encuestaE" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaEstudiante}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_encuestaAD" value="Encuesta Administrativo:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_encuestaAD" label="Encuesta Administrativo" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_encuestaAD" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaAdministrativo}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_encuestaEG" value="Encuesta Egresado:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_encuestaEG" label="Encuesta Egresado" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_encuestaEG" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaEgresado}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_encuestaGI" value="Encuesta Grupo de Interés:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_encuestaGI" label="Encuesta Grupo de Interés" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_encuestaGI" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaGrupoint}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_cuestionario" value="Cuestionario Docente:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_cuestionario" label="Cuestionario Docente" style="width:150px"
-                                                 value="" disabled="true">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_cuestionario" value="#{estandarBean.matrizRecoleccionDatos.resultadoCuestionario}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" disabled="true"/>
+
                                 <h:outputLabel for="cbx_informeSGC" value="Informe SGC:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_informeSGC" label="Informe SGC" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_informeSGC" value="#{estandarBean.matrizRecoleccionDatos.resultadoInformeSgc}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="cbx_discusion" value="Pasa a Discusión:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_discusion" label="Pasa a Discusión" style="width:150px"
-                                                 value="">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="true"/>
-                                    <f:selectItem itemLabel="No" itemValue="false"/>
-                                </p:selectOneMenu>
-                                
+                                <p:selectBooleanButton id="cbx_discusion" value="#{estandarBean.matrizRecoleccionDatos.resultadoFinal}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+
                                 <h:outputLabel for="txa_observacion" value="Observación:" style="font-weight: bold" />
-                                <p:inputTextarea id="txa_observacion" label="Observación" cols="50" />
-                                
-                                <f:facet name="footer">
+                                <p:inputTextarea id="txa_observacion" label="Observación" style="width: 150px;height: 100px;resize: none;" />
+
+                                <f:facet name="footer">                                    
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
                                                      oncomplete="PF('dlgMR').hide();" icon="icon-guardar" 
