@@ -2,6 +2,7 @@ package org.edessco.sva.da;
 
 import java.util.List;
 import org.edessco.sva.be.RegistroGradoCumplimiento;
+import org.edessco.sva.be.RegistroResultado;
 import org.edessco.sva.util.AbstractDA;
 import org.springframework.stereotype.Repository;
 
@@ -120,5 +121,11 @@ public class RegistroGradoCumplimientoDA extends AbstractDA<RegistroGradoCumplim
     @Override
     public RegistroGradoCumplimiento buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); 
+    }
+    public RegistroGradoCumplimiento buscar(long id_estandar,long id_autoevaluacion) {
+        return search("FROM RegistroGradoCumplimiento rgc "
+                    + " inner join fetch rgc.estandar e"
+                    + " inner join fetch rgc.autoevaluacion au"
+                    + " where e.idestandar="+id_estandar+" and au.idautoevaluacion="+id_autoevaluacion);
     }
 }

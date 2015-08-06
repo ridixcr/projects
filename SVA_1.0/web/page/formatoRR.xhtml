@@ -33,12 +33,13 @@
                                 <h:outputText value="#{estandarItem.titulo}" />
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEdit" update=":formRR" oncomplete="PF('dlgRR').show();" icon="ui-icon-extlink" title="Editar">
+                                <p:commandButton id="btnEdit" update=":formRR" oncomplete="PF('dlgRR').show();" 
+                                                  actionListener="#{estandarBean.recuperarResultadosFRR(estandarItem.idestandar)}" icon="ui-icon-pencil" title="Editar">
                                     <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEstado" icon="ui-icon-extlink" title="Estado">
+                                <p:commandButton id="btnEstado" icon="ui-icon-closethick" title="Estado">
                                 </p:commandButton>                            
                             </p:column>
                         </p:dataTable>
@@ -46,34 +47,38 @@
 
                     <h:form id="formRR">
                         <p:dialog header="REGISTRO DE RESULTADOS - FORMATO RR" widgetVar="dlgRR" id="dlgMR" modal="true"
-                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
-                            <h:outputLabel value="Estándar:" style="font-weight: bold"/>
-                            <h:outputLabel value="Este es el estandar seleccionado" />
+                                  resizable="false" closable="true">
+                            <h:outputLabel value="ESTANDAR : N° #{estandarBean.estandar.numeroEstandar}" style="font-weight: bold"/>
+                            <p:scrollPanel style="width: 370px;border: none;">
+                                <h:outputText value="#{estandarBean.estandar.titulo}" escape="false" style="width: 100%; border: none;font-weight: bold;text-transform: uppercase;color: #8D3333;"/> 
+                            </p:scrollPanel> 
                             <p:separator/>
-                            
-                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">                                
+                            <p:scrollPanel style="width: 370px;border: none;">
+                                <h:outputText value="#{estandarBean.autoevaluacion.titulo}" escape="false" style="width: 100%; border: none;font-weight: bold;text-transform: uppercase;color: #8D3333;"/> 
+                            </p:scrollPanel> 
+                            <p:separator/>                            
+                            <h:panelGrid id="gridNew" columns="3" cellpadding="3">                                
                                                                
                                 <h:outputLabel for="cbx_cuestionario" value="Cuestionario Docente:" style="font-weight: bold" />
-                                <p:selectOneMenu id="cbx_cuestionario" label="Cuestionario Docente" style="width:150px"
-                                                 value="" disabled="true">
-                                    <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Sí" itemValue="1"/>
-                                    <f:selectItem itemLabel="No" itemValue="0"/>
-                                </p:selectOneMenu>
+                                <p:selectBooleanButton id="cbx_encuestaD" value="#{estandarBean.registroResultado.estado}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" disabled="true" />
+                                <p:message for="cbx_encuestaD" display="icon"/>
                                 
                                 <h:outputLabel for="txa_explicacion" value="Explicación Consensuada:" style="font-weight: bold" />
-                                <p:inputTextarea id="txa_explicacion" label="Explicación Consensuada" cols="50" />
+                                <p:inputTextarea id="txa_explicacion" value="#{estandarBean.registroResultado.explicacionConsolidada}" label="Explicación Consensuada" style="width: 150px;height: 100px;resize: none;" required="true" requiredMessage="Explicación Consensuada Requerida."/>
+                                <p:message for="txa_explicacion" display="icon"/>
                                 
                                 <h:outputLabel for="txa_alternativasol" value="Alternativa de Solución Consensuada:" style="font-weight: bold" />
-                                <p:inputTextarea id="txa_alternativasol" label="Alternativa de Solución Consensuada" cols="50" />
+                                <p:inputTextarea id="txa_alternativasol" value="#{estandarBean.registroResultado.alternativaSolucionConsolidada}" label="Alternativa de Solución Consensuada" style="width: 150px;height: 100px;resize: none;" required="true" requiredMessage="Alternativa de Solución Consensuada Requerida."/>
+                                <p:message for="txa_alternativasol" display="icon"/>
                                 
                                 <f:facet name="footer">
-                                    <p:separator/>
-                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
-                                                     oncomplete="PF('dlgRR').hide();" icon="icon-guardar" 
-                                                     value="Guardar" title="Guardar" />
-                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgRR').hide();"
-                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                    <p:commandButton id="btnRegistrar" update=":msg,gridNew" validateClient="true"
+                                                     oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgRR').hide()}" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{estandarBean.guardarRegistroResultados}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  update="gridNew,:msg" process="@this"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar">
+                                        <p:resetInput target="gridNew,:msg" />
+                                    </p:commandButton>
                                 </f:facet>
                             </h:panelGrid>
                         </p:dialog>

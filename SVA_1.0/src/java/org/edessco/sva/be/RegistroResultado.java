@@ -21,6 +21,7 @@ public class RegistroResultado  implements java.io.Serializable {
      private Boolean estado;
 
     public RegistroResultado() {
+        setIdregistroresultado(new Long(0));
     }
 
 	

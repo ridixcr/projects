@@ -14,13 +14,13 @@
         <many-to-one name="estandar" class="org.edessco.sva.be.Estandar" fetch="select">
             <column name="id_estandar" not-null="true" />
         </many-to-one>
-        <property name="cumplimiento" type="java.lang.Boolean">
+        <property name="cumplimiento" type="boolean">
             <column name="cumplimiento" />
         </property>
         <property name="explicacionConsolidada" type="string">
             <column name="explicacion_consolidada" length="65535" />
         </property>
-        <property name="estado" type="java.lang.Boolean">
+        <property name="estado" type="boolean">
             <column name="estado" />
         </property>
     </class>

@@ -5,6 +5,7 @@
  */
 package org.edessco.sva.cv;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,20 +16,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
-import org.edessco.sva.be.Autoevaluacion;
-import org.edessco.sva.be.Criterio;
-import org.edessco.sva.be.Estandar;
-import org.edessco.sva.be.MatrizRecoleccionDatos;
-import org.edessco.sva.bl.AutoevaluacionBL;
-import org.edessco.sva.bl.EstandarBL;
-import org.edessco.sva.bl.MatrizRecoleccionDatosBL;
+import org.edessco.sva.be.*;
+import org.edessco.sva.bl.*;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
 
-/**
- *
- * @author JorgeLuis
- */
 @ManagedBean
 @ViewScoped
 public class EstandarBean {
@@ -45,6 +37,21 @@ public class EstandarBean {
     @ManagedProperty(value = "#{matrizRecoleccionDatos}")
     private MatrizRecoleccionDatos matrizRecoleccionDatos;
     
+    @ManagedProperty(value = "#{registroResultadoBL}")
+    private RegistroResultadoBL registroResultadoBL;
+    @ManagedProperty(value = "#{registroResultado}")
+    private RegistroResultado registroResultado;
+    
+    @ManagedProperty(value = "#{registroGradoCumplimientoBL}")
+    private RegistroGradoCumplimientoBL registroGradoCumplimientoBL;
+    @ManagedProperty(value = "#{registroGradoCumplimiento}")
+    private RegistroGradoCumplimiento registroGradoCumplimiento;
+    
+    @ManagedProperty(value = "#{iniciativaMejoraBL}")
+    private IniciativaMejoraBL iniciativaMejoraBL;
+    @ManagedProperty(value = "#{iniciativaMejora}")
+    private IniciativaMejora iniciativaMejora;
+
     @ManagedProperty(value = "#{autoevaluacionBL}")
     private AutoevaluacionBL autoevaluacionBL;
     @ManagedProperty(value = "#{autoevaluacion}")
@@ -58,12 +65,13 @@ public class EstandarBean {
         listar();
     }
 
-    public void recuperarResultados(long id_estandar) {
-        setMatrizRecoleccionDatos(getMatrizRecoleccionDatosBL().buscar(id_estandar));
-        if (getMatrizRecoleccionDatos() == null) {                        
+    public void recuperarResultadosFMR(long id_estandar) {
+        setMatrizRecoleccionDatos(getMatrizRecoleccionDatosBL().buscar(id_estandar, getAutoevaluacion().getIdautoevaluacion()));
+        if (getMatrizRecoleccionDatos() == null) {
             setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
             getMatrizRecoleccionDatos().setEstandar(getEstandarBL().buscar(id_estandar));
             getMatrizRecoleccionDatos().setAutoevaluacion(getAutoevaluacion());
+            getMatrizRecoleccionDatos().setFechaRegistro(new Date());
             listaResultadosEncuestaDocente.clear();
             listaResultadosEncuestaDocente.addAll(getEstandarBL().respuestaCuestionarioDocente(id_estandar));
             for (Object item : listaResultadosEncuestaDocente) {
@@ -76,6 +84,130 @@ public class EstandarBean {
             }
         }
     }
+    public void recuperarResultadosFRR(long id_estandar) {
+        setRegistroResultado(getRegistroResultadoBL().buscar(id_estandar, getAutoevaluacion().getIdautoevaluacion()));
+        if (getRegistroResultado() == null) {
+            setRegistroResultado(new RegistroResultado());
+            getRegistroResultado().setEstandar(getEstandarBL().buscar(id_estandar));
+            getRegistroResultado().setAutoevaluacion(getAutoevaluacion());
+            getRegistroResultado().setFechaTaller(new Date());
+            listaResultadosEncuestaDocente.clear();
+            listaResultadosEncuestaDocente.addAll(getEstandarBL().respuestaCuestionarioDocente(id_estandar));
+            for (Object item : listaResultadosEncuestaDocente) {
+                Object[] o = (Object[]) item;
+                if (Double.parseDouble(o[0].toString()) >= 50) {
+                    getRegistroResultado().setEstado(true);
+                } else {
+                    getRegistroResultado().setEstado(false);
+                }
+            }
+        }
+    }
+    public void recuperarResultadosFRC(long id_estandar) {
+        setRegistroGradoCumplimiento(getRegistroGradoCumplimientoBL().buscar(id_estandar, getAutoevaluacion().getIdautoevaluacion()));
+        if (getRegistroGradoCumplimiento() == null) {
+            setRegistroGradoCumplimiento(new RegistroGradoCumplimiento());
+            getRegistroGradoCumplimiento().setEstandar(getEstandarBL().buscar(id_estandar));
+            getRegistroGradoCumplimiento().setAutoevaluacion(getAutoevaluacion());            
+            listaResultadosEncuestaDocente.clear();
+            listaResultadosEncuestaDocente.addAll(getEstandarBL().respuestaCuestionarioDocente(id_estandar));
+            for (Object item : listaResultadosEncuestaDocente) {
+                Object[] o = (Object[]) item;
+                if (Double.parseDouble(o[0].toString()) >= 50) {
+                    getRegistroGradoCumplimiento().setCumplimiento(true);
+                } else {
+                    getRegistroGradoCumplimiento().setCumplimiento(false);
+                }
+            }
+        }
+    }
+    public void recuperarResultadosFRM(long id_estandar) {
+        setIniciativaMejora(getIniciativaMejoraBL().buscar(id_estandar, getAutoevaluacion().getIdautoevaluacion()));
+        if (getIniciativaMejora() == null) {
+            setIniciativaMejora(new IniciativaMejora());
+            getIniciativaMejora().setEstandar(getEstandarBL().buscar(id_estandar));
+            getIniciativaMejora().setAutoevaluacion(getAutoevaluacion());            
+            listaResultadosEncuestaDocente.clear();
+            listaResultadosEncuestaDocente.addAll(getEstandarBL().respuestaCuestionarioDocente(id_estandar));
+            for (Object item : listaResultadosEncuestaDocente) {
+                Object[] o = (Object[]) item;
+                if (Double.parseDouble(o[0].toString()) >= 50) {
+                    getIniciativaMejora().setEstado(true);
+                } else {
+                    getIniciativaMejora().setEstado(false);
+                }
+            }
+        }
+    }
+
+    public void guardarMatrizRecoleccionDatos() {
+        if (getMatrizRecoleccionDatos().getIdmatriz() <= 0) {
+            setTareaEvento(new Tarea(Tarea.REGISTRO,  getMatrizRecoleccionDatosBL().registrar(getMatrizRecoleccionDatos())) {
+                @Override
+                public void proceso() {
+                    setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+                }
+            });
+        } else {
+            setTareaEvento(new Tarea(Tarea.ACTUALIZACION,getMatrizRecoleccionDatosBL().actualizar(getMatrizRecoleccionDatos())) {
+                @Override
+                public void proceso() {}
+            });
+            ;
+        }
+        setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+    }
+    public void guardarRegistroResultados() {
+        if (getRegistroResultado().getIdregistroresultado() <= 0) {
+            setTareaEvento(new Tarea(Tarea.REGISTRO,  getRegistroResultadoBL().registrar(getRegistroResultado())) {
+                @Override
+                public void proceso() {
+                    setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+                }
+            });
+        } else {
+            setTareaEvento(new Tarea(Tarea.ACTUALIZACION,getRegistroResultadoBL().actualizar(getRegistroResultado())) {
+                @Override
+                public void proceso() {}
+            });
+            ;
+        }
+        setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+    }
+    public void guardarRegistroGradoCumplimiento() {
+        if (getRegistroGradoCumplimiento().getIdgradocumplimiento() <= 0) {
+            setTareaEvento(new Tarea(Tarea.REGISTRO,  getRegistroGradoCumplimientoBL().registrar(getRegistroGradoCumplimiento())) {
+                @Override
+                public void proceso() {
+                    setRegistroGradoCumplimiento(new RegistroGradoCumplimiento());
+                }
+            });
+        } else {
+            setTareaEvento(new Tarea(Tarea.ACTUALIZACION,getRegistroGradoCumplimientoBL().actualizar(getRegistroGradoCumplimiento())) {
+                @Override
+                public void proceso() {}
+            });
+            ;
+        }
+        setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+    }
+    public void guardarIniciativaMejora() {
+        if (getIniciativaMejora().getIdiniciativa() <= 0) {
+            setTareaEvento(new Tarea(Tarea.REGISTRO,  getIniciativaMejoraBL().registrar(getIniciativaMejora())) {
+                @Override
+                public void proceso() {
+                    setIniciativaMejora(new IniciativaMejora());
+                }
+            });
+        } else {
+            setTareaEvento(new Tarea(Tarea.ACTUALIZACION,getIniciativaMejoraBL().actualizar(getIniciativaMejora())) {
+                @Override
+                public void proceso() {}
+            });
+            ;
+        }
+        setMatrizRecoleccionDatos(new MatrizRecoleccionDatos());
+    }
 
     public void registrar() {
         setTareaEvento(new Tarea(Tarea.REGISTRO, getEstandarBL().registrar(getEstandar())) {
@@ -86,7 +218,7 @@ public class EstandarBean {
             }
         });
     }
-    
+
     public void listar() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         if (httpSession.getAttribute("idCriterio") != null) {
@@ -220,6 +352,54 @@ public class EstandarBean {
 
     public void setAutoevaluacion(Autoevaluacion autoevaluacion) {
         this.autoevaluacion = autoevaluacion;
+    }
+
+    public RegistroResultadoBL getRegistroResultadoBL() {
+        return registroResultadoBL;
+    }
+
+    public void setRegistroResultadoBL(RegistroResultadoBL registroResultadoBL) {
+        this.registroResultadoBL = registroResultadoBL;
+    }
+
+    public RegistroResultado getRegistroResultado() {
+        return registroResultado;
+    }
+
+    public void setRegistroResultado(RegistroResultado registroResultado) {
+        this.registroResultado = registroResultado;
+    }
+
+    public RegistroGradoCumplimientoBL getRegistroGradoCumplimientoBL() {
+        return registroGradoCumplimientoBL;
+    }
+
+    public void setRegistroGradoCumplimientoBL(RegistroGradoCumplimientoBL registroGradoCumplimientoBL) {
+        this.registroGradoCumplimientoBL = registroGradoCumplimientoBL;
+    }
+
+    public RegistroGradoCumplimiento getRegistroGradoCumplimiento() {
+        return registroGradoCumplimiento;
+    }
+
+    public void setRegistroGradoCumplimiento(RegistroGradoCumplimiento registroGradoCumplimiento) {
+        this.registroGradoCumplimiento = registroGradoCumplimiento;
+    }
+
+    public IniciativaMejoraBL getIniciativaMejoraBL() {
+        return iniciativaMejoraBL;
+    }
+
+    public void setIniciativaMejoraBL(IniciativaMejoraBL iniciativaMejoraBL) {
+        this.iniciativaMejoraBL = iniciativaMejoraBL;
+    }
+
+    public IniciativaMejora getIniciativaMejora() {
+        return iniciativaMejora;
+    }
+
+    public void setIniciativaMejora(IniciativaMejora iniciativaMejora) {
+        this.iniciativaMejora = iniciativaMejora;
     }
 
 }

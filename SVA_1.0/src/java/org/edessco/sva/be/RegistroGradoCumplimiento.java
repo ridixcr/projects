@@ -16,11 +16,12 @@ public class RegistroGradoCumplimiento  implements java.io.Serializable {
      private Long idgradocumplimiento;
      private Autoevaluacion autoevaluacion;
      private Estandar estandar;
-     private Boolean cumplimiento;
+     private boolean cumplimiento=false;
      private String explicacionConsolidada;
-     private Boolean estado;
+     private boolean estado=false;
 
     public RegistroGradoCumplimiento() {
+        setIdgradocumplimiento(new Long(0));
     }
 
 	
@@ -28,7 +29,7 @@ public class RegistroGradoCumplimiento  implements java.io.Serializable {
         this.autoevaluacion = autoevaluacion;
         this.estandar = estandar;
     }
-    public RegistroGradoCumplimiento(Autoevaluacion autoevaluacion, Estandar estandar, Boolean cumplimiento, String explicacionConsolidada, Boolean estado) {
+    public RegistroGradoCumplimiento(Autoevaluacion autoevaluacion, Estandar estandar, boolean cumplimiento, String explicacionConsolidada, boolean estado) {
        this.autoevaluacion = autoevaluacion;
        this.estandar = estandar;
        this.cumplimiento = cumplimiento;
@@ -57,11 +58,11 @@ public class RegistroGradoCumplimiento  implements java.io.Serializable {
     public void setEstandar(Estandar estandar) {
         this.estandar = estandar;
     }
-    public Boolean getCumplimiento() {
+    public boolean getCumplimiento() {
         return this.cumplimiento;
     }
     
-    public void setCumplimiento(Boolean cumplimiento) {
+    public void setCumplimiento(boolean cumplimiento) {
         this.cumplimiento = cumplimiento;
     }
     public String getExplicacionConsolidada() {
@@ -71,11 +72,11 @@ public class RegistroGradoCumplimiento  implements java.io.Serializable {
     public void setExplicacionConsolidada(String explicacionConsolidada) {
         this.explicacionConsolidada = explicacionConsolidada;
     }
-    public Boolean getEstado() {
+    public boolean getEstado() {
         return this.estado;
     }
     
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

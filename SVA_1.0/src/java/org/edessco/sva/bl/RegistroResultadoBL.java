@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-@Service("matrizRecoleccionDatosBL")
-public class MatrizRecoleccionDatosBL  extends AbstractBL<MatrizRecoleccionDatos>{
-
+@Service("registroResultadoBL")
+public class RegistroResultadoBL   extends AbstractBL<RegistroResultado>{
     @Autowired
-    @Qualifier("matrizRecoleccionDatosDA")
-    private MatrizRecoleccionDatosDA dao;
+    @Qualifier("registroResultadoDA")
+    private RegistroResultadoDA dao;
     
     @Override
     public AbstractDA getDAO() {
@@ -23,44 +22,44 @@ public class MatrizRecoleccionDatosBL  extends AbstractBL<MatrizRecoleccionDatos
 
     @Override
     public void setDA(AbstractDA dao) {
-        this.dao=(MatrizRecoleccionDatosDA) dao;
+        this.dao=(RegistroResultadoDA) dao;
     }
 
     @Override
-    public long registrar(MatrizRecoleccionDatos bean) {
+    public long registrar(RegistroResultado bean) {
         return save(bean);
     }
 
     @Override
-    public long actualizar(MatrizRecoleccionDatos bean) {
+    public long actualizar(RegistroResultado bean) {
         return update(bean);
     }
 
     @Override
-    public long eliminar(MatrizRecoleccionDatos bean) {
+    public long eliminar(RegistroResultado bean) {
         return delete(bean);
     }
 
     @Override
-    public List<MatrizRecoleccionDatos> listar() {
+    public List<RegistroResultado> listar() {
         return list();
     }
 
     @Override
-    public List<MatrizRecoleccionDatos> listar(String ref) {
+    public List<RegistroResultado> listar(String ref) {
         return list(ref);
     }
 
     @Override
-    public List<MatrizRecoleccionDatos> listar(long id) {
+    public List<RegistroResultado> listar(long id) {
         return list(id);
     }
 
     @Override
-    public MatrizRecoleccionDatos buscar(long id) {
+    public RegistroResultado buscar(long id) {
         return search(id);
     }
-    public MatrizRecoleccionDatos buscar(long id_estandar,long id_autoevaluacion) {
+    public RegistroResultado buscar(long id_estandar,long id_autoevaluacion) {
         return dao.buscar(id_estandar, id_autoevaluacion);
     }
 
@@ -70,16 +69,7 @@ public class MatrizRecoleccionDatosBL  extends AbstractBL<MatrizRecoleccionDatos
     }
 
     @Override
-    public MatrizRecoleccionDatos buscar(String ref) {
+    public RegistroResultado buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public List<MatrizRecoleccionDatos> listarEstandar(long id) {
-        return dao.listarEstandar(id);
-    }
-    
-    public List respuestaCuestionarioDocente(long id_estandar){
-        return dao.respuestaCuestionarioDocente(id_estandar);
-    }
-    
 }

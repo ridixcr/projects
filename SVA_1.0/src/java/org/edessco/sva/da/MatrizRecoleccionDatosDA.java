@@ -44,6 +44,12 @@ public class MatrizRecoleccionDatosDA extends AbstractDA<MatrizRecoleccionDatos>
                     + " inner join fetch mrd.estandar e"
                     + " where e.idestandar="+id_estandar+"");
     }
+    public MatrizRecoleccionDatos buscar(long id_estandar,long id_autoevaluacion) {
+        return search("FROM MatrizRecoleccionDatos mrd "
+                    + " inner join fetch mrd.estandar e"
+                    + " inner join fetch mrd.autoevaluacion au"
+                    + " where e.idestandar="+id_estandar+" and au.idautoevaluacion="+id_autoevaluacion);
+    }
 
     @Override
     public long id() {

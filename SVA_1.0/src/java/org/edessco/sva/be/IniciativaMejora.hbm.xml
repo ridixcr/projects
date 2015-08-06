@@ -17,7 +17,7 @@
         <property name="alternativaSolucionConsensuada" type="string">
             <column name="alternativa_solucion_consensuada" length="65535" />
         </property>
-        <property name="estado" type="java.lang.Boolean">
+        <property name="estado" type="boolean">
             <column name="estado" />
         </property>
     </class>

@@ -17,9 +17,10 @@ public class IniciativaMejora  implements java.io.Serializable {
      private Autoevaluacion autoevaluacion;
      private Estandar estandar;
      private String alternativaSolucionConsensuada;
-     private Boolean estado;
+     private boolean estado;
 
     public IniciativaMejora() {
+         setIdiniciativa(new Long(0));
     }
 
 	
@@ -27,7 +28,7 @@ public class IniciativaMejora  implements java.io.Serializable {
         this.autoevaluacion = autoevaluacion;
         this.estandar = estandar;
     }
-    public IniciativaMejora(Autoevaluacion autoevaluacion, Estandar estandar, String alternativaSolucionConsensuada, Boolean estado) {
+    public IniciativaMejora(Autoevaluacion autoevaluacion, Estandar estandar, String alternativaSolucionConsensuada, boolean estado) {
        this.autoevaluacion = autoevaluacion;
        this.estandar = estandar;
        this.alternativaSolucionConsensuada = alternativaSolucionConsensuada;
@@ -62,11 +63,11 @@ public class IniciativaMejora  implements java.io.Serializable {
     public void setAlternativaSolucionConsensuada(String alternativaSolucionConsensuada) {
         this.alternativaSolucionConsensuada = alternativaSolucionConsensuada;
     }
-    public Boolean getEstado() {
+    public boolean getEstado() {
         return this.estado;
     }
     
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

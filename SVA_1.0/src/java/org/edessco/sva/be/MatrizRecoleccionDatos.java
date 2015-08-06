@@ -26,9 +26,10 @@ public class MatrizRecoleccionDatos  implements java.io.Serializable {
      private boolean resultadoInformeSgc;
      private boolean resultadoFinal;
      private String observacion;
-     private Boolean estado;
+     private Boolean estado = new Boolean(false);
 
     public MatrizRecoleccionDatos() {
+        setIdmatriz(new Long(0));
     }
 
 	

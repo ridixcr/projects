@@ -11,7 +11,7 @@
         <ui:composition template="./../template/layoutComision.xhtml">
 
             <ui:define name="content">
-                <p:growl id="msg" showDetail="true" />
+                <p:growl id="msg" showDetail="true" sticky="true" autoUpdate="true"/>
                 <p:panel id="pnl_formatoMR" header="MATRIZ DE RECOLECCIÓN DE DATOS - FORMATO MR">
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" value="#{estandarBean.listaEstandares}" var="estandarItem"
@@ -33,7 +33,8 @@
                                 <h:outputText value="#{estandarItem.titulo}" />
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEdit" update=":formMR" oncomplete="PF('dlgMR').show();" icon="ui-icon-pencil" title="Editar" actionListener="#{estandarBean.recuperarResultados(estandarItem.idestandar)}">
+                                <p:commandButton id="btnEdit" update=":formMR" oncomplete="PF('dlgMR').show();" icon="ui-icon-pencil" title="Editar" 
+                                                 actionListener="#{estandarBean.recuperarResultadosFMR(estandarItem.idestandar)}">
                                     <f:setPropertyActionListener value="#{estandarItem}" target="#{estandarBean.estandar}" />
                                 </p:commandButton>  
                             </p:column>
@@ -57,45 +58,56 @@
                                 <h:outputText value="#{estandarBean.autoevaluacion.titulo}" escape="false" style="width: 100%; border: none;font-weight: bold;text-transform: uppercase;color: #8D3333;"/> 
                             </p:scrollPanel> 
                             <p:separator/>
-                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
-
+                            <h:panelGrid id="gridNew" columns="3" cellpadding="3">
                                 <h:outputLabel for="cbx_comite_interno" value="Comité interno:" style="font-weight: bold; text-align: right"/>
                                 <p:selectBooleanButton id="cbx_comite_interno" value="#{estandarBean.matrizRecoleccionDatos.resultadoComiteInterno}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_comite_interno" display="icon"/>
 
                                 <h:outputLabel for="cbx_encuestaD" value="Encuesta Docente:" style="font-weight: bold"/>
                                 <p:selectBooleanButton id="cbx_encuestaD" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaDocente}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_encuestaD" display="icon"/>
 
                                 <h:outputLabel for="cbx_encuestaE" value="Encuesta Estudiante:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_encuestaE" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaEstudiante}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_encuestaE" display="icon"/>
 
                                 <h:outputLabel for="cbx_encuestaAD" value="Encuesta Administrativo:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_encuestaAD" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaAdministrativo}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_encuestaAD" display="icon"/>
 
                                 <h:outputLabel for="cbx_encuestaEG" value="Encuesta Egresado:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_encuestaEG" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaEgresado}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_encuestaEG" display="icon"/>
 
                                 <h:outputLabel for="cbx_encuestaGI" value="Encuesta Grupo de Interés:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_encuestaGI" value="#{estandarBean.matrizRecoleccionDatos.resultadoEncuestaGrupoint}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_encuestaGI" display="icon"/>
 
                                 <h:outputLabel for="cbx_cuestionario" value="Cuestionario Docente:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_cuestionario" value="#{estandarBean.matrizRecoleccionDatos.resultadoCuestionario}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" disabled="true"/>
+                                <p:message for="cbx_cuestionario" display="icon"/>
 
                                 <h:outputLabel for="cbx_informeSGC" value="Informe SGC:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_informeSGC" value="#{estandarBean.matrizRecoleccionDatos.resultadoInformeSgc}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_informeSGC" display="icon"/>
 
                                 <h:outputLabel for="cbx_discusion" value="Pasa a Discusión:" style="font-weight: bold" />
                                 <p:selectBooleanButton id="cbx_discusion" value="#{estandarBean.matrizRecoleccionDatos.resultadoFinal}" onLabel="SI" offLabel="NO" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:150px" />
+                                <p:message for="cbx_discusion" display="icon"/>
 
                                 <h:outputLabel for="txa_observacion" value="Observación:" style="font-weight: bold" />
-                                <p:inputTextarea id="txa_observacion" label="Observación" style="width: 150px;height: 100px;resize: none;" />
+                                <p:inputTextarea id="txa_observacion" label="Observación" value="#{estandarBean.matrizRecoleccionDatos.observacion}" style="width: 150px;height: 100px;resize: none;" required="true" requiredMessage="Observacion Requerida."/>
+                                <p:message for="txa_observacion" display="icon"/>
 
                                 <f:facet name="footer">                                    
                                     <p:separator/>
-                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
-                                                     oncomplete="PF('dlgMR').hide();" icon="icon-guardar" 
-                                                     value="Guardar" title="Guardar" />
-                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgMR').hide();"
-                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                    <p:commandButton id="btnRegistrar" update=":msg,gridNew" validateClient="true"
+                                                     oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMR').hide()}" icon="icon-guardar" 
+                                                     value="Guardar" title="Guardar" actionListener="#{estandarBean.guardarMatrizRecoleccionDatos}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  update="gridNew,:msg" process="@this"
+                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar">
+                                        <p:resetInput target="gridNew,:msg" />
+                                    </p:commandButton>
                                 </f:facet>
                             </h:panelGrid>
                         </p:dialog>

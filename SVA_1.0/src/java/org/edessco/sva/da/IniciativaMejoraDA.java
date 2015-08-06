@@ -53,4 +53,11 @@ public class IniciativaMejoraDA extends AbstractDA<IniciativaMejora>{
     public IniciativaMejora buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+    
+    public IniciativaMejora buscar(long id_estandar,long id_autoevaluacion) {
+        return search("FROM IniciativaMejora im "
+                    + " inner join fetch im.estandar e"
+                    + " inner join fetch im.autoevaluacion au"
+                    + " where e.idestandar="+id_estandar+" and au.idautoevaluacion="+id_autoevaluacion);
+    }
 }
