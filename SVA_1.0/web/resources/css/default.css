@@ -99,7 +99,7 @@ a:link:hover, a:visited:hover  {
     background-image: url(../img/iconos/remove.png)
 }
 
-.ui-layout-pane-north.ui-widget-content{
+/*.ui-layout-pane-north.ui-widget-content{
  border: 0;
 }
  
@@ -117,7 +117,7 @@ a:link:hover, a:visited:hover  {
  
  .ui-layout-pane-center.ui-widget-content{
  border: 0;
-}
+}*/
 
 .outputLabel{
     font-weight: bold;   
@@ -126,10 +126,10 @@ a:link:hover, a:visited:hover  {
     width: 380px;
 }
 
-.ui-panel{
+/*.ui-panel{
     border: none;
     padding: 0.2em;
-}
+}*/
 
 
 
