@@ -59,10 +59,11 @@ CREATE TABLE `alumno` (
   `serie` varchar(10) DEFAULT NULL,
   `fecha_ingreso` datetime DEFAULT NULL,
   `id_persona` bigint(20) NOT NULL,
+  `anio_ingreso` varchar(8) DEFAULT NULL,
   PRIMARY KEY (`idalumno`),
   KEY `foreign_key01` (`id_persona`),
   CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,6 +72,7 @@ CREATE TABLE `alumno` (
 
 LOCK TABLES `alumno` WRITE;
 /*!40000 ALTER TABLE `alumno` DISABLE KEYS */;
+INSERT INTO `alumno` VALUES (7,'1851955','200',NULL,36,'');
 /*!40000 ALTER TABLE `alumno` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -577,7 +579,7 @@ CREATE TABLE `persona` (
   PRIMARY KEY (`idpersona`),
   KEY `foreign_key01` (`id_unidad_academica`),
   CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`id_unidad_academica`) REFERENCES `unidad_academica` (`idunidadacademica`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -586,7 +588,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (28,'JULIO','ZAGA','HUAMAN','10458989','995686569','jzagah@unsch.edu.pe',26,'M'),(29,'CARLOS','QUISPE','PRADO','42518965','995689256','',26,'M'),(30,'PEDRO','RAMOS','CARBAJAL','41589658','999658457','',26,'M');
+INSERT INTO `persona` VALUES (28,'JULIO','ZAGA','HUAMAN','10458989','995686569','jzagah@unsch.edu.pe',26,'M'),(29,'CARLOS','QUISPE','PRADO','42518965','995689256','',26,'M'),(30,'PEDRO','RAMOS','CARBAJAL','41589658','999658457','',26,'M'),(36,'JORGE LUIS','SULCA','GONZALEZ','44038362','999188003','jlsulcag@gmail.com',26,'M');
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -799,7 +801,7 @@ CREATE TABLE `rol` (
 
 LOCK TABLES `rol` WRITE;
 /*!40000 ALTER TABLE `rol` DISABLE KEYS */;
-INSERT INTO `rol` VALUES (4,'Administrativo',1),(5,'Alumno',1),(10,'ComisiÃ³n interna',1),(11,'Docente',1),(12,'Egresado',1),(13,'Grupo de interÃ©s',1),(14,'Administrador',1);
+INSERT INTO `rol` VALUES (4,'Administrativo',1),(5,'Alumno',1),(10,'Comisión interna',1),(11,'Docente',1),(12,'Egresado',1),(13,'Grupo de interés',1),(14,'Administrador',1);
 /*!40000 ALTER TABLE `rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -865,14 +867,14 @@ CREATE TABLE `usuario` (
   `idusuario` bigint(20) NOT NULL AUTO_INCREMENT,
   `id_persona` bigint(20) NOT NULL,
   `nombre_usuario` varchar(60) DEFAULT NULL,
-  `contrasenia` varchar(60) DEFAULT NULL,
+  `contrasenia` varchar(250) DEFAULT NULL,
   `fecha_registro` datetime DEFAULT NULL,
   `fecha_alta` datetime DEFAULT NULL,
   `estado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`idusuario`),
   KEY `foreign_key01` (`id_persona`),
   CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_persona`) REFERENCES `persona` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -881,6 +883,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (23,36,'admin','c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec','2015-08-19 01:13:41',NULL,1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -900,7 +903,7 @@ CREATE TABLE `usuario_rol` (
   KEY `foreign_key02` (`id_usuario`),
   CONSTRAINT `usuario_rol_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`idrol`),
   CONSTRAINT `usuario_rol_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`idusuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -909,6 +912,7 @@ CREATE TABLE `usuario_rol` (
 
 LOCK TABLES `usuario_rol` WRITE;
 /*!40000 ALTER TABLE `usuario_rol` DISABLE KEYS */;
+INSERT INTO `usuario_rol` VALUES (5,14,23);
 /*!40000 ALTER TABLE `usuario_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -925,4 +929,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-08-19  0:05:56
+-- Dump completed on 2015-08-19  1:30:05
