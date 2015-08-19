@@ -171,12 +171,13 @@
                 <div class="izquierdo">
                     <p:panel id="usuario_loguin" style="margin-bottom: 5px;">
                         <f:facet name="header">
-                            INFORMES <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
+                            USUARIO <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
                         </f:facet>   
                         <div style="width: 100%;text-align: center;">                            
                             <p:panelGrid  columns="2" style="margin: 0 auto 0 auto;">
                                 <f:facet name="header">
-                                    <p:graphicImage name="img/Default_Photo.png" /> 
+                                    <p:graphicImage name="img/Default_Photo.png" style="width: 120px;height: 160px;"/>
+                                    
                                 </f:facet>
 
                                 <h:outputText value="Id:" />
@@ -195,24 +196,10 @@
                     </p:panel>
                     <h:form>
                         <p:menu  style="margin: 0 auto 8px auto; width: 96%;">
-                            <p:submenu label="GENERALIDADES">
-                                <p:menuitem url="index.xhtml" icon="ui-icon ui-icon-home" value="INICIO" title="INICIO"/>                                                               
-                                <p:menuitem url="historia.xhtml" icon="ui-icon ui-icon-script" value="RESEÑA HISTÓRICA" title="RESEÑA HISTÓRICA"/>                                                               
-                                <p:menuitem url="mensaje.xhtml" icon="ui-icon ui-icon-comment" value="MENSAJE DEL RECTOR" title="MENSAJE DEL RECTOR"/>                                                               
-                                <p:menuitem url="comision.xhtml" icon="ui-icon ui-icon-script" value="COMISIÓN PERMANENTE" title="COMISIÓN PERMANENTE"/>                                                               
-                                <p:menuitem url="mision.xhtml" icon="ui-icon ui-icon-star" value="MISIÓN Y VISIÓN" title="MISIÓN Y VISIÓN"/>                                                               
-                                <p:menuitem url="#" icon="ui-icon ui-icon-signal-diag" value="AVISOS" title="AVISOS"/>                                                              
-
-                            </p:submenu>   
-                            <p:submenu label="DOCUMENTOS DE GESTIÓN">
-                                <p:menuitem url="instrucciones.xhtml" icon="ui-icon ui-icon-lightbulb" value="INSTRUCCIONES DE INSCRIPCIÓN" title="INSTRUCCIONES DE INSCRIPCIÓN"/>                                                               
-                                <p:menuitem url="cronograma.xhtml" icon="ui-icon ui-icon-calendar" value="CRONOGRAMA" title="CRONOGRAMA"/>                                                               
-                                <p:menuitem url="tasas.xhtml" icon="ui-icon ui-icon-signal" value="TASAS EDUCATIVAS" title="TASAS EDUCATIVAS"/>                                                               
-                                <p:menuitem url="vacantes.xhtml" icon="ui-icon ui-icon-note" value="CUADRO DE VACANTES" title="CUADRO DE VACANTES"/>                                                               
-                                <p:menuitem url="reglamento.xhtml" icon="ui-icon ui-icon-bookmark" value="REGLAMENTO DEL CONCURSO" title="REGLAMENTO DEL CONCURSO"/> 
-                                <p:menuitem url="asignacion.xhtml" icon="ui-icon ui-icon-bookmark" value="ASIGNACIÓN DE AULAS" title="ASIGNACIÓN DE AULAS"/> 
-
-                            </p:submenu>                                                      
+                            <p:submenu label="ADMINISTRACION">
+                                <p:menuitem url="index.xhtml" icon="ui-icon ui-icon-key" value="CAMBIAR CONTRASEÑA" title="CAMBIAR CONTRASEÑA"/>                                                               
+                                <p:menuitem url="historia.xhtml" icon="ui-icon ui-icon-person" value="MIS DATOS PERSONALES" title="MIS DATOS PERSONALES"/>   
+                            </p:submenu>                                                                                    
                         </p:menu>
                     </h:form>    
                     <p:panel id="informes" style="margin-bottom: 5px;display: none;">
@@ -227,10 +214,9 @@
                 </div>
                 <div class="centro">
                     <p:panel>
-                        <f:facet name="header">
-                            SVA
-                            <span class="ui-icon ui-icon-circle-triangle-e" style="float: right; margin-right: .3em;"></span>
-                            <span class="ui-icon ui-icon-carat-1-s" style="float: left; margin-right: .3em;"></span>
+                        <f:facet name="header">      
+                            <span class="ui-icon ui-icon-circle-triangle-w" style="float: right; margin-right: .3em;"></span>
+                            <span class="ui-icon ui-icon-circle-triangle-e" style="float: left; margin-right: .3em;"></span>
                         </f:facet>
                         <div id="content">                            
                             <ui:insert name="content">
