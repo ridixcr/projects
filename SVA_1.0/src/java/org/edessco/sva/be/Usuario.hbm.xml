@@ -15,7 +15,7 @@
             <column name="nombre_usuario" length="60" />
         </property>
         <property name="contrasenia" type="string">
-            <column name="contrasenia" length="60" />
+            <column name="contrasenia" length="250" />
         </property>
         <property name="fechaRegistro" type="timestamp">
             <column name="fecha_registro" length="19" />
