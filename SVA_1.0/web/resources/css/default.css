@@ -99,6 +99,14 @@ a:link:hover, a:visited:hover  {
     background-image: url(../img/iconos/remove.png)
 }
 
+.flabel{
+    width: 100px;
+    /*background: red;*/
+    font-weight: bold;
+}
+
+
+
 /*.ui-layout-pane-north.ui-widget-content{
  border: 0;
 }

@@ -11,7 +11,8 @@
         <ui:composition template="./../template/layout.xhtml">
 
             <ui:define name="content">
-                <p:panel id="pnl_adminUsuario" >
+
+                <p:panel   id="pnl_adminUsuario" >
                     <p:outputLabel style="font-weight: bold; text-transform: uppercase">usuarios del sistema</p:outputLabel>
                     <p:separator></p:separator>
                     <h:form id="form">
@@ -20,7 +21,7 @@
                                 <p:commandLink action="administrarUsuarios">
                                     <img src="../resources/img/iconos/Actions-contact-new-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
-                                
+
                             </p:panel>
                             <p:panel id="pnl_dos" header="Administrar Usuarios" style="width: 200px; text-align: center">
                                 <p:commandLink action="administrarUsuarios">
@@ -37,7 +38,7 @@
                                 <p:commandLink action="administrarUniversidad?faces-redirect=true">
                                     <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
-                                
+
                             </p:panel>
                             <p:panel id="pnl_dos" header="Facultades" style="width: 200px; text-align: center">
                                 <p:commandLink action="administrarFacultad">
@@ -59,7 +60,7 @@
                                 <p:commandLink action="administrarModeloCalidad">
                                     <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
                                 </p:commandLink>
-                                
+
                             </p:panel>
                             <p:panel id="pnl_dos" header="Dimensión" style="width: 200px; text-align: center">
                                 <p:commandLink action="administrarDimension">
@@ -84,6 +85,7 @@
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
+                
             </ui:define>
 
         </ui:composition>

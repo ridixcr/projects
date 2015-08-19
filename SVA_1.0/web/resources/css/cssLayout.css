@@ -30,6 +30,12 @@
     
 }
 
+.flabel{
+    width: 100px;
+    /*background: red;*/
+    font-weight: bold;
+}
+
 
 /*#right {
     float: right;

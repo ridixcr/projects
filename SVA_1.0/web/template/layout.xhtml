@@ -61,6 +61,92 @@
                     </p:menubar>
                 </h:form>
             </div>
+            <p:dialog widgetVar="dlgMisDatos" id="dlgMisDatos" modal="true" resizable="false" closable="true">
+                <f:facet name="header">
+                    MIS DATOS  <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span> 
+                </f:facet>
+                <h:form id="formDialog">
+                    <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                    <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
+                        <p:fieldset legend="DATOS PERSONALES">
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <div class="flabel" style="width:  150px;">NOMBRES:</div>
+                                <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
+                                             placeholder="NOMBRES"/>
+                                <p:message for="txt_nombres" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
+                                <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
+                                             placeholder="APELLIDO PATERNO"/>
+                                <p:message for="txt_apellido_paterno" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
+                                <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
+                                             placeholder="APELLIDO MATERNO"/>
+                                <p:message for="txt_apellido_materno" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">DNI:</div>
+                                <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
+                                             placeholder="DNI" mask="99999999"/>
+                                <p:message for="txt_dni" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">SEXO:</div>
+                                <p:selectOneMenu id="cbx_sexo" style="width: 245px">
+                                    <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
+                                    <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
+                                    <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
+                                </p:selectOneMenu>  
+                                <p:message for="txt_dni" display="icon" />
+                            </h:panelGrid>
+                        </p:fieldset>                    
+                        <p:fieldset legend="DATOS DE CONTACTO">
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <div class="flabel" style="width:  150px;">TELEFONO:</div>
+                                <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
+                                             placeholder="TELEFONO" mask="999-999999"/>
+                                <p:message for="txt_telefono" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">CORREO:</div>
+                                <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
+                                             placeholder="CORREO">
+                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                </p:inputText>
+                                <p:message for="txt_correo" display="icon" />
+                            </h:panelGrid>
+                        </p:fieldset>                    
+                        <p:fieldset legend="DATOS DE ACCESO">
+                            <h:panelGrid columns="3" cellpadding="5">
+                                <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
+                                <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                             placeholder="NOMBRE DE USUARIO"/>
+                                <p:message for="txt_usuario" display="icon" />
+
+                                <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
+                                <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                            placeholder="CLAVE DE USUARIO"/>
+                                <p:message for="txt_clave" display="icon" />
+
+                            </h:panelGrid>
+                        </p:fieldset>                    
+                        <p:fieldset legend="DATOS DE ROL">
+                            <h:panelGrid columns="3" cellpadding="5">
+
+                            </h:panelGrid>
+                        </p:fieldset>  
+                        <f:facet name="footer">
+                             <p:separator/>
+                            <div style="width: 100%;text-align: left;">
+                                <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMisDatos" process="@this" style="float: right; margin-right: .3em;">
+                                    <p:resetInput target="gridMisDatos,msg" />
+                                </p:commandButton>
+                                <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                 oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg" 
+                                                 /> 
+                            </div>
+                        </f:facet>
+                    </h:panelGrid>                                 
+                </h:form>                 
+            </p:dialog>
             <div id="content_comision" class="left_content">
                 <ui:insert name="content"></ui:insert>
             </div>
