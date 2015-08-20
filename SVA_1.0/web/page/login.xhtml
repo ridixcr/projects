@@ -148,20 +148,60 @@
                                                         <p:inputMask id="txt_anio_ingreso" required="true" label="AÑO INGRESO" style=" width: 240px;"
                                                                      placeholder="AÑO INGRESO" mask="999"/>     
                                                         <p:message for="txt_anio_ingreso" display="icon" />
-
-
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='EGRESADO')}">
-                                                        EGRESADO
+                                                        <div class="flabel" style="width:  150px;">AÑO EGRESO:</div>
+                                                        <p:inputMask id="txt_anio_egreso" required="true" label="AÑO EGRESO" style=" width: 240px;"
+                                                                     placeholder="AÑO EGRESO" mask="999"/>     
+                                                        <p:message for="txt_anio_egreso" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='ADMINISTRATIVO')}">
-                                                        ADMINISTRATIVO
+                                                        <div class="flabel" style="width:  150px;">CARGO:</div>
+                                                        <p:inputText id="txt_cargo" required="true" label="CARGO" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="CARGO"/>
+                                                        <p:message for="txt_cargo" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">DEPENDECIA:</div>
+                                                        <p:inputText id="txt_dependecia" required="true" label="DEPENDECIA" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="DEPENDECIA"/>
+                                                        <p:message for="txt_dependecia" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">CONDICION LABORAL:</div>
+                                                        <p:inputText id="txt_condicion_laboral" required="true" label="CONDICION LABORAL" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="CONDICION LABORAL"/>
+                                                        <p:message for="txt_condicion_laboral" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">NIVEL DE ESTUDIOS:</div>
+                                                        <p:inputText id="txt_nivel_estudio" required="true" label="NIVEL DE ESTUDIOS" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="NIVEL DE ESTUDIOS"/>
+                                                        <p:message for="txt_nivel_estudio" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='DOCENTE')}">
-                                                        DOCENTE
+                                                        <div class="flabel" style="width:  150px;">GRADO ACADEMICO:</div>
+                                                        <p:inputText id="txt_grado_academico" required="true" label="GRADO ACADEMICO" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="GRADO ACADEMICO"/>
+                                                        <p:message for="txt_grado_academico" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">CONDICION LABORAL:</div>
+                                                        <p:inputText id="txt_condicion" required="true" label="CONDICION LABORAL" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="CONDICION LABORAL"/>
+                                                        <p:message for="txt_condicion" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">CATEGORIA:</div>
+                                                        <p:inputText id="txt_categoria" required="true" label="CATEGORIA" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="CATEGORIA"/>
+                                                        <p:message for="txt_categoria" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='GRUPO_DE_INTERES')}">
-                                                        GRUPO_DE_INTERES
+                                                        <div class="flabel" style="width:  150px;">INSTITUCION:</div>
+                                                        <p:inputText id="txt_institucion" required="true" label="GRADO ACADEMICO" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="GRADO ACADEMICO"/>
+                                                        <p:message for="txt_institucion" display="icon" />
+                                                        
+                                                        <div class="flabel" style="width:  150px;">CARGO:</div>
+                                                        <p:inputText id="txt_cargo_gi" required="true" label="CARGO" style=" width: 240px;text-transform: uppercase;"
+                                                                     placeholder="CARGO"/>
+                                                        <p:message for="txt_cargo_gi" display="icon" />
                                                     </c:if>
                                                 </h:panelGrid>
                                             </p:fieldset> 
