@@ -55,7 +55,7 @@ public class UnidadAcademicaDA extends AbstractDA<UnidadAcademica>{
 
     @Override
     public UnidadAcademica buscar(long id) {
-        return search(UnidadAcademica.class,id);
+        return search("from UnidadAcademica ua where ua.idunidadacademica="+id);
     }
 
     @Override

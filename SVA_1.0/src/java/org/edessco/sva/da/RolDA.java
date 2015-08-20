@@ -47,6 +47,10 @@ public class RolDA extends AbstractDA<Rol>{
     public long id() {
         return maxId(Rol.class);
     }
+    public long buscarRol(String rol) {
+        return Long.parseLong(searchSQL("SELECT idrol FROM rol\n" +
+                                        " where nombre_rol= '"+rol+"'").toString());
+    }
 
     @Override
     public Rol buscar(String ref) {

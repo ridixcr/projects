@@ -40,7 +40,7 @@ public class UsuarioDA extends AbstractDA<Usuario> {
 
     @Override
     public long id() {
-        return maxId(Usuario.class);
+        return Long.parseLong(searchSQL("SELECT max(idusuario) FROM usuario").toString());
     }
 
     @Override

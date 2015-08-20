@@ -25,6 +25,7 @@ import org.edessco.sva.be.Egresado;
 import org.edessco.sva.be.GrupoInteres;
 import org.edessco.sva.be.Persona;
 import org.edessco.sva.be.Rol;
+import org.edessco.sva.be.UnidadAcademica;
 import org.edessco.sva.be.Usuario;
 import org.edessco.sva.be.UsuarioRol;
 import org.edessco.sva.bl.AdministrativoBL;
@@ -34,9 +35,12 @@ import org.edessco.sva.bl.EgresadoBL;
 import org.edessco.sva.bl.GrupoInteresBL;
 import org.edessco.sva.bl.PersonaBL;
 import org.edessco.sva.bl.RolBL;
+import org.edessco.sva.bl.UnidadAcademicaBL;
 import org.edessco.sva.bl.UsuarioBL;
 import org.edessco.sva.bl.UsuarioRolBL;
 import org.edessco.sva.util.Encrypt;
+import org.edessco.sva.util.Tarea;
+import static org.edessco.sva.util.Utilitario.setTareaEvento;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
@@ -95,6 +99,11 @@ public class PersonaControler {
     private RolBL rolBL;
     @ManagedProperty(value = "#{rol}")
     private Rol rol;
+    
+    @ManagedProperty(value = "#{unidadAcademicaBL}")
+    private UnidadAcademicaBL unidadAcademicaBL;
+    @ManagedProperty(value = "#{unidadAcademica}")
+    private UnidadAcademica unidadAcademica;
 
     private String confContrasenia;
     private String tipoUsuario;
@@ -104,75 +113,56 @@ public class PersonaControler {
     private FacesMessage facesMessage;
 
     private AlumnoControler alumnoControler = null;
-    
-     private List<Rol> listaRoles = new LinkedList<>();
 
-     @PostConstruct
-    public void init(){
+    private List<Rol> listaRoles = new LinkedList<>();
+    
+    private long idUnidadAcademica;
+
+    @PostConstruct
+    public void init() {
         setListaPersonas(getPersonaBL().listar());
         setListaRoles(getRolBL().listar());
     }
-    
-    public void actualizaRol(){
-    
+
+    public void actualizaRol() {
+
     }
-    
+
     public PersonaControler() {
         facesContext = FacesContext.getCurrentInstance();
         httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
     }
 
     public void registrar() {
-        //<editor-fold defaultstate="collapsed" desc="CUERPO">    
-//        if (validaContrasenia()) {
-//            //se registra a la persona
-//            long res = getPersonaBL().registrar(getPersona());
-//            httpServletRequest.setAttribute("sessionIdPersona", getPersona().getIdpersona());
-//            //determinar tipo de usuario
-//            HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-//            setTipoUsuario(httpSession.getAttribute("tipoUsuario").toString());
-//            if (getTipoUsuario().trim().equals("Alumno")) {
-//                getAlumno().setPersona(getPersona());
-//                getAlumnoBL().registrar(getAlumno());
-//            } else if (getTipoUsuario().trim().equals("Docente")) {
-//                getDocente().setPersona(getPersona());
-//                getDocenteBL().registrar(getDocente());
-//            } else if (getTipoUsuario().trim().equals("Administrativo")) {
-//                getAdministrativo().setPersona(getPersona());
-//                getAdministrativoBL().registrar(getAdministrativo());
-//            } else if (getTipoUsuario().trim().equals("Grupo de interés")) {
-//                getGrupoInteres().setPersona(getPersona());
-//                getGrupoInteresBL().registrar(getGrupoInteres());
-//            } else if (getTipoUsuario().trim().equals("Egresado")) {
-//                getEgresado().setPersona(getPersona());
-//                getEgresadoBL().registrar(getEgresado());
-//            }
-//            //se procede a registrar el usuario
-//            getUsuario().setPersona(getPersona());
-//            getUsuario().setFechaRegistro(new Date());
-//            getUsuario().setEstado(Boolean.FALSE);
-//            getUsuario().setContrasenia(Encrypt.sha512(getUsuario().getContrasenia()));
-//            long resUsuario = getUsuarioBL().registrar(getUsuario());
-//            //almacenamos el id del ultimo usuario registrado
-//            httpServletRequest.setAttribute("sessionIdUsuario", getUsuario().getIdusuario());
-//            //se procede a registrar usuarioRol
-//            getUsuarioRol().setUsuario(getUsuario());
-//            long resUR = getUsuarioRolBL().registrar(getUsuarioRol());
-//            if (res == 0 && resUsuario == 0 && resUR == 0) {
-//                String msg = "Registro exitoso.";
-//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
-//                FacesContext.getCurrentInstance().addMessage(null, message);
-//            } else {
-//                String msg = "Error al intentar registrar.";
-//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
-//                FacesContext.getCurrentInstance().addMessage(null, message);
-//            }
-//            limpiar();
-//            return "registroCorrectoUser?faces-redirect=true";
-//        }
-//        return "";
-        //</editor-fold>
-        
+        setUnidadAcademica(getUnidadAcademicaBL().buscar(getIdUnidadAcademica()));
+        getPersona().setUnidadAcademica(getUnidadAcademica());
+        setTareaEvento(new Tarea(Tarea.REGISTRO, getPersonaBL().registrar(getPersona())) {
+            @Override
+            public void proceso() {
+                if (getRepuesta() >= 0) {
+//                    getUsuario().setPersona(getPersona());
+//                    setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioBL().registrar(getUsuario())) {
+//                        @Override
+//                        public void proceso() {
+//                            if (getRepuesta() >= 0) {
+//                                setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioRolBL().registrar(getUsuarioRol())) {
+//                                    @Override
+//                                    public void proceso() {
+//                                        if (getRepuesta() >= 0) {
+//
+//                                        }
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    });
+//                    getPersonaBL().id();
+//                    getUsuarioBL().id();
+//                    getRolBL().buscar(getTipoUsuario());
+                }
+            }
+        });
+
     }
 
     public boolean validaContrasenia() {
@@ -455,5 +445,29 @@ public class PersonaControler {
 
     public void setListaRoles(List<Rol> listaRoles) {
         this.listaRoles = listaRoles;
+    }
+
+    public long getIdUnidadAcademica() {
+        return idUnidadAcademica;
+    }
+
+    public void setIdUnidadAcademica(long idUnidadAcademica) {
+        this.idUnidadAcademica = idUnidadAcademica;
+    }
+
+    public UnidadAcademicaBL getUnidadAcademicaBL() {
+        return unidadAcademicaBL;
+    }
+
+    public void setUnidadAcademicaBL(UnidadAcademicaBL unidadAcademicaBL) {
+        this.unidadAcademicaBL = unidadAcademicaBL;
+    }
+
+    public UnidadAcademica getUnidadAcademica() {
+        return unidadAcademica;
+    }
+
+    public void setUnidadAcademica(UnidadAcademica unidadAcademica) {
+        this.unidadAcademica = unidadAcademica;
     }
 }

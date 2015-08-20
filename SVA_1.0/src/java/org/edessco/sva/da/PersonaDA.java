@@ -44,7 +44,7 @@ public class PersonaDA extends AbstractDA<Persona> {
 
     @Override
     public long id() {
-        return maxId(Persona.class);
+        return Long.parseLong(searchSQL("SELECT max(idpersona) FROM persona").toString());
     }
     
     public int maxId(){

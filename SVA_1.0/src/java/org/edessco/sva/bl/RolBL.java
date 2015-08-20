@@ -70,4 +70,8 @@ public class RolBL extends AbstractBL<Rol>{
     public Rol buscar(String ref) {
         return search(ref);
     }
+    
+    public long buscarRol(String rol){
+        return dao.buscarRol(rol);
+    }
 }
