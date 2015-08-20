@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.edessco.sva.cv;
 
 import java.util.LinkedList;
@@ -19,11 +18,11 @@ import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Encuesta;
 import org.edessco.sva.be.Estandar;
 import org.edessco.sva.be.PreguntaEncuesta;
+import org.edessco.sva.bl.EncuestaBL;
 import org.edessco.sva.bl.PreguntaEncuestaBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
 import org.primefaces.event.RowEditEvent;
-
 
 /**
  *
@@ -33,6 +32,12 @@ import org.primefaces.event.RowEditEvent;
 @ViewScoped
 public class PreguntaEncuestaBean {
 
+    @ManagedProperty(value = "#{encuestaBL}")
+    private EncuestaBL encuestaBL;
+    @ManagedProperty(value = "#{encuesta}")
+    private Encuesta encuesta;
+    private int nroEncuesta;
+
     @ManagedProperty(value = "#{preguntaEncuestaBL}")
     private PreguntaEncuestaBL preguntaEncuestaBL;
     @ManagedProperty(value = "#{preguntaEncuesta}")
@@ -41,37 +46,50 @@ public class PreguntaEncuestaBean {
 
     public PreguntaEncuestaBean() {
     }
-       
-    public void registrar() {
-        setTareaEvento(new Tarea(Tarea.REGISTRO, getPreguntaEncuestaBL().registrar(getPreguntaEncuesta())) {
-            @Override
-            public void proceso() {
-                preguntaEncuesta = new PreguntaEncuesta();
-                listar();
-            }
-        });
+    
+    public void init(){
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if (httpSession.getAttribute("idEncuesta") != null) {
+            setNroEncuesta(Integer.parseInt(httpSession.getAttribute("nro_encuesta").toString()));
+            encuesta = encuestaBL.buscar(Long.parseLong(httpSession.getAttribute("idEncuesta").toString()));
+        } 
     }
     
+    public void registrar() {        
+        if (encuesta != null) {            
+            getPreguntaEncuesta().setTipoEncuesta(encuesta.getTipoUsuario());
+            setTareaEvento(new Tarea(Tarea.REGISTRO, getPreguntaEncuestaBL().registrar(getPreguntaEncuesta())) {
+                @Override
+                public void proceso() {
+                    preguntaEncuesta = new PreguntaEncuesta();
+                    listar();
+                }
+            });
+        }
+
+    }
+
     @PostConstruct
     public void listar() {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        if(httpSession.getAttribute("idEncuesta") != null){
+        if (httpSession.getAttribute("idEncuesta") != null) {
+            encuesta = encuestaBL.buscar(Long.parseLong(httpSession.getAttribute("idEncuesta").toString()));
             setListaPreguntasEncuestas(getPreguntaEncuestaBL().listarPreguntas(Long.parseLong(httpSession.getAttribute("idEncuesta").toString())));
             //httpSession.invalidate();
-        }else{
+        } else {
             setListaPreguntasEncuestas(getPreguntaEncuestaBL().listar(""));
         }
     }
-    
+
     public void actualizar() {
         PreguntaEncuesta temp = new PreguntaEncuesta();
         String msg;
         temp = buscarId();
-        
+
         temp.setEncuesta(this.getPreguntaEncuesta().getEncuesta());
         temp.setEstandar(this.getPreguntaEncuesta().getEstandar());
         temp.setPregunta(this.getPreguntaEncuesta().getPregunta());
-        
+
         long res = getPreguntaEncuestaBL().actualizar(temp);
         if (res == 0) {
             msg = "Se actualizó correctamente el registro.";
@@ -84,7 +102,7 @@ public class PreguntaEncuestaBean {
         }
         listar();
     }
-    
+
     public void eliminar() {
         PreguntaEncuesta temp = new PreguntaEncuesta();
         String msg;
@@ -102,28 +120,28 @@ public class PreguntaEncuestaBean {
 
         listar();
     }
-    
+
     public PreguntaEncuesta buscarId() {
         return getPreguntaEncuestaBL().buscar(getPreguntaEncuesta().getIdpreguntaencuesta());
     }
-    
+
     public void limpiar() {
         this.preguntaEncuesta.setIdpreguntaencuesta(null);
         this.preguntaEncuesta.setEncuesta(new Encuesta());
         this.preguntaEncuesta.setEstandar(new Estandar());
         this.preguntaEncuesta.setPregunta("");
     }
-    
-    public void obtenerPregunta(){
+
+    public void obtenerPregunta() {
         HttpSession sesion = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         sesion.setAttribute("idPreguntaEncuesta", getPreguntaEncuesta().getIdpreguntaencuesta());
     }
-    
+
     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Respuesta guardada", preguntaEncuesta.getPregunta());
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
-     
+
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edicion cancelada", preguntaEncuesta.getPregunta());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -152,5 +170,29 @@ public class PreguntaEncuestaBean {
     public void setListaPreguntasEncuestas(List<PreguntaEncuesta> listaPreguntasEncuestas) {
         this.listaPreguntasEncuestas = listaPreguntasEncuestas;
     }
-    
+
+    public EncuestaBL getEncuestaBL() {
+        return encuestaBL;
+    }
+
+    public void setEncuestaBL(EncuestaBL encuestaBL) {
+        this.encuestaBL = encuestaBL;
+    }
+
+    public Encuesta getEncuesta() {
+        return encuesta;
+    }
+
+    public void setEncuesta(Encuesta encuesta) {
+        this.encuesta = encuesta;
+    }
+
+    public int getNroEncuesta() {
+        return nroEncuesta;
+    }
+
+    public void setNroEncuesta(int nroEncuesta) {
+        this.nroEncuesta = nroEncuesta;
+    }
+
 }

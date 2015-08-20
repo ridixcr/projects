@@ -11,16 +11,24 @@
         <ui:composition template="./../template/layoutComision.xhtml">
 
             <ui:define name="content">
+                <f:metadata>
+                    <f:viewAction action="#{preguntaEncuestaBean.init}" />
+                </f:metadata>
+                
                 <p:growl id="msg" showDetail="true" />
                 <p:panel id="pnl_adminPregEnc" header="Administrar preguntas de las encuestas">
                     <h:form id="formBtnNew">
-                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="icon-add" title="Nuevo"
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="ui-icon ui-icon-plusthick" title="Nuevo"
                                          value="Nuevo" actionListener="#{preguntaEncuestaBean.limpiar()}"/>                  
                     </h:form>
+                    
+                    <div style="width: 100%;color: black;text-transform: uppercase;margin-top: 5px;margin-bottom: 5px;">
+                        #{preguntaEncuestaBean.nroEncuesta} - #{preguntaEncuestaBean.encuesta.tituloEncuesta}
+                    </div>
 
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" value="#{preguntaEncuestaBean.listaPreguntasEncuestas}" var="preguntasEncuestaItem"
-                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginator="true" rows="10" paginatorPosition="bottom" rowIndexVar="rowIndex"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="10,15,20">
                             <f:facet name="header">
@@ -28,23 +36,20 @@
                             </f:facet>
 
                             <p:column style="width:15px;text-align: center" headerText="Nº">
-                                <h:outputText value="#{preguntasEncuestaItem.idpreguntaencuesta}" />
-                            </p:column>
-                            <p:column style="width:50px;text-align: center" headerText="Estándar">
-                                <h:outputText value="#{preguntasEncuestaItem.estandar.idestandar}" />
-                            </p:column>
+                                <h:outputText value="#{rowIndex+1}" />
+                            </p:column>                            
                             <p:column headerText="Preguntas">
                                 <h:outputText value="#{preguntasEncuestaItem.pregunta}" />
                             </p:column>
                             <p:column style="width:30px;text-align: center">
-                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="icon-editar" title="Editar">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="ui-icon-pencil" title="Editar">
                                     <f:setPropertyActionListener value="#{preguntasEncuestaItem}" target="#{preguntaEncuestaBean.preguntaEncuesta}" />
                                 </p:commandButton>                            
                             </p:column>
                             
                             <p:column style="width:30px;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
-                                                 icon="icon-eliminar" title="Eliminar">
+                                                 icon="ui-icon-closethick" title="Eliminar">
                                     <f:setPropertyActionListener value="#{preguntasEncuestaItem}" target="#{preguntaEncuestaBean.preguntaEncuesta}" />          
                                 </p:commandButton> 
                             </p:column>
@@ -54,14 +59,10 @@
 
                     <h:form id="formNew">
                         <p:dialog header="Registrar Pregunta" widgetVar="dlgNew" id="dlgNew" modal="true"
-                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                                  showEffect="fade" closable="false">
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
 
-                                <h:outputLabel for="cbx_encuesta" value="Encuesta:" />
-                                <p:selectOneMenu id="cbx_encuesta" value="#{preguntaEncuestaBean.preguntaEncuesta.encuesta.idencuesta}" style="width:388px">
-                                    <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
-                                    <f:selectItems value="#{encuestaControler.selectOneItemsEncuesta}" />
-                                </p:selectOneMenu>
+                                
 
                                 <h:outputLabel for="cbx_estandar" value="Estandar:" />
                                 <p:selectOneMenu id="cbx_estandar" value="#{preguntaEncuestaBean.preguntaEncuesta.estandar.idestandar}" style="width:388px">
@@ -78,10 +79,10 @@
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
-                                                     oncomplete="PF('dlgNew').hide();" icon="icon-guardar" 
+                                                     oncomplete="PF('dlgNew').hide();" icon="ui-icon ui-icon-disk" 
                                                      value="Guardar" title="Guardar" actionListener="#{preguntaEncuestaBean.registrar()}"/>
                                     <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide();"
-                                                     icon="icon-cancelar" value="Cancelar" title="Cancelar"/>
+                                                     icon="ui-icon ui-icon-closethick" value="Cancelar" title="Cancelar"/>
                                 </f:facet>
                             </h:panelGrid>
                         </p:dialog>
@@ -89,18 +90,14 @@
 
                     <h:form id="formEdit">
                         <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
-                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                                  modal="true" resizable="false" closable="false">
 
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
 
                                 <h:inputHidden value="#{preguntaEncuestaBean.preguntaEncuesta.idpreguntaencuesta}" />
                                 <h:inputHidden/>
                                 
-                                <h:outputLabel for="cbx_edit_encuesta" value="Encuesta:" />
-                                <p:selectOneMenu id="cbx_edit_encuesta" value="#{preguntaEncuestaBean.preguntaEncuesta.encuesta.idencuesta}" style="width:388px">
-                                    <f:selectItem itemLabel="--Seleccione--" noSelectionOption="true"/>
-                                    <f:selectItems value="#{encuestaControler.selectOneItemsEncuesta}" />
-                                </p:selectOneMenu>
+                                
 
                                 <h:outputLabel for="cbx_edit_estandar" value="Estandar:" />
                                 <p:selectOneMenu id="cbx_edit_estandar" value="#{preguntaEncuestaBean.preguntaEncuesta.estandar.idestandar}" style="width:388px">
@@ -115,10 +112,10 @@
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
-                                                     oncomplete="PF('dlgEdit').hide();" icon="icon-guardar" 
+                                                     oncomplete="PF('dlgEdit').hide();" icon="ui-icon ui-icon-disk" 
                                                      title="Guardar" value="Guardar" actionListener="#{preguntaEncuestaBean.actualizar()}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide();" 
-                                                     icon="icon-cancelar" title="Cancelar" value="Cancelar" />
+                                                     icon="ui-icon ui-icon-closethick" title="Cancelar" value="Cancelar" />
                                 </f:facet>
 
                             </h:panelGrid>
@@ -128,15 +125,14 @@
                     
                     <h:form id="formDelete">
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
-                                         header="Eliminar Registro" showEffect="fade" 
-                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                                         header="Eliminar Registro" widgetVar="dlgDelete" closable="false">
                             <h:inputHidden value="#{preguntaEncuestaBean.preguntaEncuesta.idpreguntaencuesta}" />
-                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-icon ui-icon-check" 
                                              icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
                                              actionListener="#{preguntaEncuestaBean.eliminar()}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
-                                             icon="icon-cancelar" oncomplete="PF('dlgDelete').hide();" />
+                                             icon="ui-icon ui-icon-closethick" oncomplete="PF('dlgDelete').hide();" />
 
                         </p:confirmDialog>
                     </h:form>

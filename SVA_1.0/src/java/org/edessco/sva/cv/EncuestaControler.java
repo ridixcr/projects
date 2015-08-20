@@ -155,9 +155,10 @@ public class EncuestaControler {
         this.selectOneItemsEncuesta = selectOneItemsEncuesta;
     }
     
-    public String redirigir() {
+    public String redirigir(int nro) {
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         httpSession.setAttribute("idEncuesta", getEncuesta().getIdencuesta());
+        httpSession.setAttribute("nro_encuesta", nro);
         return "administrarPreguntasEncuestas?faces-redirect=true";
     }
     
