@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
@@ -39,33 +40,146 @@
                             <div style="width: 80%;text-align: center; margin-top: 10px;">
                                 Caso contario registrarse aqui 
                                 <h:form>
-                                    <p:commandButton icon="ui-icon ui-icon-plusthick" onclick="PF('dlgDialog').show();" style="margin-top: -15px;float: right; font-size: 8px;"/>                                
+                                    <p:commandButton icon="ui-icon ui-icon-plusthick" onclick="PF('dlgMisDatos').show();" style="margin-top: -15px;float: right; font-size: 8px;"/>                                
                                 </h:form> 
                             </div>
-                            <h:form id="formDialog">
-                                <p:dialog header="Tipo de Usuario" widgetVar="dlgDialog" id="dlgDialog" modal="true"
-                                          showEffect="fade" hideEffect="explode" resizable="false" closable="true">
-                                    <h:panelGrid id="gridNew" columns="2" cellpadding="3">                                        
+                            <p:dialog widgetVar="dlgMisDatos" id="dlgMisDatos" modal="true" resizable="false" closable="true" height="600" width="520">
+                                <f:facet name="header">
+                                    REGISTRAR USUARIO  <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span> 
+                                </f:facet>
 
-                                        <h:outputLabel for="cbx_efp" value="Tipo de Usuario:" />
-                                        <p:selectOneMenu id="cbx_efp" value="#{personaControler.tipoUsuario}" style="width: 200px">
-                                            <f:selectItem itemLabel="-- Seleccione --" itemValue="" noSelectionOption="true" />
-                                            <f:selectItem itemLabel="Alumno" itemValue="Alumno"/>
-                                            <f:selectItem itemLabel="Egresado" itemValue="Egresado"/>
-                                            <f:selectItem itemLabel="Administrativo" itemValue="Administrativo"/>
-                                            <f:selectItem itemLabel="Docente" itemValue="Docente"/>
-                                            <f:selectItem itemLabel="Grupo de interés" itemValue="Grupo de interés"/>
-                                        </p:selectOneMenu>  
+                                <h:form id="formDialog">
+                                    <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                                    <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
+                                        <p:scrollPanel style="height:530px">
+                                            <p:fieldset legend="DATOS PERSONALES">
+                                                <h:panelGrid columns="3" cellpadding="5">
+                                                    <div class="flabel" style="width:  150px;">NOMBRES:</div>
+                                                    <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
+                                                                 placeholder="NOMBRES"/>
+                                                    <p:message for="txt_nombres" display="icon" />
 
+                                                    <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
+                                                    <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                                 placeholder="APELLIDO PATERNO"/>
+                                                    <p:message for="txt_apellido_paterno" display="icon" />
+
+                                                    <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
+                                                    <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                                 placeholder="APELLIDO MATERNO"/>
+                                                    <p:message for="txt_apellido_materno" display="icon" />
+
+                                                    <div class="flabel" style="width:  150px;">DNI:</div>
+                                                    <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
+                                                                 placeholder="DNI" mask="99999999"/>
+                                                    <p:message for="txt_dni" display="icon" />
+
+                                                    <div class="flabel" style="width:  150px;">SEXO:</div>
+                                                    <p:selectOneMenu id="cbx_sexo" style="width: 245px">
+                                                        <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
+                                                        <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
+                                                        <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
+                                                    </p:selectOneMenu>  
+                                                    <p:message for="txt_dni" display="icon" />
+                                                </h:panelGrid>
+                                            </p:fieldset>                    
+                                            <p:fieldset legend="DATOS DE CONTACTO">
+                                                <h:panelGrid columns="3" cellpadding="5">
+                                                    <div class="flabel" style="width:  150px;">TELEFONO:</div>
+                                                    <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
+                                                                 placeholder="TELEFONO" mask="999-999999"/>
+                                                    <p:message for="txt_telefono" display="icon" />
+
+                                                    <div class="flabel" style="width:  150px;">CORREO:</div>
+                                                    <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
+                                                                 placeholder="CORREO">
+                                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    </p:inputText>
+                                                    <p:message for="txt_correo" display="icon" />
+                                                </h:panelGrid>
+                                            </p:fieldset>                    
+                                            <p:fieldset legend="DATOS DE ACCESO">
+                                                <h:panelGrid columns="3" cellpadding="5">
+                                                    <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
+                                                    <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                                 placeholder="NOMBRE DE USUARIO"/>
+                                                    <p:message for="txt_usuario" display="icon" />
+
+                                                    <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
+                                                    <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                                placeholder="CLAVE DE USUARIO"/>
+                                                    <p:message for="txt_clave" display="icon" />
+
+                                                    <h:outputLabel for="cbx_efp" value="TIPO DE USUARIO:" />
+                                                    <p:selectOneMenu id="cbx_efp" value="#{personaControler.tipoUsuario}" style="width: 245px">
+                                                        <p:ajax update="gridMisDatos,datos_segun_rol" listener="#{personaControler.actualizaRol}" />
+                                                        <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
+                                                        <f:selectItem itemLabel="ALUMNO" itemValue="ALUMNO"/>
+                                                        <f:selectItem itemLabel="EGRESADO" itemValue="EGRESADO"/>
+                                                        <f:selectItem itemLabel="ADMINISTRATIVO" itemValue="ADMINISTRATIVO"/>
+                                                        <f:selectItem itemLabel="DOCENTE" itemValue="DOCENTE"/>
+                                                        <f:selectItem itemLabel="GRUPO DE INTERES" itemValue="GRUPO_DE_INTERES"/>
+                                                    </p:selectOneMenu>  
+                                                    <p:message for="cbx_efp" display="icon" />
+
+                                                </h:panelGrid>
+                                            </p:fieldset>                    
+                                            <p:fieldset legend="DATOS DE ROL" style="margin-bottom: 20px;">
+                                                <h:panelGrid id="datos_segun_rol" columns="3" cellpadding="5">
+                                                    <c:if test="#{(personaControler.tipoUsuario =='ALUMNO')}">
+                                                        <div class="flabel" style="width:  150px;">CODIGO:</div>
+                                                        <p:inputMask id="txt_codigo" required="true" label="CODIGO" style=" width: 240px;"
+                                                                     placeholder="CODIGO" mask="99999999"/>                                                        
+                                                        <p:message for="txt_usuario" display="icon" />
+
+                                                        <div class="flabel" style="width:  150px;">SERIE:</div>
+                                                        <p:inputMask id="txt_serie" required="true" label="SERIE" style=" width: 240px;"
+                                                                     placeholder="SERIE" mask="999"/>     
+                                                        <p:message for="txt_serie" display="icon" />
+
+                                                        <div class="flabel" style="width:  150px;">AÑO INGRESO:</div>
+                                                        <p:calendar id="txt_fecha_ingreso" showOn="button" effect="fold" navigator="true" 
+                                                                    pattern="dd/MM/yyyy" placeholder="dd/mm/aaaa">
+                                                            <f:convertDateTime type="date"  dateStyle="short" pattern="dd/MM/yyyy" />
+                                                        </p:calendar>
+                                                        <p:message for="txt_fecha_ingreso" display="icon" />
+
+                                                        <div class="flabel" style="width:  150px;">AÑO INGRESO:</div>
+                                                        <p:inputMask id="txt_anio_ingreso" required="true" label="AÑO INGRESO" style=" width: 240px;"
+                                                                     placeholder="AÑO INGRESO" mask="999"/>     
+                                                        <p:message for="txt_anio_ingreso" display="icon" />
+
+
+                                                    </c:if>
+                                                    <c:if test="#{(personaControler.tipoUsuario =='EGRESADO')}">
+                                                        EGRESADO
+                                                    </c:if>
+                                                    <c:if test="#{(personaControler.tipoUsuario =='ADMINISTRATIVO')}">
+                                                        ADMINISTRATIVO
+                                                    </c:if>
+                                                    <c:if test="#{(personaControler.tipoUsuario =='DOCENTE')}">
+                                                        DOCENTE
+                                                    </c:if>
+                                                    <c:if test="#{(personaControler.tipoUsuario =='GRUPO_DE_INTERES')}">
+                                                        GRUPO_DE_INTERES
+                                                    </c:if>
+                                                </h:panelGrid>
+                                            </p:fieldset> 
+                                        </p:scrollPanel>
                                         <f:facet name="footer">
                                             <p:separator/>
-                                            <p:commandButton id="btnContinuar" 
-                                                             oncomplete="PF('dlgDialog').hide();" value="Continuar >>" 
-                                                             title="Continuar" action="#{personaControler.registrarUser()}"/>
+                                            <div style="width: 100%;text-align: left;">
+                                                <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMisDatos" process="@this" style="float: right; margin-right: .3em;">
+                                                    <p:resetInput target="gridMisDatos,msg" />
+                                                </p:commandButton>
+                                                <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg"/> 
+                                            </div>
                                         </f:facet>
-                                    </h:panelGrid>
-                                </p:dialog>
-                            </h:form>
+                                    </h:panelGrid>                                 
+                                </h:form>  
+
+                            </p:dialog>
 
                         </div>
                     </div>

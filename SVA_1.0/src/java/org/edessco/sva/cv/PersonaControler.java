@@ -105,6 +105,10 @@ public class PersonaControler {
 
     private AlumnoControler alumnoControler = null;
 
+    public void actualizaRol(){
+    
+    }
+    
     public PersonaControler() {
         facesContext = FacesContext.getCurrentInstance();
         httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
