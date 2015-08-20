@@ -6,6 +6,7 @@
 
 package org.edessco.sva.cv;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,6 +18,7 @@ import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.PreguntaEncuesta;
 import org.edessco.sva.be.RespuestaEncuesta;
+import org.edessco.sva.be.Usuario;
 import org.edessco.sva.bl.RespuestaEncuestaBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
@@ -43,7 +45,9 @@ public class RespuestaEncuestaBean {
         HttpSession sesion = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         getRespuestaEncuesta().getPreguntaEncuesta().setIdpreguntaencuesta((Long) sesion.getAttribute("idPreguntaEncuesta"));
         HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        sesionUser.getAttribute("usuario");
+        getRespuestaEncuesta().setUsuario((Usuario) sesionUser.getAttribute("usuario"));
+        getRespuestaEncuesta().setFechaHora(new Date());
+        getRespuestaEncuesta().setEstado(Boolean.TRUE);
         setTareaEvento(new Tarea(Tarea.REGISTRO, getRespuestaEncuestaBL().registrar(getRespuestaEncuesta())) {
             @Override
             public void proceso() {
