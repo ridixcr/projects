@@ -69,6 +69,10 @@ public class DocenteBL extends AbstractBL<Docente>{
     public Docente buscar(long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Docente buscarXidPersona(long id) {
+        return dao.buscarXidPersona(id);
+    }
 
     @Override
     public Docente buscar(String ref) {

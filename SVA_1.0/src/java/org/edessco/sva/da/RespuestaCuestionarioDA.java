@@ -39,7 +39,7 @@ public class RespuestaCuestionarioDA extends AbstractDA<RespuestaCuestionario>{
 
     @Override
     public List<RespuestaCuestionario> listar(String ref) {
-        return list("from RespuestaEncuesta re left join fetch re.preguntaEncuesta");
+        return list("from RespuestaCuestionario rc left join fetch rc.preguntaCuestionario");
     }
 
     @Override

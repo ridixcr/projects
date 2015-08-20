@@ -67,4 +67,8 @@ public class DocenteDA extends AbstractDA<Docente> {
     public Docente buscar(String ref) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Docente buscarXidPersona(long id) {
+        return search("from Docente d inner join fetch d.persona p where p.idpersona="+id);
+    }
 }
