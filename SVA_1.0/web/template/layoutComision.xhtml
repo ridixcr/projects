@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
@@ -8,65 +9,271 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLogin.css"/>
-        <title>.:Sistema Virtual de Autoevaluacion:.</title>
+        <h:outputStylesheet name="./css/style.css"/>
+        <h:outputStylesheet name="./css/social.min.css"/>
+        <title>.:ADMISIÓN UNSCH:.</title>
+        <link rel="shortcut icon" type="image/x-icon" href="../resources/img/favicon.png"/> 
+        <h:outputScript name="./js/Primafaces.locales.es.js"/>
     </h:head>
 
-    <h:body>
-        <div id="Cont_layaout">
-            <div id="top">
-                <ui:insert name="top"></ui:insert>
-            </div>
-            <div id="menu">
+    <h:body class="public_body">   
+        <ui:insert name="status">
+            <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+                <f:facet name="start">
+                    <p:graphicImage name="img/loader.gif" />
+                </f:facet>
+                <f:facet name="complete">
+                    <h:outputText value="" />
+                </f:facet>
+            </p:ajaxStatus>
+        </ui:insert>
+        <p:notificationBar position="top" effect="slide" styleClass="top" widgetVar="notificacion" effectSpeed="fast">
+            <h:outputText value="PrimeFaces Rocks!" style="font-size:36px;" />
+        </p:notificationBar>
+        <div class="background">
+            <div class="cabecera">
+                <a href="./index.xhtml">
+                    <div class="banner">
+                        <div class="logo">
+                            <div class="logo_unsch_banner" style="width: 80px;height: 100px;"></div>                       
+                        </div>
+                        <div class="masterinfo">                            
+                            UNIVERSIDAD NACIONAL SAN CRISTÓBAL DE HUAMANGA<br/>
+                            SISTEMA VIRTUAL DE AUTOEVALUACIÓN<br/>
+                            2015
+                        </div>
+                    </div>
+                </a>                
+            </div>            
+            <div class="cuerpo" > 
                 <h:form> 
-                    <p:menubar>
-                        <p:menuitem value="Inicio" url="/admin/page/inicioComision.xhtml" icon="ui-icon-home" />
+                    <p:menubar style="margin-top: 10px;">
+                        <p:menuitem value="Inicio" url="/admin/page/inicioAdmin.xhtml" icon="ui-icon-home" />
 
-                        <p:submenu label="Autoevaluación">
-                            <p:menuitem value="Administrar autoevaluación" url="/admin/page/administrarAutoevaluacion.xhtml"  />
-
-                        </p:submenu>
-                        <p:submenu label="Cuestionario">
-                            <p:menuitem value="Administrar cuestionario" url="/admin/page/administrarCuestionario.xhtml"  />
-                        </p:submenu>
-                        <p:submenu label="Encuesta">
-                            <p:menuitem value="Administrar encuesta" url="/admin/page/administrarEncuesta.xhtml"  />
-                        </p:submenu>
-                        <p:submenu label="Reportes">
-                            <p:menuitem value="Formato RD" url="formatoRD.xhtml" />
-                            <p:menuitem value="Formato RE" url="formatoRE.xhtml" />
-                            <p:menuitem value="Formato RP" url="formatoRP.xhtml" />
-                        </p:submenu>
-                        <p:submenu label="Estadisticas">
-                            <p:menuitem value="Encuestas" url="estadisticasEncuesta.xhtml" />                       
-                            <p:menuitem value="Generales" url="estadisticasTotal.xhtml" />                       
-                        </p:submenu> 
-                        <p:submenu label="Procesamiento">
-                            <p:menuitem value="Formato MR" url="/admin/page/formatoMR.xhtml" />
-                            <p:menuitem value="Formato RR" url="/admin/page/formatoRR.xhtml" />
-                            <p:menuitem value="Formato RC" url="/admin/page/formatoRC.xhtml" />
-                            <p:menuitem value="Formato RM" url="/admin/page/formatoRM.xhtml" />                        
+                        <p:submenu label="Universidad" >
+                            <p:menuitem value="Administrar universidad" url="/admin/page/administrarUniversidad.xhtml"  />
+                            <p:menuitem value="Administrar facultad" url="/admin/page/administrarFacultad.xhtml"  />
+                            <p:menuitem value="Administrar EFP" url="/admin/page/administrarUnidadAcademica.xhtml"  />
                         </p:submenu>
 
+                        <p:submenu label="Comite Interno" >
+                            <p:menuitem value="Administrar Comite Interno" url="/admin/page/adminDocComiteInterno.xhtml"  />
+                        </p:submenu>
 
-                        <f:facet name="options">
-                            <p:outputLabel value="Bienvenido(a) : " style="margin-right: 5px;"></p:outputLabel>
-                            <p:menuButton value="#{loginControler.nombreUsuario}" iconPos="fa fa-user">
-                                <p:menuitem value="Cambiar contraseña" icon="ui-icon-arrowrefresh-1-w"/>
-                                <p:menuitem value="Información" icon="fa fa-user"/>
-                            </p:menuButton>
+                        <p:submenu label="Usuarios" >
+                            <p:menuitem value="Administrar usuario" url="/admin/page/administrarUsuarios.xhtml"  />
+                        </p:submenu>                        
+
+                        <p:submenu label="Modelo de calidad" >
+                            <p:menuitem value="Modelo de calidad" url="/admin/page/administrarModeloCalidad.xhtml"  />
+                            <p:menuitem value="Dimensión" url="/admin/page/administrarDimension.xhtml"  />
+                            <p:menuitem value="Factor" url="/admin/page/administrarFactor.xhtml"  />
+                            <p:menuitem value="Criterio" url="/admin/page/administrarCriterio.xhtml"  />
+                            <p:menuitem value="Estándar" url="/admin/page/administrarEstandar.xhtml" />
+                        </p:submenu>
+
+                        <f:facet name="options">                            
                             <p:commandButton id="btnCancelarRegistro"  action="#{loginControler.cerrarSesion()}"
-                                                     icon="fa fa-power-off" value="Cerrar Sesión" title="Cerrar Sesión"/>
+                                             icon="ui-icon ui-icon-power" value="Cerrar Sesión" title="Cerrar Sesión"/>
                         </f:facet>
                     </p:menubar>
-                </h:form>
+                </h:form>                
+                <div class="izquierdo">
+                    <p:panel id="usuario_loguin" style="margin-bottom: 5px;">
+                        <f:facet name="header">
+                            USUARIO ONLINE<span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
+                        </f:facet>   
+                        <div style="width: 100%;text-align: center;">                            
+                            <h:panelGrid  columns="1" style="margin: 0 auto 0 auto;">
+                                <f:facet name="header">
+                                    <p:graphicImage name="img/Default_Photo.png" style="
+                                                    -webkit-border-radius: 5px;
+                                                    -moz-border-radius: 5px;
+                                                    border-radius: 5px;
+                                                    margin: 0 auto 0 auto;
+                                                    width: 120px;
+                                                    height: 160px;
+                                                    border: solid 1px #8A2C2C;"/>                                    
+                                </f:facet>
+                                <h:outputText value="Bienvenido(a)" />
+                                <h:outputText value="PERES LUJAN, MARTIN" /><!--#{loginControler.nombreUsuario}-->
+                                <h:outputText value="martin_123@gmail.com"/>
+                            </h:panelGrid>
+                        </div>                         
+                    </p:panel>
+                    <h:form>
+                        <p:menu  style="margin: 0 auto 8px auto; width: 96%;">
+                            <p:submenu label="ADMINISTRACION">
+                                <p:menuitem icon="ui-icon ui-icon-key" value="CAMBIAR CONTRASEÑA" title="CAMBIAR CONTRASEÑA" onclick="PF('dlgMiClave').show();"/>                                                               
+                                <p:menuitem icon="ui-icon ui-icon-person" value="MIS DATOS PERSONALES" title="MIS DATOS PERSONALES" onclick="PF('dlgMisDatos').show();"/>   
+                            </p:submenu>                                                                                    
+                        </p:menu>
+                    </h:form>
+                    <p:dialog widgetVar="dlgMisDatos" id="dlgMisDatos" modal="true" resizable="false" closable="true">
+                        <f:facet name="header">
+                            MIS DATOS  <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span> 
+                        </f:facet>
+                        <h:form id="formDialog">
+                            <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                            <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
+                                <p:fieldset legend="DATOS PERSONALES">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">NOMBRES:</div>
+                                        <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="NOMBRES"/>
+                                        <p:message for="txt_nombres" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
+                                        <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="APELLIDO PATERNO"/>
+                                        <p:message for="txt_apellido_paterno" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
+                                        <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="APELLIDO MATERNO"/>
+                                        <p:message for="txt_apellido_materno" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">DNI:</div>
+                                        <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
+                                                     placeholder="DNI" mask="99999999"/>
+                                        <p:message for="txt_dni" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">SEXO:</div>
+                                        <p:selectOneMenu id="cbx_sexo" style="width: 245px">
+                                            <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
+                                            <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
+                                        </p:selectOneMenu>  
+                                        <p:message for="txt_dni" display="icon" />
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE CONTACTO">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">TELEFONO:</div>
+                                        <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
+                                                     placeholder="TELEFONO" mask="999-999999"/>
+                                        <p:message for="txt_telefono" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">CORREO:</div>
+                                        <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="CORREO">
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        </p:inputText>
+                                        <p:message for="txt_correo" display="icon" />
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE ACCESO">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
+                                        <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="NOMBRE DE USUARIO"/>
+                                        <p:message for="txt_usuario" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
+                                        <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CLAVE DE USUARIO"/>
+                                        <p:message for="txt_clave" display="icon" />
+
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE ROL">
+                                    <h:panelGrid columns="3" cellpadding="5">
+
+                                    </h:panelGrid>
+                                </p:fieldset>  
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <div style="width: 100%;text-align: left;">
+                                        <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMisDatos" process="@this" style="float: right; margin-right: .3em;">
+                                            <p:resetInput target="gridMisDatos,msg" />
+                                        </p:commandButton>
+                                        <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                         oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg"/> 
+                                    </div>
+                                </f:facet>
+                            </h:panelGrid>                                 
+                        </h:form>                 
+                    </p:dialog>
+                    <p:dialog widgetVar="dlgMiClave" id="dlgMiClave" modal="true" resizable="false" closable="true">
+                        <f:facet name="header">
+                            MI CLAVE DE ACCESO  <span class="ui-icon ui-icon-key" style="float: right; margin-right: .3em;"></span> 
+                        </f:facet>
+                        <h:form id="formDialog2">
+                            <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                            <h:panelGrid id="gridMiClave" columns="1" cellpadding="3">                  
+                                <p:fieldset legend="CLAVES">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">CLAVE ACTUAL:</div>
+                                        <p:password id="txt_clave1" required="true" label="CLAVE ACTUAL" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CLAVE ACTUAL"/>
+                                        <p:message for="txt_clave1" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">NUEVA CLAVE:</div>
+                                        <p:password id="txt_clave2" required="true" match="txt_clave3" label="NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="NUEVA CLAVE"/>
+                                        <p:message for="txt_clave2" display="icon" />
+                                        
+                                        <div class="flabel" style="width:  150px;">CONFIRME NUEVA CLAVE:</div>
+                                        <p:password id="txt_clave3" required="true" label="CONFIRME NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CONFIRME NUEVA CLAVE"/>
+                                        <p:message for="txt_clave3" display="icon" />
+
+                                    </h:panelGrid>
+                                </p:fieldset>  
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <div style="width: 100%;text-align: left;">
+                                        <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMiClave" process="@this" style="float: right; margin-right: .3em;">
+                                            <p:resetInput target="gridMiClave,msg" />
+                                        </p:commandButton>
+                                        <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                         oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMiClave').hide()}" update="gridMiClave,msg"/> 
+                                    </div>
+                                </f:facet>
+                            </h:panelGrid>                                 
+                        </h:form>                 
+                    </p:dialog>
+                    <p:panel id="informes" style="margin-bottom: 5px;display: none;">
+                        <f:facet name="header">
+                            INFORMES <span class="ui-icon ui-icon-contact" style="float: right; margin-right: .3em;"></span>
+                        </f:facet>   
+                        <div style="width: 100%;text-align: center;">                            
+                            Portal Independencia N° 57 Ayacucho
+                            Central Telefónico <br/>066-312230 / 066-312510
+                        </div>  
+                    </p:panel>
+                </div>
+                <div class="centro">
+                    <p:panel>
+                        <f:facet name="header">      
+                            <span class="ui-icon ui-icon-circle-triangle-w" style="float: right; margin-right: .3em;"></span>
+                            <span class="ui-icon ui-icon-circle-triangle-e" style="float: left; margin-right: .3em;"></span>
+                        </f:facet>
+                        <div id="content">                            
+                            <ui:insert name="content">
+
+                            </ui:insert>
+                        </div>                                               
+                    </p:panel>
+                </div> 
+
             </div>
-            <div id="content_comision" class="left_content">
-                <ui:insert name="content"></ui:insert>
-            </div>
-            <div id="bottom">
-                <ui:insert name="bottom"></ui:insert>
+            <div class="pie">
+                <div class="info_pie">                    
+                    copyright &copy; 2015 | 
+                    <a href="#" target="_black">
+                        UNSCH 
+                    </a>     
+                </div>   
+                <div class="social">
+                    <div class="icons">
+                        <a href="#" title="Facebook" class="facebook"></a>
+                        <a href="#" title="Twitter" class="twitter"></a>
+                        <a href="#" title="Youtube" class="youtube"></a>
+                        <a href="#" title="Google Plus" class="google_plus"></a>
+                        <a href="#" title="Linkedin" class="linkedin"></a>        
+                    </div>    
+                </div>    
             </div>
         </div>
     </h:body>

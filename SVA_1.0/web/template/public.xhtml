@@ -40,7 +40,7 @@
                         <div class="masterinfo">                            
                             UNIVERSIDAD NACIONAL SAN CRISTÓBAL DE HUAMANGA<br/>
                             SISTEMA VIRTUAL DE AUTOEVALUACIÓN<br/>
-                            1.0
+                            2015
                         </div>
                     </div>
                 </a>                
@@ -72,136 +72,167 @@
                             <p:menuitem value="Estándar" url="/admin/page/administrarEstandar.xhtml" />
                         </p:submenu>
 
-                        <f:facet name="options">
-                            <p:outputLabel value="Bienvenido(a) : " style="margin-right: 5px;"></p:outputLabel>
-                            <p:menuButton value="#{loginControler.nombreUsuario}" iconPos="fa fa-user" style="margin-right: 10px;">
-                                <p:menuitem value="Cambiar contraseña" icon="ui-icon ui-icon-key"/>
-                                <p:menuitem value="Información" icon="ui-icon ui-icon-person" onclick="PF('dlgMisDatos').show();"/>
-                            </p:menuButton>
+                        <f:facet name="options">                            
                             <p:commandButton id="btnCancelarRegistro"  action="#{loginControler.cerrarSesion()}"
                                              icon="ui-icon ui-icon-power" value="Cerrar Sesión" title="Cerrar Sesión"/>
                         </f:facet>
                     </p:menubar>
-                </h:form>
-                <p:dialog widgetVar="dlgMisDatos" id="dlgMisDatos" modal="true" resizable="false" closable="true">
-                    <f:facet name="header">
-                        MIS DATOS  <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span> 
-                    </f:facet>
-                    <h:form id="formDialog">
-                        <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
-                        <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
-                            <p:fieldset legend="DATOS PERSONALES">
-                                <h:panelGrid columns="3" cellpadding="5">
-                                    <div class="flabel" style="width:  150px;">NOMBRES:</div>
-                                    <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
-                                                 placeholder="NOMBRES"/>
-                                    <p:message for="txt_nombres" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
-                                    <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
-                                                 placeholder="APELLIDO PATERNO"/>
-                                    <p:message for="txt_apellido_paterno" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
-                                    <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
-                                                 placeholder="APELLIDO MATERNO"/>
-                                    <p:message for="txt_apellido_materno" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">DNI:</div>
-                                    <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
-                                                 placeholder="DNI" mask="99999999"/>
-                                    <p:message for="txt_dni" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">SEXO:</div>
-                                    <p:selectOneMenu id="cbx_sexo" style="width: 245px">
-                                        <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
-                                        <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
-                                        <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
-                                    </p:selectOneMenu>  
-                                    <p:message for="txt_dni" display="icon" />
-                                </h:panelGrid>
-                            </p:fieldset>                    
-                            <p:fieldset legend="DATOS DE CONTACTO">
-                                <h:panelGrid columns="3" cellpadding="5">
-                                    <div class="flabel" style="width:  150px;">TELEFONO:</div>
-                                    <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
-                                                 placeholder="TELEFONO" mask="999-999999"/>
-                                    <p:message for="txt_telefono" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">CORREO:</div>
-                                    <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
-                                                 placeholder="CORREO">
-                                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                    </p:inputText>
-                                    <p:message for="txt_correo" display="icon" />
-                                </h:panelGrid>
-                            </p:fieldset>                    
-                            <p:fieldset legend="DATOS DE ACCESO">
-                                <h:panelGrid columns="3" cellpadding="5">
-                                    <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
-                                    <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
-                                                 placeholder="NOMBRE DE USUARIO"/>
-                                    <p:message for="txt_usuario" display="icon" />
-
-                                    <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
-                                    <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
-                                                placeholder="CLAVE DE USUARIO"/>
-                                    <p:message for="txt_clave" display="icon" />
-
-                                </h:panelGrid>
-                            </p:fieldset>                    
-                            <p:fieldset legend="DATOS DE ROL">
-                                <h:panelGrid columns="3" cellpadding="5">
-
-                                </h:panelGrid>
-                            </p:fieldset>  
-                            <f:facet name="footer">
-                                <p:separator/>
-                                <div style="width: 100%;text-align: left;">
-                                    <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMisDatos" process="@this" style="float: right; margin-right: .3em;">
-                                        <p:resetInput target="gridMisDatos,msg" />
-                                    </p:commandButton>
-                                    <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
-                                                     oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg"/> 
-                                </div>
-                            </f:facet>
-                        </h:panelGrid>                                 
-                    </h:form>                 
-                </p:dialog>
+                </h:form>                
                 <div class="izquierdo">
                     <p:panel id="usuario_loguin" style="margin-bottom: 5px;">
                         <f:facet name="header">
-                            USUARIO <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
+                            USUARIO ONLINE<span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
                         </f:facet>   
                         <div style="width: 100%;text-align: center;">                            
-                            <p:panelGrid  columns="2" style="margin: 0 auto 0 auto;">
+                            <h:panelGrid  columns="1" style="margin: 0 auto 0 auto;">
                                 <f:facet name="header">
-                                    <p:graphicImage name="img/Default_Photo.png" style="width: 120px;height: 160px;"/>
-                                    
+                                    <p:graphicImage name="img/Default_Photo.png" style="
+                                                    -webkit-border-radius: 5px;
+                                                    -moz-border-radius: 5px;
+                                                    border-radius: 5px;
+                                                    margin: 0 auto 0 auto;
+                                                    width: 120px;
+                                                    height: 160px;
+                                                    border: solid 1px #8A2C2C;"/>                                    
                                 </f:facet>
-
-                                <h:outputText value="Id:" />
-                                <h:outputText value="as" />
-
-                                <h:outputText value="Year" />
-                                <h:outputText value="as" />
-
-                                <h:outputText value="Color:" />
-                                <h:outputText value="as"/>
-
-                                <h:outputText value="Price" />
-                                <h:outputText value="aaa" />
-                            </p:panelGrid>
+                                <h:outputText value="Bienvenido(a)" />
+                                <h:outputText value="PERES LUJAN, MARTIN" /><!--#{loginControler.nombreUsuario}-->
+                                <h:outputText value="martin_123@gmail.com"/>
+                            </h:panelGrid>
                         </div>                         
                     </p:panel>
                     <h:form>
                         <p:menu  style="margin: 0 auto 8px auto; width: 96%;">
                             <p:submenu label="ADMINISTRACION">
-                                <p:menuitem url="index.xhtml" icon="ui-icon ui-icon-key" value="CAMBIAR CONTRASEÑA" title="CAMBIAR CONTRASEÑA"/>                                                               
-                                <p:menuitem url="historia.xhtml" icon="ui-icon ui-icon-person" value="MIS DATOS PERSONALES" title="MIS DATOS PERSONALES"/>   
+                                <p:menuitem icon="ui-icon ui-icon-key" value="CAMBIAR CONTRASEÑA" title="CAMBIAR CONTRASEÑA" onclick="PF('dlgMiClave').show();"/>                                                               
+                                <p:menuitem icon="ui-icon ui-icon-person" value="MIS DATOS PERSONALES" title="MIS DATOS PERSONALES" onclick="PF('dlgMisDatos').show();"/>   
                             </p:submenu>                                                                                    
                         </p:menu>
-                    </h:form>    
+                    </h:form>
+                    <p:dialog widgetVar="dlgMisDatos" id="dlgMisDatos" modal="true" resizable="false" closable="true">
+                        <f:facet name="header">
+                            MIS DATOS  <span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span> 
+                        </f:facet>
+                        <h:form id="formDialog">
+                            <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                            <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
+                                <p:fieldset legend="DATOS PERSONALES">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">NOMBRES:</div>
+                                        <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="NOMBRES"/>
+                                        <p:message for="txt_nombres" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
+                                        <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="APELLIDO PATERNO"/>
+                                        <p:message for="txt_apellido_paterno" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
+                                        <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="APELLIDO MATERNO"/>
+                                        <p:message for="txt_apellido_materno" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">DNI:</div>
+                                        <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
+                                                     placeholder="DNI" mask="99999999"/>
+                                        <p:message for="txt_dni" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">SEXO:</div>
+                                        <p:selectOneMenu id="cbx_sexo" style="width: 245px">
+                                            <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
+                                            <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
+                                        </p:selectOneMenu>  
+                                        <p:message for="txt_dni" display="icon" />
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE CONTACTO">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">TELEFONO:</div>
+                                        <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
+                                                     placeholder="TELEFONO" mask="999-999999"/>
+                                        <p:message for="txt_telefono" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">CORREO:</div>
+                                        <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="CORREO">
+                                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                        </p:inputText>
+                                        <p:message for="txt_correo" display="icon" />
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE ACCESO">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
+                                        <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                     placeholder="NOMBRE DE USUARIO"/>
+                                        <p:message for="txt_usuario" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
+                                        <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CLAVE DE USUARIO"/>
+                                        <p:message for="txt_clave" display="icon" />
+
+                                    </h:panelGrid>
+                                </p:fieldset>                    
+                                <p:fieldset legend="DATOS DE ROL">
+                                    <h:panelGrid columns="3" cellpadding="5">
+
+                                    </h:panelGrid>
+                                </p:fieldset>  
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <div style="width: 100%;text-align: left;">
+                                        <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMisDatos" process="@this" style="float: right; margin-right: .3em;">
+                                            <p:resetInput target="gridMisDatos,msg" />
+                                        </p:commandButton>
+                                        <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                         oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg"/> 
+                                    </div>
+                                </f:facet>
+                            </h:panelGrid>                                 
+                        </h:form>                 
+                    </p:dialog>
+                    <p:dialog widgetVar="dlgMiClave" id="dlgMiClave" modal="true" resizable="false" closable="true">
+                        <f:facet name="header">
+                            MI CLAVE DE ACCESO  <span class="ui-icon ui-icon-key" style="float: right; margin-right: .3em;"></span> 
+                        </f:facet>
+                        <h:form id="formDialog2">
+                            <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
+                            <h:panelGrid id="gridMiClave" columns="1" cellpadding="3">                  
+                                <p:fieldset legend="CLAVES">
+                                    <h:panelGrid columns="3" cellpadding="5">
+                                        <div class="flabel" style="width:  150px;">CLAVE ACTUAL:</div>
+                                        <p:password id="txt_clave1" required="true" label="CLAVE ACTUAL" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CLAVE ACTUAL"/>
+                                        <p:message for="txt_clave1" display="icon" />
+
+                                        <div class="flabel" style="width:  150px;">NUEVA CLAVE:</div>
+                                        <p:password id="txt_clave2" required="true" match="txt_clave3" label="NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="NUEVA CLAVE"/>
+                                        <p:message for="txt_clave2" display="icon" />
+                                        
+                                        <div class="flabel" style="width:  150px;">CONFIRME NUEVA CLAVE:</div>
+                                        <p:password id="txt_clave3" required="true" label="CONFIRME NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
+                                                    placeholder="CONFIRME NUEVA CLAVE"/>
+                                        <p:message for="txt_clave3" display="icon" />
+
+                                    </h:panelGrid>
+                                </p:fieldset>  
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <div style="width: 100%;text-align: left;">
+                                        <p:commandButton icon="ui-icon-circle-close" value="Cancelar" update="gridMiClave" process="@this" style="float: right; margin-right: .3em;">
+                                            <p:resetInput target="gridMiClave,msg" />
+                                        </p:commandButton>
+                                        <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
+                                                         oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMiClave').hide()}" update="gridMiClave,msg"/> 
+                                    </div>
+                                </f:facet>
+                            </h:panelGrid>                                 
+                        </h:form>                 
+                    </p:dialog>
                     <p:panel id="informes" style="margin-bottom: 5px;display: none;">
                         <f:facet name="header">
                             INFORMES <span class="ui-icon ui-icon-contact" style="float: right; margin-right: .3em;"></span>
