@@ -23,7 +23,7 @@
                     </h:form>
                     
                     <div style="width: 100%;color: black;text-transform: uppercase;margin-top: 5px;margin-bottom: 5px;">
-                        #{preguntaEncuestaBean.nroEncuesta} - #{preguntaEncuestaBean.encuesta.tituloEncuesta}
+                        ENCUESTA N° #{preguntaEncuestaBean.nroEncuesta} - #{preguntaEncuestaBean.encuesta.tituloEncuesta}
                     </div>
 
                     <h:form id="formDataTable">
@@ -70,9 +70,9 @@
                                     <f:selectItems value="#{estandarBean.selectOneItemsEstandar}" />
                                 </p:selectOneMenu>
 
-                                <h:outputLabel for="txt_pregunta" value="Pregunta:" />                            
-                                <p:inputText id="txt_pregunta" label="Pregunta" placeholder="PREGUNTA"
-                                             value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" size="60"/>
+                                <h:outputLabel for="txt_pregunta" value="Pregunta:" />                      
+                                <p:inputTextarea id="txt_pregunta" label="Pregunta" placeholder="PREGUNTA"
+                                                 value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" cols="60"/>
                                 
                                                                
 
@@ -105,9 +105,9 @@
                                     <f:selectItems value="#{estandarBean.selectOneItemsEstandar}" />
                                 </p:selectOneMenu>
 
-                                <h:outputLabel for="txt_edit_pregunta" value="Pregunta:" />                            
-                                <p:inputText id="txt_edit_pregunta" label="Pregunta" placeholder="PREGUNTA"
-                                             value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" size="60"/>
+                                <h:outputLabel for="txt_edit_pregunta" value="Pregunta:" /> 
+                                <p:inputTextarea id="txt_edit_pregunta" label="Pregunta" placeholder="PREGUNTA"
+                                                 value="#{preguntaEncuestaBean.preguntaEncuesta.pregunta}" cols="60"/>                                
                                 
                                 <f:facet name="footer">
                                     <p:separator/>

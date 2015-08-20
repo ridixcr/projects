@@ -73,7 +73,7 @@
 
                     <h:form id="formNew">
                         <p:dialog header="Registrar Encuesta" widgetVar="dlgNew" id="dlgNew" modal="true"
-                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                                  resizable="false" closable="false">
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
 
                                 <h:outputLabel for="cbx_autoevaluacion" value="Autoevaluacion:" />
@@ -136,7 +136,7 @@
 
                     <h:form id="formEdit">
                         <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
-                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                                  modal="true" resizable="false" closable="false">
 
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
 
@@ -205,8 +205,7 @@
 
                     <h:form id="formDelete">
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
-                                         header="Eliminar Registro" showEffect="fade" 
-                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                                         header="Eliminar Registro" widgetVar="dlgDelete" closable="false">
                             <h:inputHidden value="#{encuestaControler.encuesta.idencuesta}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-icon ui-icon-check" 
                                              icon="icon-aceptar" oncomplete="PF('dlgDelete').hide();" 
