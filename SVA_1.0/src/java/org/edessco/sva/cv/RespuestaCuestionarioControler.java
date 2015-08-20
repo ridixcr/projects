@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.edessco.sva.cv;
 
 import java.util.LinkedList;
@@ -14,6 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
+import org.edessco.sva.be.Docente;
 import org.edessco.sva.be.RespuestaCuestionario;
 import org.edessco.sva.bl.RespuestaCuestionarioBL;
 import org.edessco.sva.util.Tarea;
@@ -32,14 +32,16 @@ public class RespuestaCuestionarioControler {
     @ManagedProperty(value = "#{respuestaCuestionario}")
     private RespuestaCuestionario respuestaCuestionario;
     private List<RespuestaCuestionario> listaRptasCuestionario = new LinkedList<>();
-    
+
     public RespuestaCuestionarioControler() {
     }
-    
+
     public void registrar() {
         HttpSession sesion = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         getRespuestaCuestionario().getPreguntaCuestionario().setIdpreguntacuestionario((Long) sesion.getAttribute("idPreguntaCuestionario"));
-        
+        //Recuperar el docente de la sesion
+        HttpSession sesionDoc = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        getRespuestaCuestionario().setDocente((Docente) sesionDoc.getAttribute("docente"));
         setTareaEvento(new Tarea(Tarea.REGISTRO, getRespuestaCuestionarioBL().registrar(getRespuestaCuestionario())) {
             @Override
             public void proceso() {
@@ -49,7 +51,7 @@ public class RespuestaCuestionarioControler {
         });
         sesion.removeAttribute("idPreguntaEncuesta");
     }
-    
+
     @PostConstruct
     public void listar() {
         setListaRptasCuestionario(getRespuestaCuestionarioBL().listar(""));
@@ -78,5 +80,5 @@ public class RespuestaCuestionarioControler {
     public void setListaRptasCuestionario(List<RespuestaCuestionario> listaRptasCuestionario) {
         this.listaRptasCuestionario = listaRptasCuestionario;
     }
-    
+
 }

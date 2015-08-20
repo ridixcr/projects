@@ -42,7 +42,8 @@ public class RespuestaEncuestaBean {
     public void registrar() {
         HttpSession sesion = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         getRespuestaEncuesta().getPreguntaEncuesta().setIdpreguntaencuesta((Long) sesion.getAttribute("idPreguntaEncuesta"));
-        
+        HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        sesionUser.getAttribute("usuario");
         setTareaEvento(new Tarea(Tarea.REGISTRO, getRespuestaEncuestaBL().registrar(getRespuestaEncuesta())) {
             @Override
             public void proceso() {
