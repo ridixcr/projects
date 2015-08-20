@@ -182,7 +182,9 @@
                                 </p:fieldset>                    
                                 <p:fieldset legend="DATOS DE ROL">
                                     <h:panelGrid columns="3" cellpadding="5">
+                                        <c:if test="#{(rCuestionarioDocenteVC.existe =='false')}">
 
+                                        </c:if>
                                     </h:panelGrid>
                                 </p:fieldset>  
                                 <f:facet name="footer">
