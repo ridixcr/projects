@@ -99,7 +99,7 @@ public class PersonaControler {
     private RolBL rolBL;
     @ManagedProperty(value = "#{rol}")
     private Rol rol;
-    
+
     @ManagedProperty(value = "#{unidadAcademicaBL}")
     private UnidadAcademicaBL unidadAcademicaBL;
     @ManagedProperty(value = "#{unidadAcademica}")
@@ -115,7 +115,7 @@ public class PersonaControler {
     private AlumnoControler alumnoControler = null;
 
     private List<Rol> listaRoles = new LinkedList<>();
-    
+
     private long idUnidadAcademica;
 
     @PostConstruct
@@ -140,25 +140,101 @@ public class PersonaControler {
             @Override
             public void proceso() {
                 if (getRepuesta() >= 0) {
-//                    getUsuario().setPersona(getPersona());
-//                    setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioBL().registrar(getUsuario())) {
-//                        @Override
-//                        public void proceso() {
-//                            if (getRepuesta() >= 0) {
-//                                setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioRolBL().registrar(getUsuarioRol())) {
-//                                    @Override
-//                                    public void proceso() {
-//                                        if (getRepuesta() >= 0) {
-//
-//                                        }
-//                                    }
-//                                });
-//                            }
-//                        }
-//                    });
-//                    getPersonaBL().id();
-//                    getUsuarioBL().id();
-//                    getRolBL().buscar(getTipoUsuario());
+                    getUsuario().setPersona(getPersona());
+                    getUsuario().setFechaRegistro(new Date());
+                    getUsuario().setFechaAlta(new Date());
+                    getUsuario().setEstado(true);
+                    setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioBL().registrar(getUsuario())) {
+                        @Override
+                        public void proceso() {
+                            if (getRepuesta() >= 0) {
+                                getUsuarioRol().setUsuario(getUsuario());
+                                getUsuarioRol().setRol(getRolBL().buscar(getTipoUsuario()));
+                                setTareaEvento(new Tarea(Tarea.REGISTRO, getUsuarioRolBL().registrar(getUsuarioRol())) {
+                                    @Override
+                                    public void proceso() {
+                                        if (getRepuesta() >= 0) {
+                                            switch (getTipoUsuario()) {
+                                                case "ALUMNO":
+                                                    getAlumno().setPersona(getPersona());
+                                                    setTareaEvento(new Tarea(Tarea.REGISTRO, getAlumnoBL().registrar(getAlumno())) {
+                                                        @Override
+                                                        public void proceso() {
+                                                            if (getRepuesta() >= 0) {
+                                                                setPersona(new Persona());
+                                                                setUsuario(new Usuario());
+                                                                setUsuarioRol(new UsuarioRol());
+                                                                setAlumno(new Alumno());
+                                                            }
+                                                        }
+                                                    });
+                                                    break;
+                                                case "COMISION INTERNA":
+                                                    
+                                                    break;
+                                                case "DOCENTE":
+                                                    getDocente().setPersona(getPersona());
+                                                    setTareaEvento(new Tarea(Tarea.REGISTRO, getDocenteBL().registrar(getDocente())) {
+                                                        @Override
+                                                        public void proceso() {
+                                                            if (getRepuesta() >= 0) {
+                                                                setPersona(new Persona());
+                                                                setUsuario(new Usuario());
+                                                                setUsuarioRol(new UsuarioRol());
+                                                                setDocente(new Docente());
+                                                            }
+                                                        }
+                                                    });
+                                                    break;
+                                                case "EGRESADO":
+                                                    getEgresado().setPersona(getPersona());
+                                                    setTareaEvento(new Tarea(Tarea.REGISTRO, getEgresadoBL().registrar(getEgresado())) {
+                                                        @Override
+                                                        public void proceso() {
+                                                            if (getRepuesta() >= 0) {
+                                                                setPersona(new Persona());
+                                                                setUsuario(new Usuario());
+                                                                setUsuarioRol(new UsuarioRol());
+                                                                setEgresado(new Egresado());
+                                                            }
+                                                        }
+                                                    });
+                                                    break;
+                                                case "GRUPO DE INTERES":
+                                                    getGrupoInteres().setPersona(getPersona());
+                                                    setTareaEvento(new Tarea(Tarea.REGISTRO, getGrupoInteresBL().registrar(getGrupoInteres())) {
+                                                        @Override
+                                                        public void proceso() {
+                                                            if (getRepuesta() >= 0) {
+                                                                setPersona(new Persona());
+                                                                setUsuario(new Usuario());
+                                                                setUsuarioRol(new UsuarioRol());
+                                                                setGrupoInteres(new GrupoInteres());
+                                                            }
+                                                        }
+                                                    });
+                                                    break;
+                                                case "ADMINISTRATIVO":
+                                                    getAdministrativo().setPersona(getPersona());
+                                                    setTareaEvento(new Tarea(Tarea.REGISTRO, getAdministrativoBL().registrar(getAdministrativo())) {
+                                                        @Override
+                                                        public void proceso() {
+                                                            if (getRepuesta() >= 0) {
+                                                                setPersona(new Persona());
+                                                                setUsuario(new Usuario());
+                                                                setUsuarioRol(new UsuarioRol());
+                                                                setAdministrativo(new Administrativo());
+                                                            }
+                                                        }
+                                                    });
+                                                    break;
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
                 }
             }
         });

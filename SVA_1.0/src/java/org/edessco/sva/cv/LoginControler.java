@@ -110,28 +110,28 @@ public class LoginControler implements Serializable {
                     //FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", "Bienvenido " + temp.getNombreUsuario());
                     //FacesContext.getCurrentInstance().addMessage(null, message);
                     switch (rol.getNombreRol()) {
-                        case "Administrador":
+                        case "ADMINISTRADOR":
                             url = "/page/inicioAdmin";
                             break;
-                        case "Administrativo":
+                        case "ADMINISTRATIVO":
                             url = "/page/inicioUsuario";
                             break;
-                        case "Alumno":
+                        case "ALUMNO":
                             url = "/page/inicioUsuario";
                             break;
-                        case "Comisión interna":
+                        case "COMISION INTERNA":
                             url = "/page/inicioComision";
                             break;
-                        case "Docente":
+                        case "DOCENTE":
                             url = "/page/inicioDocente";
                             docente = getDocenteBL().buscarXidPersona(temp.getPersona().getIdpersona());
                             HttpSession sesion = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                             sesion.setAttribute("docente", docente);
                             break;
-                        case "Egresado":
+                        case "EGRESADO":
                             url = "/page/inicioUsuario";
                             break;
-                        case "Grupo de interés":
+                        case "GRUPO DE INTERES":
                             url = "/page/inicioUsuario";
                             break;
                     }

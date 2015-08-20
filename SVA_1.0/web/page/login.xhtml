@@ -112,25 +112,25 @@
                                             <p:fieldset legend="DATOS DE ACCESO">
                                                 <h:panelGrid columns="3" cellpadding="5">
                                                     <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
-                                                    <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                    <p:inputText id="txt_usuario" required="false" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
                                                                  placeholder="NOMBRE DE USUARIO" value="#{personaControler.usuario.nombreUsuario}"/>
                                                     <p:message for="txt_usuario" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
-                                                    <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
+                                                    <p:password id="txt_clave" required="false" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
                                                                 placeholder="CLAVE DE USUARIO" value="#{personaControler.usuario.contrasenia}"/>
                                                     <p:message for="txt_clave" display="icon" />
 
                                                     <h:outputLabel for="cbx_tu" value="TIPO DE USUARIO:" />
                                                     <p:selectOneMenu id="cbx_tu" value="#{personaControler.tipoUsuario}" style="width: 245px">
-                                                        <p:ajax update="gridMisDatos,datos_segun_rol" listener="#{personaControler.actualizaRol}" />
+                                                        <p:ajax update="datos_segun_rol" listener="#{personaControler.actualizaRol}" />
                                                         <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
                                                         <f:selectItems value="#{personaControler.listaRoles}" />
                                                     </p:selectOneMenu>  
                                                     <p:message for="cbx_tu" display="icon" />
                                                 </h:panelGrid>
                                             </p:fieldset>                    
-                                            <p:fieldset legend="DATOS DE ROL" style="margin-bottom: 20px;">
+                                            <p:fieldset legend="DATOS DE ROL" style="margin-bottom: 20px;height: 200px;">
                                                 <h:panelGrid id="datos_segun_rol" columns="3" cellpadding="5">
                                                     <c:if test="#{(personaControler.tipoUsuario =='ALUMNO')}">
                                                         <div class="flabel" style="width:  150px;">CODIGO:</div>
