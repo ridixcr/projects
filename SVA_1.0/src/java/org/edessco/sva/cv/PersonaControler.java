@@ -104,7 +104,15 @@ public class PersonaControler {
     private FacesMessage facesMessage;
 
     private AlumnoControler alumnoControler = null;
+    
+     private List<Rol> listaRoles = new LinkedList<>();
 
+     @PostConstruct
+    public void init(){
+        setListaPersonas(getPersonaBL().listar());
+        setListaRoles(getRolBL().listar());
+    }
+    
     public void actualizaRol(){
     
     }
@@ -114,54 +122,57 @@ public class PersonaControler {
         httpServletRequest = (HttpServletRequest) facesContext.getExternalContext().getRequest();
     }
 
-    public String registrar() {
-        if (validaContrasenia()) {
-            //se registra a la persona
-            long res = getPersonaBL().registrar(getPersona());
-            httpServletRequest.setAttribute("sessionIdPersona", getPersona().getIdpersona());
-            //determinar tipo de usuario
-            HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-            setTipoUsuario(httpSession.getAttribute("tipoUsuario").toString());
-            if (getTipoUsuario().trim().equals("Alumno")) {
-                getAlumno().setPersona(getPersona());
-                getAlumnoBL().registrar(getAlumno());
-            } else if (getTipoUsuario().trim().equals("Docente")) {
-                getDocente().setPersona(getPersona());
-                getDocenteBL().registrar(getDocente());
-            } else if (getTipoUsuario().trim().equals("Administrativo")) {
-                getAdministrativo().setPersona(getPersona());
-                getAdministrativoBL().registrar(getAdministrativo());
-            } else if (getTipoUsuario().trim().equals("Grupo de interés")) {
-                getGrupoInteres().setPersona(getPersona());
-                getGrupoInteresBL().registrar(getGrupoInteres());
-            } else if (getTipoUsuario().trim().equals("Egresado")) {
-                getEgresado().setPersona(getPersona());
-                getEgresadoBL().registrar(getEgresado());
-            }
-            //se procede a registrar el usuario
-            getUsuario().setPersona(getPersona());
-            getUsuario().setFechaRegistro(new Date());
-            getUsuario().setEstado(Boolean.FALSE);
-            getUsuario().setContrasenia(Encrypt.sha512(getUsuario().getContrasenia()));
-            long resUsuario = getUsuarioBL().registrar(getUsuario());
-            //almacenamos el id del ultimo usuario registrado
-            httpServletRequest.setAttribute("sessionIdUsuario", getUsuario().getIdusuario());
-            //se procede a registrar usuarioRol
-            getUsuarioRol().setUsuario(getUsuario());
-            long resUR = getUsuarioRolBL().registrar(getUsuarioRol());
-            if (res == 0 && resUsuario == 0 && resUR == 0) {
-                String msg = "Registro exitoso.";
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else {
-                String msg = "Error al intentar registrar.";
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }
-            limpiar();
-            return "registroCorrectoUser?faces-redirect=true";
-        }
-        return "";
+    public void registrar() {
+        //<editor-fold defaultstate="collapsed" desc="CUERPO">    
+//        if (validaContrasenia()) {
+//            //se registra a la persona
+//            long res = getPersonaBL().registrar(getPersona());
+//            httpServletRequest.setAttribute("sessionIdPersona", getPersona().getIdpersona());
+//            //determinar tipo de usuario
+//            HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+//            setTipoUsuario(httpSession.getAttribute("tipoUsuario").toString());
+//            if (getTipoUsuario().trim().equals("Alumno")) {
+//                getAlumno().setPersona(getPersona());
+//                getAlumnoBL().registrar(getAlumno());
+//            } else if (getTipoUsuario().trim().equals("Docente")) {
+//                getDocente().setPersona(getPersona());
+//                getDocenteBL().registrar(getDocente());
+//            } else if (getTipoUsuario().trim().equals("Administrativo")) {
+//                getAdministrativo().setPersona(getPersona());
+//                getAdministrativoBL().registrar(getAdministrativo());
+//            } else if (getTipoUsuario().trim().equals("Grupo de interés")) {
+//                getGrupoInteres().setPersona(getPersona());
+//                getGrupoInteresBL().registrar(getGrupoInteres());
+//            } else if (getTipoUsuario().trim().equals("Egresado")) {
+//                getEgresado().setPersona(getPersona());
+//                getEgresadoBL().registrar(getEgresado());
+//            }
+//            //se procede a registrar el usuario
+//            getUsuario().setPersona(getPersona());
+//            getUsuario().setFechaRegistro(new Date());
+//            getUsuario().setEstado(Boolean.FALSE);
+//            getUsuario().setContrasenia(Encrypt.sha512(getUsuario().getContrasenia()));
+//            long resUsuario = getUsuarioBL().registrar(getUsuario());
+//            //almacenamos el id del ultimo usuario registrado
+//            httpServletRequest.setAttribute("sessionIdUsuario", getUsuario().getIdusuario());
+//            //se procede a registrar usuarioRol
+//            getUsuarioRol().setUsuario(getUsuario());
+//            long resUR = getUsuarioRolBL().registrar(getUsuarioRol());
+//            if (res == 0 && resUsuario == 0 && resUR == 0) {
+//                String msg = "Registro exitoso.";
+//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
+//                FacesContext.getCurrentInstance().addMessage(null, message);
+//            } else {
+//                String msg = "Error al intentar registrar.";
+//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Atención", msg);
+//                FacesContext.getCurrentInstance().addMessage(null, message);
+//            }
+//            limpiar();
+//            return "registroCorrectoUser?faces-redirect=true";
+//        }
+//        return "";
+        //</editor-fold>
+        
     }
 
     public boolean validaContrasenia() {
@@ -214,11 +225,6 @@ public class PersonaControler {
         this.getUsuario().setNombreUsuario("");
         this.getUsuario().setContrasenia("");
         this.setConfContrasenia("");
-    }
-
-    @PostConstruct
-    public void listar() {
-        setListaPersonas(getPersonaBL().listar());
     }
 
     public List<Persona> complete(String query) {
@@ -441,5 +447,13 @@ public class PersonaControler {
     public void onRowUnselect(UnselectEvent event) {
         FacesMessage msg = new FacesMessage("Persona no seleccionada", ((Persona) event.getObject()).getIdpersona().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
+    public List<Rol> getListaRoles() {
+        return listaRoles;
+    }
+
+    public void setListaRoles(List<Rol> listaRoles) {
+        this.listaRoles = listaRoles;
     }
 }

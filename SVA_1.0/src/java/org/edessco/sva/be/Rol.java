@@ -57,7 +57,12 @@ public class Rol  implements java.io.Serializable {
         this.usuarioRols = usuarioRols;
     }
 
+    @Override
+    public String toString() {
+        return nombreRol.toUpperCase();
+    }
 
+    
 
 
 }

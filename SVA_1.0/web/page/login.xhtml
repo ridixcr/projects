@@ -52,30 +52,41 @@
                                     <p:growl id="msg" sticky="true" showDetail="true" life="2000"/>
                                     <h:panelGrid id="gridMisDatos" columns="1" cellpadding="3">
                                         <p:scrollPanel style="height:530px">
+                                            <p:fieldset legend="DATOS DE DEPENDECIA">
+                                                <h:panelGrid columns="3" cellpadding="5">
+                                                    <div class="flabel" style="width:  150px;">UNIDAD ACADEMICA:</div>
+                                                    <p:selectOneMenu id="cbx_efp" style="width: 245px" value="#{personaControler.persona.unidadAcademica.idunidadacademica}" 
+                                                                     label="Escuela de formación profesional" required="true">
+                                                        <f:selectItem itemLabel="--SELECCIONAR--" />
+                                                        <f:selectItems value="#{unidadAcademicaBean.selectOneItemsUnidAcademica}" />
+                                                    </p:selectOneMenu>
+                                                    <p:message for="cbx_efp" display="icon" />
+                                                </h:panelGrid>
+                                            </p:fieldset>                                            
                                             <p:fieldset legend="DATOS PERSONALES">
                                                 <h:panelGrid columns="3" cellpadding="5">
                                                     <div class="flabel" style="width:  150px;">NOMBRES:</div>
                                                     <p:inputText id="txt_nombres" required="true" label="NOMBRES" style=" width: 240px;text-transform: uppercase;"
-                                                                 placeholder="NOMBRES"/>
+                                                                 placeholder="NOMBRES" value="#{personaControler.persona.nombres}"/>
                                                     <p:message for="txt_nombres" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">APELLIDO PATERNO:</div>
                                                     <p:inputText id="txt_apellido_paterno" required="true" label="APELLIDO PATERNO" style=" width: 240px;text-transform: uppercase;"
-                                                                 placeholder="APELLIDO PATERNO"/>
+                                                                 placeholder="APELLIDO PATERNO" value="#{personaControler.persona.apellidoPaterno}"/>
                                                     <p:message for="txt_apellido_paterno" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">APELLIDO MATERNO:</div>
                                                     <p:inputText id="txt_apellido_materno" required="true" label="APELLIDO MATERNO" style=" width: 240px;text-transform: uppercase;"
-                                                                 placeholder="APELLIDO MATERNO"/>
+                                                                 placeholder="APELLIDO MATERNO" value="#{personaControler.persona.apellidoMaterno}"/>
                                                     <p:message for="txt_apellido_materno" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">DNI:</div>
                                                     <p:inputMask id="txt_dni" required="true" label="DNI" style=" width: 240px;"
-                                                                 placeholder="DNI" mask="99999999"/>
+                                                                 placeholder="DNI" mask="99999999" value="#{personaControler.persona.dni}"/>
                                                     <p:message for="txt_dni" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">SEXO:</div>
-                                                    <p:selectOneMenu id="cbx_sexo" style="width: 245px">
+                                                    <p:selectOneMenu id="cbx_sexo" style="width: 245px" value="#{personaControler.persona.sexo}">
                                                         <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
                                                         <f:selectItem itemLabel="MASCULINO" itemValue="M"/>
                                                         <f:selectItem itemLabel="FEMENINO" itemValue="F"/>
@@ -87,12 +98,12 @@
                                                 <h:panelGrid columns="3" cellpadding="5">
                                                     <div class="flabel" style="width:  150px;">TELEFONO:</div>
                                                     <p:inputMask id="txt_telefono" required="true" label="TELEFONO" style=" width: 240px;"
-                                                                 placeholder="TELEFONO" mask="999-999999"/>
+                                                                 placeholder="TELEFONO" mask="999-999999" value="#{personaControler.persona.telefono}"/>
                                                     <p:message for="txt_telefono" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">CORREO:</div>
                                                     <p:inputText id="txt_correo" required="true" label="CORREO" style=" width: 240px;text-transform: uppercase;"
-                                                                 placeholder="CORREO">
+                                                                 placeholder="CORREO" value="#{personaControler.persona.correo}">
                                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                                     </p:inputText>
                                                     <p:message for="txt_correo" display="icon" />
@@ -102,26 +113,21 @@
                                                 <h:panelGrid columns="3" cellpadding="5">
                                                     <div class="flabel" style="width:  150px;">NOMBRE DE USUARIO:</div>
                                                     <p:inputText id="txt_usuario" required="true" label="NOMBRE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
-                                                                 placeholder="NOMBRE DE USUARIO"/>
+                                                                 placeholder="NOMBRE DE USUARIO" value="#{personaControler.usuario.nombreUsuario}"/>
                                                     <p:message for="txt_usuario" display="icon" />
 
                                                     <div class="flabel" style="width:  150px;">CLAVE DE USUARIO:</div>
                                                     <p:password id="txt_clave" required="true" label="CLAVE DE USUARIO" style=" width: 240px;text-transform: uppercase;"
-                                                                placeholder="CLAVE DE USUARIO"/>
+                                                                placeholder="CLAVE DE USUARIO" value="#{personaControler.usuario.contrasenia}"/>
                                                     <p:message for="txt_clave" display="icon" />
 
-                                                    <h:outputLabel for="cbx_efp" value="TIPO DE USUARIO:" />
-                                                    <p:selectOneMenu id="cbx_efp" value="#{personaControler.tipoUsuario}" style="width: 245px">
+                                                    <h:outputLabel for="cbx_tu" value="TIPO DE USUARIO:" />
+                                                    <p:selectOneMenu id="cbx_tu" value="#{personaControler.tipoUsuario}" style="width: 245px">
                                                         <p:ajax update="gridMisDatos,datos_segun_rol" listener="#{personaControler.actualizaRol}" />
                                                         <f:selectItem itemLabel="-- SELECCIONAR --" itemValue="" noSelectionOption="true" />
-                                                        <f:selectItem itemLabel="ALUMNO" itemValue="ALUMNO"/>
-                                                        <f:selectItem itemLabel="EGRESADO" itemValue="EGRESADO"/>
-                                                        <f:selectItem itemLabel="ADMINISTRATIVO" itemValue="ADMINISTRATIVO"/>
-                                                        <f:selectItem itemLabel="DOCENTE" itemValue="DOCENTE"/>
-                                                        <f:selectItem itemLabel="GRUPO DE INTERES" itemValue="GRUPO_DE_INTERES"/>
+                                                        <f:selectItems value="#{personaControler.listaRoles}" />
                                                     </p:selectOneMenu>  
-                                                    <p:message for="cbx_efp" display="icon" />
-
+                                                    <p:message for="cbx_tu" display="icon" />
                                                 </h:panelGrid>
                                             </p:fieldset>                    
                                             <p:fieldset legend="DATOS DE ROL" style="margin-bottom: 20px;">
@@ -129,12 +135,12 @@
                                                     <c:if test="#{(personaControler.tipoUsuario =='ALUMNO')}">
                                                         <div class="flabel" style="width:  150px;">CODIGO:</div>
                                                         <p:inputMask id="txt_codigo" required="true" label="CODIGO" style=" width: 240px;"
-                                                                     placeholder="CODIGO" mask="99999999"/>                                                        
+                                                                     placeholder="CODIGO" mask="99999999" value="#{personaControler.alumno.codigo}"/>                                                        
                                                         <p:message for="txt_usuario" display="icon" />
 
                                                         <div class="flabel" style="width:  150px;">SERIE:</div>
                                                         <p:inputMask id="txt_serie" required="true" label="SERIE" style=" width: 240px;"
-                                                                     placeholder="SERIE" mask="999"/>     
+                                                                     placeholder="SERIE" mask="999" value="#{personaControler.alumno.serie}"/>     
                                                         <p:message for="txt_serie" display="icon" />
 
                                                         <div class="flabel" style="width:  150px;">AÑO INGRESO:</div>
@@ -146,61 +152,61 @@
 
                                                         <div class="flabel" style="width:  150px;">AÑO INGRESO:</div>
                                                         <p:inputMask id="txt_anio_ingreso" required="true" label="AÑO INGRESO" style=" width: 240px;"
-                                                                     placeholder="AÑO INGRESO" mask="999"/>     
+                                                                     placeholder="AÑO INGRESO" mask="999" value="#{personaControler.alumno.anioIngreso}"/>     
                                                         <p:message for="txt_anio_ingreso" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='EGRESADO')}">
                                                         <div class="flabel" style="width:  150px;">AÑO EGRESO:</div>
                                                         <p:inputMask id="txt_anio_egreso" required="true" label="AÑO EGRESO" style=" width: 240px;"
-                                                                     placeholder="AÑO EGRESO" mask="999"/>     
+                                                                     placeholder="AÑO EGRESO" mask="999" value="#{personaControler.egresado.anioEgreso}"/>     
                                                         <p:message for="txt_anio_egreso" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='ADMINISTRATIVO')}">
                                                         <div class="flabel" style="width:  150px;">CARGO:</div>
                                                         <p:inputText id="txt_cargo" required="true" label="CARGO" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="CARGO"/>
+                                                                     placeholder="CARGO" value="#{personaControler.administrativo.cargo}"/>
                                                         <p:message for="txt_cargo" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">DEPENDECIA:</div>
                                                         <p:inputText id="txt_dependecia" required="true" label="DEPENDECIA" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="DEPENDECIA"/>
+                                                                     placeholder="DEPENDECIA" value="#{personaControler.administrativo.dependencia}"/>
                                                         <p:message for="txt_dependecia" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">CONDICION LABORAL:</div>
                                                         <p:inputText id="txt_condicion_laboral" required="true" label="CONDICION LABORAL" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="CONDICION LABORAL"/>
+                                                                     placeholder="CONDICION LABORAL" value="#{personaControler.administrativo.condicionLaboral}"/>
                                                         <p:message for="txt_condicion_laboral" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">NIVEL DE ESTUDIOS:</div>
                                                         <p:inputText id="txt_nivel_estudio" required="true" label="NIVEL DE ESTUDIOS" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="NIVEL DE ESTUDIOS"/>
+                                                                     placeholder="NIVEL DE ESTUDIOS" value="#{personaControler.administrativo.nivelEstudios}"/>
                                                         <p:message for="txt_nivel_estudio" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='DOCENTE')}">
                                                         <div class="flabel" style="width:  150px;">GRADO ACADEMICO:</div>
                                                         <p:inputText id="txt_grado_academico" required="true" label="GRADO ACADEMICO" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="GRADO ACADEMICO"/>
+                                                                     placeholder="GRADO ACADEMICO" value="#{personaControler.docente.gradoAcademico}"/>
                                                         <p:message for="txt_grado_academico" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">CONDICION LABORAL:</div>
                                                         <p:inputText id="txt_condicion" required="true" label="CONDICION LABORAL" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="CONDICION LABORAL"/>
+                                                                     placeholder="CONDICION LABORAL" value="#{personaControler.docente.condicion}"/>
                                                         <p:message for="txt_condicion" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">CATEGORIA:</div>
                                                         <p:inputText id="txt_categoria" required="true" label="CATEGORIA" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="CATEGORIA"/>
+                                                                     placeholder="CATEGORIA" value="#{personaControler.docente.categoria}"/>
                                                         <p:message for="txt_categoria" display="icon" />
                                                     </c:if>
-                                                    <c:if test="#{(personaControler.tipoUsuario =='GRUPO_DE_INTERES')}">
+                                                    <c:if test="#{(personaControler.tipoUsuario =='GRUPO DE INTERES')}">
                                                         <div class="flabel" style="width:  150px;">INSTITUCION:</div>
                                                         <p:inputText id="txt_institucion" required="true" label="GRADO ACADEMICO" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="GRADO ACADEMICO"/>
+                                                                     placeholder="GRADO ACADEMICO" value="#{personaControler.grupoInteres.cargo}"/>
                                                         <p:message for="txt_institucion" display="icon" />
-                                                        
+
                                                         <div class="flabel" style="width:  150px;">CARGO:</div>
                                                         <p:inputText id="txt_cargo_gi" required="true" label="CARGO" style=" width: 240px;text-transform: uppercase;"
-                                                                     placeholder="CARGO"/>
+                                                                     placeholder="CARGO" value="#{personaControler.grupoInteres.cargo}"/>
                                                         <p:message for="txt_cargo_gi" display="icon" />
                                                     </c:if>
                                                 </h:panelGrid>
@@ -213,7 +219,7 @@
                                                     <p:resetInput target="gridMisDatos,msg" />
                                                 </p:commandButton>
                                                 <p:commandButton icon="ui-icon-disk" value="Guardar" title="Guardar"  validateClient="true" style="float: right; margin-right: .3em;"
-                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg"/> 
+                                                                 oncomplete="if (args &amp;&amp; !args.validationFailed){ PF('dlgMisDatos').hide()}" update="gridMisDatos,msg" actionListener="#{personaControler.registrar}"/> 
                                             </div>
                                         </f:facet>
                                     </h:panelGrid>                                 
