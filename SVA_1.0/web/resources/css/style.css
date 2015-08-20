@@ -146,6 +146,11 @@ body{
     width: 1200px;
     height: 865px;
 }
+.cuerpo_login{ 
+    margin: 0 auto;
+    /*width: 1200px;*/
+    /*height: 865px;*/
+}
 .cuerpo_admin{ 
     margin: 0 auto;
     width: 1200px;
@@ -167,6 +172,13 @@ body{
     padding: 5px;
 }
 .pie{
+    width: 100%;
+    height: 98px;
+    background: url("../img/banner/bg_botton.png");
+}
+.pie_login{
+    position: absolute;
+    bottom: 0px;
     width: 100%;
     height: 98px;
     background: url("../img/banner/bg_botton.png");

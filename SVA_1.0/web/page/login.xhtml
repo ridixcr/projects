@@ -17,32 +17,31 @@
                         <div class="box">
                             <p:growl id="growl" showDetail="true" life="3000" showSummary="true"/>
                             <h:form id="formLogin">
-                                <p:panel id="basic" header="CREDENCIALES DE ACCESO" >
-                                    <h:panelGrid columns="2" cellpadding="5">
+                                <p:fieldset legend="CREDENCIALES DE ACCESO" style="width: 80%;margin: 20px auto 0 auto;">
+                                    <h:panelGrid columns="2" cellpadding="5" style="width: 100%;text-align: center;">
                                         <h:outputLabel for="txf_usuario" value="USUARIO: " />
-                                        <p:inputText id="txf_usuario"  required="true" label="Usuario" size="20" placeholder="USUARIO"
+                                        <p:inputText id="txf_usuario"  required="true" label="Usuario" size="35" placeholder="USUARIO"
                                                      value="#{loginControler.nombreUsuario}"/>
 
                                         <h:outputLabel for="password" value="CONTRASEÑA: " />
-                                        <p:password id="password"  required="true" label="Contraseña" size="20" placeholder="CONTRASEÑA"
+                                        <p:password id="password"  required="true" label="Contraseña" size="35" placeholder="CONTRASEÑA"
                                                     value="#{loginControler.contrasenia}"/>
                                         <f:facet name="footer">
                                             <p:separator />
                                             <div style="width: 100%;text-align: center;">
                                                 <p:commandButton value="Iniciar Sesion" update=":growl" icon="ui-icon ui-icon-check"
-                                                             action="#{loginControler.login()}"/>      
+                                                                 action="#{loginControler.login()}"/>      
                                             </div>                                    
                                         </f:facet>
                                     </h:panelGrid>
-                                    <f:facet name="footer">
-                                        Caso contario registrarse aqui 
-                                        <h:form>
-                                            <p:commandButton icon="ui-icon ui-icon-plusthick" onclick="PF('dlgDialog').show();" style="margin-top: 0px;float: right; font-size: 8px;"/>                                
-                                        </h:form> 
-                                    </f:facet>
-                                </p:panel>
+                                </p:fieldset>
                             </h:form>
-
+                            <div style="width: 80%;text-align: center; margin-top: 10px;">
+                                Caso contario registrarse aqui 
+                                <h:form>
+                                    <p:commandButton icon="ui-icon ui-icon-plusthick" onclick="PF('dlgDialog').show();" style="margin-top: -15px;float: right; font-size: 8px;"/>                                
+                                </h:form> 
+                            </div>
                             <h:form id="formDialog">
                                 <p:dialog header="Tipo de Usuario" widgetVar="dlgDialog" id="dlgDialog" modal="true"
                                           showEffect="fade" hideEffect="explode" resizable="false" closable="true">
@@ -69,7 +68,6 @@
                             </h:form>
 
                         </div>
-                        <span class="copy">Copyright &copy; 2014  jlsulcag</span>	
                     </div>
                 </div>
             </ui:define>

@@ -85,7 +85,7 @@
                 <div class="izquierdo">
                     <p:panel id="usuario_loguin" style="margin-bottom: 5px;">
                         <f:facet name="header">
-                            USUARIO ONLINE<span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
+                            COMISIONADO CONECTADO<span class="ui-icon ui-icon-person" style="float: right; margin-right: .3em;"></span>
                         </f:facet>   
                         <div style="width: 100%;text-align: center;">                            
                             <h:panelGrid  columns="1" style="margin: 0 auto 0 auto;">
@@ -100,8 +100,8 @@
                                                     border: solid 1px #8A2C2C;"/>                                    
                                 </f:facet>
                                 <h:outputText value="Bienvenido(a)" />
-                                <h:outputText value="PERES LUJAN, MARTIN" /><!--#{loginControler.nombreUsuario}-->
-                                <h:outputText value="martin_123@gmail.com"/>
+                                <h:outputText value="#{loginControler.nombreUsuario}" />
+                                <h:outputText value="#{loginControler.nombreUsuario}@sva.com"/>
                             </h:panelGrid>
                         </div>                         
                     </p:panel>
