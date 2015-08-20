@@ -6,6 +6,7 @@
 
 package org.edessco.sva.cv;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import org.edessco.sva.be.Autoevaluacion;
 import org.edessco.sva.be.Encuesta;
+import org.edessco.sva.be.Usuario;
 import org.edessco.sva.bl.EncuestaBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
@@ -42,6 +44,10 @@ public class EncuestaControler {
     }    
     
     public void registrar() {
+        HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        Usuario userTemp = (Usuario) sesionUser.getAttribute("usuario");
+        getEncuesta().setIdUsuario(userTemp.getIdusuario());
+        getEncuesta().setFechaCreacion(new Date());
         setTareaEvento(new Tarea(Tarea.REGISTRO, getEncuestaBL().registrar(getEncuesta())) {
             @Override
             public void proceso() {
