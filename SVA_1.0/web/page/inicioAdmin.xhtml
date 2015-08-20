@@ -12,80 +12,83 @@
 
             <ui:define name="content">
 
-                <p:panel   id="pnl_adminUsuario" >
-                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">usuarios del sistema</p:outputLabel>
-                    <p:separator></p:separator>
-                    <h:form id="form">
-                        <h:panelGrid columns="3" cellpadding="10">
-                            <p:panel id="pnl_uno" header="Nuevo Usuario" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarUsuarios">
-                                    <img src="../resources/img/iconos/Actions-contact-new-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
+                <p:scrollPanel style="width:100%;height:720px">
 
-                            </p:panel>
-                            <p:panel id="pnl_dos" header="Administrar Usuarios" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarUsuarios">
-                                    <img src="../resources/img/iconos/user-settings.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                        </h:panelGrid>
-                    </h:form>
-                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">universidad - facultad - escuela de formacion profesional</p:outputLabel>
-                    <p:separator></p:separator>
-                    <h:form id="form2">
-                        <h:panelGrid columns="3" cellpadding="10">
-                            <p:panel id="pnl_uno" header="Universidad" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarUniversidad?faces-redirect=true">
-                                    <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
+                    <p:panel   id="pnl_adminUsuario" >
+                        <p:outputLabel style="font-weight: bold; text-transform: uppercase">usuarios del sistema</p:outputLabel>
+                        <p:separator></p:separator>
+                        <h:form id="form">
+                            <h:panelGrid columns="3" cellpadding="10">
+                                <p:panel id="pnl_uno" header="Nuevo Usuario" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarUsuarios">
+                                        <img src="../resources/img/iconos/Actions-contact-new-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
 
-                            </p:panel>
-                            <p:panel id="pnl_dos" header="Facultades" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarFacultad">
-                                    <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                            <p:panel id="pnl_tres" header="Escuelas de Formación Profesional" style="width: 300px; text-align: center">
-                                <p:commandLink action="administrarUnidadAcademica">
-                                    <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                        </h:panelGrid>
-                    </h:form>
-                    <p:outputLabel style="font-weight: bold; text-transform: uppercase">Modelo de calidad coneau</p:outputLabel>
-                    <p:separator></p:separator>
-                    <h:form id="form3">
-                        <h:panelGrid columns="5" cellpadding="10">
-                            <p:panel id="pnl_uno" header="Modelo de Calidad" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarModeloCalidad">
-                                    <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
+                                </p:panel>
+                                <p:panel id="pnl_dos" header="Administrar Usuarios" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarUsuarios">
+                                        <img src="../resources/img/iconos/user-settings.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                            </h:panelGrid>
+                        </h:form>
+                        <p:outputLabel style="font-weight: bold; text-transform: uppercase">universidad - facultad - escuela de formacion profesional</p:outputLabel>
+                        <p:separator></p:separator>
+                        <h:form id="form2">
+                            <h:panelGrid columns="3" cellpadding="10">
+                                <p:panel id="pnl_uno" header="Universidad" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarUniversidad?faces-redirect=true">
+                                        <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
 
-                            </p:panel>
-                            <p:panel id="pnl_dos" header="Dimensión" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarDimension">
-                                    <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                            <p:panel id="pnl_tres" header="Factor" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarFactor">
-                                    <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                            <p:panel id="pnl_cuatro" header="Criterio" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarCriterio">
-                                    <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                            <p:panel id="pnl_cinco" header="Estándar" style="width: 200px; text-align: center">
-                                <p:commandLink action="administrarEstandar">
-                                    <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
-                                </p:commandLink>
-                            </p:panel>
-                        </h:panelGrid>
-                    </h:form>
-                </p:panel>
-                
+                                </p:panel>
+                                <p:panel id="pnl_dos" header="Facultades" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarFacultad">
+                                        <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                                <p:panel id="pnl_tres" header="Escuelas de Formación Profesional" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarUnidadAcademica">
+                                        <img src="../resources/img/iconos/university-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                            </h:panelGrid>
+                        </h:form>
+                        <p:outputLabel style="font-weight: bold; text-transform: uppercase">Modelo de calidad coneau</p:outputLabel>
+                        <p:separator></p:separator>
+                        <h:form id="form3">
+                            <h:panelGrid columns="4" cellpadding="10">
+                                <p:panel id="pnl_uno" header="Modelo de Calidad" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarModeloCalidad">
+                                        <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+
+                                </p:panel>
+                                <p:panel id="pnl_dos" header="Dimensión" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarDimension">
+                                        <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                                <p:panel id="pnl_tres" header="Factor" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarFactor">
+                                        <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                                <p:panel id="pnl_cuatro" header="Criterio" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarCriterio">
+                                        <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                                <p:panel id="pnl_cinco" header="Estándar" style="width: 180px; text-align: center">
+                                    <p:commandLink action="administrarEstandar">
+                                        <img src="../resources/img/iconos/diary-book-icon.png" width="64px" height="64px"/>
+                                    </p:commandLink>
+                                </p:panel>
+                            </h:panelGrid>
+                        </h:form>
+                    </p:panel>
+
+                </p:scrollPanel>
             </ui:define>
 
         </ui:composition>
