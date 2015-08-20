@@ -216,7 +216,7 @@
                                         <p:password id="txt_clave2" required="true" match="txt_clave3" label="NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
                                                     placeholder="NUEVA CLAVE"/>
                                         <p:message for="txt_clave2" display="icon" />
-                                        
+
                                         <div class="flabel" style="width:  150px;">CONFIRME NUEVA CLAVE:</div>
                                         <p:password id="txt_clave3" required="true" label="CONFIRME NUEVA CLAVE" style=" width: 240px;text-transform: uppercase;"
                                                     placeholder="CONFIRME NUEVA CLAVE"/>
@@ -253,11 +253,14 @@
                             <span class="ui-icon ui-icon-circle-triangle-w" style="float: right; margin-right: .3em;"></span>
                             <span class="ui-icon ui-icon-circle-triangle-e" style="float: left; margin-right: .3em;"></span>
                         </f:facet>
-                        <div id="content">                            
+                        <div id="content" style="height: 720px;">                            
                             <ui:insert name="content">
 
                             </ui:insert>
-                        </div>                                               
+                        </div>  
+                        <f:facet name="footer">
+                            .:SISTEMA VIRTUAL DE AUTOEVALUACION:.
+                        </f:facet>
                     </p:panel>
                 </div> 
 

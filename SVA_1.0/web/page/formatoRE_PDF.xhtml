@@ -24,7 +24,7 @@
                     <c:if test="#{(rCuestionarioPorEstandarVC.existe =='true')}">
                         <div style="width: 100%;">
                             <iframe src = "../web/viewer.html#{rCuestionarioPorEstandarVC.pathFile()}" 
-                                    style="width: 100%;height: 86vh;border: solid 2px #000;"></iframe>
+                                    style="width: 100%;height: 660px;border: solid 2px #000;"></iframe>
                         </div>
                     </c:if>
                     <c:if test="#{(rCuestionarioPorEstandarVC.existe =='false')}">     
@@ -35,9 +35,6 @@
                             </div>
                         </div>                
                     </c:if>   
-                    <f:facet name="footer">
-                        .:SISTEMA VIRTUAL DE AUTOEVALUACION:.
-                    </f:facet>
                 </p:panel>
             </ui:define>
         </ui:composition>
