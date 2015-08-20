@@ -21,6 +21,7 @@ import org.edessco.sva.be.Autoevaluacion;
 import org.edessco.sva.be.Encuesta;
 import org.edessco.sva.be.Usuario;
 import org.edessco.sva.bl.EncuestaBL;
+import org.edessco.sva.bl.UsuarioBL;
 import org.edessco.sva.util.Tarea;
 import static org.edessco.sva.util.Utilitario.setTareaEvento;
 
@@ -31,6 +32,11 @@ import static org.edessco.sva.util.Utilitario.setTareaEvento;
 @ManagedBean
 @ViewScoped
 public class EncuestaControler {
+    
+    @ManagedProperty(value = "#{usuarioBL}")
+    private UsuarioBL usuarioBL;
+    @ManagedProperty(value = "#{usuario}")
+    private Usuario usuario;
 
     @ManagedProperty(value = "#{encuestaBL}")
     private EncuestaBL encuestaBL;
@@ -44,8 +50,8 @@ public class EncuestaControler {
     }    
     
     public void registrar() {
-        HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-        Usuario userTemp = (Usuario) sesionUser.getAttribute("usuario");
+        HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);        
+        Usuario userTemp = usuarioBL.buscar(Long.parseLong(sesionUser.getAttribute("idUsuario").toString()));
         getEncuesta().setIdUsuario(userTemp.getIdusuario());
         getEncuesta().setFechaCreacion(new Date());
         setTareaEvento(new Tarea(Tarea.REGISTRO, getEncuestaBL().registrar(getEncuesta())) {
@@ -160,6 +166,22 @@ public class EncuestaControler {
         httpSession.setAttribute("idEncuesta", getEncuesta().getIdencuesta());
         httpSession.setAttribute("nro_encuesta", nro);
         return "administrarPreguntasEncuestas?faces-redirect=true";
+    }
+
+    public UsuarioBL getUsuarioBL() {
+        return usuarioBL;
+    }
+
+    public void setUsuarioBL(UsuarioBL usuarioBL) {
+        this.usuarioBL = usuarioBL;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
 }

@@ -97,6 +97,7 @@ public class LoginControler implements Serializable {
         if (temp != null) {
             //guardamos en sesion usuario para las respuetsas de las encuestas
             HttpSession sesionUser = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            sesionUser.setAttribute("idUsuario", temp.getIdusuario());
             sesionUser.setAttribute("usuario", temp);
             //Obtenemos los datos del usuario vinculado al rol
             usuarioRol = getUsuarioRolBL().buscar("" + temp.getIdusuario());
