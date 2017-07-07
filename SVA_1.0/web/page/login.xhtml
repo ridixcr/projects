@@ -152,13 +152,13 @@
 
                                                         <div class="flabel" style="width:  150px;">AÑO INGRESO:</div>
                                                         <p:inputMask id="txt_anio_ingreso" required="true" label="AÑO INGRESO" style=" width: 240px;"
-                                                                     placeholder="AÑO INGRESO" mask="999" value="#{personaControler.alumno.anioIngreso}"/>     
+                                                                     placeholder="AÑO INGRESO" mask="9999" value="#{personaControler.alumno.anioIngreso}"/>     
                                                         <p:message for="txt_anio_ingreso" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='EGRESADO')}">
                                                         <div class="flabel" style="width:  150px;">AÑO EGRESO:</div>
                                                         <p:inputMask id="txt_anio_egreso" required="true" label="AÑO EGRESO" style=" width: 240px;"
-                                                                     placeholder="AÑO EGRESO" mask="999" value="#{personaControler.egresado.anioEgreso}"/>     
+                                                                     placeholder="AÑO EGRESO" mask="9999" value="#{personaControler.egresado.anioEgreso}"/>     
                                                         <p:message for="txt_anio_egreso" display="icon" />
                                                     </c:if>
                                                     <c:if test="#{(personaControler.tipoUsuario =='ADMINISTRATIVO')}">
