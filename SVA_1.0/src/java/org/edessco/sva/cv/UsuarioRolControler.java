@@ -21,7 +21,7 @@ import org.edessco.sva.bl.UsuarioRolBL;
 @ViewScoped
 public class UsuarioRolControler {
 
-    @ManagedProperty(value = "#{usaurioRolBL}")
+    @ManagedProperty(value = "#{usuarioRolBL}")
     private UsuarioRolBL usuarioRolBL;
     @ManagedProperty(value = "#{usuarioRol}")
     private UsuarioRol usuarioRol;

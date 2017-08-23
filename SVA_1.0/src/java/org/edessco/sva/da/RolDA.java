@@ -54,8 +54,9 @@ public class RolDA extends AbstractDA<Rol>{
 
     @Override
     public Rol buscar(String ref) {
-        int idExterno = Integer.parseInt(ref);
-        return search("from Rol as r where r.idrol="+idExterno);
+        //int idExterno = Integer.parseInt(ref);
+        //return search("from Rol as r where r.idrol="+idExterno);
+        return search("from Rol as r where r.nombreRol='"+ref+"'");
     }
     
 }
